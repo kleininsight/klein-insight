@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kleininsight.com/sitemap.xml
