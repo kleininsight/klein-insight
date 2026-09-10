@@ -39,5 +39,3 @@ When connecting the GitHub repository to Cloudflare Pages:
 3. Replace generalized project examples with approved case studies.
 4. Add dedicated service pages once the homepage positioning is finalized.
 5. Add analytics after launch.
-
-I added a line to the readme
