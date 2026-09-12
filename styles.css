@@ -274,7 +274,7 @@ p {
 }
 
 .panel-label {
-  margin-bottom: 18px;
+  margin-bottom: 10px;
   font-size: 13px;
   font-weight: 800;
   text-transform: uppercase;
@@ -464,10 +464,74 @@ p {
 }
 
 .contact-card {
-  padding: 30px;
+  padding: 36px;
   border-radius: var(--radius);
   background: var(--white);
   box-shadow: var(--shadow);
+}
+
+.contact-label {
+  margin-bottom: 24px;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.contact-form {
+  display: grid;
+  gap: 20px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.form-field label {
+  display: block;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.form-field input,
+.form-field textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--white);
+  color: var(--ink);
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.form-field input {
+  min-height: 46px;
+}
+
+.form-field textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+.form-submit {
+  width: 100%;
+  margin-top: 4px;
+  border: 0;
+  cursor: pointer;
 }
 
 .contact-direct {
@@ -484,56 +548,6 @@ p {
 
 .contact-direct a:hover {
   text-decoration: underline;
-}
-
-.contact-form {
-  display: grid;
-  gap: 18px;
-}
-
-.form-field {
-  display: grid;
-  gap: 6px;
-}
-
-.form-field label {
-  font-size: 13px;
-  font-weight: 750;
-}
-
-.form-field input,
-.form-field textarea {
-  width: 100%;
-  padding: 12px 14px;
-  border: 1px solid var(--line);
-  border-radius: 9px;
-  background: var(--white);
-  color: var(--ink);
-  font: inherit;
-}
-
-.form-field input:focus,
-.form-field textarea:focus {
-  outline: 2px solid var(--accent-light);
-  border-color: var(--accent);
-}
-
-.form-field textarea {
-  resize: vertical;
-}
-
-.form-submit {
-  width: 100%;
-  border: 0;
-  cursor: pointer;
-}
-
-.contact-label {
-  margin-bottom: 10px;
-  font-size: 13px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
 }
 
 .contact-placeholder {
