@@ -237,25 +237,99 @@
       <p>
         If you are serious about growing your business and need more than advice, let's talk. Tell me where you are trying to go, what is getting in the way, and where you could use some help.
       </p>
+      
+       <p class="contact-direct">
+        Prefer to reach out directly?<br>
+        <a href="mailto:joe@kleininsight.com">joe@kleininsight.com</a>
+      </p>
     </div>
 
     <div class="contact-card">
-      <p class="contact-label">Contact Joe</p>
+      <p class="contact-label">Start a Conversation</p>
 
-      <p>
-        <a href="mailto:joe@kleininsight.com">Joe@KleinInsight.com</a><br>
-        <a href="tel:+1 831-247-7150">831-247-7150</a>
-      </p>
+      <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
 
-    <a
-      class="button button-primary"
-      href="mailto:joe@kleininsight.com?subject=Klein%20Insight%20Inquiry"
-    >
-      Email Joe
-  </a>
-</div>
+        <input
+          type="hidden"
+          name="access_key"
+          value="5e33b3d7-0efc-43f8-8669-dec872870e3d"
+        >
+
+        <input
+          type="hidden"
+          name="subject"
+          value="New Klein Insight Website Inquiry"
+        >
+
+        <input
+          type="hidden"
+          name="from_name"
+          value="Klein Insight Website"
+        >
+
+        <div class="form-field">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+          >
+        </div>
+
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+          >
+        </div>
+
+        <div class="form-field">
+          <label for="business">Business Name</label>
+          <input
+            type="text"
+            id="business"
+            name="business"
+          >
+        </div>
+
+        <div class="form-field">
+          <label for="message">What are you trying to accomplish?</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="5"
+            required
+          ></textarea>
+        </div>
+
+        <div class="form-field">
+          <label for="roadblock">What's getting in the way?</label>
+          <textarea
+            id="roadblock"
+            name="roadblock"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <input
+          type="checkbox"
+          name="botcheck"
+          class="hidden"
+          style="display:none;"
+        >
+
+        <button class="button button-primary form-submit" type="submit">
+          Send Request
+        </button>
+
+      </form>
+    </div>
   </div>
-    </section>
+</section>
   </main>
 
   <footer class="site-footer">
