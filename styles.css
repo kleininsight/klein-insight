@@ -281,6 +281,15 @@ p {
   letter-spacing: 0.08em;
 }
 
+.panel-subtext {
+  margin: 0 0 20px;
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+
 .challenge-list {
   list-style: none;
   padding: 0;
