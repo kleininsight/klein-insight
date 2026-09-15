@@ -353,6 +353,10 @@ p {
   grid-template-columns: repeat(3, 1fr);
 }
 
+.card-grid.two {
+  grid-template-columns: repeat(2, 1fr);
+}
+
 .card {
   min-height: 250px;
   padding: 30px;
@@ -652,7 +656,8 @@ p {
     width: auto;
   }
 
-  .card-grid.three {
+  .card-grid.three,
+  .card-grid.two {
     grid-template-columns: 1fr;
   }
 
