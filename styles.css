@@ -166,13 +166,15 @@ img {
 }
 
 .hero {
-  padding-top: 120px;
+  padding-top: 40px;
   padding-bottom: 110px;
 }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 60px;
+  align-items: center;
 }
 
 .eyebrow {
@@ -188,7 +190,9 @@ img {
   color: #9ec5dc;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   margin-top: 0;
   line-height: 1.08;
   letter-spacing: -0.035em;
@@ -216,16 +220,22 @@ p {
 
 .hero-lead {
   max-width: 760px;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
   color: var(--ink-soft);
   font-size: 20px;
 }
 
 .hero-actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 18px;
+  flex-direction: column;
+  gap: 14px;
+  align-items: stretch;
+  min-width: 230px;
+}
+
+.hero-actions .button {
+  width: 100%;
+  text-align: center;
 }
 
 .button {
@@ -321,7 +331,7 @@ p {
   margin-bottom: 48px;
 }
 
-.section-heading > p:last-child {
+.section-heading>p:last-child {
   color: var(--ink-soft);
   font-size: 18px;
 }
@@ -448,7 +458,7 @@ p {
   font-size: 18px;
 }
 
-.about-copy p + p {
+.about-copy p+p {
   margin-top: 22px;
 }
 
@@ -629,6 +639,17 @@ p {
   .contact-grid {
     grid-template-columns: 1fr;
     gap: 36px;
+  }
+
+  .hero-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .hero-actions .button {
+    width: auto;
   }
 
   .card-grid.three {
