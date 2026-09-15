@@ -19,3 +19,15 @@ const year = document.querySelector('#year');
 if (year) {
   year.textContent = new Date().getFullYear();
 }
+
+const backToTop = document.querySelector('.back-to-top');
+if (backToTop) {
+  backToTop.addEventListener('click', (event) => {
+    event.preventDefault();
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  });
+}
