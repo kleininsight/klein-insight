@@ -172,9 +172,7 @@ img {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
-  gap: 70px;
-  align-items: center;
+  grid-template-columns: 1fr;
 }
 
 .eyebrow {
@@ -271,6 +269,10 @@ p {
   border-radius: var(--radius);
   background: var(--white);
   box-shadow: var(--shadow);
+}
+
+.how-help-panel {
+  margin-top: 20px;
 }
 
 .panel-label {
