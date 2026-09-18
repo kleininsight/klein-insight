@@ -1,4 +1,4 @@
-/* Klein Insight - single-page consulting site */
+/* Klein Insight - single-page strategy coaching and consulting site */
 
 :root {
   --ink: #141f28;
@@ -156,6 +156,10 @@ img {
   padding: 104px 0;
 }
 
+section[id] {
+  scroll-margin-top: 90px;
+}
+
 .section-muted {
   background: var(--surface);
 }
@@ -300,7 +304,6 @@ p {
   line-height: 1.5;
   font-weight: 500;
 }
-
 
 .challenge-list {
   list-style: none;
