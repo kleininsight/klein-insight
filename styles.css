@@ -122,7 +122,7 @@ img {
 .site-nav {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 22px;
 }
 
 .site-nav a {
@@ -152,8 +152,18 @@ img {
   font-weight: 650;
 }
 
+.site-nav a:focus-visible,
+.brand:focus-visible,
+.button:focus-visible,
+.nav-toggle:focus-visible,
+.contact-direct a:focus-visible,
+.footer-meta a:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
 .section {
-  padding: 104px 0;
+  padding: 88px 0;
 }
 
 section[id] {
@@ -171,13 +181,13 @@ section[id] {
 
 .hero {
   padding-top: 40px;
-  padding-bottom: 110px;
+  padding-bottom: 88px;
 }
 
 .hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: 60px;
+  gap: 48px;
   align-items: center;
 }
 
@@ -234,7 +244,7 @@ p {
   flex-direction: column;
   gap: 14px;
   align-items: stretch;
-  min-width: 230px;
+  min-width: 250px;
 }
 
 .hero-actions .button {
@@ -251,7 +261,7 @@ p {
   border-radius: 11px;
   text-decoration: none;
   font-weight: 750;
-  transition: transform 0.15s ease, background-color 0.15s ease;
+  transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
 }
 
 .button:hover {
@@ -270,6 +280,11 @@ p {
 .button-secondary {
   border: 1px solid var(--line);
   background: var(--white);
+}
+
+.button-secondary:hover {
+  border-color: var(--accent);
+  background: var(--accent-light);
 }
 
 .hero-note {
@@ -305,6 +320,10 @@ p {
   font-weight: 500;
 }
 
+.hero-panel .panel-subtext:last-child {
+  margin-bottom: 0;
+}
+
 .challenge-list {
   list-style: none;
   padding: 0;
@@ -331,7 +350,7 @@ p {
 
 .section-heading {
   max-width: 790px;
-  margin-bottom: 48px;
+  margin-bottom: 40px;
 }
 
 .section-heading>p:last-child {
@@ -361,7 +380,7 @@ p {
 }
 
 .card {
-  min-height: 250px;
+  min-height: 230px;
   padding: 30px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -374,11 +393,26 @@ p {
 
 .card-number {
   display: block;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
   color: var(--accent);
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 0.09em;
+}
+
+.pathway-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.pathway-card .button {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.pathway-card-primary {
+  border-color: rgba(72, 123, 156, 0.45);
+  box-shadow: 0 18px 45px rgba(18, 30, 39, 0.06);
 }
 
 .service-list {
@@ -415,7 +449,7 @@ p {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 1px;
-  margin-top: 56px;
+  margin-top: 48px;
   overflow: hidden;
   border: 1px solid #243644;
   border-radius: var(--radius);
@@ -470,8 +504,8 @@ p {
 }
 
 .contact-section {
-  padding-top: 90px;
-  padding-bottom: 90px;
+  padding-top: 82px;
+  padding-bottom: 82px;
   background: #eaf1f6;
 }
 
@@ -484,6 +518,7 @@ p {
 
 .contact-card {
   padding: 36px;
+  border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--white);
   box-shadow: var(--shadow);
@@ -664,6 +699,10 @@ p {
     grid-template-columns: 1fr;
   }
 
+  .card {
+    min-height: 0;
+  }
+
   .steps {
     grid-template-columns: 1fr;
   }
@@ -683,15 +722,46 @@ p {
   }
 
   .section {
-    padding: 74px 0;
+    padding: 64px 0;
   }
 
   .hero {
-    padding-top: 40px;
+    padding-top: 32px;
+    padding-bottom: 64px;
+  }
+
+  .hero-grid {
+    gap: 30px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions .button {
+    width: 100%;
   }
 
   h1 {
-    font-size: clamp(42px, 12vw, 58px);
+    font-size: clamp(40px, 12vw, 56px);
+  }
+
+  .hero-lead {
+    font-size: 18px;
+  }
+
+  .hero-panel,
+  .card {
+    padding: 24px;
+  }
+
+  .contact-card {
+    padding: 26px;
+  }
+
+  .pathway-card .button {
+    width: 100%;
   }
 
   .service-list {
