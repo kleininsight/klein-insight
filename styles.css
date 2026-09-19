@@ -334,7 +334,11 @@ p {
   position: relative;
   padding: 16px 0 16px 24px;
   border-top: 1px solid var(--line);
-  font-weight: 650;
+  font-weight: 500;
+}
+
+.challenge-list li strong {
+  font-weight: 750;
 }
 
 .challenge-list li::before {
