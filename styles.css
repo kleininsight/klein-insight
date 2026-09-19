@@ -1,4 +1,4 @@
-/* Klein Insight - single-page strategy coaching and consulting site */
+/* Klein Insight - single-page strategy coaching site */
 
 :root {
   --ink: #141f28;
@@ -492,10 +492,31 @@ p {
   font-size: 13px;
 }
 
+.about-heading {
+  max-width: 940px;
+  margin-bottom: 48px;
+}
+
 .about-grid {
   display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: 90px;
+  grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
+  gap: 72px;
+  align-items: start;
+}
+
+.about-photo-wrap {
+  width: 100%;
+  max-width: 320px;
+}
+
+.about-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border: 6px solid var(--white);
+  border-radius: 50%;
+  box-shadow: var(--shadow);
 }
 
 .about-copy {
@@ -505,6 +526,13 @@ p {
 
 .about-copy p+p {
   margin-top: 22px;
+}
+
+.about-quote {
+  color: var(--ink);
+  font-size: 20px;
+  font-weight: 750;
+  line-height: 1.45;
 }
 
 .contact-section {
@@ -714,6 +742,10 @@ p {
   .step {
     min-height: auto;
   }
+
+  .about-photo-wrap {
+    max-width: 280px;
+  }
 }
 
 @media (max-width: 720px) {
@@ -777,6 +809,10 @@ p {
   .service:nth-child(even) {
     padding: 26px 0;
     border-right: 0;
+  }
+
+  .about-photo-wrap {
+    max-width: 240px;
   }
 
   .footer-wrap {
