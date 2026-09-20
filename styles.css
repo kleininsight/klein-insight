@@ -192,11 +192,11 @@ section[id] {
 }
 
 .eyebrow {
-  margin: 0 0 18px;
+  margin: 0 0 16px;
   color: var(--accent);
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-size: 12px;
+  letter-spacing: 0.12em;
+  font-size: 14px;
   font-weight: 800;
 }
 
@@ -494,13 +494,17 @@ p {
 
 .about-heading {
   max-width: 940px;
-  margin-bottom: 36px;
+  margin-bottom: 30px;
+}
+
+.about-heading h2 {
+  margin-bottom: 0;
 }
 
 .about-grid {
   display: grid;
   grid-template-columns: 300px minmax(0, 1fr);
-  gap: 56px;
+  gap: 48px;
   align-items: start;
 }
 
