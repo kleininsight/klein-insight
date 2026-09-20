@@ -196,7 +196,7 @@ section[id] {
   color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 800;
 }
 
