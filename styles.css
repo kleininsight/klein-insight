@@ -494,29 +494,31 @@ p {
 
 .about-heading {
   max-width: 940px;
-  margin-bottom: 48px;
+  margin-bottom: 36px;
 }
 
 .about-grid {
   display: grid;
-  grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
-  gap: 72px;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 56px;
   align-items: start;
 }
 
 .about-photo-wrap {
-  width: 100%;
-  max-width: 320px;
+  width: min(300px, 100%);
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border: 6px solid var(--white);
+  border-radius: 50%;
+  box-shadow: var(--shadow);
 }
 
 .about-photo {
   display: block;
   width: 100%;
-  aspect-ratio: 1;
+  height: 100%;
   object-fit: cover;
-  border: 6px solid var(--white);
-  border-radius: 50%;
-  box-shadow: var(--shadow);
+  object-position: 50% 38%;
 }
 
 .about-copy {
@@ -525,7 +527,7 @@ p {
 }
 
 .about-copy p+p {
-  margin-top: 22px;
+  margin-top: 20px;
 }
 
 .about-quote {
@@ -744,7 +746,8 @@ p {
   }
 
   .about-photo-wrap {
-    max-width: 280px;
+    width: min(280px, 100%);
+    margin-inline: auto;
   }
 }
 
@@ -811,8 +814,12 @@ p {
     border-right: 0;
   }
 
+  .about-heading {
+    margin-bottom: 30px;
+  }
+
   .about-photo-wrap {
-    max-width: 240px;
+    width: min(230px, 100%);
   }
 
   .footer-wrap {
