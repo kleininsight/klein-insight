@@ -184,7 +184,7 @@ section[id] {
 }
 
 .section-testimonial {
-  max-width: 1080px;
+  max-width: 900px;
   margin: 0 0 48px;
 }
 
@@ -196,10 +196,10 @@ section[id] {
   margin: 0;
   color: var(--ink);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(19px, 1.8vw, 23px);
+  font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 .section-testimonial blockquote strong {
@@ -216,6 +216,16 @@ section[id] {
 
 .section-testimonial cite {
   font-style: normal;
+}
+
+#owner-bottleneck .section-heading {
+  max-width: 1080px;
+}
+
+#owner-bottleneck .section-heading > p:last-child {
+  max-width: 1050px;
+  font-size: 20px;
+  line-height: 1.6;
 }
 
 .hero {
