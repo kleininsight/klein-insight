@@ -218,6 +218,14 @@ section[id] {
   font-style: normal;
 }
 
+.section-testimonial-light blockquote p {
+  color: #e4edf2;
+}
+
+.section-testimonial-light footer {
+  color: #9ec5dc;
+}
+
 #owner-bottleneck .section-heading {
   max-width: 1080px;
 }
@@ -226,6 +234,10 @@ section[id] {
   max-width: 1050px;
   font-size: 20px;
   line-height: 1.6;
+}
+
+.services-heading {
+  max-width: 900px;
 }
 
 .hero {
