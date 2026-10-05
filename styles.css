@@ -1246,8 +1246,8 @@ p {
     display: none;
     flex-direction: column;
     align-items: stretch;
-    gap: 0;
-    padding: 12px;
+    gap: 4px;
+    padding: 14px 12px;
     border: 1px solid var(--line);
     border-radius: 14px;
     background: var(--paper);
@@ -1259,7 +1259,21 @@ p {
   }
 
   .site-nav a {
-    padding: 12px;
+    padding: 10px 12px;
+  }
+
+  .site-nav a.nav-dossier-link {
+    text-align: center;
+    padding: 7px 14px;
+    margin-top: 4px;
+    border-radius: 999px;
+  }
+
+  .site-nav .nav-cta {
+    text-align: center;
+    padding: 8px 14px;
+    margin-top: 6px;
+    border-radius: 999px;
   }
 
   .nav-toggle {
