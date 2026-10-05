@@ -309,6 +309,16 @@
         const control = form.elements.namedItem(field.name);
         state.answers[field.name] = control ? String(control.value || '').trim() : '';
       });
+      if (state.answers.full_name || state.answers.email || state.answers.business_name) {
+        try {
+          const currentSaved = JSON.parse(localStorage.getItem('klein_contact_details') || '{}');
+          if (state.answers.full_name) currentSaved.name = state.answers.full_name;
+          if (state.answers.email) currentSaved.email = state.answers.email;
+          if (state.answers.business_name) currentSaved.business = state.answers.business_name;
+          currentSaved.savedAt = new Date().toISOString();
+          localStorage.setItem('klein_contact_details', JSON.stringify(currentSaved));
+        } catch (e) { }
+      }
     }
 
     function renderReview(shell) {
@@ -407,6 +417,14 @@
         });
         const result = await response.json();
         if (!response.ok || !result.success) throw new Error('Application could not be confirmed');
+        try {
+          localStorage.setItem('klein_contact_details', JSON.stringify({
+            name: state.answers.full_name || '',
+            email: state.answers.email || '',
+            business: state.answers.business_name || '',
+            savedAt: new Date().toISOString()
+          }));
+        } catch (e) { }
         state.step = 'success';
         render(true);
       } catch (error) {

@@ -192,9 +192,123 @@ function syncDiagnosticButtons() {
   }
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', syncDiagnosticButtons);
-} else {
+// Preload contact details in the "Let's Talk" form if already submitted
+function preloadContactDetails() {
+  const contactForm = document.querySelector('.contact-form');
+  if (!contactForm) return;
+
+  const nameInput = document.getElementById('name');
+  const emailInput = document.getElementById('email');
+  const businessInput = document.getElementById('business');
+
+  let leadName = '';
+  let leadEmail = '';
+  let leadBusiness = '';
+
+  // 1. Check URL query parameters
+  try {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('name')) leadName = params.get('name').trim();
+    if (params.get('email')) leadEmail = params.get('email').trim();
+    if (params.get('business')) leadBusiness = params.get('business').trim();
+    if (!leadBusiness && params.get('company')) leadBusiness = params.get('company').trim();
+  } catch (e) { }
+
+  // 2. Check explicitly saved contact details
+  if (!leadName || !leadEmail || !leadBusiness) {
+    try {
+      const savedContactRaw = localStorage.getItem('klein_contact_details');
+      if (savedContactRaw) {
+        const savedContact = JSON.parse(savedContactRaw);
+        if (!leadName && savedContact.name) leadName = savedContact.name;
+        if (!leadEmail && savedContact.email) leadEmail = savedContact.email;
+        if (!leadBusiness && (savedContact.business || savedContact.company)) leadBusiness = savedContact.business || savedContact.company;
+      }
+    } catch (e) { }
+  }
+
+  // 3. Check diagnostic dossier results
+  if (!leadName || !leadEmail || !leadBusiness) {
+    try {
+      const dossierRaw = localStorage.getItem('klein_diagnostic_result');
+      if (dossierRaw) {
+        const dossier = JSON.parse(dossierRaw);
+        if (dossier && dossier.client) {
+          if (!leadName && dossier.client.name && dossier.client.name !== 'Executive Lead') {
+            leadName = dossier.client.name;
+          }
+          if (!leadEmail && dossier.client.email && dossier.client.email.includes('@')) {
+            leadEmail = dossier.client.email;
+          }
+          if (!leadBusiness && dossier.client.company && dossier.client.company !== 'Your Company') {
+            leadBusiness = dossier.client.company;
+          }
+        }
+      }
+    } catch (e) { }
+  }
+
+  // 4. Check survey progress leadData
+  if (!leadName || !leadEmail || !leadBusiness) {
+    try {
+      const progressRaw = localStorage.getItem('klein_survey_progress');
+      if (progressRaw) {
+        const progress = JSON.parse(progressRaw);
+        if (progress && progress.leadData) {
+          if (!leadName && progress.leadData.name && progress.leadData.name !== 'Executive Lead') {
+            leadName = progress.leadData.name;
+          }
+          if (!leadEmail && progress.leadData.email && progress.leadData.email.includes('@')) {
+            leadEmail = progress.leadData.email;
+          }
+          if (!leadBusiness && progress.leadData.company && progress.leadData.company !== 'Your Company') {
+            leadBusiness = progress.leadData.company;
+          }
+        }
+      }
+    } catch (e) { }
+  }
+
+  // Pre-fill inputs if empty
+  if (nameInput && !nameInput.value && leadName) {
+    nameInput.value = leadName;
+  }
+  if (emailInput && !emailInput.value && leadEmail) {
+    emailInput.value = leadEmail;
+  }
+  if (businessInput && !businessInput.value && leadBusiness) {
+    businessInput.value = leadBusiness;
+  }
+
+  // Auto-save any manual updates in the form so it is remembered
+  const saveCurrentContact = () => {
+    try {
+      const current = {
+        name: nameInput ? nameInput.value.trim() : '',
+        email: emailInput ? emailInput.value.trim() : '',
+        business: businessInput ? businessInput.value.trim() : '',
+        savedAt: new Date().toISOString()
+      };
+      if (current.email || current.name || current.business) {
+        localStorage.setItem('klein_contact_details', JSON.stringify(current));
+      }
+    } catch (e) { }
+  };
+
+  contactForm.addEventListener('submit', saveCurrentContact);
+  if (nameInput) nameInput.addEventListener('change', saveCurrentContact);
+  if (emailInput) emailInput.addEventListener('change', saveCurrentContact);
+  if (businessInput) businessInput.addEventListener('change', saveCurrentContact);
+}
+
+function initPageInteractions() {
   syncDiagnosticButtons();
+  preloadContactDetails();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initPageInteractions);
+} else {
+  initPageInteractions();
 }
 
