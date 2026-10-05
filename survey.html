@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
-  <title>Business Constraint &amp; Operational Diagnostic | Klein Insight</title>
+  <title>Owner Constraint Assessment | Klein Insight</title>
   <meta name="description"
-    content="Identify your primary business constraint across 6 dimensions. Executive operational diagnostic by Klein Insight.">
+    content="Assess the owner operating patterns, behavioral trade-offs, and constraints limiting the business you are building. Strategic evaluation by Klein Insight.">
   <meta name="theme-color" content="#121e27">
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -152,14 +152,10 @@
     }
 
     @keyframes typingBounce {
-
-      0%,
-      80%,
-      100% {
+      0%, 80%, 100% {
         transform: scale(0);
         opacity: 0.3;
       }
-
       40% {
         transform: scale(1);
         opacity: 1;
@@ -212,9 +208,7 @@
 
       header,
       #chatOverlay,
-      #settingsDrawer,
       #toast,
-      #slotPickerSection,
       .no-print {
         display: none !important;
       }
@@ -229,7 +223,6 @@
         width: 100% !important;
         max-width: 100% !important;
         box-sizing: border-box !important;
-        space-y: 5px !important;
       }
 
       .app-card,
@@ -238,24 +231,42 @@
         border: 1px solid #d8e2e9 !important;
         color: #141f28 !important;
         page-break-inside: avoid !important;
-        padding: 8px 12px !important;
-        border-radius: 6px !important;
+        padding: 14px 18px !important;
+        border-radius: 8px !important;
         width: 100% !important;
         max-width: 100% !important;
         box-sizing: border-box !important;
-        margin-bottom: 6px !important;
+        margin-bottom: 0 !important;
+      }
+
+      .dossier-cover-card {
+        page-break-after: always !important;
+        page-break-inside: avoid !important;
+        padding: 22px 24px !important;
+      }
+
+      #bottleneckSynthesisCard {
+        page-break-after: always !important;
+        page-break-inside: avoid !important;
+        padding: 16px 20px !important;
+      }
+
+      #asymmetricCard {
+        page-break-inside: avoid !important;
+        padding: 16px 20px !important;
       }
 
       #chartContainerWrapper {
         width: 100% !important;
         max-width: 100% !important;
-        height: 110px !important;
+        height: 290px !important;
+        margin-top: 8px !important;
       }
 
-      #radarChart {
+      #patternChart {
         width: 100% !important;
         max-width: 100% !important;
-        height: 110px !important;
+        height: 290px !important;
         display: block !important;
       }
     }
@@ -266,12 +277,12 @@
   class="bg-[#edf3f7] text-[#141f28] font-sans min-h-screen antialiased flex flex-col selection:bg-brand-600 selection:text-white relative">
 
   <!-- ========================================================================= -->
-  <!-- FULL-PAGE CONVERSATIONAL DIAGNOSTIC OVERLAY (LIGHT THEME)                  -->
+  <!-- FULL-PAGE CONVERSATIONAL ASSESSMENT OVERLAY (LIGHT THEME)                 -->
   <!-- ========================================================================= -->
   <div id="chatOverlay"
     class="fixed inset-0 z-50 bg-[#0d171f]/75 backdrop-blur-sm flex flex-col items-center justify-center p-0 sm:p-4 md:p-6 transition-opacity duration-300">
     <div
-      class="w-full max-w-2xl h-[100dvh] sm:h-[820px] sm:max-h-[92vh] bg-white rounded-none sm:rounded-2xl border-0 sm:border border-[#d8e2e9] shadow-2xl flex flex-col overflow-hidden relative">
+      class="w-full max-w-2xl h-[100dvh] sm:h-[840px] sm:max-h-[92vh] bg-white rounded-none sm:rounded-2xl border-0 sm:border border-[#d8e2e9] shadow-2xl flex flex-col overflow-hidden relative">
 
       <!-- Concierge Header -->
       <div class="p-3.5 sm:p-4 border-b border-[#d8e2e9] bg-[#f8fafc] flex items-center justify-between flex-shrink-0">
@@ -286,13 +297,13 @@
           </div>
           <div>
             <div class="font-bold text-xs sm:text-sm text-[#141f28] flex items-center gap-1.5 sm:gap-2">
-              <span>Klein Insight Diagnostic</span>
+              <span>Klein Insight</span>
               <span
                 class="text-[9px] sm:text-[10px] text-[#36607d] font-semibold border border-[rgba(89,141,174,0.3)] bg-[#eaf2f7] px-2 py-0.5 rounded-full"
-                id="auditTypeBadge">Strategy Audit</span>
+                id="auditTypeBadge">Owner Assessment</span>
             </div>
             <span class="text-[10px] sm:text-[11px] text-[#4a5560] block leading-tight font-medium"
-              id="chatStepTracker">Choose Evaluation Depth</span>
+              id="chatStepTracker">Methodology Overview</span>
           </div>
         </div>
 
@@ -311,7 +322,7 @@
 
           <button id="restartChatBtn"
             class="text-xs text-[#4a5560] hover:text-[#141f28] hover:border-[#487b9c] transition-colors flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-[#d8e2e9] bg-white shadow-sm"
-            title="Restart Audit">
+            title="Restart Assessment">
             <svg class="w-3.5 h-3.5 text-[#487b9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -340,7 +351,7 @@
         <span class="w-1.5 h-1.5 rounded-full bg-[#487b9c] typing-dot"></span>
         <span class="w-1.5 h-1.5 rounded-full bg-[#487b9c] typing-dot"></span>
         <span class="w-1.5 h-1.5 rounded-full bg-[#487b9c] typing-dot"></span>
-        <span class="text-[10px] sm:text-[11px] text-[#4a5560] font-mono">Analyzing operational vectors...</span>
+        <span class="text-[10px] sm:text-[11px] text-[#4a5560] font-mono">Analyzing operating patterns...</span>
       </div>
 
       <!-- Pinned Bottom Action Station -->
@@ -354,7 +365,7 @@
   </div>
 
   <!-- ========================================================================= -->
-  <!-- MAIN WORKSPACE: Executive Diagnostic Dossier (Light Theme)                -->
+  <!-- MAIN WORKSPACE: Executive Owner Constraint Dossier (Light Theme)          -->
   <!-- ========================================================================= -->
 
   <header class="border-b border-[#d8e2e9] bg-white/95 backdrop-blur sticky top-0 z-40 shadow-sm">
@@ -408,15 +419,16 @@
   </header>
 
   <!-- Client Dossier Header Banner -->
-  <div class="border-b border-[#d8e2e9] bg-[#eaf2f7] px-4 sm:px-6 py-2.5 sm:py-3">
+  <div class="border-b border-[#d8e2e9] bg-[#eaf2f7] px-4 sm:px-6 py-2.5 sm:py-3 no-print">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 text-xs">
       <div class="flex items-center gap-2">
         <span class="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
-        <span id="dossierClientHeader" class="font-bold text-[#141f28] tracking-wide truncate">Diagnostic Briefing:
-          Prepared for Executive Review</span>
+        <span id="dossierClientHeader" class="font-bold text-[#141f28] tracking-wide truncate">
+          Owner Constraint Assessment: Prepared for Executive Review
+        </span>
       </div>
       <div class="text-[#4a5560] font-mono text-[10px] sm:text-[11px]" id="auditBaselineLabel">
-        Format: Express 11-Scenario Constraint Triage
+        Format: 3-Phase Assessment (Emotional Experience &bull; Pairwise Trade-offs &bull; Drive &amp; Change Readiness)
       </div>
     </div>
   </div>
@@ -425,74 +437,151 @@
   <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 py-5 sm:py-6 space-y-6">
 
     <!-- ===================================================================== -->
-    <!-- CARD 1 (FULL WIDTH): Primary Constraint & 6-Dimension Scorecard       -->
+    <!-- CARD 1 (FULL WIDTH): Primary Constraint & Part 1 Emotional Experience -->
     <!-- ===================================================================== -->
-    <div class="w-full app-card-accent p-5 sm:p-7 relative overflow-hidden">
+    <div class="w-full app-card-accent p-5 sm:p-7 relative overflow-hidden dossier-cover-card">
+      <!-- Cover Page Header: Title & Subtitle with Client & Company Details -->
+      <div class="border-b border-[#d8e2e9] pb-4 mb-4 sm:mb-5">
+        <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+          <div>
+            <div class="eyebrow flex items-center gap-2 mb-1">
+              <span class="w-2 h-2 rounded-full bg-[#487b9c]"></span>
+              <span>Executive Briefing &bull; Strategic Advisory</span>
+            </div>
+            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#141f28] tracking-tight">
+              Owner Constraint Assessment
+            </h1>
+            <p class="text-sm sm:text-base font-semibold text-[#36607d] mt-1" id="coverSubtitle">
+              Executive Briefing Prepared for <strong id="coverClientName" class="text-[#141f28] font-bold">Executive Lead</strong> &bull; <strong id="coverCompanyName" class="text-[#141f28] font-bold">Your Company</strong>
+            </p>
+          </div>
+          <div class="text-left sm:text-right font-mono text-[10px] sm:text-[11px] text-[#647c8f] bg-[#f8fafc] sm:bg-transparent p-2.5 sm:p-0 rounded-lg border border-[#d8e2e9] sm:border-0 flex-shrink-0">
+            <div><strong class="text-[#141f28]">Date:</strong> <span id="coverMetaDate">October 2026</span></div>
+            <div><strong class="text-[#141f28]">Advisory:</strong> Joe Klein, Klein Insight</div>
+            <div><strong class="text-[#141f28]">Evaluation:</strong> 3-Phase Owner Model</div>
+          </div>
+        </div>
+      </div>
+
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2 sm:mb-3">
         <span class="eyebrow flex items-center gap-2">
           <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#487b9c] animate-pulse flex-shrink-0"></span>
-          Primary Identified Business Constraint
+          Primary Identified Owner Operating Constraint
         </span>
         <span id="constraintSeverityBadge"
-          class="text-[11px] sm:text-xs px-3 py-1 rounded-full font-bold bg-rose-50 text-rose-700 border border-rose-200 w-fit">
-          Critical Structural Choke
+          class="text-[11px] sm:text-xs px-3 py-1 rounded-full font-bold bg-[#eaf2f7] text-[#36607d] border border-[rgba(89,141,174,0.4)] w-fit">
+          Primary Operating Constraint
         </span>
       </div>
 
-      <!-- Archetype Headline -->
+      <!-- Archetype Headline & Narrative -->
       <div class="mb-4 sm:mb-5">
-        <h2 class="text-2xl sm:text-4xl font-extrabold text-[#141f28] tracking-tight" id="archetypeTitle">
-          The Central Hub Trap (Owner Dependency)
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#141f28] tracking-tight" id="archetypeTitle">
+          Delegation Friction: The Efficiency Trap
         </h2>
         <p class="text-[#4a5560] text-xs sm:text-sm mt-1.5 max-w-4xl leading-relaxed font-medium" id="archetypeSummary">
-          Your day-to-day operations and growth are tethered directly to your personal cognitive bandwidth. Problems,
-          routine decisions, and client escalations default back to you.
+          Doing tasks personally continues to feel faster, easier, or more reliable than transferring ownership. While this creates short-term operational speed, it locks you in as the ultimate execution bottleneck.
         </p>
       </div>
 
-      <!-- 6-Dimension Friction Breakdown -->
-      <div class="mt-4 sm:mt-5 pt-4 border-t border-[#d8e2e9]">
-        <div class="text-xs font-bold text-[#141f28] mb-2 flex justify-between items-center">
-          <span>6-Dimension Friction Breakdown (Demand, Sales, Capacity, Owner Dependency, Operations, Economics)</span>
-          <span class="text-[10px] sm:text-[11px] text-[#36607d] font-mono font-semibold" id="chartSubtext">Diagnostic
-            Signal Analysis</span>
+      <!-- Part 1: What Ownership Currently Feels Like -->
+      <div class="p-4 sm:p-5 rounded-xl bg-[#f8fafc] border border-[#d8e2e9] space-y-2.5 mb-5">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold uppercase tracking-wider text-[#36607d] flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-[#487b9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <span>Part 1: What Ownership Currently Feels Like</span>
+          </span>
+          <span class="text-[10px] text-[#647c8f] font-mono font-medium">Emotional Experience Synthesis</span>
         </div>
-        <div class="h-44 sm:h-52 w-full relative bg-[#f8fafc] border border-[#d8e2e9] rounded-xl p-3"
+        <div id="emotionalExperienceNarrative" class="text-xs sm:text-sm text-[#141f28] leading-relaxed space-y-2">
+          <!-- Dynamic Synthesis Injected via JS -->
+        </div>
+      </div>
+
+      <!-- 7-Dimension Owner Constraint Profile Chart -->
+      <div class="pt-4 border-t border-[#d8e2e9]">
+        <div class="text-xs font-bold text-[#141f28] mb-2 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1">
+          <span>Relative Operating Friction Across 7 Core Owner Patterns</span>
+          <span class="text-[10px] sm:text-[11px] text-[#36607d] font-mono font-semibold" id="chartSubtext">
+            Forced-Choice Pairwise &amp; Converging Evidence
+          </span>
+        </div>
+        <div class="h-64 sm:h-72 lg:h-80 w-full relative bg-[#f8fafc] border border-[#d8e2e9] rounded-xl p-3 sm:p-4"
           id="chartContainerWrapper">
-          <canvas id="radarChart"></canvas>
+          <canvas id="patternChart"></canvas>
         </div>
       </div>
     </div>
 
     <!-- ===================================================================== -->
-    <!-- CARD 2 (FULL WIDTH): Synthesis, Contradictions & Action Roadmap       -->
+    <!-- CARD 2 (FULL WIDTH): Part 2 Operating Patterns & Part 3 Readiness     -->
     <!-- ===================================================================== -->
-    <div id="bottleneckSynthesisCard" class="w-full app-card p-5 sm:p-7 space-y-5">
+    <div id="bottleneckSynthesisCard" class="w-full app-card p-5 sm:p-7 space-y-6">
+      
+      <!-- Card Sub-Header -->
       <div class="flex items-center justify-between border-b border-[#d8e2e9] pb-3">
         <h3 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#141f28] flex items-center gap-2">
           <svg class="w-4 h-4 text-[#d99236] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <span>Diagnostic Synthesis: Primary Bottlenecks &amp; Alignment Signals</span>
+          <span>Diagnostic Synthesis: Operating Patterns, Self-Reinforcing Loops &amp; Agency</span>
         </h3>
         <span
           class="text-[10px] px-2.5 py-0.5 rounded bg-[#edf3f7] text-[#36607d] border border-[#d8e2e9] font-mono font-bold"
-          id="reportModeBadge">Express Report</span>
+          id="reportModeBadge">Executive Briefing</span>
       </div>
 
-      <!-- Emotional Contradictions Section -->
-      <div class="space-y-3">
+      <!-- Part 2: Operating Patterns Contributing Most -->
+      <div class="space-y-4">
+        <div class="text-xs font-bold text-[#141f28] uppercase tracking-wider flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-[#487b9c]"></span>
+          <span>Part 2: The Operating Patterns Contributing Most</span>
+        </div>
+        <p class="text-xs text-[#4a5560]">
+          These are not fixed personality traits. They are specific operating habits, decision defaults, and trade-offs that create predictable business bottlenecks.
+        </p>
+
+        <!-- Dynamic Injected Patterns & Self-Reinforcing Loops -->
+        <div id="operatingPatternsContainer" class="space-y-3.5">
+          <!-- Injected via JavaScript -->
+        </div>
+
+        <!-- Pattern Interconnection Callout -->
+        <div id="patternConnectionCallout" class="p-3.5 sm:p-4 rounded-xl bg-[#eaf2f7] border border-[rgba(89,141,174,0.35)] text-xs sm:text-sm text-[#141f28] leading-relaxed">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+
+      <!-- Behavioral Contradictions & Strategic Tensions -->
+      <div class="pt-4 border-t border-[#d8e2e9] space-y-3">
         <div class="text-xs font-bold text-[#b45309] uppercase tracking-wider flex items-center gap-1.5">
           <span class="w-1.5 h-1.5 rounded-full bg-[#d99236]"></span>
-          <span>Behavioral &amp; Psychological Friction Points:</span>
+          <span>Strategic Tensions &amp; Behavioral Contradictions:</span>
         </div>
+        <p class="text-xs text-[#4a5560]">
+          Contradictions in your responses reveal valuable strategic insights about where your growth ambitions collide with your daily operating patterns.
+        </p>
         <div class="space-y-2.5 text-xs sm:text-sm text-[#4a5560]" id="contradictionList">
           <!-- Injected via JavaScript -->
         </div>
       </div>
 
-      <!-- Strategic Action Plan Section -->
+      <!-- Part 3: Drive, Commitment and Change Readiness -->
+      <div class="pt-4 border-t border-[#d8e2e9] space-y-3.5">
+        <div class="text-xs font-bold text-[#36607d] uppercase tracking-wider flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          <span>Part 3: Drive, Commitment &amp; Available Leverage</span>
+        </div>
+        <div id="driveReadinessContainer" class="p-4 sm:p-5 rounded-xl bg-[#f0f5f8] border border-[#d8e2e9] space-y-2.5 text-xs sm:text-sm text-[#141f28] leading-relaxed">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+
+      <!-- Immediate Focus: 3 Strategic Advisory Sprints -->
       <div class="pt-4 border-t border-[#d8e2e9] space-y-3">
         <div class="text-xs font-bold text-[#36607d] uppercase tracking-wider flex items-center gap-1.5">
           <span class="w-1.5 h-1.5 rounded-full bg-[#487b9c]"></span>
@@ -502,6 +591,7 @@
           <!-- Injected via JavaScript -->
         </div>
       </div>
+
     </div>
 
     <!-- ===================================================================== -->
@@ -527,7 +617,7 @@
       <!-- Core Partnership Narrative & Pricing Overview -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-        <!-- Left: Partnership Model & Specific Pricing Structure (from index.html) -->
+        <!-- Left: Partnership Model & Specific Pricing Structure -->
         <div class="lg:col-span-7 space-y-4 text-xs sm:text-sm text-[#4a5560] leading-relaxed">
           <p>
             The Klein Insight engagement is a <strong class="text-[#141f28]">six-month, one-on-one strategy
@@ -536,11 +626,10 @@
             to ensure uncompromising focus.
           </p>
           <p>
-            We start with what you want to achieve, then work backward to dismantle the operational constraints, flawed
-            assumptions, and bottlenecks capping your ceiling.
+            We don't provide generic theory. We work backward from what you are trying to build to dismantle the self-reinforcing operating constraints, uncodified knowledge, and cognitive bottlenecks capping your ceiling.
           </p>
 
-          <!-- Pricing & Terms Callout matching index.html #roi -->
+          <!-- Pricing & Terms Callout -->
           <div class="p-4 rounded-xl bg-[#edf3f7] border border-[rgba(89,141,174,0.35)] space-y-2.5 text-[#141f28]">
             <div class="flex items-center justify-between">
               <span class="font-extrabold text-[#141f28] text-sm">Transparent Investment &amp; Commitment</span>
@@ -565,25 +654,22 @@
               </div>
               <div>
                 <strong class="text-[#141f28] block font-bold">Custom Systems</strong>
-                <span class="text-[#647c8f]">Tailored SOPs &amp; models</span>
+                <span class="text-[#647c8f]">Decision protocols &amp; leverage</span>
               </div>
             </div>
           </div>
 
-          <!-- The ROI of Hidden Leverage (from index.html #roi) -->
+          <!-- The ROI of Hidden Leverage -->
           <div class="space-y-2 text-xs">
-            <span class="font-bold uppercase tracking-wider text-[#141f28] block text-[11px]">The ROI of Hidden
-              Leverage:</span>
+            <span class="font-bold uppercase tracking-wider text-[#141f28] block text-[11px]">The ROI of Owner Leverage:</span>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[#4a5560]">
               <div class="p-3 rounded-lg bg-[#f8fafc] border border-[#d8e2e9]">
                 <strong class="text-[#141f28] block mb-1 font-bold">Time Liberation</strong>
-                Valuing founder time at $150/hr, freeing just <strong class="text-[#141f28]">7 hours per month</strong>
-                from broken workflows completely pays for this partnership.
+                Valuing founder time conservatively at $150/hr, freeing just <strong class="text-[#141f28]">7 hours per month</strong> from routine operational friction pays for the entire partnership.
               </div>
               <div class="p-3 rounded-lg bg-[#f8fafc] border border-[#d8e2e9]">
-                <strong class="text-[#141f28] block mb-1 font-bold">Scaling Leverage</strong>
-                Unlocking just a fraction of your hidden capacity covers the entire program. Everything after that is
-                pure profit and freedom.
+                <strong class="text-[#141f28] block mb-1 font-bold">Scaling Capacity</strong>
+                Decoupling your delivery from your personal cognitive bandwidth allows you to absorb 20–40%+ more business without burning out.
               </div>
             </div>
           </div>
@@ -592,7 +678,7 @@
         <!-- Right: The 5-Stage Framework & Schedule Debrief -->
         <div class="lg:col-span-5 space-y-4">
 
-          <!-- 5-Stage Roadmap from index.html -->
+          <!-- 5-Stage Roadmap -->
           <div class="p-4 rounded-xl bg-[#f8fafc] border border-[#d8e2e9] space-y-2.5">
             <span class="font-bold text-[#36607d] text-xs uppercase tracking-wider block">
               Our 5-Stage Transformation Architecture
@@ -600,28 +686,23 @@
             <ol class="space-y-2 text-xs text-[#4a5560]">
               <li class="flex items-start gap-2">
                 <span class="text-[#487b9c] font-bold font-mono text-[11px]">01</span>
-                <span><strong class="text-[#141f28]">Diagnose the Real Constraint:</strong> Audit marketing, operations,
-                  capacity &amp; leadership.</span>
+                <span><strong class="text-[#141f28]">Diagnose the Real Constraint:</strong> Audit operating patterns, decision centralization &amp; friction.</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-[#487b9c] font-bold font-mono text-[11px]">02</span>
-                <span><strong class="text-[#141f28]">Define the Starting Line:</strong> Establish baselines and clear
-                  6-month outcomes.</span>
+                <span><strong class="text-[#141f28]">Define the Starting Line:</strong> Establish baselines and explicit 6-month owner outcomes.</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-[#487b9c] font-bold font-mono text-[11px]">03</span>
-                <span><strong class="text-[#141f28]">Implement What Matters Most:</strong> Build practical workflows,
-                  messaging &amp; tools.</span>
+                <span><strong class="text-[#141f28]">Implement What Matters Most:</strong> Build decision thresholds, ownership handoffs &amp; playbooks.</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-[#487b9c] font-bold font-mono text-[11px]">04</span>
-                <span><strong class="text-[#141f28]">Make Progress Repeatable:</strong> Sustainable operating rhythm
-                  team runs without you.</span>
+                <span><strong class="text-[#141f28]">Make Progress Repeatable:</strong> Install a sustainable operating rhythm the team runs without you.</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-[#487b9c] font-bold font-mono text-[11px]">05</span>
-                <span><strong class="text-[#141f28]">Measure Results:</strong> Compare with baseline, refine &amp; set
-                  next growth targets.</span>
+                <span><strong class="text-[#141f28]">Measure &amp; Compound Freedom:</strong> Measure reclaimed bandwidth, refine, and set next targets.</span>
               </li>
             </ol>
           </div>
@@ -634,13 +715,13 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
-                <span>Ready to Discuss Your Constraint?</span>
+                <span>Ready to Discuss Your Assessment?</span>
               </span>
               <span class="text-[10px] font-semibold text-[#36607d] bg-white border border-[#d8e2e9] px-2 py-0.5 rounded-full">Direct with Joe</span>
             </div>
 
             <p class="text-xs text-[#4a5560] leading-relaxed">
-              Have questions about your diagnostic findings or want to see if our 6-month advisory partnership is the right fit? Reach out directly to talk through where your business is and what needs to change.
+              Have questions about your operating patterns or want to see if our 6-month advisory partnership is the right fit? Reach out directly to talk through where your business is and what needs to change.
             </p>
 
             <a href="index.html#contact" id="dossierTalkCta"
@@ -668,7 +749,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
           </svg>
-          <span>Re-Run Diagnostic</span>
+          <span>Re-Run Assessment</span>
         </button>
 
         <button id="printBtn"
@@ -698,210 +779,320 @@
   </div>
 
   <!-- ========================================================================= -->
-  <!-- SCRIPT ENGINE                                                             -->
+  <!-- SCRIPT ENGINE: 3-PHASE OWNER CONSTRAINT ASSESSMENT                        -->
   <!-- ========================================================================= -->
   <script>
-    /* Complete Question Registry */
-    const allScenarios = [
-      // 1. Operations
+    /* =========================================================================
+       QUESTION REGISTRY: 3 INTENTIONAL PHASES
+       Phase 1: Emotional Experience (Agree / Unsure / Disagree)
+       Phase 2: Owner Operating Patterns (Pairwise Trade-offs: A vs B)
+       Phase 3: Drive, Commitment & Change Readiness (Multiple Choice)
+       ========================================================================= */
+
+    // Phase 1 Questions (Emotional Experience)
+    const phase1Scenarios = [
       {
-        id: 'monday_morning',
-        category: 'operations',
-        title: 'The Monday Morning Test',
-        prompt: 'You walk into Monday morning with a full list of things that need attention. Before you can get to what you actually wanted to work on, three new problems have already landed on your desk.',
-        subtext: 'I feel like this happens regularly.',
+        id: 'p1_growth_stress',
+        phase: 1,
+        pattern: 'coupling',
+        title: 'Phase 1: Growth & Workload Stress',
+        prompt: 'It’s difficult to feel genuinely excited about bringing in substantial new business because I immediately get stressed about the additional personal workload and delivery demands.',
+        subtext: 'Does growth immediately trigger anxiety about your personal execution capacity?',
         isExpress: true
       },
-      // 2. Capacity
       {
-        id: 'customer_rush',
-        category: 'capacity',
-        title: 'The Customer Rush',
-        prompt: 'Business suddenly gets busy. Instead of simply being excited about the additional revenue, your first thought is, <strong class="text-[#141f28] font-bold">"How are we going to handle all of this?"</strong>',
-        subtext: 'Does growth immediately trigger anxiety about execution?',
+        id: 'p1_strategic_bandwidth',
+        phase: 1,
+        pattern: 'reactive',
+        title: 'Phase 1: Strategic Bandwidth',
+        prompt: 'At the end of a long week, I realize I was busy almost the entire time, but it’s difficult to find the time to focus on work that would actually move the business forward.',
+        subtext: 'Immediate operational fires repeatedly displace forward-looking strategic priorities.',
         isExpress: true
       },
-      // 3. Owner Dependency
       {
-        id: 'vacation_test',
-        category: 'owner',
-        title: 'The Vacation Test',
-        prompt: 'You take a few days completely away from the business. Your phone is nearby, and part of you is still waiting for something to go wrong or for someone to need you.',
-        subtext: 'Stepping away feels like an operational risk.',
-        isExpress: false
-      },
-      // 4. Owner Dependency
-      {
-        id: 'decision_test',
-        category: 'owner',
-        title: 'The Decision Test',
-        prompt: 'An employee runs into a problem that should be fairly routine. Instead of solving it themselves, they come to you because you’re the person who knows what to do.',
-        subtext: 'This happens more often than I’d like.',
+        id: 'p1_disconnect',
+        phase: 1,
+        pattern: 'centralization',
+        title: 'Phase 1: Ability to Disconnect',
+        prompt: 'It is difficult for me to fully step away from the business—even during evenings, weekends, or vacations—without feeling that something will stall or go wrong.',
+        subtext: 'Stepping away feels like an operational risk to the company.',
         isExpress: true
       },
-      // 5. Owner Dependency
       {
-        id: 'delegation_test',
-        category: 'owner',
-        title: 'The Delegation Test',
-        prompt: 'You hand something off to someone else, but you eventually find yourself checking on it, correcting it, or taking it back because it would have been easier to do it yourself.',
-        subtext: 'Delegation often turns into rework.',
+        id: 'p1_return_on_effort',
+        phase: 1,
+        pattern: 'effort_pressure',
+        title: 'Phase 1: Return on Effort',
+        prompt: 'I feel like I am working harder and putting in more hours, but the financial return and progress of the business don’t reflect that amount of effort.',
+        subtext: 'Effort is increasing faster than tangible financial or operational leverage.',
         isExpress: true
       },
-      // 6. Capacity
       {
-        id: 'growth_test',
-        category: 'capacity',
-        title: 'The Growth Test',
-        prompt: 'You imagine the business becoming significantly busier over the next year. Your first reaction isn’t "That would be great"—you immediately start thinking about everything that could break.',
-        subtext: 'Growth feels threatening to quality or sanity.',
+        id: 'p1_recurring_problems',
+        phase: 1,
+        pattern: 'operations_drag',
+        title: 'Phase 1: Recurring Problem Frustration',
+        prompt: 'I often feel frustrated because we seem to solve what feels like the same operational problems repeatedly without them staying permanently fixed.',
+        subtext: 'Fixes often feel like temporary band-aids rather than permanent structural solutions.',
         isExpress: false
       },
-      // 7. Operations
       {
-        id: 'repeated_problem',
-        category: 'operations',
-        title: 'The Repeated-Problem Test',
-        prompt: 'You solve what feels like the same problem for the third or fourth time because whatever caused it wasn’t really fixed the first time.',
-        subtext: 'Fixes feel temporary rather than structural.',
+        id: 'p1_pipeline_anxiety',
+        phase: 1,
+        pattern: 'commercial',
+        title: 'Phase 1: Commercial Anxiety',
+        prompt: 'When business hits a quieter period, I almost immediately start worrying about where the next customers or revenue are going to come from.',
+        subtext: 'Pipeline confidence fluctuates heavily with current workload rather than a predictable acquisition engine.',
+        isExpress: false
+      },
+      {
+        id: 'p1_central_router',
+        phase: 1,
+        pattern: 'centralization',
+        title: 'Phase 1: The Decision Router',
+        prompt: 'Important decisions, routine exceptions, and problem-solving inevitably find their way back to my desk to be resolved.',
+        subtext: 'Accountability continually gravitates back to the center.',
+        isExpress: false
+      }
+    ];
+
+    // Phase 2 Questions (Pairwise Comparisons: Operating Patterns)
+    const phase2Scenarios = [
+      {
+        id: 'p2_delegation_friction',
+        phase: 2,
+        pattern: 'delegation',
+        title: 'Phase 2: Task Execution Trade-off',
+        prompt: 'When routine work or a new task needs to get done:',
+        optionA: {
+          label: 'If I can finish something quickly myself, I usually just handle it rather than spending the extra time explaining it to someone else.',
+          favors: 'delegation',
+          weight: 2
+        },
+        optionB: {
+          label: 'I am willing to accept temporary slowness and mistakes upfront so someone else can fully own the task going forward.',
+          favors: 'delegation_mature',
+          weight: 0
+        },
         isExpress: true
       },
-      // 8. Operations
       {
-        id: 'explanation_test',
-        category: 'operations',
-        title: 'The Explanation Test',
-        prompt: 'Someone new joins the business and asks, "How do we normally do this?" You realize the answer is basically, <strong class="text-[#141f28] font-bold">"I’ll show you."</strong>',
-        subtext: 'Knowledge lives in heads rather than documented systems.',
+        id: 'p2_reactive_ownership',
+        phase: 2,
+        pattern: 'reactive',
+        title: 'Phase 2: Prioritization Trade-off',
+        prompt: 'When planning your working time each day:',
+        optionA: {
+          label: 'I focus first on whatever immediate customer issue, fire, or friction is creating the biggest urgent pressure today.',
+          favors: 'reactive',
+          weight: 2
+        },
+        optionB: {
+          label: 'I protect dedicated blocks of time for high-leverage strategic work, even when an urgent day-to-day issue is waiting.',
+          favors: 'reactive_mature',
+          weight: 0
+        },
         isExpress: true
       },
-      // 9. Owner Dependency
       {
-        id: 'help_desk_test',
-        category: 'owner',
-        title: 'The Owner-as-Help-Desk Test',
-        prompt: 'Your day gets interrupted by questions that other people could probably answer if the information, process, or authority were easier to access.',
-        subtext: 'You function as the central operating router.',
-        isExpress: false
-      },
-      // 10. Economics
-      {
-        id: 'busy_not_better',
-        category: 'economics',
-        title: 'The Busy-But-Not-Better Test',
-        prompt: 'You look back at how hard you’ve been working and think, "We’re doing more, but I don’t know if the business is actually better off because of it."',
-        subtext: 'Effort is increasing faster than tangible progress.',
-        isExpress: false
-      },
-      // 11. Sales / Conversion
-      {
-        id: 'customer_inquiry',
-        category: 'sales',
-        title: 'The Customer Inquiry Test',
-        prompt: 'A potential customer reaches out, but for whatever reason they don’t move forward. You find yourself wondering what happened because you don’t really have a clear answer.',
-        subtext: 'Prospect dropout feels like a black box.',
+        id: 'p2_owner_centralization',
+        phase: 2,
+        pattern: 'centralization',
+        title: 'Phase 2: Decision Authority Trade-off',
+        prompt: 'When an unusual situation or client exception occurs:',
+        optionA: {
+          label: 'I prefer staying personally involved so I can ensure the judgment call meets our standards.',
+          favors: 'centralization',
+          weight: 2
+        },
+        optionB: {
+          label: 'I prefer giving people enough authority and guardrails to make the call without waiting for my approval.',
+          favors: 'centralization_mature',
+          weight: 0
+        },
         isExpress: true
       },
-      // 12. Demand
       {
-        id: 'feast_famine',
-        category: 'demand',
-        title: 'The Feast-or-Famine Test',
-        prompt: 'Things are busy and you feel good about the business. Then you hit a slower period and almost immediately start wondering where the next customers are going to come from.',
-        subtext: 'Pipeline confidence fluctuates with current workload.',
+        id: 'p2_execution_drift',
+        phase: 2,
+        pattern: 'drift',
+        title: 'Phase 2: Initiative Completion Trade-off',
+        prompt: 'When a compelling new idea or business opportunity appears:',
+        optionA: {
+          label: 'I tend to pursue it quickly while enthusiasm is high, even if prior projects are still in progress.',
+          favors: 'drift',
+          weight: 2
+        },
+        optionB: {
+          label: 'I intentionally hold off on new initiatives until our current operational improvements are fully completed and running.',
+          favors: 'drift_mature',
+          weight: 0
+        },
         isExpress: true
       },
-      // 13. Operations
       {
-        id: 'wrong_work',
-        category: 'operations',
-        title: 'The Wrong-Work Test',
-        prompt: 'At the end of a long day, you realize you were busy almost the entire time, but very little of what you did actually moved the business forward.',
-        subtext: 'High activity, low strategic leverage.',
-        isExpress: false
-      },
-      // 14. Owner Dependency
-      {
-        id: 'should_do_else',
-        category: 'owner',
-        title: 'The "I Should Be Doing Something Else" Test',
-        prompt: 'You spend part of your day doing work you know you shouldn’t still be doing, but finding someone else to handle it feels like more trouble than just doing it yourself.',
-        subtext: 'The switching cost of training feels prohibitive.',
-        isExpress: false
-      },
-      // 15. Capacity
-      {
-        id: 'bottleneck_test',
-        category: 'capacity',
-        title: 'The Bottleneck Test',
-        prompt: 'You could bring in substantially more business tomorrow, but you’re not completely confident the rest of the business could keep up.',
-        subtext: 'Lead generation is artificially constrained by delivery fear.',
-        isExpress: false
-      },
-      // 16. Economics
-      {
-        id: 'money_test',
-        category: 'economics',
-        title: 'The Money Test',
-        prompt: 'You have a month where the business is extremely busy, but when you look at what you actually made from all that work, you wonder whether it was worth the effort.',
-        subtext: 'Margin and net return don\'t match operational stress.',
+        id: 'p2_leadership_depth',
+        phase: 2,
+        pattern: 'leadership',
+        title: 'Phase 2: Talent & Oversight Trade-off',
+        prompt: 'When managing operational delivery:',
+        optionA: {
+          label: 'I rely heavily on my own direct oversight because I don\'t have enough people around me who think and decide like owners.',
+          favors: 'leadership',
+          weight: 2
+        },
+        optionB: {
+          label: 'I actively invest time in developing key people\'s problem-solving skills, even when their learning curve takes time.',
+          favors: 'leadership_mature',
+          weight: 0
+        },
         isExpress: true
       },
-      // 17. Owner Dependency
       {
-        id: 'everything_comes_back',
-        category: 'owner',
-        title: 'The "Everything Comes Back to Me" Test',
-        prompt: 'You notice that regardless of how many people are involved, important decisions, problems, and exceptions eventually seem to find their way back to you.',
-        subtext: 'Accountability gravitates back to the center.',
-        isExpress: false
-      },
-      // 18. Operations
-      {
-        id: 'change_test',
-        category: 'operations',
-        title: 'The Change Test',
-        prompt: 'You know there are things about the business that need to change, but there are so many possible things to fix that you aren’t sure which one deserves your attention first.',
-        subtext: 'Operational fog makes prioritization difficult.',
-        isExpress: false
-      },
-      // 19. Operations
-      {
-        id: 'shiny_object',
-        category: 'operations',
-        title: 'The Shiny-Object Test',
-        prompt: 'You get excited about a new idea that could improve the business, but you already have several things you started previously that haven’t been fully implemented.',
-        subtext: 'Unfinished initiatives create organizational drag.',
-        isExpress: false
-      },
-      // 20. Emotional Contradiction
-      {
-        id: 'land_large_contradiction',
-        category: 'capacity',
-        isContradiction: true,
-        title: 'The Growth Contradiction',
-        prompt: 'You get a message saying you just landed a large new customer. You’re excited about the opportunity, but almost immediately start thinking about everything you’re going to have to do to deliver it.',
-        subtext: 'Excitement is instantly overtaken by delivery dread.',
+        id: 'p2_growth_coupling',
+        phase: 2,
+        pattern: 'coupling',
+        title: 'Phase 2: Scaling Capacity Trade-off',
+        prompt: 'If your business volume increased by 30% next month:',
+        optionA: {
+          label: 'It would inevitably require significantly more hours, oversight, and operational stress from me personally.',
+          favors: 'coupling',
+          weight: 2
+        },
+        optionB: {
+          label: 'Our workflows and team could absorb that volume without requiring much more of my direct personal time.',
+          favors: 'coupling_mature',
+          weight: 0
+        },
         isExpress: true
       },
-      // 21. Emotional Contradiction
       {
-        id: 'quiet_week_contradiction',
-        category: 'demand',
-        isContradiction: true,
-        title: 'The Breathing Room Contradiction',
-        prompt: 'You finally have a week where things are relatively quiet. Instead of enjoying the breathing room, you start worrying that business is slowing down.',
-        subtext: 'Peace feels like a threat rather than recovery.',
+        id: 'p2_commercial_uncertainty',
+        phase: 2,
+        pattern: 'commercial',
+        title: 'Phase 2: Commercial Visibility Trade-off',
+        prompt: 'When evaluating new customer acquisition and sales conversion:',
+        optionA: {
+          label: 'When prospects don\'t move forward or inquiries drop, it often feels difficult to pinpoint the exact structural reason.',
+          favors: 'commercial',
+          weight: 2
+        },
+        optionB: {
+          label: 'We have clear, predictable visibility into why customers choose us, why prospects walk away, and where revenue comes from.',
+          favors: 'commercial_mature',
+          weight: 0
+        },
+        isExpress: true
+      },
+      {
+        id: 'p2_process_vs_shadowing',
+        phase: 2,
+        pattern: 'centralization',
+        title: 'Phase 2: Onboarding & Knowledge Transfer',
+        prompt: 'When someone new needs to learn a key workflow in your company:',
+        optionA: {
+          label: 'It feels more natural and practical to have them shadow me directly so I can show them how it\'s done in real time.',
+          favors: 'centralization',
+          weight: 2
+        },
+        optionB: {
+          label: 'I insist on codifying repeatable written procedures and clear checklists before transferring execution.',
+          favors: 'centralization_mature',
+          weight: 0
+        },
         isExpress: false
       },
-      // 22. Alignment
       {
-        id: 'five_year_test',
-        category: 'economics',
-        title: 'The Five-Year Test',
-        prompt: 'Imagine nothing fundamentally changes. Five years from now, you’re still running the business essentially the same way you are today.',
-        subtext: '<strong class="text-[#141f28] font-bold">That thought bothers me.</strong>',
+        id: 'p2_problem_prevention',
+        phase: 2,
+        pattern: 'reactive',
+        title: 'Phase 2: Problem Solving Approach',
+        prompt: 'When operational snags occur in the business:',
+        optionA: {
+          label: 'I take pride in my ability to step in quickly and resolve complex emergencies with direct founder agility.',
+          favors: 'reactive',
+          weight: 2
+        },
+        optionB: {
+          label: 'I get frustrated by having to solve problems personally and focus on building systems so they cannot recur.',
+          favors: 'reactive_mature',
+          weight: 0
+        },
+        isExpress: false
+      },
+      {
+        id: 'p2_focus_vs_scope',
+        phase: 2,
+        pattern: 'drift',
+        title: 'Phase 2: Offering Scope Trade-off',
+        prompt: 'When clients request specialized or custom services:',
+        optionA: {
+          label: 'I often customize our scope or add new services to capture the revenue opportunity and satisfy the client.',
+          favors: 'drift',
+          weight: 2
+        },
+        optionB: {
+          label: 'I protect our core offering and decline custom complexity so our delivery remains standard and repeatable.',
+          favors: 'drift_mature',
+          weight: 0
+        },
+        isExpress: false
+      }
+    ];
+
+    // Phase 3 Questions (Drive, Commitment & Change Readiness)
+    const phase3Scenarios = [
+      {
+        id: 'p3_change_readiness',
+        phase: 3,
+        dimension: 'readiness',
+        title: 'Phase 3: Change Readiness',
+        prompt: 'Which best describes where you are right now regarding how you run the business?',
+        options: [
+          { text: 'I know things could be better, but right now I am not ready to make major changes to how we operate.', value: 1, label: 'Contemplative / Hesitant' },
+          { text: 'I am actively looking for the right changes to make, but I want to be certain about the path before committing.', value: 2, label: 'Evaluating / Seeking Clarity' },
+          { text: 'I am ready to make significant changes to how I operate if I believe they will fundamentally move the business forward.', value: 3, label: 'High Change Readiness' }
+        ],
         isExpress: true
+      },
+      {
+        id: 'p3_habit_shift',
+        phase: 3,
+        dimension: 'ownership',
+        title: 'Phase 3: Personal Operating Shift',
+        prompt: 'If building a self-sustaining business required you to substantially change how you personally spend your time each day, how willing are you to do that?',
+        options: [
+          { text: 'Reluctant: I strongly prefer solutions that fit into my existing routine without changing how I work.', value: 1, label: 'Routine Protection' },
+          { text: 'Open: I am willing to adapt my daily habits, provided the changes happen gradually.', value: 2, label: 'Gradual Adaptation' },
+          { text: 'Committed: I recognize that the business cannot change unless I fundamentally change how I operate.', value: 3, label: 'Complete Operational Ownership' }
+        ],
+        isExpress: true
+      },
+      {
+        id: 'p3_coachability',
+        phase: 3,
+        dimension: 'coachability',
+        title: 'Phase 3: Openness to Challenge',
+        prompt: 'When an experienced advisor or colleague presents evidence that challenges an operating decision you strongly believe in, your natural reaction is to:',
+        options: [
+          { text: 'Defend my reasoning until there is overwhelming proof that my approach is wrong.', value: 1, label: 'Defensive / Skeptical' },
+          { text: 'Listen respectfully, but remain cautious about altering how we do things.', value: 2, label: 'Cautious Evaluation' },
+          { text: 'Lean in with curiosity and explore whether my current assumption is capping the company\'s ceiling.', value: 3, label: 'High Coachability & Curiosity' }
+        ],
+        isExpress: true
+      },
+      {
+        id: 'p3_outcome_vision',
+        phase: 3,
+        dimension: 'vision',
+        title: 'Phase 3: Future Vision & Freedom',
+        prompt: 'What is the primary personal breakthrough you want this business to create for you over the next 12 to 24 months?',
+        options: [
+          { text: 'Greater personal financial return and margin without increasing my working hours.', value: 2, label: 'Economic Leverage' },
+          { text: 'A business that operates predictably and consistently without requiring my daily intervention.', value: 3, label: 'Operational Independence' },
+          { text: 'Both: Significant enterprise scalability while reclaiming my personal freedom and peace of mind.', value: 3, label: 'True Enterprise Freedom' }
+        ],
+        isExpress: false
       }
     ];
 
@@ -927,7 +1118,7 @@
     const paramCompany = urlParams.get('company');
 
     const state = {
-      mode: 'express', // 'express' (11 questions) or 'deep' (22 questions)
+      mode: 'express', // 'express' (14 questions) or 'deep' (21 questions)
       activeScenarios: [],
       step: -1,
       answers: {},
@@ -946,6 +1137,22 @@
     const chatProgressBar = document.getElementById('chatProgressBar');
     const chatOverlay = document.getElementById('chatOverlay');
     const chatStepTracker = document.getElementById('chatStepTracker');
+
+    function buildScenarioList(mode) {
+      if (mode === 'express') {
+        return [
+          ...phase1Scenarios.filter(s => s.isExpress),
+          ...phase2Scenarios.filter(s => s.isExpress),
+          ...phase3Scenarios.filter(s => s.isExpress)
+        ];
+      } else {
+        return [
+          ...phase1Scenarios,
+          ...phase2Scenarios,
+          ...phase3Scenarios
+        ];
+      }
+    }
 
     function scrollToQuestion(element) {
       requestAnimationFrame(() => {
@@ -983,7 +1190,7 @@
 
         if (callback) callback();
         scrollToQuestion(bubble);
-      }, 180);
+      }, 160);
     }
 
     function submitUserAnswer(text) {
@@ -1001,8 +1208,7 @@
     function renderPastConversation(scenariosToPopulate) {
       chatStream.innerHTML = '';
 
-      // 1. Initial audit mode choice bubble
-      const modeLabel = state.mode === 'express' ? 'Express Audit (11 Scenarios)' : 'Deep-Dive Audit (22 Scenarios)';
+      const modeLabel = state.mode === 'express' ? 'Express Assessment (14 Scenarios)' : 'Deep-Dive Assessment (21 Scenarios)';
       const modeBubble = document.createElement('div');
       modeBubble.className = 'chat-bubble-animate flex items-start gap-2.5 sm:gap-3 text-xs sm:text-sm';
       modeBubble.innerHTML = `
@@ -1011,19 +1217,26 @@
         </div>
         <div class="bg-[#f0f5f8] border border-[#d8e2e9] p-3.5 sm:p-4 rounded-2xl rounded-tl-sm text-[#141f28] max-w-lg leading-relaxed shadow-sm space-y-1">
           <div class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#36607d] font-mono">Overview &amp; Mode Selection</div>
-          <div>Welcome back to the <strong>Klein Insight Business Constraint Diagnostic</strong>. Resuming your previously saved evaluation.</div>
+          <div>Welcome back to the <strong>Klein Insight Owner Constraint Assessment</strong>. Resuming your previously saved evaluation.</div>
         </div>
       `;
       chatStream.appendChild(modeBubble);
       submitUserAnswer(modeLabel);
 
-      // 2. Populate each previous question and answer
       scenariosToPopulate.forEach((s) => {
         const val = state.answers[s.id];
         if (val === undefined) return;
 
-        // Question Bubble
-        const fullPrompt = `${s.prompt}${s.subtext ? `<div class="text-[#4a5560] text-xs mt-1.5 italic font-medium">${s.subtext}</div>` : ''}`;
+        let displayAnswer = '';
+        if (s.phase === 1) {
+          displayAnswer = val === 2 ? 'Agree' : (val === 1 ? 'Unsure' : 'Disagree');
+        } else if (s.phase === 2) {
+          displayAnswer = val === 'A' ? `Option A: ${s.optionA.label}` : `Option B: ${s.optionB.label}`;
+        } else if (s.phase === 3) {
+          const match = s.options.find(o => o.value === val);
+          displayAnswer = match ? match.text : `Selected (Score ${val})`;
+        }
+
         const qBubble = document.createElement('div');
         qBubble.className = 'chat-bubble-animate flex items-start gap-2.5 sm:gap-3 text-xs sm:text-sm';
         qBubble.innerHTML = `
@@ -1032,17 +1245,13 @@
           </div>
           <div class="bg-[#f0f5f8] border border-[#d8e2e9] p-3.5 sm:p-4 rounded-2xl rounded-tl-sm text-[#141f28] max-w-lg leading-relaxed shadow-sm space-y-1">
             ${s.title ? `<div class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#36607d] font-mono">${s.title}</div>` : ''}
-            <div>${fullPrompt}</div>
+            <div>${s.prompt}</div>
           </div>
         `;
         chatStream.appendChild(qBubble);
-
-        // User Answer Bubble
-        const label = val === 2 ? 'Agree' : (val === 1 ? 'Unsure' : 'Disagree');
-        submitUserAnswer(label);
+        submitUserAnswer(displayAnswer);
       });
 
-      // 3. Resumed indicator badge
       const divider = document.createElement('div');
       divider.className = 'text-center my-3';
       divider.innerHTML = `
@@ -1057,8 +1266,8 @@
 
     function renderWelcomeScreen() {
       chatProgressBar.style.width = '0%';
-      chatStepTracker.textContent = 'Choose Evaluation Depth';
-      document.getElementById('auditTypeBadge').textContent = 'Audit Setup';
+      chatStepTracker.textContent = 'Choose Assessment Depth';
+      document.getElementById('auditTypeBadge').textContent = 'Assessment Setup';
 
       let savedProgress = null;
       try {
@@ -1066,11 +1275,10 @@
         if (raw) savedProgress = JSON.parse(raw);
       } catch (e) { }
 
-      // If user previously completed only the short form (express audit)
-      if (savedProgress && savedProgress.isShortFormCompleted) {
+      if (savedProgress && (savedProgress.isShortFormCompleted || savedProgress.isCompleted)) {
         const prompt = `
-          Welcome back! You previously completed the <strong class="text-[#141f28] font-bold">11-question Express Diagnostic</strong>.<br><br>
-          You can view your unlocked Constraint Dossier, or upgrade to the full 22-question Deep-Dive to evaluate all 6 friction vectors and psychological contradiction signals.
+          Welcome back! You have a completed assessment dossier on file.<br><br>
+          You can view your unlocked <strong>Executive Owner Constraint Dossier</strong>, or re-run the assessment with our comprehensive 21-scenario deep dive.
         `;
 
         appendBotMessage('Welcome Back', prompt, () => {
@@ -1078,38 +1286,38 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               <button id="resumeDossierBtn" class="min-h-[50px] p-3 rounded-xl bg-[#487b9c] hover:bg-[#36607d] text-white text-left transition-all shadow-md flex flex-col justify-center">
                 <span class="font-bold text-xs sm:text-sm">📊 View My Dossier</span>
-                <span class="text-[10px] text-white/90 mt-0.5">Review your action plan &amp; scorecard</span>
+                <span class="text-[10px] text-white/90 mt-0.5">Review your synthesized constraint report</span>
               </button>
               <button id="upgradeDeepBtn" class="min-h-[50px] p-3 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#487b9c] hover:bg-[#eaf2f7] text-[#141f28] text-left transition-all flex flex-col justify-center shadow-sm">
-                <span class="font-bold text-xs sm:text-sm">🔍 Upgrade to 22-Question Audit</span>
-                <span class="text-[10px] text-[#4a5560] mt-0.5">Complete remaining 11 questions</span>
+                <span class="font-bold text-xs sm:text-sm">🔍 Deep-Dive Assessment</span>
+                <span class="text-[10px] text-[#4a5560] mt-0.5">Complete full 21-scenario evaluation</span>
               </button>
             </div>
             <div class="text-center mt-2.5">
-              <button id="startFreshBtn" class="text-[11px] text-[#647c8f] hover:text-[#141f28] font-semibold underline">Or start fresh with a new audit</button>
+              <button id="startFreshBtn" class="text-[11px] text-[#647c8f] hover:text-[#141f28] font-semibold underline">Or reset and start fresh</button>
             </div>
           `;
 
           document.getElementById('resumeDossierBtn').addEventListener('click', () => {
             state.answers = savedProgress.answers || {};
             state.leadData = savedProgress.leadData || state.leadData;
-            state.mode = 'express';
-            state.activeScenarios = allScenarios.filter(s => s.isExpress);
+            state.mode = savedProgress.mode || 'express';
+            state.activeScenarios = buildScenarioList(state.mode);
             const analysis = analyzeConstraints();
             chatOverlay.classList.add('opacity-0', 'pointer-events-none');
             syncDashboard(analysis);
-            showToast('Viewing your saved constraint dossier.');
+            showToast('Viewing your executive constraint dossier.');
           });
 
           document.getElementById('upgradeDeepBtn').addEventListener('click', () => {
             state.answers = savedProgress.answers || {};
             state.leadData = savedProgress.leadData || state.leadData;
             state.mode = 'deep';
-            state.activeScenarios = allScenarios;
-            const unansweredIdx = allScenarios.findIndex(s => state.answers[s.id] === undefined);
+            state.activeScenarios = buildScenarioList('deep');
+            const unansweredIdx = state.activeScenarios.findIndex(s => state.answers[s.id] === undefined);
             state.step = unansweredIdx >= 0 ? unansweredIdx : 0;
-            document.getElementById('auditTypeBadge').textContent = 'Deep-Dive (22 Qs)';
-            document.getElementById('reportModeBadge').textContent = 'Deep-Dive Diagnostic Report';
+            document.getElementById('auditTypeBadge').textContent = 'Deep-Dive (21 Qs)';
+            document.getElementById('reportModeBadge').textContent = 'Deep-Dive Executive Dossier';
             const answeredScenarios = state.activeScenarios.slice(0, state.step);
             renderPastConversation(answeredScenarios);
             renderCurrentScenario();
@@ -1125,22 +1333,22 @@
         return;
       }
 
-      // If user saved mid-way through an audit
+      // Check if mid-way
       const hasAnsweredAny = savedProgress && savedProgress.answers && Object.keys(savedProgress.answers).length > 0;
       if (savedProgress && (savedProgress.hasSaved || hasAnsweredAny) && !savedProgress.isCompleted) {
-        const total = savedProgress.totalScenarios || (savedProgress.mode === 'deep' ? 22 : 11);
+        const total = savedProgress.totalScenarios || (savedProgress.mode === 'deep' ? 21 : 14);
         const answeredCount = savedProgress.answers ? Object.keys(savedProgress.answers).length : 0;
         const currentScenarioNum = Math.min(total, Math.max(1, (typeof savedProgress.step === 'number' ? savedProgress.step : answeredCount) + 1));
         const prompt = `
-          Welcome back! You have an audit in progress saved at <strong class="text-[#141f28] font-bold">Scenario ${currentScenarioNum} of ${total}</strong>.<br><br>
+          Welcome back! You have an assessment saved at <strong class="text-[#141f28] font-bold">Scenario ${currentScenarioNum} of ${total}</strong>.<br><br>
           Would you like to pick up where you left off or start over?
         `;
 
-        appendBotMessage('Diagnostic In Progress', prompt, () => {
+        appendBotMessage('Assessment In Progress', prompt, () => {
           activeInputContainer.innerHTML = `
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               <button id="resumeProgressBtn" class="min-h-[50px] p-3 rounded-xl bg-[#487b9c] hover:bg-[#36607d] text-white text-left transition-all shadow-md flex flex-col justify-center">
-                <span class="font-bold text-xs sm:text-sm">▶ Resume Diagnostic</span>
+                <span class="font-bold text-xs sm:text-sm">▶ Resume Assessment</span>
                 <span class="text-[10px] text-white/90 mt-0.5">Continue from Scenario ${currentScenarioNum}</span>
               </button>
               <button id="startFreshBtn" class="min-h-[50px] p-3 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#487b9c] hover:bg-[#eaf2f7] text-[#141f28] text-left transition-all flex flex-col justify-center shadow-sm">
@@ -1154,11 +1362,11 @@
             state.answers = savedProgress.answers || {};
             state.leadData = savedProgress.leadData || state.leadData;
             state.mode = savedProgress.mode || 'express';
-            state.activeScenarios = state.mode === 'express' ? allScenarios.filter(s => s.isExpress) : allScenarios;
+            state.activeScenarios = buildScenarioList(state.mode);
             const nextIdx = state.activeScenarios.findIndex(s => state.answers[s.id] === undefined);
             state.step = nextIdx >= 0 ? nextIdx : (typeof savedProgress.step === 'number' ? savedProgress.step : 0);
-            document.getElementById('auditTypeBadge').textContent = state.mode === 'express' ? 'Express (11 Qs)' : 'Deep-Dive (22 Qs)';
-            document.getElementById('reportModeBadge').textContent = state.mode === 'express' ? 'Express Diagnostic Report' : 'Deep-Dive Diagnostic Report';
+            document.getElementById('auditTypeBadge').textContent = state.mode === 'express' ? 'Express (14 Qs)' : 'Deep-Dive (21 Qs)';
+            document.getElementById('reportModeBadge').textContent = state.mode === 'express' ? 'Express Executive Dossier' : 'Deep-Dive Executive Dossier';
             const answeredScenarios = state.activeScenarios.slice(0, state.step);
             renderPastConversation(answeredScenarios);
             renderCurrentScenario();
@@ -1179,50 +1387,56 @@
 
     function renderStandardWelcomeScreen() {
       const prompt = `
-        Welcome to the <strong class="text-[#141f28] font-bold">Klein Insight Business Constraint Diagnostic</strong>.<br><br>
-        Rather than asking for proprietary financial numbers that produce fragile estimations, this system diagnoses your <strong class="text-[#141f28] font-bold">actual operational friction, recurring bottlenecks, and behavioral roadblocks</strong>.<br><br>
-        Choose your preferred evaluation depth to get started:
+        Welcome to the <strong class="text-[#141f28] font-bold">Klein Insight Owner Constraint Assessment</strong>.<br><br>
+        Most business problems are not purely operational or financial—they are directly connected to how the owner operates, delegates, handles pressure, and makes trade-offs.<br><br>
+        This assessment is built around three distinct phases:
+        <ul class="list-disc pl-4 mt-1.5 space-y-1 text-xs text-[#354c5e]">
+          <li><strong>Phase 1: Emotional Experience</strong> (What owning the business currently feels like)</li>
+          <li><strong>Phase 2: Operating Preferences</strong> (Pairwise trade-offs identifying relative constraints)</li>
+          <li><strong>Phase 3: Drive &amp; Change Readiness</strong> (Agency, commitment &amp; future vision)</li>
+        </ul>
+        <br>Choose your evaluation depth:
       `;
 
-      appendBotMessage('Overview &amp; Mode Selection', prompt, () => {
+      appendBotMessage('Overview &amp; Method', prompt, () => {
         activeInputContainer.innerHTML = `
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             <button id="startExpressBtn" class="min-h-[54px] p-3 rounded-xl bg-[#487b9c] hover:bg-[#36607d] text-white text-left transition-all shadow-md shadow-[rgba(72,123,156,0.25)] flex flex-col justify-center border border-[#36607d]">
               <span class="font-bold text-xs sm:text-sm flex items-center gap-1.5">
-                <span>⚡ Express Audit</span>
-                <span class="text-[10px] bg-white/20 px-1.5 py-0.2 rounded font-semibold">11 Questions</span>
+                <span>⚡ Express Assessment</span>
+                <span class="text-[10px] bg-white/20 px-1.5 py-0.2 rounded font-semibold">14 Scenarios</span>
               </span>
-              <span class="text-[10px] text-white/90 mt-0.5">Rapid constraint triage &amp; focused action plan (~90 sec)</span>
+              <span class="text-[10px] text-white/90 mt-0.5">Rapid triage across all 3 phases (~2 min)</span>
             </button>
 
             <button id="startFullBtn" class="min-h-[54px] p-3 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#487b9c] hover:bg-[#eaf2f7] text-[#141f28] text-left transition-all flex flex-col justify-center shadow-sm">
               <span class="font-bold text-xs sm:text-sm flex items-center gap-1.5">
-                <span>🔍 Deep-Dive Audit</span>
-                <span class="text-[10px] bg-[#edf3f7] text-[#36607d] border border-[#d8e2e9] px-1.5 py-0.2 rounded font-bold">22 Questions</span>
+                <span>🔍 Deep-Dive Assessment</span>
+                <span class="text-[10px] bg-[#edf3f7] text-[#36607d] border border-[#d8e2e9] px-1.5 py-0.2 rounded font-bold">21 Scenarios</span>
               </span>
-              <span class="text-[10px] text-[#4a5560] mt-0.5">Comprehensive 6-dimension evaluation &amp; contradiction mapping</span>
+              <span class="text-[10px] text-[#4a5560] mt-0.5">Comprehensive pairwise evaluation &amp; contradiction analysis (~4 min)</span>
             </button>
           </div>
         `;
 
         document.getElementById('startExpressBtn').addEventListener('click', () => {
           state.mode = 'express';
-          state.activeScenarios = allScenarios.filter(s => s.isExpress);
-          document.getElementById('auditTypeBadge').textContent = 'Express (11 Qs)';
-          document.getElementById('reportModeBadge').textContent = 'Express Diagnostic Report';
-          document.getElementById('auditBaselineLabel').textContent = 'Format: Express 11-Scenario Constraint Triage';
-          submitUserAnswer("Express Audit (11 Scenarios)");
+          state.activeScenarios = buildScenarioList('express');
+          document.getElementById('auditTypeBadge').textContent = 'Express (14 Qs)';
+          document.getElementById('reportModeBadge').textContent = 'Express Executive Dossier';
+          document.getElementById('auditBaselineLabel').textContent = 'Format: 14-Scenario 3-Phase Owner Assessment';
+          submitUserAnswer("Express Assessment (14 Scenarios)");
           state.step = 0;
           renderCurrentScenario();
         });
 
         document.getElementById('startFullBtn').addEventListener('click', () => {
           state.mode = 'deep';
-          state.activeScenarios = allScenarios;
-          document.getElementById('auditTypeBadge').textContent = 'Deep-Dive (22 Qs)';
-          document.getElementById('reportModeBadge').textContent = 'Deep-Dive Diagnostic Report';
-          document.getElementById('auditBaselineLabel').textContent = 'Format: Comprehensive 22-Scenario Constraint Audit';
-          submitUserAnswer("Deep-Dive Audit (22 Scenarios)");
+          state.activeScenarios = buildScenarioList('deep');
+          document.getElementById('auditTypeBadge').textContent = 'Deep-Dive (21 Qs)';
+          document.getElementById('reportModeBadge').textContent = 'Deep-Dive Executive Dossier';
+          document.getElementById('auditBaselineLabel').textContent = 'Format: 21-Scenario 3-Phase Deep-Dive Assessment';
+          submitUserAnswer("Deep-Dive Assessment (21 Scenarios)");
           state.step = 0;
           renderCurrentScenario();
         });
@@ -1238,49 +1452,125 @@
       const s = state.activeScenarios[state.step];
       const stepPercent = Math.min(100, Math.round(((state.step + 1) / (state.activeScenarios.length + 1)) * 100));
       chatProgressBar.style.width = stepPercent + '%';
-      chatStepTracker.textContent = `Scenario ${state.step + 1} of ${state.activeScenarios.length}`;
+      
+      const phaseNames = {
+        1: 'Phase 1: Emotional Experience',
+        2: 'Phase 2: Operating Trade-offs',
+        3: 'Phase 3: Change Readiness'
+      };
+      chatStepTracker.textContent = `${phaseNames[s.phase]} (${state.step + 1} of ${state.activeScenarios.length})`;
 
-      const fullPrompt = `${s.prompt}${s.subtext ? `<div class="text-[#4a5560] text-xs mt-1.5 italic font-medium">${s.subtext}</div>` : ''}`;
+      // Render Phase 1 (Agree / Unsure / Disagree)
+      if (s.phase === 1) {
+        const fullPrompt = `${s.prompt}${s.subtext ? `<div class="text-[#4a5560] text-xs mt-1.5 italic font-medium">${s.subtext}</div>` : ''}`;
+        appendBotMessage(s.title, fullPrompt, () => {
+          activeInputContainer.innerHTML = `
+            <div class="grid grid-cols-3 gap-2">
+              <button type="button" class="diag-btn min-h-[48px] py-2.5 px-2 rounded-xl border border-[#487b9c] bg-[#eaf2f7] hover:bg-[#36607d] hover:text-white text-[#36607d] font-bold text-xs transition-all flex flex-col items-center justify-center text-center shadow-sm" data-val="2" data-label="Agree">
+                <span class="font-bold text-xs sm:text-sm">Agree</span>
+                <span class="text-[9px] opacity-80 hidden sm:inline">Sounds like my reality</span>
+              </button>
+              <button type="button" class="diag-btn min-h-[48px] py-2.5 px-2 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#487b9c] hover:bg-[#eaf2f7] text-[#141f28] font-bold text-xs transition-all flex flex-col items-center justify-center text-center shadow-sm" data-val="1" data-label="Unsure">
+                <span class="font-bold text-xs sm:text-sm">Unsure</span>
+                <span class="text-[9px] opacity-80 hidden sm:inline">Inconsistent / Ambiguous</span>
+              </button>
+              <button type="button" class="diag-btn min-h-[48px] py-2.5 px-2 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#487b9c] hover:bg-[#eaf2f7] text-[#141f28] font-bold text-xs transition-all flex flex-col items-center justify-center text-center shadow-sm" data-val="0" data-label="Disagree">
+                <span class="font-bold text-xs sm:text-sm">Disagree</span>
+                <span class="text-[9px] opacity-80 hidden sm:inline">Doesn't sound like me</span>
+              </button>
+            </div>
+          `;
 
-      appendBotMessage(s.title, fullPrompt, () => {
-        activeInputContainer.innerHTML = `
-          <div class="grid grid-cols-3 gap-2">
-            <button type="button" class="diag-btn min-h-[48px] py-2.5 px-2 rounded-xl border border-[#487b9c] bg-[#eaf2f7] hover:bg-[#36607d] hover:text-white text-[#36607d] font-bold text-xs transition-all flex flex-col items-center justify-center text-center shadow-sm" data-val="2" data-label="Agree">
-              <span class="font-bold text-xs sm:text-sm">Agree</span>
-              <span class="text-[9px] opacity-80 hidden sm:inline">Sounds like me</span>
-            </button>
-            <button type="button" class="diag-btn min-h-[48px] py-2.5 px-2 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#487b9c] hover:bg-[#eaf2f7] text-[#141f28] font-bold text-xs transition-all flex flex-col items-center justify-center text-center shadow-sm" data-val="1" data-label="Unsure">
-              <span class="font-bold text-xs sm:text-sm">Unsure</span>
-              <span class="text-[9px] opacity-80 hidden sm:inline">Sometimes / Not sure</span>
-            </button>
-            <button type="button" class="diag-btn min-h-[48px] py-2.5 px-2 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#487b9c] hover:bg-[#eaf2f7] text-[#141f28] font-bold text-xs transition-all flex flex-col items-center justify-center text-center shadow-sm" data-val="0" data-label="Disagree">
-              <span class="font-bold text-xs sm:text-sm">Disagree</span>
-              <span class="text-[9px] opacity-80 hidden sm:inline">Doesn't sound like me</span>
-            </button>
-          </div>
-        `;
-
-        const buttons = activeInputContainer.querySelectorAll('.diag-btn');
-        buttons.forEach(btn => {
-          btn.addEventListener('click', () => {
-            const val = parseInt(btn.dataset.val, 10);
-            const label = btn.dataset.label;
-            state.answers[s.id] = val;
-
-            submitUserAnswer(`${label}`);
-            state.step++;
-            activeInputContainer.innerHTML = '';
-            saveProgressLocally(false);
-            setTimeout(renderCurrentScenario, 120);
+          activeInputContainer.querySelectorAll('.diag-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+              const val = parseInt(btn.dataset.val, 10);
+              const label = btn.dataset.label;
+              state.answers[s.id] = val;
+              submitUserAnswer(label);
+              state.step++;
+              activeInputContainer.innerHTML = '';
+              saveProgressLocally(false);
+              setTimeout(renderCurrentScenario, 120);
+            });
           });
         });
-      });
+        return;
+      }
+
+      // Render Phase 2 (Pairwise Trade-off: Choice A vs Choice B)
+      if (s.phase === 2) {
+        const fullPrompt = `
+          ${s.prompt}<br>
+          <span class="text-[#647c8f] text-[11px] block mt-1">Select the approach that most honestly reflects how you operate day-to-day:</span>
+        `;
+        appendBotMessage(s.title, fullPrompt, () => {
+          activeInputContainer.innerHTML = `
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <button type="button" class="pairwise-btn min-h-[58px] p-3 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#487b9c] hover:bg-[#eaf2f7] text-[#141f28] text-left transition-all flex flex-col justify-center shadow-sm group" data-val="A">
+                <span class="text-[10px] font-bold text-[#36607d] uppercase tracking-wider mb-0.5">Approach A</span>
+                <span class="text-xs leading-snug group-hover:text-[#141f28] font-medium">${s.optionA.label}</span>
+              </button>
+              <button type="button" class="pairwise-btn min-h-[58px] p-3 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#487b9c] hover:bg-[#eaf2f7] text-[#141f28] text-left transition-all flex flex-col justify-center shadow-sm group" data-val="B">
+                <span class="text-[10px] font-bold text-[#36607d] uppercase tracking-wider mb-0.5">Approach B</span>
+                <span class="text-xs leading-snug group-hover:text-[#141f28] font-medium">${s.optionB.label}</span>
+              </button>
+            </div>
+          `;
+
+          activeInputContainer.querySelectorAll('.pairwise-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+              const choice = btn.dataset.val;
+              state.answers[s.id] = choice;
+              const text = choice === 'A' ? `Approach A: "${s.optionA.label}"` : `Approach B: "${s.optionB.label}"`;
+              submitUserAnswer(text);
+              state.step++;
+              activeInputContainer.innerHTML = '';
+              saveProgressLocally(false);
+              setTimeout(renderCurrentScenario, 120);
+            });
+          });
+        });
+        return;
+      }
+
+      // Render Phase 3 (Drive, Commitment & Change Readiness)
+      if (s.phase === 3) {
+        appendBotMessage(s.title, s.prompt, () => {
+          const optionsHtml = s.options.map((opt, idx) => `
+            <button type="button" class="readiness-btn min-h-[46px] p-2.5 sm:p-3 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#487b9c] hover:bg-[#eaf2f7] text-[#141f28] text-left transition-all flex items-center justify-between shadow-sm group" data-val="${opt.value}" data-text="${opt.text}">
+              <div class="flex items-center gap-2.5">
+                <span class="w-5 h-5 rounded-full border border-[#cbd8e2] group-hover:border-[#487b9c] flex items-center justify-center font-bold text-[10px] text-[#36607d] flex-shrink-0 bg-[#f8fafc]">${idx + 1}</span>
+                <span class="text-xs font-medium">${opt.text}</span>
+              </div>
+            </button>
+          `).join('');
+
+          activeInputContainer.innerHTML = `
+            <div class="flex flex-col gap-2">
+              ${optionsHtml}
+            </div>
+          `;
+
+          activeInputContainer.querySelectorAll('.readiness-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+              const val = parseInt(btn.dataset.val, 10);
+              const text = btn.dataset.text;
+              state.answers[s.id] = val;
+              submitUserAnswer(text);
+              state.step++;
+              activeInputContainer.innerHTML = '';
+              saveProgressLocally(false);
+              setTimeout(renderCurrentScenario, 120);
+            });
+          });
+        });
+        return;
+      }
     }
 
     function renderContactStep() {
       chatProgressBar.style.width = '100%';
 
-      // Check if contact info was already captured
       let leadName = (state.leadData && state.leadData.name && state.leadData.name !== 'Executive Lead') ? state.leadData.name : '';
       let leadEmail = (state.leadData && state.leadData.email) ? state.leadData.email.trim() : '';
       let leadCompany = (state.leadData && state.leadData.company && state.leadData.company !== 'Your Company') ? state.leadData.company : '';
@@ -1307,7 +1597,7 @@
         } catch (e) { }
       }
 
-      // If we already got their info, skip the Unlock interface!
+      // If contact info already captured, complete intake directly
       if (leadEmail && leadEmail.includes('@')) {
         state.leadData = {
           name: leadName || 'Executive Lead',
@@ -1317,8 +1607,8 @@
         chatStepTracker.textContent = 'Dossier Unlocked';
         const displayClient = state.leadData.name !== 'Executive Lead' ? state.leadData.name : state.leadData.email;
         appendBotMessage(
-          'Diagnostic Complete',
-          `Scoring complete. Converging signals have updated your <strong class="text-[#141f28] font-bold">Executive Constraint Dossier</strong> for <strong>${displayClient}</strong>.<br><br>Unlocking your scorecard and action plan...`,
+          'Assessment Complete',
+          `Scoring complete. Converging signals have compiled your <strong class="text-[#141f28] font-bold">Executive Owner Constraint Dossier</strong> for <strong>${displayClient}</strong>.<br><br>Synthesizing your 3-phase briefing and action roadmap...`,
           () => {
             setTimeout(completeIntake, 400);
           }
@@ -1329,8 +1619,8 @@
       chatStepTracker.textContent = 'Dossier Delivery';
 
       const prompt = `
-        Scoring complete. Converging signals have compiled your <strong class="text-[#141f28] font-bold">Executive Constraint Dossier</strong>.<br><br>
-        Where should we deliver your customized 1-Page Action Plan?
+        Scoring complete. We have synthesized your responses across all 3 phases into your <strong class="text-[#141f28] font-bold">Executive Owner Constraint Dossier</strong>.<br><br>
+        Where should we address and deliver your customized briefing?
       `;
 
       appendBotMessage('Final Step', prompt, () => {
@@ -1340,7 +1630,7 @@
             <input type="email" id="chatLeadEmail" required value="${leadEmail}" placeholder="Work Email (alex@firm.com)" class="w-full px-3.5 py-2.5 rounded-lg bg-white border border-[#d8e2e9] text-base sm:text-xs text-[#141f28] placeholder-[#8ba2b3] focus:outline-none focus:border-[#487b9c] focus:ring-2 focus:ring-[#eaf2f7]">
             <input type="text" id="chatLeadCompany" required value="${leadCompany}" placeholder="Company Domain / Name" class="w-full px-3.5 py-2.5 rounded-lg bg-white border border-[#d8e2e9] text-base sm:text-xs text-[#141f28] placeholder-[#8ba2b3] focus:outline-none focus:border-[#487b9c] focus:ring-2 focus:ring-[#eaf2f7]">
             <button type="submit" id="generateReportBtn" class="w-full min-h-[46px] py-3 rounded-lg bg-[#487b9c] hover:bg-[#36607d] text-white font-bold text-xs sm:text-sm tracking-wide transition-all shadow-md shadow-[rgba(72,123,156,0.25)] flex items-center justify-center gap-2">
-              <span>Unlock Constraint Dossier</span>
+              <span>Unlock Executive Constraint Dossier</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
             </button>
           </form>
@@ -1363,14 +1653,14 @@
       activeInputContainer.innerHTML = `
         <div class="p-3 text-center text-xs sm:text-sm text-[#36607d] font-bold flex items-center justify-center gap-2">
           <svg class="animate-spin h-4 w-4 text-[#487b9c]" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
-          Compiling converging evidence &amp; unlocking dossier...
+          Synthesizing operating patterns &amp; unlocking dossier...
         </div>
       `;
 
       const analysis = analyzeConstraints();
       const telemetry = updateTelemetryPreview(analysis);
 
-      // Save diagnostic snapshot to localStorage for seamless application.html prefill
+      // Save diagnostic snapshot to localStorage
       try {
         localStorage.setItem('klein_diagnostic_result', JSON.stringify({
           client: state.leadData,
@@ -1382,6 +1672,11 @@
             convergingPattern: {
               primary: analysis.primaryKey,
               secondary: analysis.secondaryKey
+            },
+            synthesis: {
+              part1_emotional: analysis.emotionalNarrativeText,
+              part2_patterns: analysis.patternSummaryText,
+              part3_readiness: analysis.readinessSummaryText
             }
           },
           timestamp: new Date().toISOString()
@@ -1411,49 +1706,43 @@
         console.warn('LocalStorage save error:', err);
       }
 
-      // Auto-dispatch comprehensive lead dossier to Joe via Web3Forms
+      // Auto-dispatch lead dossier to Joe via Web3Forms
       try {
-        // Format detailed scenario responses for Joe
+        // Detailed answers summary
         const answersSummary = state.activeScenarios.map((s, idx) => {
           const val = state.answers[s.id];
-          const choice = val === 2 ? 'Agree' : (val === 1 ? 'Unsure' : (val === 0 ? 'Disagree' : 'Unanswered'));
-          return `${idx + 1}. [${s.category.toUpperCase()}] ${s.title}: ${choice} (${val !== undefined ? val : 'N/A'})\n   "${s.prompt}"`;
+          let displayVal = 'Unanswered';
+          if (s.phase === 1) {
+            displayVal = val === 2 ? 'Agree' : (val === 1 ? 'Unsure' : (val === 0 ? 'Disagree' : 'Unanswered'));
+          } else if (s.phase === 2) {
+            displayVal = val === 'A' ? `Choice A: "${s.optionA.label}"` : `Choice B: "${s.optionB.label}"`;
+          } else if (s.phase === 3) {
+            const opt = s.options.find(o => o.value === val);
+            displayVal = opt ? `${opt.label} (${opt.text})` : `Score ${val}`;
+          }
+          return `${idx + 1}. [Phase ${s.phase}] ${s.title}: ${displayVal}\n   Prompt: "${s.prompt}"`;
         }).join('\n\n');
 
-        // Extract contradiction signals
-        const contradictionTexts = [];
-        if (state.answers['land_large_contradiction'] === 2) {
-          contradictionTexts.push('Growth vs. Delivery Dread: Landing a major customer triggers operational breakdown anxiety.');
-        }
-        if (state.answers['quiet_week_contradiction'] === 2) {
-          contradictionTexts.push('Breathing Room Panic: Slower operational weeks trigger anxiety over future pipeline.');
-        }
-        if (state.answers['five_year_test'] === 2) {
-          contradictionTexts.push('The Five-Year Impasse: Running the business five years from now the way it is operated today is deeply unacceptable.');
-        }
-        if (contradictionTexts.length === 0) {
-          contradictionTexts.push('Consistent Baseline: No extreme psychological contradictions detected.');
-        }
-
-        // Format prescribed sprints
         const sprintTexts = analysis.actionSteps.map(stepHtml => {
           return stepHtml.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
         }).join('\n');
 
         const emailPayload = {
           access_key: '5e33b3d7-0efc-43f8-8669-dec872870e3d',
-          subject: `New Constraint Diagnostic Dossier: ${state.leadData.name} (${state.leadData.company})`,
-          from_name: 'Klein Insight Diagnostic',
+          subject: `Owner Constraint Dossier: ${state.leadData.name} (${state.leadData.company})`,
+          from_name: 'Klein Insight Assessment',
           name: state.leadData.name,
           email: state.leadData.email,
           business_name: state.leadData.company,
-          'Audit Depth': state.mode === 'express' ? 'Express Audit (11 Scenarios)' : 'Deep-Dive Audit (22 Scenarios)',
-          'Primary Constraint': `${analysis.archetype.title} (${analysis.archetype.severity})`,
-          'Secondary Friction Vector': analysis.secondaryKey ? analysis.secondaryKey.toUpperCase() : 'None',
-          'Archetype Summary': analysis.archetype.summary,
-          'Dimension Friction Breakdown': Object.entries(analysis.percentages).map(([k, v]) => `${k}: ${v}%`).join(', '),
-          'Contradiction Signals': contradictionTexts.join('\n'),
-          'Prescribed 90-Day Sprints': sprintTexts,
+          'Assessment Depth': state.mode === 'express' ? 'Express (14 Scenarios)' : 'Deep-Dive (21 Scenarios)',
+          'Primary Constraint': `${analysis.archetype.title}`,
+          'Secondary Pattern': `${analysis.secondaryPatternTitle}`,
+          'Part 1 Ownership Feel': analysis.emotionalNarrativeText,
+          'Part 2 Patterns & Reinforcing Loop': analysis.patternSummaryText,
+          'Part 3 Drive & Readiness': analysis.readinessSummaryText,
+          'Relative Friction Profile': Object.entries(analysis.percentages).map(([k, v]) => `${k}: ${v}%`).join(', '),
+          'Strategic Tensions': analysis.contradictionTexts.join('\n'),
+          'Prescribed Focus Sprints': sprintTexts,
           'Detailed Scenario Answers': answersSummary,
           'Telemetry JSON Payload': JSON.stringify(telemetry, null, 2),
           botcheck: false
@@ -1468,201 +1757,480 @@
         console.warn('Web3Forms error:', err);
       }
 
-      if (state.webhookUrl) {
-        try {
-          await fetch(state.webhookUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            mode: 'no-cors',
-            body: JSON.stringify(telemetry)
-          });
-        } catch (e) {
-          console.warn('Webhook transmission error:', e);
-        }
-      }
-
       if (state.leadData.name && state.leadData.company) {
-        document.getElementById('dossierClientHeader').textContent = `Klein Insight Constraint Dossier: Prepared for ${state.leadData.name} (${state.leadData.company})`;
+        document.getElementById('dossierClientHeader').textContent = `Owner Constraint Dossier: Prepared for ${state.leadData.name} (${state.leadData.company})`;
       }
 
       setTimeout(() => {
         chatOverlay.classList.add('opacity-0', 'pointer-events-none');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         syncDashboard(analysis);
-        showToast('Constraint Dossier Unlocked & Saved.');
+        showToast('Executive Constraint Dossier Unlocked & Saved.');
       }, 600);
     }
 
+    /* =========================================================================
+       CONSTRAINTS ANALYSIS ENGINE
+       Implements Joe's 3-Phase Methodology:
+       - Phase 1: Emotional Experience & Strain
+       - Phase 2: Pairwise Operating Patterns & Relative Constraints
+       - Phase 3: Drive, Coachability & Change Readiness
+       - Connects patterns into Self-Reinforcing Loops
+       - Detects Contradictions as Strategic Tensions
+       ========================================================================= */
+
     function analyzeConstraints() {
-      const catScores = {
-        demand: { earned: 0, max: 0 },
-        sales: { earned: 0, max: 0 },
-        capacity: { earned: 0, max: 0 },
-        owner: { earned: 0, max: 0 },
-        operations: { earned: 0, max: 0 },
-        economics: { earned: 0, max: 0 }
+      // 7 Core Owner Operating Patterns
+      const patternFriction = {
+        delegation: { score: 0, max: 0, label: 'Delegation Friction' },
+        centralization: { score: 0, max: 0, label: 'Owner Centralization' },
+        reactive: { score: 0, max: 0, label: 'Reactive Ownership' },
+        leadership: { score: 0, max: 0, label: 'Leadership Depth Gap' },
+        drift: { score: 0, max: 0, label: 'Execution Drift' },
+        coupling: { score: 0, max: 0, label: 'Growth-Load Coupling' },
+        commercial: { score: 0, max: 0, label: 'Commercial Uncertainty' }
       };
 
-      state.activeScenarios.forEach(s => {
-        const val = state.answers[s.id] !== undefined ? state.answers[s.id] : 1;
-        catScores[s.category].earned += val;
-        catScores[s.category].max += 2;
+      // Tally Phase 2 Pairwise comparisons (primary source of relative pattern constraints)
+      phase2Scenarios.forEach(s => {
+        const answer = state.answers[s.id];
+        if (answer !== undefined && patternFriction[s.pattern]) {
+          patternFriction[s.pattern].max += 10;
+          if (answer === 'A') {
+            patternFriction[s.pattern].score += 10;
+          } else {
+            patternFriction[s.pattern].score += 1; // minor baseline
+          }
+        }
       });
 
+      // Tally Phase 1 converging evidence into relevant dimensions
+      if (state.answers['p1_growth_stress'] !== undefined) {
+        patternFriction.coupling.max += 6;
+        patternFriction.coupling.score += state.answers['p1_growth_stress'] * 3;
+      }
+      if (state.answers['p1_strategic_bandwidth'] !== undefined) {
+        patternFriction.reactive.max += 6;
+        patternFriction.reactive.score += state.answers['p1_strategic_bandwidth'] * 3;
+      }
+      if (state.answers['p1_disconnect'] !== undefined) {
+        patternFriction.centralization.max += 6;
+        patternFriction.centralization.score += state.answers['p1_disconnect'] * 3;
+      }
+      if (state.answers['p1_central_router'] !== undefined) {
+        patternFriction.centralization.max += 6;
+        patternFriction.centralization.score += state.answers['p1_central_router'] * 3;
+      }
+      if (state.answers['p1_pipeline_anxiety'] !== undefined) {
+        patternFriction.commercial.max += 6;
+        patternFriction.commercial.score += state.answers['p1_pipeline_anxiety'] * 3;
+      }
+      if (state.answers['p1_recurring_problems'] !== undefined) {
+        patternFriction.reactive.max += 3;
+        patternFriction.reactive.score += state.answers['p1_recurring_problems'] * 1.5;
+        patternFriction.delegation.max += 3;
+        patternFriction.delegation.score += state.answers['p1_recurring_problems'] * 1.5;
+      }
+
+      // Calculate normalized friction percentages (0-100%)
       const percentages = {};
-      Object.keys(catScores).forEach(cat => {
-        percentages[cat] = catScores[cat].max > 0 ? Math.round((catScores[cat].earned / catScores[cat].max) * 100) : 0;
+      Object.keys(patternFriction).forEach(key => {
+        const item = patternFriction[key];
+        percentages[key] = item.max > 0 ? Math.min(100, Math.round((item.score / item.max) * 100)) : 50;
       });
 
-      const sortedCategories = Object.keys(percentages).sort((a, b) => percentages[b] - percentages[a]);
-      const primaryKey = sortedCategories[0];
-      const secondaryKey = sortedCategories[1];
+      // Rank patterns relatively
+      const sortedKeys = Object.keys(percentages).sort((a, b) => percentages[b] - percentages[a]);
+      const primaryKey = sortedKeys[0];
+      const secondaryKey = sortedKeys[1];
 
-      let archetype = {
-        title: 'The Central Hub Trap (Owner Dependency)',
-        summary: 'Regardless of team size or revenue, the business routes exceptions, decisions, and problem-solving through you. Time away feels high-risk, and delegation frequently degrades into checking and rework.',
-        severity: 'Key-Person Dependency'
+      // Pattern Definition Catalog with business consequences and self-reinforcing loops
+      const patternCatalog = {
+        delegation: {
+          title: 'Delegation Friction',
+          tagline: 'The Short-Term Efficiency Trap',
+          situation: 'A task or workflow could potentially be transferred to someone else on the team.',
+          reaction: '"It would be faster and more reliable if I just handled this myself right now."',
+          behavior: 'The owner continues personally executing the task instead of investing the time to hand it off.',
+          consequence: 'Others do not gain the competence or confidence to take ownership, ensuring the owner remains the only person capable of executing it.',
+          loop: 'Doing it myself is faster &rarr; I keep doing it &rarr; Nobody else becomes capable &rarr; Doing it myself remains faster.',
+          sprintTitle: 'Codify Decision &amp; Handoff Thresholds',
+          sprintDesc: 'Define explicit "Rules of the Road" and authority thresholds for top recurring tasks. Accept short-term onboarding friction to permanently liberate executive execution time.'
+        },
+        centralization: {
+          title: 'Owner Centralization',
+          tagline: 'The Central Router Bottleneck',
+          situation: 'Routine exceptions, operational decisions, or client issues arise during daily business.',
+          reaction: '"I need to see this to ensure it\'s handled according to our standard."',
+          behavior: 'All knowledge, judgment calls, and problem-solving default to the owner\'s desk.',
+          consequence: 'Team members stop thinking independently, waiting for the owner to direct them, making the owner the ultimate ceiling on scale.',
+          loop: 'I make all calls &rarr; Team waits for my input &rarr; My desk fills with questions &rarr; I feel compelled to make all calls.',
+          sprintTitle: 'Distributed Authority Framework',
+          sprintDesc: 'Build guardrails and explicit decision guidelines that empower team members to resolve routine client escalations up to defined thresholds without owner sign-off.'
+        },
+        reactive: {
+          title: 'Reactive Ownership',
+          tagline: 'The Firefighting Treadmill',
+          situation: 'An urgent customer request or day-to-day operational issue appears during the workweek.',
+          reaction: '"This needs my immediate attention before I can do anything else."',
+          behavior: 'Forward-looking strategic work is repeatedly postponed in favor of handling immediate noise.',
+          consequence: 'The owner remains perpetually busy solving symptoms while the structural root causes of friction are never eliminated.',
+          loop: 'Solve urgent problems &rarr; Strategic work postponed &rarr; Structural causes unaddressed &rarr; More urgent problems emerge.',
+          sprintTitle: 'Executive Bandwidth Quarantine',
+          sprintDesc: 'Quarantine dedicated blocks of uninterrupted strategic time each week. Triage the top 3 recurring Monday morning issues with permanent structural fixes rather than band-aids.'
+        },
+        leadership: {
+          title: 'Leadership Depth Gap',
+          tagline: 'The Lone Operator Constraint',
+          situation: 'The company needs high-level oversight and initiative execution across key departments.',
+          reaction: '"Nobody around me thinks like an owner, so I have to oversee everything myself."',
+          behavior: 'The owner manages individual tasks rather than cultivating capable second-tier leaders.',
+          consequence: 'The business lacks independent thinkers who can lead alongside the owner, capping growth at the owner\'s personal span of control.',
+          loop: 'Lack trusted leaders &rarr; Direct micromanagement &rarr; Capable talent feels disempowered &rarr; The leadership vacuum remains.',
+          sprintTitle: 'Leadership Competency Architecture',
+          sprintDesc: 'Identify 1–2 high-potential internal leaders or key hires. Transition them from task followers to outcome owners through weekly structured coaching.'
+        },
+        drift: {
+          title: 'Execution Drift',
+          tagline: 'The Unfinished Initiative Drag',
+          situation: 'A new opportunity, service expansion, or exciting marketing idea appears.',
+          reaction: '"We should jump on this right now while momentum is fresh."',
+          behavior: 'Attention shifts to the new initiative before previous operational systems are fully embedded.',
+          consequence: 'Half-built systems and shifting priorities create organizational fatigue, confusion, and operational drag.',
+          loop: 'Start new project &rarr; Prior system unfinished &rarr; Results plateau &rarr; Look for another new opportunity.',
+          sprintTitle: 'Initiative Completion Discipline',
+          sprintDesc: 'Install a strict "finish-to-start" operating protocol. Cap concurrent internal initiatives at 2, and protect core offerings from scope creep.'
+        },
+        coupling: {
+          title: 'Growth-Load Coupling',
+          tagline: 'The Capacity &amp; Delivery Ceiling',
+          situation: 'New business, major client accounts, or inbound opportunities enter the company.',
+          reaction: '"How are we going to deliver this without breaking operations or killing my personal schedule?"',
+          behavior: 'The owner subconsciously taps the brakes on new sales or personally absorbs massive overtime.',
+          consequence: 'Growth becomes a source of dread rather than celebration, capping enterprise revenue at personal human limits.',
+          loop: 'More clients arrive &rarr; Owner workload spikes &rarr; Dread of new business &rarr; Growth is capped or sabotaged.',
+          sprintTitle: 'Fulfillment Capacity Decoupling',
+          sprintDesc: 'Standardize client onboarding and delivery checklists so taking on 30%+ more volume flows through proven workflows without requiring founder heroics.'
+        },
+        commercial: {
+          title: 'Commercial Uncertainty',
+          tagline: 'The Black-Box Pipeline',
+          situation: 'Prospects drop off, or the business enters an unexpected quiet operational period.',
+          reaction: '"I\'m not entirely sure why that prospect walked away or where the next clients will come from."',
+          behavior: 'The owner oscillates between panic-selling during quiet weeks and neglecting sales during delivery rushes.',
+          consequence: 'Unpredictable revenue cycles prevent confident hiring and long-term capital reinvestment.',
+          loop: 'Feast-or-famine cycles &rarr; Inconsistent pipeline &rarr; Panic-selling &rarr; Overcommitted delivery &rarr; Pipeline dry again.',
+          sprintTitle: 'Predictable Conversion &amp; Pipeline Engine',
+          sprintDesc: 'Establish systematic pipeline tracking, structured qualification stages, and root-cause win/loss debriefs to eliminate the black-box loss of qualified prospects.'
+        }
       };
 
-      if (primaryKey === 'capacity') {
-        archetype = {
-          title: 'The Capacity Wall (Delivery Choke)',
-          summary: 'Inbound demand and market opportunities exist, but growth triggers immediate execution anxiety. The fear of delivery breakdown or quality degradation artificially throttles your business scale.',
-          severity: 'Delivery Bottleneck'
-        };
-      } else if (primaryKey === 'operations') {
-        archetype = {
-          title: 'The Reactive Firefighter Loop',
-          summary: 'Your strategic agenda is consistently displaced by routine operational emergencies. The business stays busy and solves the same problems repeatedly without becoming meaningfully easier to run.',
-          severity: 'Process Rigidity Drag'
-        };
-      } else if (primaryKey === 'economics') {
-        archetype = {
-          title: 'The High-Effort / Low-Yield Treadmill',
-          summary: 'The business generates revenue and workload, but the personal return and net margin fail to justify the operational stress. More volume currently equates to more complexity rather than more profit.',
-          severity: 'Economic Efficiency Drag'
-        };
-      } else if (primaryKey === 'demand' || primaryKey === 'sales') {
-        archetype = {
-          title: 'The Black-Box Pipeline',
-          summary: 'Qualified inquiries fail to convert predictably, and quiet weeks trigger immediate pipeline anxiety. You lack systematic visibility into why interested prospects disengage.',
-          severity: 'Conversion Friction'
-        };
+      const primaryPattern = patternCatalog[primaryKey] || patternCatalog.delegation;
+      const secondaryPattern = patternCatalog[secondaryKey] || patternCatalog.reactive;
+
+      // Construct Archetype Data
+      const archetype = {
+        title: `${primaryPattern.title}: ${primaryPattern.tagline}`,
+        summary: `Your responses indicate that ${primaryPattern.title.toLowerCase()} is your primary operating constraint. ${primaryPattern.consequence}`,
+        severity: 'Primary Operating Constraint'
+      };
+
+      // -----------------------------------------------------------------------
+      // PART 1: What Ownership Currently Feels Like (Emotional Experience Synthesis)
+      // -----------------------------------------------------------------------
+      const growthStress = state.answers['p1_growth_stress'] === 2;
+      const strategicDisplaced = state.answers['p1_strategic_bandwidth'] === 2;
+      const disconnectStall = state.answers['p1_disconnect'] === 2;
+      const effortMismatch = state.answers['p1_return_on_effort'] === 2;
+      const pipelineAnxiety = state.answers['p1_pipeline_anxiety'] === 2;
+
+      let emotionalNarrativeHtml = '';
+      let emotionalNarrativeText = '';
+
+      if (growthStress && strategicDisplaced) {
+        emotionalNarrativeText = "You haven't lost your ambition. You've run out of room. You still want the company to grow, but additional business is increasingly associated with personal workload and delivery stress. Immediate daily demands repeatedly displace the strategic work you know would move the company forward.";
+        emotionalNarrativeHtml = `
+          <p class="font-bold text-[#141f28]">You haven't lost your ambition. You've run out of room.</p>
+          <p class="text-[#4a5560]">
+            Your responses suggest you care deeply about growing the company, but additional business has become closely coupled with personal workload, responsibility, and stress. 
+            Because your days are consumed with immediate problem-solving, you have difficulty carving out protected time for the forward-looking work that would actually make the company easier to run.
+          </p>
+        `;
+      } else if (effortMismatch) {
+        emotionalNarrativeText = "You're carrying more cognitive and operational strain than the business should require. You are working harder and investing tremendous personal effort, but the financial return and operational leverage are not compounding proportionally.";
+        emotionalNarrativeHtml = `
+          <p class="font-bold text-[#141f28]">Effort is outpacing leverage.</p>
+          <p class="text-[#4a5560]">
+            You are investing significant hours, but the business is not rewarding that effort with proportionate financial return or operational freedom. 
+            The feeling is not one of apathy—it is the frustration of high operational activity yielding insufficient strategic leverage.
+          </p>
+        `;
+      } else {
+        emotionalNarrativeText = "Your responses reflect an established owner experiencing operational friction at the current ceiling of personal bandwidth. While the business functions, too much coordination and decision-making flow through your direct oversight.";
+        emotionalNarrativeHtml = `
+          <p class="font-bold text-[#141f28]">Operating at the ceiling of personal bandwidth.</p>
+          <p class="text-[#4a5560]">
+            While the business delivers results, too much of the daily operating momentum relies on your personal cognitive presence. 
+            Stepping away or scaling volume creates tension because the business does not yet possess the structural independence to run smoothly without you.
+          </p>
+        `;
       }
 
-      // Check Emotional Contradictions
+      // -----------------------------------------------------------------------
+      // PART 2: Operating Patterns & Self-Reinforcing Loops
+      // -----------------------------------------------------------------------
+      let connectionText = '';
+      if (primaryKey === 'delegation' && secondaryKey === 'reactive') {
+        connectionText = "The more work you personally absorb because it feels faster, the less time you have to build the systems and capability that would allow you to absorb less.";
+      } else if (primaryKey === 'centralization' && secondaryKey === 'leadership') {
+        connectionText = "Because routine decisions default to you, potential leaders around you don't develop independent judgment—which reinforces your belief that you must oversee everything yourself.";
+      } else if (primaryKey === 'coupling' && secondaryKey === 'delegation') {
+        connectionText = "Growth creates personal delivery dread because you haven't yet transferred core execution to others, making additional revenue personally expensive in time and stress.";
+      } else {
+        connectionText = `Your primary constraint (${primaryPattern.title}) and secondary pattern (${secondaryPattern.title}) mutually reinforce one another, keeping you centrally involved in maintaining the company rather than scaling it.`;
+      }
+
+      const patternSummaryText = `Primary Pattern: ${primaryPattern.title} (${primaryPattern.tagline}). Loop: ${primaryPattern.loop} Secondary Pattern: ${secondaryPattern.title}. Connection: ${connectionText}`;
+
+      // -----------------------------------------------------------------------
+      // STRATEGIC CONTRADICTIONS & TENSIONS
+      // -----------------------------------------------------------------------
       const contradictions = [];
-      if (state.answers['land_large_contradiction'] === 2) {
+      const contradictionTexts = [];
+
+      // Contradiction 1: High Ambition / Vision vs Growth Dread
+      if (growthStress) {
+        const text = "Growth Ambition vs. Delivery Dread: You want to build a larger, more successful company, yet incoming business instantly triggers anxiety about personal workload and execution breakdowns.";
+        contradictionTexts.push(text);
         contradictions.push(`
           <div class="p-3.5 rounded-xl bg-amber-50/90 border border-amber-200 flex items-start gap-2.5">
             <span class="w-2 h-2 rounded-full bg-amber-500 mt-1.5 flex-shrink-0"></span>
             <div>
-              <strong class="text-[#78350f] font-bold">Growth vs. Delivery Dread:</strong> Landing a major customer instantly triggers anxiety about workload and operational breakdown rather than celebration. This reveals that your fulfillment workflows are near their breaking point.
+              <strong class="text-[#78350f] font-bold">Growth Ambition vs. Delivery Dread:</strong> You are driven to grow the business, yet landing significant new business immediately triggers workload anxiety rather than excitement. This reveals that your current delivery model is tethered directly to your personal hours.
             </div>
           </div>
         `);
       }
-      if (state.answers['quiet_week_contradiction'] === 2) {
+
+      // Contradiction 2: Quiet Week Panic vs. Desire for Freedom
+      if (pipelineAnxiety) {
+        const text = "Breathing Room Panic: You crave space away from daily firefighting, but when a quiet week finally arrives, it immediately triggers commercial anxiety over where future revenue will come from.";
+        contradictionTexts.push(text);
         contradictions.push(`
           <div class="p-3.5 rounded-xl bg-amber-50/90 border border-amber-200 flex items-start gap-2.5">
             <span class="w-2 h-2 rounded-full bg-amber-500 mt-1.5 flex-shrink-0"></span>
             <div>
-              <strong class="text-[#78350f] font-bold">Breathing Room Panic:</strong> Slower operational weeks trigger anxiety over future pipeline rather than providing restorative space. This reflects an uncodified lead generation process.
+              <strong class="text-[#78350f] font-bold">Breathing Room Panic:</strong> You crave freedom from operational chaos, yet quieter weeks feel threatening because customer acquisition is not yet codified into a predictable, measurable pipeline engine.
             </div>
           </div>
         `);
       }
-      if (state.answers['five_year_test'] === 2) {
+
+      // Contradiction 3: Hard Work vs. Static Leverage
+      if (effortMismatch) {
+        const text = "Effort vs. Leverage Paradox: You are working harder than ever, but business leverage and profit are not compounding proportionally.";
+        contradictionTexts.push(text);
         contradictions.push(`
           <div class="p-3.5 rounded-xl bg-rose-50 border border-rose-200 flex items-start gap-2.5">
             <span class="w-2 h-2 rounded-full bg-rose-500 mt-1.5 flex-shrink-0"></span>
             <div>
-              <strong class="text-[#991b1b] font-bold">The Five-Year Impasse:</strong> You indicated deep dissatisfaction with running the business five years from now the way it is operated today. This establishes that incremental firefighting is no longer acceptable; architectural change is required.
-            </div>
-          </div>
-        `);
-      }
-      if (contradictions.length === 0) {
-        contradictions.push(`
-          <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 flex items-start gap-2.5">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0"></span>
-            <div>
-              <strong class="text-[#065f46] font-bold">Consistent Psychological Baseline:</strong> Your operational reactions to workload spikes and quiet weeks show baseline stability. Operational gains can focus directly on codifying repeatable workflows and unblocking throughput.
+              <strong class="text-[#991b1b] font-bold">The Effort-Leverage Impasse:</strong> You recognize that working harder is no longer yielding proportional business gains. The solution is no longer personal exertion—it is structural leverage.
             </div>
           </div>
         `);
       }
 
-      // Prescribed Action Steps
+      if (contradictions.length === 0) {
+        const text = "Aligned Operational Baseline: Your operational reactions to growth and quiet periods show baseline psychological stability. The opportunity is to directly unblock throughput and codify delegation.";
+        contradictionTexts.push(text);
+        contradictions.push(`
+          <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 flex items-start gap-2.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0"></span>
+            <div>
+              <strong class="text-[#065f46] font-bold">Consistent Operating Baseline:</strong> Your responses show consistent alignment between your expectations and business reality. The primary work is focused execution on delegation thresholds and workflow leverage.
+            </div>
+          </div>
+        `);
+      }
+
+      // -----------------------------------------------------------------------
+      // PART 3: Drive, Commitment and Change Readiness
+      // -----------------------------------------------------------------------
+      const readinessVal = state.answers['p3_change_readiness'] || 2;
+      const habitShiftVal = state.answers['p3_habit_shift'] || 2;
+      const coachabilityVal = state.answers['p3_coachability'] || 2;
+
+      let readinessSummaryText = '';
+      let driveReadinessHtml = '';
+
+      if (readinessVal >= 2 && habitShiftVal >= 2 && coachabilityVal >= 2) {
+        readinessSummaryText = "The issue is not motivation or capability. You exhibit high ambition, genuine openness to being challenged with evidence, and a clear recognition that changing the business requires changing some of your own daily habits.";
+        driveReadinessHtml = `
+          <div class="flex items-center justify-between pb-2 border-b border-[#d8e2e9]">
+            <span class="font-bold text-[#141f28] text-sm">Strategic Profile: The Driven Builder Running Out of Room</span>
+            <span class="text-[11px] font-mono text-emerald-700 bg-emerald-100 border border-emerald-300 px-2 py-0.5 rounded-full font-bold">High Change Readiness</span>
+          </div>
+          <p class="mt-2 text-[#4a5560]">
+            <strong>The bottleneck is not your ambition.</strong> Your answers indicate strong commitment, high coachability, and a clear willingness to dismantle and rebuild how you personally spend your time. 
+            You do not need motivation—you need <em>room</em>. The immediate opportunity is to redirect your energy from executing the business to architecting the systems and leadership leverage that can run without your daily heroics.
+          </p>
+        `;
+      } else if (readinessVal === 1 || habitShiftVal === 1) {
+        readinessSummaryText = "You recognize that current operating constraints are capping the company, but you remain cautious about disrupting established daily routines. The priority is small, high-confidence systemic wins that prove the value of leverage without high friction.";
+        driveReadinessHtml = `
+          <div class="flex items-center justify-between pb-2 border-b border-[#d8e2e9]">
+            <span class="font-bold text-[#141f28] text-sm">Strategic Profile: Experienced Operator Seeking High-Certainty Steps</span>
+            <span class="text-[11px] font-mono text-amber-700 bg-amber-100 border border-amber-300 px-2 py-0.5 rounded-full font-bold">Cautious / Stepwise Readiness</span>
+          </div>
+          <p class="mt-2 text-[#4a5560]">
+            You see that things could be significantly better, but you are protective of your time and hesitant to create organizational upheaval. 
+            The strategic path forward is not a disruptive overhaul, but calibrated, low-risk delegation experiments that demonstrate immediate time liberation.
+          </p>
+        `;
+      } else {
+        readinessSummaryText = "You possess established industry knowledge and clear standards for quality. With evidence-based guidance, you are prepared to transition from central operator to leveraged executive.";
+        driveReadinessHtml = `
+          <div class="flex items-center justify-between pb-2 border-b border-[#d8e2e9]">
+            <span class="font-bold text-[#141f28] text-sm">Strategic Profile: Capable Executive Transitioning to Strategic Leverage</span>
+            <span class="text-[11px] font-mono text-[#36607d] bg-[#eaf2f7] border border-[rgba(89,141,174,0.3)] px-2 py-0.5 rounded-full font-bold">Balanced Readiness</span>
+          </div>
+          <p class="mt-2 text-[#4a5560]">
+            Your responses indicate that you hold high standards for execution and take personal responsibility for business outcomes. 
+            By installing clear decision thresholds and leadership guardrails, you can protect quality while freeing your cognitive bandwidth for high-value growth.
+          </p>
+        `;
+      }
+
+      // Prescribed Strategic Sprints based on primary & secondary constraints
       const actionSteps = [];
-      if (primaryKey === 'owner' || secondaryKey === 'owner') {
-        actionSteps.push(`
-          <div class="p-3.5 rounded-xl bg-[#f0f5f8] border border-[#d8e2e9] border-l-4 border-l-[#487b9c] flex items-start gap-2.5">
-            <div>
-              <strong class="text-[#141f28] font-bold">Sprint 1: Codify the Decision Architecture:</strong> Document routine problem-solving protocols and explicit decision thresholds for your staff. Move from "I'll show you" shadowing to a codified operational handbook that liberates executive time.
-            </div>
+      actionSteps.push(`
+        <div class="p-3.5 rounded-xl bg-[#f0f5f8] border border-[#d8e2e9] border-l-4 border-l-[#487b9c] flex items-start gap-2.5">
+          <div>
+            <strong class="text-[#141f28] font-bold">Sprint 1 (${primaryPattern.title}): ${primaryPattern.sprintTitle}:</strong>
+            <span class="text-[#4a5560] block mt-0.5">${primaryPattern.sprintDesc}</span>
           </div>
-        `);
-      }
-      if (primaryKey === 'capacity' || secondaryKey === 'capacity') {
-        actionSteps.push(`
-          <div class="p-3.5 rounded-xl bg-[#f0f5f8] border border-[#d8e2e9] border-l-4 border-l-[#487b9c] flex items-start gap-2.5">
-            <div>
-              <strong class="text-[#141f28] font-bold">Sprint 2: Standardize Fulfillment Capacity:</strong> Decouple client delivery from founder heroics. Install standardized onboarding workflows and resource checklists so taking on 25%+ more volume does not threaten delivery quality.
-            </div>
+        </div>
+      `);
+
+      actionSteps.push(`
+        <div class="p-3.5 rounded-xl bg-[#f0f5f8] border border-[#d8e2e9] border-l-4 border-l-[#36607d] flex items-start gap-2.5">
+          <div>
+            <strong class="text-[#141f28] font-bold">Sprint 2 (${secondaryPattern.title}): ${secondaryPattern.sprintTitle}:</strong>
+            <span class="text-[#4a5560] block mt-0.5">${secondaryPattern.sprintDesc}</span>
           </div>
-        `);
-      }
-      if (primaryKey === 'operations' || secondaryKey === 'operations') {
-        actionSteps.push(`
-          <div class="p-3.5 rounded-xl bg-[#f0f5f8] border border-[#d8e2e9] border-l-4 border-l-[#487b9c] flex items-start gap-2.5">
-            <div>
-              <strong class="text-[#141f28] font-bold">Sprint 3: Triage the Repeated-Problem Loop:</strong> Perform a root-cause audit on the 3 issues repeatedly landing on your desk each Monday morning. Install permanent systemic fixes rather than recurring operational band-aids.
-            </div>
+        </div>
+      `);
+
+      actionSteps.push(`
+        <div class="p-3.5 rounded-xl bg-[#f0f5f8] border border-[#d8e2e9] border-l-4 border-l-emerald-600 flex items-start gap-2.5">
+          <div>
+            <strong class="text-[#141f28] font-bold">Sprint 3 (Leverage Architecture): Reclaim 8–15 Hours of Strategic Bandwidth:</strong>
+            <span class="text-[#4a5560] block mt-0.5">Audit low-leverage founder execution tasks and systematically migrate them to codified playbooks, freeing up executive time to lead high-yield growth.</span>
           </div>
-        `);
-      }
-      if (primaryKey === 'demand' || primaryKey === 'sales' || secondaryKey === 'demand' || secondaryKey === 'sales') {
-        actionSteps.push(`
-          <div class="p-3.5 rounded-xl bg-[#f0f5f8] border border-[#d8e2e9] border-l-4 border-l-[#487b9c] flex items-start gap-2.5">
-            <div>
-              <strong class="text-[#141f28] font-bold">Sprint 4: Pipeline Triage &amp; Conversion Clarity:</strong> Implement automated speed-to-lead follow-up sequences and structured inquiry tracking to eliminate the black-box loss of qualified prospects.
-            </div>
-          </div>
-        `);
-      }
-      if (actionSteps.length < 2) {
-        actionSteps.push(`
-          <div class="p-3.5 rounded-xl bg-[#f0f5f8] border border-[#d8e2e9] border-l-4 border-l-[#487b9c] flex items-start gap-2.5">
-            <div>
-              <strong class="text-[#141f28] font-bold">Sprint 5: Executive Time Reallocation:</strong> Audit and systematically eliminate lower-value tasks trapping founder bandwidth, reclaiming 8–15 hours weekly for strategic growth.
-            </div>
-          </div>
-        `);
-      }
+        </div>
+      `);
 
       return {
         percentages,
         primaryKey,
         secondaryKey,
         archetype,
+        primaryPattern,
+        secondaryPattern,
+        secondaryPatternTitle: secondaryPattern.title,
+        emotionalNarrativeHtml,
+        emotionalNarrativeText,
+        patternSummaryText,
+        connectionText,
         contradictions,
+        contradictionTexts,
+        driveReadinessHtml,
+        readinessSummaryText,
         actionSteps
       };
     }
 
-    let radarChart = null;
+    let patternChart = null;
 
     function syncDashboard(analysis) {
+      // Cover Header Title/Subtitle with Client & Company Name
+      const lead = state.leadData || {};
+      const clientName = (lead.name && lead.name !== 'Executive Lead') ? lead.name : 'Executive Leader';
+      const companyName = (lead.company && lead.company !== 'Your Company') ? lead.company : 'Client Organization';
+
+      const coverSub = document.getElementById('coverSubtitle');
+      if (coverSub) {
+        coverSub.innerHTML = `Executive Briefing Prepared for <strong id="coverClientName" class="text-[#141f28] font-bold">${clientName}</strong> &bull; <strong id="coverCompanyName" class="text-[#141f28] font-bold">${companyName}</strong>`;
+      }
+      const coverMetaDate = document.getElementById('coverMetaDate');
+      if (coverMetaDate) {
+        coverMetaDate.textContent = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      }
+
       document.getElementById('archetypeTitle').textContent = analysis.archetype.title;
       document.getElementById('archetypeSummary').textContent = analysis.archetype.summary;
 
       const badge = document.getElementById('constraintSeverityBadge');
       badge.textContent = analysis.archetype.severity;
 
+      // Part 1 Emotional Experience
+      document.getElementById('emotionalExperienceNarrative').innerHTML = analysis.emotionalNarrativeHtml;
+
+      // Part 2 Operating Patterns
+      const patternsContainer = document.getElementById('operatingPatternsContainer');
+      patternsContainer.innerHTML = `
+        <div class="p-4 rounded-xl bg-[#f8fafc] border border-[#d8e2e9] space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="font-extrabold text-[#141f28] text-sm">${analysis.primaryPattern.title} (Primary Constraint)</span>
+            <span class="text-[10px] font-mono font-bold text-rose-700 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-full">${analysis.percentages[analysis.primaryKey]}% Friction</span>
+          </div>
+          <div class="text-xs text-[#4a5560] space-y-1">
+            <div><strong class="text-[#141f28]">The Situation:</strong> ${analysis.primaryPattern.situation}</div>
+            <div><strong class="text-[#141f28]">Owner Reaction:</strong> <em>${analysis.primaryPattern.reaction}</em></div>
+            <div><strong class="text-[#141f28]">Business Consequence:</strong> ${analysis.primaryPattern.consequence}</div>
+            <div class="pt-1.5 border-t border-[#d8e2e9] text-[#36607d] font-semibold">
+              <strong>The Self-Reinforcing Loop:</strong> ${analysis.primaryPattern.loop}
+            </div>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-[#f8fafc] border border-[#d8e2e9] space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="font-extrabold text-[#141f28] text-sm">${analysis.secondaryPattern.title} (Secondary Constraint)</span>
+            <span class="text-[10px] font-mono font-bold text-[#36607d] bg-[#eaf2f7] border border-[#d8e2e9] px-2 py-0.5 rounded-full">${analysis.percentages[analysis.secondaryKey]}% Friction</span>
+          </div>
+          <div class="text-xs text-[#4a5560] space-y-1">
+            <div><strong class="text-[#141f28]">The Situation:</strong> ${analysis.secondaryPattern.situation}</div>
+            <div><strong class="text-[#141f28]">Owner Reaction:</strong> <em>${analysis.secondaryPattern.reaction}</em></div>
+            <div><strong class="text-[#141f28]">Business Consequence:</strong> ${analysis.secondaryPattern.consequence}</div>
+            <div class="pt-1.5 border-t border-[#d8e2e9] text-[#36607d] font-semibold">
+              <strong>The Self-Reinforcing Loop:</strong> ${analysis.secondaryPattern.loop}
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Pattern Connection Callout
+      document.getElementById('patternConnectionCallout').innerHTML = `
+        <div class="flex items-start gap-2.5">
+          <span class="w-2 h-2 rounded-full bg-[#487b9c] mt-1.5 flex-shrink-0"></span>
+          <div>
+            <strong class="text-[#141f28] font-bold block mb-0.5">How These Two Patterns Reinforce Each Other:</strong>
+            <span class="text-[#354c5e]">${analysis.connectionText}</span>
+          </div>
+        </div>
+      `;
+
+      // Contradictions List
       document.getElementById('contradictionList').innerHTML = analysis.contradictions.join('');
+
+      // Part 3 Drive & Readiness
+      document.getElementById('driveReadinessContainer').innerHTML = analysis.driveReadinessHtml;
+
+      // Sprints Action Plan
       document.getElementById('actionPlanList').innerHTML = analysis.actionSteps.join('');
 
+      // Chart & Telemetry
       renderOrUpdateChart(analysis.percentages);
       updateTelemetryPreview(analysis);
       updateTalkLinks();
@@ -1695,51 +2263,64 @@
     }
 
     function renderOrUpdateChart(percentages) {
-      const canvas = document.getElementById('radarChart');
+      const canvas = document.getElementById('patternChart');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
 
-      const labels = ['Demand', 'Sales/Conv', 'Capacity', 'Owner Dep.', 'Operations', 'Economics'];
-      const data = [
-        percentages.demand || 0,
-        percentages.sales || 0,
-        percentages.capacity || 0,
-        percentages.owner || 0,
-        percentages.operations || 0,
-        percentages.economics || 0
+      const labels = [
+        'Delegation',
+        'Centralization',
+        'Reactive Firefighting',
+        'Leadership Depth',
+        'Execution Drift',
+        'Growth-Load Coupling',
+        'Commercial Visibility'
       ];
 
-      if (radarChart) {
-        radarChart.data.datasets[0].data = data;
-        radarChart.update();
+      const data = [
+        percentages.delegation || 0,
+        percentages.centralization || 0,
+        percentages.reactive || 0,
+        percentages.leadership || 0,
+        percentages.drift || 0,
+        percentages.coupling || 0,
+        percentages.commercial || 0
+      ];
+
+      if (patternChart) {
+        patternChart.data.datasets[0].data = data;
+        patternChart.update();
         return;
       }
 
-      radarChart = new Chart(ctx, {
+      patternChart = new Chart(ctx, {
         type: 'bar',
         data: {
           labels: labels,
           datasets: [{
-            label: 'Friction Index (%)',
+            label: 'Relative Friction Index (%)',
             data: data,
             backgroundColor: [
-              'rgba(89, 141, 174, 0.85)',
-              'rgba(72, 123, 156, 0.85)',
               'rgba(217, 112, 90, 0.85)',
               'rgba(217, 146, 54, 0.85)',
+              'rgba(89, 141, 174, 0.85)',
+              'rgba(72, 123, 156, 0.85)',
               'rgba(90, 125, 154, 0.85)',
+              'rgba(194, 90, 69, 0.85)',
               'rgba(74, 155, 142, 0.85)'
             ],
             borderColor: [
-              '#487b9c',
-              '#36607d',
               '#c25a45',
               '#bf7a22',
+              '#487b9c',
+              '#36607d',
               '#43617b',
+              '#a84532',
               '#348275'
             ],
             borderWidth: 1.5,
             borderRadius: 6,
+            maxBarThickness: 46,
           }]
         },
         options: {
@@ -1750,7 +2331,7 @@
             tooltip: {
               callbacks: {
                 label: function (context) {
-                  return ' Friction Index: ' + context.raw + '%';
+                  return ' Relative Friction: ' + context.raw + '%';
                 }
               }
             }
@@ -1758,7 +2339,7 @@
           scales: {
             x: {
               grid: { display: false },
-              ticks: { color: '#4a5560', font: { size: 10, weight: '600' } }
+              ticks: { color: '#141f28', font: { size: 11, weight: '700' } }
             },
             y: {
               max: 100,
@@ -1766,7 +2347,8 @@
               grid: { color: 'rgba(216, 226, 233, 0.7)' },
               ticks: {
                 color: '#647c8f',
-                font: { size: 9 },
+                font: { size: 10, weight: '600' },
+                stepSize: 20,
                 callback: function (val) { return val + '%'; }
               }
             }
@@ -1780,22 +2362,25 @@
         timestamp: new Date().toISOString(),
         advisoryFirm: 'Klein Insight',
         website: 'https://kleininsight.com',
-        auditMode: state.mode,
+        assessmentMode: state.mode,
         client: state.leadData,
         rawAnswers: state.answers,
         diagnostics: {
           primaryConstraint: analysis.archetype.title,
-          severityLabel: analysis.archetype.severity,
+          secondaryConstraint: analysis.secondaryPatternTitle,
           dimensionBreakdown: analysis.percentages,
           convergingPattern: {
             primary: analysis.primaryKey,
             secondary: analysis.secondaryKey
+          },
+          synthesis: {
+            part1_emotional: analysis.emotionalNarrativeText,
+            part2_patterns: analysis.patternSummaryText,
+            part3_readiness: analysis.readinessSummaryText
           }
         }
       };
 
-      const pre = document.getElementById('payloadPreview');
-      if (pre) pre.textContent = JSON.stringify(payload, null, 2);
       return payload;
     }
 
@@ -1808,8 +2393,8 @@
           step: typeof state.step === 'number' && state.step >= 0 ? state.step : 0,
           answers: state.answers || {},
           leadData: state.leadData || {},
-          totalScenarios: state.activeScenarios && state.activeScenarios.length ? state.activeScenarios.length : (state.mode === 'deep' ? 22 : 11),
-          isShortFormCompleted: (state.mode === 'express' && (isCompleted || Object.keys(state.answers || {}).length >= 11)),
+          totalScenarios: state.activeScenarios && state.activeScenarios.length ? state.activeScenarios.length : (state.mode === 'deep' ? 21 : 14),
+          isShortFormCompleted: (state.mode === 'express' && (isCompleted || Object.keys(state.answers || {}).length >= 14)),
           isCompleted: isCompleted,
           savedAt: new Date().toISOString()
         };
@@ -1826,7 +2411,7 @@
           }
         }
         if (redirectHome) {
-          showToast('Diagnostic progress saved. Returning home...');
+          showToast('Assessment progress saved. Returning home...');
           setTimeout(() => {
             window.location.href = 'index.html';
           }, 350);
@@ -1853,7 +2438,6 @@
       });
     }
 
-    // Esc key triggers Save and Exit
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' || e.key === 'Esc') {
         saveProgressLocally(true);
@@ -1871,7 +2455,7 @@
 
     document.getElementById('restartChatBtn').addEventListener('click', () => {
       restartIntake();
-      showToast('Diagnostic reset.');
+      showToast('Assessment reset.');
     });
 
     document.querySelectorAll('#reopenChatBtn').forEach(btn => {
@@ -1881,8 +2465,8 @@
     });
 
     function triggerPrintWithChartResize() {
-      if (radarChart) {
-        radarChart.resize();
+      if (patternChart) {
+        patternChart.resize();
       }
       setTimeout(() => {
         window.print();
@@ -1894,17 +2478,16 @@
     });
 
     window.addEventListener('beforeprint', () => {
-      if (radarChart) {
-        radarChart.resize();
+      if (patternChart) {
+        patternChart.resize();
       }
     });
 
     window.addEventListener('afterprint', () => {
-      if (radarChart) {
-        radarChart.resize();
+      if (patternChart) {
+        patternChart.resize();
       }
     });
-
 
     function showToast(msg) {
       const toast = document.getElementById('toast');
@@ -1935,29 +2518,29 @@
           if (savedProgress) {
             state.answers = savedProgress.answers || {};
             state.leadData = savedProgress.leadData || state.leadData;
-            state.mode = savedProgress.mode || (Object.keys(state.answers).length > 11 ? 'deep' : 'express');
+            state.mode = savedProgress.mode || (Object.keys(state.answers).length > 14 ? 'deep' : 'express');
           }
           if (dossierData && dossierData.client) {
             state.leadData = dossierData.client;
           }
-          state.activeScenarios = state.mode === 'deep' ? allScenarios : allScenarios.filter(s => s.isExpress);
+          state.activeScenarios = buildScenarioList(state.mode);
           const analysis = analyzeConstraints();
 
           if (state.leadData && state.leadData.name && state.leadData.company) {
             const clientHeader = document.getElementById('dossierClientHeader');
             if (clientHeader) {
-              clientHeader.textContent = `Klein Insight Constraint Dossier: Prepared for ${state.leadData.name} (${state.leadData.company})`;
+              clientHeader.textContent = `Owner Constraint Dossier: Prepared for ${state.leadData.name} (${state.leadData.company})`;
             }
           }
           const reportBadge = document.getElementById('reportModeBadge');
           if (reportBadge) {
-            reportBadge.textContent = state.mode === 'deep' ? 'Deep-Dive Diagnostic Report' : 'Express Diagnostic Report';
+            reportBadge.textContent = state.mode === 'deep' ? 'Deep-Dive Executive Dossier' : 'Express Executive Dossier';
           }
           const baselineLabel = document.getElementById('auditBaselineLabel');
           if (baselineLabel) {
             baselineLabel.textContent = state.mode === 'deep'
-              ? 'Format: Comprehensive 22-Scenario Constraint Audit'
-              : 'Format: Express 11-Scenario Constraint Triage';
+              ? 'Format: 21-Scenario 3-Phase Deep-Dive Assessment'
+              : 'Format: 14-Scenario 3-Phase Owner Assessment';
           }
 
           chatOverlay.classList.add('opacity-0', 'pointer-events-none');
