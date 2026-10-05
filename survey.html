@@ -208,6 +208,8 @@
         padding: 0 !important;
         width: 100% !important;
         max-width: 100% !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
       }
 
       header,
@@ -241,6 +243,8 @@
         max-width: 100% !important;
         box-sizing: border-box !important;
         margin-bottom: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
       }
 
       .dossier-cover-card {
@@ -272,6 +276,34 @@
         max-width: 100% !important;
         height: 290px !important;
         display: block !important;
+      }
+
+      a.pdf-talk-link,
+      a#dossierTalkCta {
+        display: inline-flex !important;
+        background-color: #487b9c !important;
+        color: #ffffff !important;
+        border: 1px solid #36607d !important;
+        text-decoration: none !important;
+        font-weight: 700 !important;
+        cursor: pointer !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      
+      a#dossierTalkCta {
+        display: flex !important;
+        width: 100% !important;
+        text-align: center !important;
+        justify-content: center !important;
+        padding: 10px 16px !important;
+      }
+
+      a.pdf-talk-url {
+        color: #36607d !important;
+        text-decoration: underline !important;
+        font-weight: 600 !important;
+        cursor: pointer !important;
       }
     }
   </style>
@@ -457,7 +489,7 @@
             class="text-left sm:text-right font-mono text-[10px] sm:text-[11px] text-[#647c8f] bg-[#f8fafc] sm:bg-transparent p-2.5 sm:p-0 rounded-lg border border-[#d8e2e9] sm:border-0 flex-shrink-0">
             <div><strong class="text-[#141f28]">Date:</strong> <span id="coverMetaDate">October 2026</span></div>
             <div><strong class="text-[#141f28]">Advisory:</strong> Joe Klein, Klein Insight</div>
-            <div><strong class="text-[#141f28]">Evaluation:</strong> 3-Phase Owner Model</div>
+            <div><strong class="text-[#141f28]">Consultation:</strong> <a href="https://kleininsight.com/#contact" target="_blank" rel="noopener noreferrer" class="pdf-talk-url text-[#36607d] underline font-semibold">kleininsight.com/#contact</a></div>
           </div>
         </div>
       </div>
@@ -594,6 +626,23 @@
         </div>
         <div class="space-y-2.5 text-xs sm:text-sm text-[#141f28]" id="actionPlanList">
           <!-- Injected via JavaScript -->
+        </div>
+      </div>
+
+      <!-- Advisory Debrief Callout (Page 2 Print & Screen) -->
+      <div class="pt-3 border-t border-[#d8e2e9] flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#f8fafc] p-3.5 rounded-xl border border-[#d8e2e9]">
+        <div class="space-y-0.5">
+          <div class="text-xs font-bold text-[#141f28] flex items-center gap-1.5">
+            <span>Want to unpack these sprints for your business?</span>
+          </div>
+          <p class="text-[11px] text-[#4a5560]">
+            Review your findings and discuss custom 6-month operational roadmaps directly with Joe.
+          </p>
+        </div>
+        <div class="flex-shrink-0 flex items-center gap-2">
+          <a href="https://kleininsight.com/#contact" target="_blank" rel="noopener noreferrer" class="pdf-talk-link px-3.5 py-1.5 rounded-lg bg-[#487b9c] text-white text-xs font-bold shadow-sm hover:bg-[#36607d] transition-colors inline-flex items-center gap-1.5">
+            <span>Let's Talk &rarr;</span>
+          </a>
         </div>
       </div>
 
@@ -742,10 +791,15 @@
               right fit? Reach out directly to talk through where your business is and what needs to change.
             </p>
 
-            <a href="index.html#contact" id="dossierTalkCta"
-              class="w-full min-h-[44px] py-2.5 px-4 rounded-lg bg-[#487b9c] hover:bg-[#36607d] text-white font-bold text-xs sm:text-sm transition-all shadow-sm flex items-center justify-center gap-2 group">
+            <a href="https://kleininsight.com/#contact" id="dossierTalkCta" target="_blank" rel="noopener noreferrer"
+              class="w-full min-h-[44px] py-2.5 px-4 rounded-lg bg-[#487b9c] hover:bg-[#36607d] text-white font-bold text-xs sm:text-sm transition-all shadow-sm flex items-center justify-center gap-2 group pdf-talk-link">
               <span>Let's Talk &rarr;</span>
             </a>
+            <div class="text-center pt-0.5">
+              <a href="https://kleininsight.com/#contact" target="_blank" rel="noopener noreferrer" class="pdf-talk-url text-[11px] text-[#36607d] underline font-semibold">
+                kleininsight.com/#contact
+              </a>
+            </div>
           </div>
         </div>
 
@@ -782,9 +836,7 @@
 
       <!-- Print-Only Callout -->
       <div class="hidden print-only-block pt-2 border-t border-[#d8e2e9] text-xs text-[#4a5560]">
-        <strong>Strategic Advisory:</strong> Prepared by Joe Klein, Klein Insight. For operational blueprint
-        implementation and 6-month partnership applications, visit <strong>kleininsight.com</strong> or email
-        <strong>joe@kleininsight.com</strong>.
+        <strong>Strategic Advisory:</strong> Prepared by Joe Klein, Klein Insight. For operational blueprint implementation and 6-month partnership applications, schedule a debrief at <a href="https://kleininsight.com/#contact" target="_blank" rel="noopener noreferrer" class="pdf-talk-url text-[#36607d] underline font-bold">kleininsight.com/#contact</a> or email <strong>joe@kleininsight.com</strong>.
       </div>
     </div>
 
@@ -2255,16 +2307,22 @@
     }
 
     function updateTalkLinks() {
-      const talkLinks = document.querySelectorAll('a[href*="#contact"]');
+      const talkLinks = document.querySelectorAll('a[href*="#contact"], a.pdf-talk-link, a.pdf-talk-url, #dossierTalkCta');
       if (!talkLinks.length) return;
       const lead = state.leadData || {};
       const params = new URLSearchParams();
       if (lead.name && lead.name !== 'Executive Lead') params.set('name', lead.name);
       if (lead.email && lead.email.includes('@')) params.set('email', lead.email);
       if (lead.company && lead.company !== 'Your Company') params.set('business', lead.company);
+      params.set('utm_source', 'pdf_dossier');
+      params.set('utm_medium', 'assessment_report');
       const qs = params.toString();
+      const targetUrl = `https://kleininsight.com/${qs ? '?' + qs : ''}#contact`;
+
       talkLinks.forEach(link => {
-        link.href = qs ? `index.html?${qs}#contact` : 'index.html#contact';
+        link.href = targetUrl;
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noopener noreferrer');
         link.addEventListener('click', () => {
           if (lead.email) {
             try {
