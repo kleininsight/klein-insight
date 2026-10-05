@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" class="light">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
   <title>Business Constraint &amp; Operational Diagnostic | Klein Insight</title>
-  <meta name="description" content="Identify your primary business constraint across 6 dimensions. Executive operational diagnostic by Klein Insight.">
+  <meta name="description"
+    content="Identify your primary business constraint across 6 dimensions. Executive operational diagnostic by Klein Insight.">
   <meta name="theme-color" content="#121e27">
-  
+
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
+
   <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
 
   <script>
     tailwind.config = {
@@ -121,9 +124,17 @@
     }
 
     @keyframes chatFadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+
     .chat-bubble-animate {
       animation: chatFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
@@ -131,24 +142,44 @@
     .typing-dot {
       animation: typingBounce 1.4s infinite ease-in-out both;
     }
-    .typing-dot:nth-child(1) { animation-delay: -0.32s; }
-    .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+    .typing-dot:nth-child(1) {
+      animation-delay: -0.32s;
+    }
+
+    .typing-dot:nth-child(2) {
+      animation-delay: -0.16s;
+    }
+
     @keyframes typingBounce {
-      0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
-      40% { transform: scale(1); opacity: 1; }
+
+      0%,
+      80%,
+      100% {
+        transform: scale(0);
+        opacity: 0.3;
+      }
+
+      40% {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
 
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
     }
+
     ::-webkit-scrollbar-track {
       background: #edf3f7;
     }
+
     ::-webkit-scrollbar-thumb {
       background: #cbd8e2;
       border-radius: 9999px;
     }
+
     ::-webkit-scrollbar-thumb:hover {
       background: #8ba2b3;
     }
@@ -159,13 +190,16 @@
         size: letter portrait;
         margin: 0.3in 0.35in;
       }
-      
-      *, *::before, *::after {
+
+      *,
+      *::before,
+      *::after {
         box-shadow: none !important;
         text-shadow: none !important;
       }
 
-      html, body {
+      html,
+      body {
         background: #ffffff !important;
         color: #141f28 !important;
         font-size: 10px !important;
@@ -176,11 +210,11 @@
         max-width: 100% !important;
       }
 
-      header, 
-      #chatOverlay, 
-      #settingsDrawer, 
-      #toast, 
-      #slotPickerSection, 
+      header,
+      #chatOverlay,
+      #settingsDrawer,
+      #toast,
+      #slotPickerSection,
       .no-print {
         display: none !important;
       }
@@ -198,7 +232,8 @@
         space-y: 5px !important;
       }
 
-      .app-card, .app-card-accent {
+      .app-card,
+      .app-card-accent {
         background: #ffffff !important;
         border: 1px solid #d8e2e9 !important;
         color: #141f28 !important;
@@ -227,41 +262,60 @@
   </style>
 </head>
 
-<body class="bg-[#edf3f7] text-[#141f28] font-sans min-h-screen antialiased flex flex-col selection:bg-brand-600 selection:text-white relative">
+<body
+  class="bg-[#edf3f7] text-[#141f28] font-sans min-h-screen antialiased flex flex-col selection:bg-brand-600 selection:text-white relative">
 
   <!-- ========================================================================= -->
   <!-- FULL-PAGE CONVERSATIONAL DIAGNOSTIC OVERLAY (LIGHT THEME)                  -->
   <!-- ========================================================================= -->
-  <div id="chatOverlay" class="fixed inset-0 z-50 bg-[#0d171f]/75 backdrop-blur-sm flex flex-col items-center justify-center p-0 sm:p-4 md:p-6 transition-opacity duration-300">
-    <div class="w-full max-w-2xl h-[100dvh] sm:h-[820px] sm:max-h-[92vh] bg-white rounded-none sm:rounded-2xl border-0 sm:border border-[#d8e2e9] shadow-2xl flex flex-col overflow-hidden relative">
-      
+  <div id="chatOverlay"
+    class="fixed inset-0 z-50 bg-[#0d171f]/75 backdrop-blur-sm flex flex-col items-center justify-center p-0 sm:p-4 md:p-6 transition-opacity duration-300">
+    <div
+      class="w-full max-w-2xl h-[100dvh] sm:h-[820px] sm:max-h-[92vh] bg-white rounded-none sm:rounded-2xl border-0 sm:border border-[#d8e2e9] shadow-2xl flex flex-col overflow-hidden relative">
+
       <!-- Concierge Header -->
       <div class="p-3.5 sm:p-4 border-b border-[#d8e2e9] bg-[#f8fafc] flex items-center justify-between flex-shrink-0">
         <div class="flex items-center gap-2.5 sm:gap-3">
           <div class="relative">
-            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#1a2936] text-[#598dae] border border-[rgba(89,141,174,0.35)] flex items-center justify-center font-bold text-xs sm:text-sm shadow-sm">
+            <div
+              class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#1a2936] text-[#598dae] border border-[rgba(89,141,174,0.35)] flex items-center justify-center font-bold text-xs sm:text-sm shadow-sm">
               KI
             </div>
-            <span class="absolute -bottom-0.5 -right-0.5 w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"></span>
+            <span
+              class="absolute -bottom-0.5 -right-0.5 w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"></span>
           </div>
           <div>
             <div class="font-bold text-xs sm:text-sm text-[#141f28] flex items-center gap-1.5 sm:gap-2">
               <span>Klein Insight Diagnostic</span>
-              <span class="text-[9px] sm:text-[10px] text-[#36607d] font-semibold border border-[rgba(89,141,174,0.3)] bg-[#eaf2f7] px-2 py-0.5 rounded-full" id="auditTypeBadge">Strategy Audit</span>
+              <span
+                class="text-[9px] sm:text-[10px] text-[#36607d] font-semibold border border-[rgba(89,141,174,0.3)] bg-[#eaf2f7] px-2 py-0.5 rounded-full"
+                id="auditTypeBadge">Strategy Audit</span>
             </div>
-            <span class="text-[10px] sm:text-[11px] text-[#4a5560] block leading-tight font-medium" id="chatStepTracker">Choose Evaluation Depth</span>
+            <span class="text-[10px] sm:text-[11px] text-[#4a5560] block leading-tight font-medium"
+              id="chatStepTracker">Choose Evaluation Depth</span>
           </div>
         </div>
 
         <div class="flex items-center gap-1.5 sm:gap-2">
-          <button id="saveExitChatBtn" class="text-xs text-[#36607d] hover:text-[#141f28] hover:border-[#487b9c] transition-colors flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[#d8e2e9] bg-white shadow-sm font-semibold" title="Save Progress and Return to Homepage (Esc)">
-            <svg class="w-3.5 h-3.5 text-[#487b9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/></svg>
+          <button id="saveExitChatBtn"
+            class="text-xs text-[#36607d] hover:text-[#141f28] hover:border-[#487b9c] transition-colors flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[#d8e2e9] bg-white shadow-sm font-semibold"
+            title="Save Progress and Return to Homepage (Esc)">
+            <svg class="w-3.5 h-3.5 text-[#487b9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+            </svg>
             <span>Save &amp; Exit</span>
-            <kbd class="hidden sm:inline-block text-[9px] font-mono text-[#647c8f] bg-[#edf3f7] px-1 py-0.2 rounded border border-[#d8e2e9]">Esc</kbd>
+            <kbd
+              class="hidden sm:inline-block text-[9px] font-mono text-[#647c8f] bg-[#edf3f7] px-1 py-0.2 rounded border border-[#d8e2e9]">Esc</kbd>
           </button>
 
-          <button id="restartChatBtn" class="text-xs text-[#4a5560] hover:text-[#141f28] hover:border-[#487b9c] transition-colors flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-[#d8e2e9] bg-white shadow-sm" title="Restart Audit">
-            <svg class="w-3.5 h-3.5 text-[#487b9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <button id="restartChatBtn"
+            class="text-xs text-[#4a5560] hover:text-[#141f28] hover:border-[#487b9c] transition-colors flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-[#d8e2e9] bg-white shadow-sm"
+            title="Restart Audit">
+            <svg class="w-3.5 h-3.5 text-[#487b9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
             <span class="hidden sm:inline font-semibold">Reset</span>
           </button>
         </div>
@@ -269,16 +323,20 @@
 
       <!-- Live Intake Progress Bar -->
       <div class="w-full bg-[#edf3f7] h-1.5 flex-shrink-0">
-        <div id="chatProgressBar" class="bg-gradient-to-r from-brand-500 via-brand-600 to-brand-700 h-full w-[0%] transition-all duration-300"></div>
+        <div id="chatProgressBar"
+          class="bg-gradient-to-r from-brand-500 via-brand-600 to-brand-700 h-full w-[0%] transition-all duration-300">
+        </div>
       </div>
 
       <!-- Scrollable Message Stream -->
-      <div id="chatStream" class="flex-grow p-4 sm:p-6 overflow-y-auto space-y-4 text-xs sm:text-sm scroll-smooth bg-white">
+      <div id="chatStream"
+        class="flex-grow p-4 sm:p-6 overflow-y-auto space-y-4 text-xs sm:text-sm scroll-smooth bg-white">
         <!-- Messages injected dynamically -->
       </div>
 
       <!-- Typing Indicator -->
-      <div id="typingIndicator" class="hidden items-center gap-2 py-2 px-3 mx-4 sm:mx-6 mb-2 rounded-xl bg-[#f0f5f8] border border-[#d8e2e9] w-fit text-[#4a5560] text-xs">
+      <div id="typingIndicator"
+        class="hidden items-center gap-2 py-2 px-3 mx-4 sm:mx-6 mb-2 rounded-xl bg-[#f0f5f8] border border-[#d8e2e9] w-fit text-[#4a5560] text-xs">
         <span class="w-1.5 h-1.5 rounded-full bg-[#487b9c] typing-dot"></span>
         <span class="w-1.5 h-1.5 rounded-full bg-[#487b9c] typing-dot"></span>
         <span class="w-1.5 h-1.5 rounded-full bg-[#487b9c] typing-dot"></span>
@@ -303,37 +361,48 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-3">
         <a href="index.html" class="flex items-center gap-3 text-decoration-none group" aria-label="Klein Insight home">
-          <div class="w-8 h-8 rounded-lg bg-[#1a2936] border border-brand-500/40 text-brand-300 flex items-center justify-center font-bold text-xs shadow-sm group-hover:border-brand-500 transition-colors">
+          <div
+            class="w-8 h-8 rounded-lg bg-[#1a2936] border border-brand-500/40 text-brand-300 flex items-center justify-center font-bold text-xs shadow-sm group-hover:border-brand-500 transition-colors">
             KI
           </div>
           <div>
-            <span class="font-bold text-sm sm:text-base tracking-tight text-[#141f28] block leading-none group-hover:text-[#487b9c] transition-colors">Klein Insight</span>
-            <span class="text-[10px] sm:text-[11px] text-[#4a5560] font-medium">Business Strategy &amp; Growth Coaching</span>
+            <span
+              class="font-bold text-sm sm:text-base tracking-tight text-[#141f28] block leading-none group-hover:text-[#487b9c] transition-colors">Klein
+              Insight</span>
+            <span class="text-[10px] sm:text-[11px] text-[#4a5560] font-medium">Business Strategy &amp; Growth
+              Coaching</span>
           </div>
         </a>
       </div>
-      
+
       <div class="flex items-center space-x-2 sm:space-x-3">
-        <button id="saveExitDossierBtn" class="text-xs px-2.5 sm:px-3 py-1.5 rounded-lg border border-[#d8e2e9] bg-white hover:bg-[#edf3f7] text-[#36607d] font-semibold transition-colors flex items-center gap-1.5 shadow-sm" title="Save &amp; Exit to Homepage (Esc)">
-          <svg class="w-3.5 h-3.5 text-[#487b9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/></svg>
+        <button id="saveExitDossierBtn"
+          class="text-xs px-2.5 sm:px-3 py-1.5 rounded-lg border border-[#d8e2e9] bg-white hover:bg-[#edf3f7] text-[#36607d] font-semibold transition-colors flex items-center gap-1.5 shadow-sm"
+          title="Save &amp; Exit to Homepage (Esc)">
+          <svg class="w-3.5 h-3.5 text-[#487b9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+          </svg>
           <span class="hidden sm:inline">Save &amp; Exit</span>
-          <kbd class="hidden md:inline-block text-[9px] font-mono text-[#647c8f] bg-[#edf3f7] px-1 py-0.2 rounded border border-[#d8e2e9]">Esc</kbd>
+          <kbd
+            class="hidden md:inline-block text-[9px] font-mono text-[#647c8f] bg-[#edf3f7] px-1 py-0.2 rounded border border-[#d8e2e9]">Esc</kbd>
         </button>
 
-        <a href="index.html" class="text-xs px-2.5 sm:px-3 py-1.5 rounded-lg border border-[#d8e2e9] bg-white hover:bg-[#edf3f7] text-[#36607d] font-semibold transition-colors flex items-center gap-1.5 shadow-sm">
-          <svg class="w-3.5 h-3.5 text-[#487b9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+        <a href="index.html"
+          class="text-xs px-2.5 sm:px-3 py-1.5 rounded-lg border border-[#d8e2e9] bg-white hover:bg-[#edf3f7] text-[#36607d] font-semibold transition-colors flex items-center gap-1.5 shadow-sm">
+          <svg class="w-3.5 h-3.5 text-[#487b9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
           <span class="hidden sm:inline">Back to Site</span>
         </a>
 
-        <a href="application.html" class="text-xs px-2.5 sm:px-3 py-1.5 rounded-lg bg-[#487b9c] hover:bg-[#36607d] text-white font-bold transition-colors flex items-center gap-1.5 shadow-sm">
+        <a href="application.html"
+          class="text-xs px-2.5 sm:px-3 py-1.5 rounded-lg bg-[#487b9c] hover:bg-[#36607d] text-white font-bold transition-colors flex items-center gap-1.5 shadow-sm">
           <span>Apply Now</span>
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </a>
-
-        <button id="openSettingsBtn" class="text-xs p-1.5 sm:px-2.5 sm:py-1.5 rounded-lg border border-[#d8e2e9] bg-white hover:bg-[#edf3f7] text-[#4a5560] hover:text-[#141f28] transition-colors flex items-center gap-1.5 shadow-sm" title="Configure Webhook / Calendar Integrations">
-          <svg class="w-3.5 h-3.5 text-[#487b9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3" stroke-width="2"/></svg>
-          <span class="hidden md:inline font-medium">Settings</span>
-        </button>
       </div>
     </div>
   </header>
@@ -343,7 +412,8 @@
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 text-xs">
       <div class="flex items-center gap-2">
         <span class="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
-        <span id="dossierClientHeader" class="font-bold text-[#141f28] tracking-wide truncate">Diagnostic Briefing: Prepared for Executive Review</span>
+        <span id="dossierClientHeader" class="font-bold text-[#141f28] tracking-wide truncate">Diagnostic Briefing:
+          Prepared for Executive Review</span>
       </div>
       <div class="text-[#4a5560] font-mono text-[10px] sm:text-[11px]" id="auditBaselineLabel">
         Format: Express 11-Scenario Constraint Triage
@@ -363,7 +433,8 @@
           <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#487b9c] animate-pulse flex-shrink-0"></span>
           Primary Identified Business Constraint
         </span>
-        <span id="constraintSeverityBadge" class="text-[11px] sm:text-xs px-3 py-1 rounded-full font-bold bg-rose-50 text-rose-700 border border-rose-200 w-fit">
+        <span id="constraintSeverityBadge"
+          class="text-[11px] sm:text-xs px-3 py-1 rounded-full font-bold bg-rose-50 text-rose-700 border border-rose-200 w-fit">
           Critical Structural Choke
         </span>
       </div>
@@ -374,7 +445,8 @@
           The Central Hub Trap (Owner Dependency)
         </h2>
         <p class="text-[#4a5560] text-xs sm:text-sm mt-1.5 max-w-4xl leading-relaxed font-medium" id="archetypeSummary">
-          Your day-to-day operations and growth are tethered directly to your personal cognitive bandwidth. Problems, routine decisions, and client escalations default back to you.
+          Your day-to-day operations and growth are tethered directly to your personal cognitive bandwidth. Problems,
+          routine decisions, and client escalations default back to you.
         </p>
       </div>
 
@@ -382,9 +454,11 @@
       <div class="mt-4 sm:mt-5 pt-4 border-t border-[#d8e2e9]">
         <div class="text-xs font-bold text-[#141f28] mb-2 flex justify-between items-center">
           <span>6-Dimension Friction Breakdown (Demand, Sales, Capacity, Owner Dependency, Operations, Economics)</span>
-          <span class="text-[10px] sm:text-[11px] text-[#36607d] font-mono font-semibold" id="chartSubtext">Diagnostic Signal Analysis</span>
+          <span class="text-[10px] sm:text-[11px] text-[#36607d] font-mono font-semibold" id="chartSubtext">Diagnostic
+            Signal Analysis</span>
         </div>
-        <div class="h-44 sm:h-52 w-full relative bg-[#f8fafc] border border-[#d8e2e9] rounded-xl p-3" id="chartContainerWrapper">
+        <div class="h-44 sm:h-52 w-full relative bg-[#f8fafc] border border-[#d8e2e9] rounded-xl p-3"
+          id="chartContainerWrapper">
           <canvas id="radarChart"></canvas>
         </div>
       </div>
@@ -396,10 +470,15 @@
     <div id="bottleneckSynthesisCard" class="w-full app-card p-5 sm:p-7 space-y-5">
       <div class="flex items-center justify-between border-b border-[#d8e2e9] pb-3">
         <h3 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#141f28] flex items-center gap-2">
-          <svg class="w-4 h-4 text-[#d99236] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <svg class="w-4 h-4 text-[#d99236] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
           <span>Diagnostic Synthesis: Primary Bottlenecks &amp; Alignment Signals</span>
         </h3>
-        <span class="text-[10px] px-2.5 py-0.5 rounded bg-[#edf3f7] text-[#36607d] border border-[#d8e2e9] font-mono font-bold" id="reportModeBadge">Express Report</span>
+        <span
+          class="text-[10px] px-2.5 py-0.5 rounded bg-[#edf3f7] text-[#36607d] border border-[#d8e2e9] font-mono font-bold"
+          id="reportModeBadge">Express Report</span>
       </div>
 
       <!-- Emotional Contradictions Section -->
@@ -429,38 +508,51 @@
     <!-- CARD 3 (FULL WIDTH, LAST): Advisory Architecture, Pricing & Action    -->
     <!-- ===================================================================== -->
     <div id="asymmetricCard" class="w-full app-card-accent p-5 sm:p-7 space-y-6">
-      
+
       <!-- Card Header -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#d8e2e9] pb-3 gap-2">
         <div class="flex items-center gap-2 text-[#36607d] text-xs sm:text-sm font-bold uppercase tracking-wider">
-          <svg class="w-4 h-4 text-[#487b9c] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          <svg class="w-4 h-4 text-[#487b9c] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          </svg>
           <span>The 6-Month One-on-One Strategy Partnership</span>
         </div>
-        <span class="text-[10px] sm:text-xs px-3 py-1 rounded-full bg-[#eaf2f7] text-[#36607d] border border-[rgba(89,141,174,0.4)] font-bold w-fit">
+        <span
+          class="text-[10px] sm:text-xs px-3 py-1 rounded-full bg-[#eaf2f7] text-[#36607d] border border-[rgba(89,141,174,0.4)] font-bold w-fit">
           $1,000/mo Founding Commitment (Normally $1,500/mo)
         </span>
       </div>
 
       <!-- Core Partnership Narrative & Pricing Overview -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        
+
         <!-- Left: Partnership Model & Specific Pricing Structure (from index.html) -->
         <div class="lg:col-span-7 space-y-4 text-xs sm:text-sm text-[#4a5560] leading-relaxed">
           <p>
-            The Klein Insight engagement is a <strong class="text-[#141f28]">six-month, one-on-one strategy partnership</strong> designed exclusively for established owners ready to transform how their business operates. Limited to <strong class="text-[#141f28]">20 dedicated business owners</strong> at any given time to ensure uncompromising focus.
+            The Klein Insight engagement is a <strong class="text-[#141f28]">six-month, one-on-one strategy
+              partnership</strong> designed exclusively for established owners ready to transform how their business
+            operates. Limited to <strong class="text-[#141f28]">20 dedicated business owners</strong> at any given time
+            to ensure uncompromising focus.
           </p>
           <p>
-            We start with what you want to achieve, then work backward to dismantle the operational constraints, flawed assumptions, and bottlenecks capping your ceiling.
+            We start with what you want to achieve, then work backward to dismantle the operational constraints, flawed
+            assumptions, and bottlenecks capping your ceiling.
           </p>
 
           <!-- Pricing & Terms Callout matching index.html #roi -->
           <div class="p-4 rounded-xl bg-[#edf3f7] border border-[rgba(89,141,174,0.35)] space-y-2.5 text-[#141f28]">
             <div class="flex items-center justify-between">
               <span class="font-extrabold text-[#141f28] text-sm">Transparent Investment &amp; Commitment</span>
-              <span class="text-[11px] font-mono text-emerald-700 bg-emerald-100 border border-emerald-300 px-2 py-0.5 rounded-full font-bold">Save $500/mo</span>
+              <span
+                class="text-[11px] font-mono text-emerald-700 bg-emerald-100 border border-emerald-300 px-2 py-0.5 rounded-full font-bold">Save
+                $500/mo</span>
             </div>
             <p class="text-xs text-[#354c5e] leading-relaxed">
-              Investment is fixed at <strong class="text-[#141f28] font-bold">$1,000/month</strong> (reflecting your <strong class="text-[#36607d] font-bold">$500/month Founding-Client discount</strong> from the standard $1,500/mo rate) over our <strong class="text-[#141f28] font-bold">6-month commitment ($6,000 total commitment)</strong>.
+              Investment is fixed at <strong class="text-[#141f28] font-bold">$1,000/month</strong> (reflecting your
+              <strong class="text-[#36607d] font-bold">$500/month Founding-Client discount</strong> from the standard
+              $1,500/mo rate) over our <strong class="text-[#141f28] font-bold">6-month commitment ($6,000 total
+                commitment)</strong>.
             </p>
             <div class="pt-2 border-t border-[#d8e2e9] grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px]">
               <div>
@@ -480,15 +572,18 @@
 
           <!-- The ROI of Hidden Leverage (from index.html #roi) -->
           <div class="space-y-2 text-xs">
-            <span class="font-bold uppercase tracking-wider text-[#141f28] block text-[11px]">The ROI of Hidden Leverage:</span>
+            <span class="font-bold uppercase tracking-wider text-[#141f28] block text-[11px]">The ROI of Hidden
+              Leverage:</span>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[#4a5560]">
               <div class="p-3 rounded-lg bg-[#f8fafc] border border-[#d8e2e9]">
                 <strong class="text-[#141f28] block mb-1 font-bold">Time Liberation</strong>
-                Valuing founder time at $150/hr, freeing just <strong class="text-[#141f28]">7 hours per month</strong> from broken workflows completely pays for this partnership.
+                Valuing founder time at $150/hr, freeing just <strong class="text-[#141f28]">7 hours per month</strong>
+                from broken workflows completely pays for this partnership.
               </div>
               <div class="p-3 rounded-lg bg-[#f8fafc] border border-[#d8e2e9]">
                 <strong class="text-[#141f28] block mb-1 font-bold">Scaling Leverage</strong>
-                Unlocking just a fraction of your hidden capacity covers the entire program. Everything after that is pure profit and freedom.
+                Unlocking just a fraction of your hidden capacity covers the entire program. Everything after that is
+                pure profit and freedom.
               </div>
             </div>
           </div>
@@ -496,7 +591,7 @@
 
         <!-- Right: The 5-Stage Framework & Schedule Debrief -->
         <div class="lg:col-span-5 space-y-4">
-          
+
           <!-- 5-Stage Roadmap from index.html -->
           <div class="p-4 rounded-xl bg-[#f8fafc] border border-[#d8e2e9] space-y-2.5">
             <span class="font-bold text-[#36607d] text-xs uppercase tracking-wider block">
@@ -505,23 +600,28 @@
             <ol class="space-y-2 text-xs text-[#4a5560]">
               <li class="flex items-start gap-2">
                 <span class="text-[#487b9c] font-bold font-mono text-[11px]">01</span>
-                <span><strong class="text-[#141f28]">Diagnose the Real Constraint:</strong> Audit marketing, operations, capacity &amp; leadership.</span>
+                <span><strong class="text-[#141f28]">Diagnose the Real Constraint:</strong> Audit marketing, operations,
+                  capacity &amp; leadership.</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-[#487b9c] font-bold font-mono text-[11px]">02</span>
-                <span><strong class="text-[#141f28]">Define the Starting Line:</strong> Establish baselines and clear 6-month outcomes.</span>
+                <span><strong class="text-[#141f28]">Define the Starting Line:</strong> Establish baselines and clear
+                  6-month outcomes.</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-[#487b9c] font-bold font-mono text-[11px]">03</span>
-                <span><strong class="text-[#141f28]">Implement What Matters Most:</strong> Build practical workflows, messaging &amp; tools.</span>
+                <span><strong class="text-[#141f28]">Implement What Matters Most:</strong> Build practical workflows,
+                  messaging &amp; tools.</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-[#487b9c] font-bold font-mono text-[11px]">04</span>
-                <span><strong class="text-[#141f28]">Make Progress Repeatable:</strong> Sustainable operating rhythm team runs without you.</span>
+                <span><strong class="text-[#141f28]">Make Progress Repeatable:</strong> Sustainable operating rhythm
+                  team runs without you.</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="text-[#487b9c] font-bold font-mono text-[11px]">05</span>
-                <span><strong class="text-[#141f28]">Measure Results:</strong> Compare with baseline, refine &amp; set next growth targets.</span>
+                <span><strong class="text-[#141f28]">Measure Results:</strong> Compare with baseline, refine &amp; set
+                  next growth targets.</span>
               </li>
             </ol>
           </div>
@@ -534,25 +634,30 @@
             </div>
 
             <div class="grid grid-cols-2 gap-2" id="slotPicker">
-              <button class="slot-btn min-h-[44px] py-2 px-2.5 rounded-lg border border-[#d8e2e9] bg-white text-xs text-[#141f28] hover:border-[#487b9c] hover:bg-[#eaf2f7] transition-all text-left shadow-sm">
+              <button
+                class="slot-btn min-h-[44px] py-2 px-2.5 rounded-lg border border-[#d8e2e9] bg-white text-xs text-[#141f28] hover:border-[#487b9c] hover:bg-[#eaf2f7] transition-all text-left shadow-sm">
                 <span class="font-bold block text-[11px]">Tomorrow</span>
                 <span class="text-[10px] text-[#647c8f]">10:00 AM EDT</span>
               </button>
-              <button class="slot-btn min-h-[44px] py-2 px-2.5 rounded-lg border border-[#d8e2e9] bg-white text-xs text-[#141f28] hover:border-[#487b9c] hover:bg-[#eaf2f7] transition-all text-left shadow-sm">
+              <button
+                class="slot-btn min-h-[44px] py-2 px-2.5 rounded-lg border border-[#d8e2e9] bg-white text-xs text-[#141f28] hover:border-[#487b9c] hover:bg-[#eaf2f7] transition-all text-left shadow-sm">
                 <span class="font-bold block text-[11px]">Tomorrow</span>
                 <span class="text-[10px] text-[#647c8f]">2:30 PM EDT</span>
               </button>
-              <button class="slot-btn min-h-[44px] py-2 px-2.5 rounded-lg border border-[#d8e2e9] bg-white text-xs text-[#141f28] hover:border-[#487b9c] hover:bg-[#eaf2f7] transition-all text-left shadow-sm">
+              <button
+                class="slot-btn min-h-[44px] py-2 px-2.5 rounded-lg border border-[#d8e2e9] bg-white text-xs text-[#141f28] hover:border-[#487b9c] hover:bg-[#eaf2f7] transition-all text-left shadow-sm">
                 <span class="font-bold block text-[11px]">Thursday</span>
                 <span class="text-[10px] text-[#647c8f]">11:15 AM EDT</span>
               </button>
-              <button class="slot-btn min-h-[44px] py-2 px-2.5 rounded-lg border border-[#d8e2e9] bg-white text-xs text-[#141f28] hover:border-[#487b9c] hover:bg-[#eaf2f7] transition-all text-left shadow-sm">
+              <button
+                class="slot-btn min-h-[44px] py-2 px-2.5 rounded-lg border border-[#d8e2e9] bg-white text-xs text-[#141f28] hover:border-[#487b9c] hover:bg-[#eaf2f7] transition-all text-left shadow-sm">
                 <span class="font-bold block text-[11px]">Thursday</span>
                 <span class="text-[10px] text-[#647c8f]">4:00 PM EDT</span>
               </button>
             </div>
 
-            <div id="bookingConfirmation" class="hidden p-3 rounded-lg bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs text-center font-bold">
+            <div id="bookingConfirmation"
+              class="hidden p-3 rounded-lg bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs text-center font-bold">
               ✓ Debrief reserved. Confirmation dispatched with your constraint audit dossier.
             </div>
           </div>
@@ -562,85 +667,55 @@
 
       <!-- Action Buttons Row -->
       <div class="pt-4 border-t border-[#d8e2e9] grid grid-cols-1 sm:grid-cols-4 gap-3 no-print">
-        <a href="application.html" class="min-h-[46px] py-2.5 px-4 rounded-xl bg-[#487b9c] hover:bg-[#36607d] text-white font-bold text-xs sm:text-sm transition-all shadow-md shadow-[rgba(72,123,156,0.25)] flex items-center justify-center gap-2">
+        <a href="application.html"
+          class="min-h-[46px] py-2.5 px-4 rounded-xl bg-[#487b9c] hover:bg-[#36607d] text-white font-bold text-xs sm:text-sm transition-all shadow-md shadow-[rgba(72,123,156,0.25)] flex items-center justify-center gap-2">
           <span>Apply for Partnership</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </a>
 
-        <button id="reopenChatBtn" class="min-h-[46px] py-2.5 px-4 rounded-xl border border-[#487b9c] bg-[#eaf2f7] hover:bg-[#36607d] hover:text-white text-[#36607d] font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+        <button id="reopenChatBtn"
+          class="min-h-[46px] py-2.5 px-4 rounded-xl border border-[#487b9c] bg-[#eaf2f7] hover:bg-[#36607d] hover:text-white text-[#36607d] font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
           <span>Re-Run Diagnostic</span>
         </button>
 
-        <button id="printBtn" class="min-h-[46px] py-2.5 px-4 rounded-xl border border-[#d8e2e9] bg-white hover:bg-[#f8fafc] text-[#141f28] font-bold text-xs sm:text-sm transition-all shadow-sm flex items-center justify-center gap-2">
-          <svg class="w-4 h-4 text-[#4a5560]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+        <button id="printBtn"
+          class="min-h-[46px] py-2.5 px-4 rounded-xl border border-[#d8e2e9] bg-white hover:bg-[#f8fafc] text-[#141f28] font-bold text-xs sm:text-sm transition-all shadow-sm flex items-center justify-center gap-2">
+          <svg class="w-4 h-4 text-[#4a5560]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+          </svg>
           <span>Download PDF Dossier</span>
         </button>
 
-        <a href="index.html#contact" class="min-h-[46px] py-2.5 px-4 rounded-xl border border-[#d8e2e9] bg-white hover:bg-[#f8fafc] text-[#141f28] font-bold text-xs sm:text-sm transition-all shadow-sm flex items-center justify-center gap-2">
+        <a href="index.html#contact"
+          class="min-h-[46px] py-2.5 px-4 rounded-xl border border-[#d8e2e9] bg-white hover:bg-[#f8fafc] text-[#141f28] font-bold text-xs sm:text-sm transition-all shadow-sm flex items-center justify-center gap-2">
           <span>Start a Conversation</span>
-          <svg class="w-4 h-4 text-[#4a5560]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+          <svg class="w-4 h-4 text-[#4a5560]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg>
         </a>
       </div>
 
       <!-- Print-Only Callout -->
       <div class="hidden print-only-block pt-2 border-t border-[#d8e2e9] text-xs text-[#4a5560]">
-        <strong>Strategic Advisory:</strong> Prepared by Joe Klein, Klein Insight. For operational blueprint implementation and 6-month partnership applications, visit <strong>kleininsight.com</strong> or email <strong>joe@kleininsight.com</strong>.
+        <strong>Strategic Advisory:</strong> Prepared by Joe Klein, Klein Insight. For operational blueprint
+        implementation and 6-month partnership applications, visit <strong>kleininsight.com</strong> or email
+        <strong>joe@kleininsight.com</strong>.
       </div>
     </div>
 
   </main>
 
-  <!-- ========================================================================= -->
-  <!-- INTEGRATION & WEBHOOK DRAWER (LIGHT THEME)                                -->
-  <!-- ========================================================================= -->
-  <div id="settingsDrawer" class="fixed inset-0 z-50 bg-[#0d171f]/50 backdrop-blur-sm flex justify-end hidden opacity-0 transition-opacity duration-200">
-    <div class="bg-white border-l border-[#d8e2e9] w-full max-w-md h-full p-5 sm:p-6 shadow-2xl flex flex-col justify-between overflow-y-auto transform translate-x-full transition-transform duration-200" id="drawerBox">
-      <div class="space-y-5">
-        <div class="flex items-center justify-between border-b border-[#d8e2e9] pb-3">
-          <h3 class="text-sm font-extrabold text-[#141f28] flex items-center gap-2">
-            <svg class="w-4 h-4 text-[#487b9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a2 2 0 002 2h3a1 1 0 011 1v3a2 2 0 002 2h1a2 2 0 100 4h-1a2 2 0 00-2 2v3a1 1 0 01-1 1h-3a2 2 0 00-2-2V9a2 2 0 00-2-2H4a1 1 0 01-1-1V5a2 2 0 012-2h3a2 2 0 002-2V4z"/></svg>
-            Integration Scaffolding
-          </h3>
-          <button id="closeSettingsBtn" class="text-[#4a5560] hover:text-[#141f28] p-1 rounded-lg">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-          </button>
-        </div>
-
-        <p class="text-xs text-[#4a5560] leading-relaxed">
-          Configure external endpoints (Zapier / Make / HubSpot / Webhook) to receive full diagnostic answers, constraint scores, and lead contact details upon completion.
-        </p>
-
-        <div class="space-y-1.5">
-          <label class="block text-xs font-bold text-[#141f28]">Webhook URL (CRM Dispatch)</label>
-          <input type="url" id="webhookUrlInput" placeholder="https://hook.us1.make.com/..." class="w-full px-3 py-2 rounded-lg bg-[#f8fafc] border border-[#d8e2e9] text-base sm:text-xs text-[#141f28] focus:outline-none focus:border-[#487b9c] font-mono">
-          <span class="text-[10px] text-[#647c8f] block">Sends full constraint profile, contradictory signals, and contact dossier.</span>
-        </div>
-
-        <div class="space-y-1.5">
-          <label class="block text-xs font-bold text-[#141f28]">External Booking URL (Calendly / SavvyCal)</label>
-          <input type="url" id="calendarUrlInput" placeholder="https://calendly.com/kleininsight/20min" class="w-full px-3 py-2 rounded-lg bg-[#f8fafc] border border-[#d8e2e9] text-base sm:text-xs text-[#141f28] focus:outline-none focus:border-[#487b9c] font-mono">
-        </div>
-
-        <div class="space-y-1.5">
-          <div class="flex items-center justify-between">
-            <label class="block text-xs font-bold text-[#141f28]">Real-Time Telemetry Payload</label>
-            <button id="copyPayloadBtn" class="text-[10px] text-[#487b9c] hover:text-[#36607d] font-bold">Copy JSON</button>
-          </div>
-          <pre id="payloadPreview" class="p-3 rounded-lg bg-[#f0f5f8] border border-[#d8e2e9] text-[11px] text-[#141f28] font-mono overflow-x-auto max-h-48"></pre>
-        </div>
-      </div>
-
-      <div class="pt-4 border-t border-[#d8e2e9]">
-        <button id="saveSettingsBtn" class="w-full py-2.5 rounded-lg bg-[#487b9c] hover:bg-[#36607d] text-xs font-bold text-white transition-colors">
-          Save Configuration
-        </button>
-      </div>
-    </div>
-  </div>
-
   <!-- Toast Container -->
-  <div id="toast" class="fixed bottom-5 right-5 z-50 bg-[#141f28] border border-[rgba(89,141,174,0.5)] text-white text-xs px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-200">
+  <div id="toast"
+    class="fixed bottom-5 right-5 z-50 bg-[#141f28] border border-[rgba(89,141,174,0.5)] text-white text-xs px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-200">
     <span id="toastMessage">Configuration saved.</span>
   </div>
 
@@ -852,15 +927,36 @@
       }
     ];
 
+    let preloadedLead = null;
+    try {
+      const dRaw = localStorage.getItem('klein_diagnostic_result');
+      if (dRaw) {
+        const d = JSON.parse(dRaw);
+        if (d.client && d.client.email) preloadedLead = d.client;
+      }
+      if (!preloadedLead) {
+        const pRaw = localStorage.getItem('klein_survey_progress');
+        if (pRaw) {
+          const p = JSON.parse(pRaw);
+          if (p.leadData && p.leadData.email) preloadedLead = p.leadData;
+        }
+      }
+    } catch (e) { }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const paramEmail = urlParams.get('email');
+    const paramName = urlParams.get('name');
+    const paramCompany = urlParams.get('company');
+
     const state = {
       mode: 'express', // 'express' (11 questions) or 'deep' (22 questions)
       activeScenarios: [],
       step: -1,
       answers: {},
       leadData: {
-        name: 'Executive Lead',
-        email: '',
-        company: 'Your Company'
+        name: paramName || (preloadedLead && preloadedLead.name ? preloadedLead.name : 'Executive Lead'),
+        email: paramEmail || (preloadedLead && preloadedLead.email ? preloadedLead.email : ''),
+        company: paramCompany || (preloadedLead && preloadedLead.company ? preloadedLead.company : 'Your Company')
       },
       webhookUrl: localStorage.getItem('klein_webhook_url') || '',
       calendarUrl: localStorage.getItem('klein_calendar_url') || '',
@@ -990,7 +1086,7 @@
       try {
         const raw = localStorage.getItem('klein_survey_progress');
         if (raw) savedProgress = JSON.parse(raw);
-      } catch (e) {}
+      } catch (e) { }
 
       // If user previously completed only the short form (express audit)
       if (savedProgress && savedProgress.isShortFormCompleted) {
@@ -1003,7 +1099,7 @@
           activeInputContainer.innerHTML = `
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               <button id="resumeDossierBtn" class="min-h-[50px] p-3 rounded-xl bg-[#487b9c] hover:bg-[#36607d] text-white text-left transition-all shadow-md flex flex-col justify-center">
-                <span class="font-bold text-xs sm:text-sm">📊 View My Unlocked Dossier</span>
+                <span class="font-bold text-xs sm:text-sm">📊 View My Dossier</span>
                 <span class="text-[10px] text-white/90 mt-0.5">Review your action plan &amp; scorecard</span>
               </button>
               <button id="upgradeDeepBtn" class="min-h-[50px] p-3 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#487b9c] hover:bg-[#eaf2f7] text-[#141f28] text-left transition-all flex flex-col justify-center shadow-sm">
@@ -1205,6 +1301,53 @@
 
     function renderContactStep() {
       chatProgressBar.style.width = '100%';
+
+      // Check if contact info was already captured
+      let leadName = (state.leadData && state.leadData.name && state.leadData.name !== 'Executive Lead') ? state.leadData.name : '';
+      let leadEmail = (state.leadData && state.leadData.email) ? state.leadData.email.trim() : '';
+      let leadCompany = (state.leadData && state.leadData.company && state.leadData.company !== 'Your Company') ? state.leadData.company : '';
+
+      if (!leadEmail) {
+        try {
+          const diagResult = JSON.parse(localStorage.getItem('klein_diagnostic_result') || '{}');
+          if (diagResult.client && diagResult.client.email) {
+            leadEmail = diagResult.client.email.trim();
+            leadName = diagResult.client.name || leadName;
+            leadCompany = diagResult.client.company || leadCompany;
+          }
+        } catch (e) { }
+      }
+
+      if (!leadEmail) {
+        try {
+          const prog = JSON.parse(localStorage.getItem('klein_survey_progress') || '{}');
+          if (prog.leadData && prog.leadData.email) {
+            leadEmail = prog.leadData.email.trim();
+            leadName = prog.leadData.name || leadName;
+            leadCompany = prog.leadData.company || leadCompany;
+          }
+        } catch (e) { }
+      }
+
+      // If we already got their info, skip the Unlock interface!
+      if (leadEmail && leadEmail.includes('@')) {
+        state.leadData = {
+          name: leadName || 'Executive Lead',
+          email: leadEmail,
+          company: leadCompany || 'Your Company'
+        };
+        chatStepTracker.textContent = 'Dossier Unlocked';
+        const displayClient = state.leadData.name !== 'Executive Lead' ? state.leadData.name : state.leadData.email;
+        appendBotMessage(
+          'Diagnostic Complete',
+          `Scoring complete. Converging signals have updated your <strong class="text-[#141f28] font-bold">Executive Constraint Dossier</strong> for <strong>${displayClient}</strong>.<br><br>Unlocking your scorecard and action plan...`,
+          () => {
+            setTimeout(completeIntake, 400);
+          }
+        );
+        return;
+      }
+
       chatStepTracker.textContent = 'Dossier Delivery';
 
       const prompt = `
@@ -1215,9 +1358,9 @@
       appendBotMessage('Final Step', prompt, () => {
         activeInputContainer.innerHTML = `
           <form id="chatLeadForm" class="space-y-2.5">
-            <input type="text" id="chatLeadName" required placeholder="Full Name (e.g. Alex Mercer)" class="w-full px-3.5 py-2.5 rounded-lg bg-white border border-[#d8e2e9] text-base sm:text-xs text-[#141f28] placeholder-[#8ba2b3] focus:outline-none focus:border-[#487b9c] focus:ring-2 focus:ring-[#eaf2f7]">
-            <input type="email" id="chatLeadEmail" required placeholder="Work Email (alex@firm.com)" class="w-full px-3.5 py-2.5 rounded-lg bg-white border border-[#d8e2e9] text-base sm:text-xs text-[#141f28] placeholder-[#8ba2b3] focus:outline-none focus:border-[#487b9c] focus:ring-2 focus:ring-[#eaf2f7]">
-            <input type="text" id="chatLeadCompany" required placeholder="Company Domain / Name" class="w-full px-3.5 py-2.5 rounded-lg bg-white border border-[#d8e2e9] text-base sm:text-xs text-[#141f28] placeholder-[#8ba2b3] focus:outline-none focus:border-[#487b9c] focus:ring-2 focus:ring-[#eaf2f7]">
+            <input type="text" id="chatLeadName" required value="${leadName}" placeholder="Full Name (e.g. Alex Mercer)" class="w-full px-3.5 py-2.5 rounded-lg bg-white border border-[#d8e2e9] text-base sm:text-xs text-[#141f28] placeholder-[#8ba2b3] focus:outline-none focus:border-[#487b9c] focus:ring-2 focus:ring-[#eaf2f7]">
+            <input type="email" id="chatLeadEmail" required value="${leadEmail}" placeholder="Work Email (alex@firm.com)" class="w-full px-3.5 py-2.5 rounded-lg bg-white border border-[#d8e2e9] text-base sm:text-xs text-[#141f28] placeholder-[#8ba2b3] focus:outline-none focus:border-[#487b9c] focus:ring-2 focus:ring-[#eaf2f7]">
+            <input type="text" id="chatLeadCompany" required value="${leadCompany}" placeholder="Company Domain / Name" class="w-full px-3.5 py-2.5 rounded-lg bg-white border border-[#d8e2e9] text-base sm:text-xs text-[#141f28] placeholder-[#8ba2b3] focus:outline-none focus:border-[#487b9c] focus:ring-2 focus:ring-[#eaf2f7]">
             <button type="submit" id="generateReportBtn" class="w-full min-h-[46px] py-3 rounded-lg bg-[#487b9c] hover:bg-[#36607d] text-white font-bold text-xs sm:text-sm tracking-wide transition-all shadow-md shadow-[rgba(72,123,156,0.25)] flex items-center justify-center gap-2">
               <span>Unlock Constraint Dossier</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
@@ -1281,8 +1424,35 @@
         console.warn('LocalStorage save error:', err);
       }
 
-      // Auto-dispatch lead dossier to Joe via Web3Forms
+      // Auto-dispatch comprehensive lead dossier to Joe via Web3Forms
       try {
+        // Format detailed scenario responses for Joe
+        const answersSummary = state.activeScenarios.map((s, idx) => {
+          const val = state.answers[s.id];
+          const choice = val === 2 ? 'Agree' : (val === 1 ? 'Unsure' : (val === 0 ? 'Disagree' : 'Unanswered'));
+          return `${idx + 1}. [${s.category.toUpperCase()}] ${s.title}: ${choice} (${val !== undefined ? val : 'N/A'})\n   "${s.prompt}"`;
+        }).join('\n\n');
+
+        // Extract contradiction signals
+        const contradictionTexts = [];
+        if (state.answers['land_large_contradiction'] === 2) {
+          contradictionTexts.push('Growth vs. Delivery Dread: Landing a major customer triggers operational breakdown anxiety.');
+        }
+        if (state.answers['quiet_week_contradiction'] === 2) {
+          contradictionTexts.push('Breathing Room Panic: Slower operational weeks trigger anxiety over future pipeline.');
+        }
+        if (state.answers['five_year_test'] === 2) {
+          contradictionTexts.push('The Five-Year Impasse: Running the business five years from now the way it is operated today is deeply unacceptable.');
+        }
+        if (contradictionTexts.length === 0) {
+          contradictionTexts.push('Consistent Baseline: No extreme psychological contradictions detected.');
+        }
+
+        // Format prescribed sprints
+        const sprintTexts = analysis.actionSteps.map(stepHtml => {
+          return stepHtml.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+        }).join('\n');
+
         const emailPayload = {
           access_key: '5e33b3d7-0efc-43f8-8669-dec872870e3d',
           subject: `New Constraint Diagnostic Dossier: ${state.leadData.name} (${state.leadData.company})`,
@@ -1290,11 +1460,15 @@
           name: state.leadData.name,
           email: state.leadData.email,
           business_name: state.leadData.company,
-          'Primary Constraint': analysis.archetype.title,
-          'Constraint Severity': analysis.archetype.severity,
+          'Audit Depth': state.mode === 'express' ? 'Express Audit (11 Scenarios)' : 'Deep-Dive Audit (22 Scenarios)',
+          'Primary Constraint': `${analysis.archetype.title} (${analysis.archetype.severity})`,
+          'Secondary Friction Vector': analysis.secondaryKey ? analysis.secondaryKey.toUpperCase() : 'None',
           'Archetype Summary': analysis.archetype.summary,
-          'Dimension Breakdown': Object.entries(analysis.percentages).map(([k, v]) => `${k}: ${v}%`).join(', '),
-          'Audit Mode': state.mode === 'express' ? 'Express (11 Scenarios)' : 'Deep-Dive (22 Scenarios)',
+          'Dimension Friction Breakdown': Object.entries(analysis.percentages).map(([k, v]) => `${k}: ${v}%`).join(', '),
+          'Contradiction Signals': contradictionTexts.join('\n'),
+          'Prescribed 90-Day Sprints': sprintTexts,
+          'Detailed Scenario Answers': answersSummary,
+          'Telemetry JSON Payload': JSON.stringify(telemetry, null, 2),
           botcheck: false
         };
 
@@ -1657,11 +1831,6 @@
     // Esc key triggers Save and Exit
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' || e.key === 'Esc') {
-        const settingsDrawer = document.getElementById('settingsDrawer');
-        if (settingsDrawer && !settingsDrawer.classList.contains('hidden') && !settingsDrawer.classList.contains('opacity-0')) {
-          closeSettings();
-          return;
-        }
         saveProgressLocally(true);
       }
     });
@@ -1714,63 +1883,34 @@
     const bookingConfirmation = document.getElementById('bookingConfirmation');
     document.querySelectorAll('#slotPicker .slot-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        if (state.calendarUrl) {
-          window.open(state.calendarUrl, '_blank');
-          return;
-        }
         document.querySelectorAll('#slotPicker .slot-btn').forEach(b => b.classList.remove('border-emerald-600', 'bg-emerald-50', 'text-emerald-900'));
         btn.classList.add('border-emerald-600', 'bg-emerald-50', 'text-emerald-900');
         bookingConfirmation.classList.remove('hidden');
-        showToast('Debrief Reserved! Confirmation dispatched.');
+        const slotText = btn.innerText.replace(/\s+/g, ' ').trim();
+        showToast('Debrief Reserved: ' + slotText);
+
+        // Auto-dispatch debrief reservation to Joe via Web3Forms
+        try {
+          fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+              access_key: '5e33b3d7-0efc-43f8-8669-dec872870e3d',
+              subject: `Strategy Debrief Reserved: ${state.leadData.name} (${state.leadData.company}) - ${slotText}`,
+              from_name: 'Klein Insight Scheduler',
+              name: state.leadData.name,
+              email: state.leadData.email,
+              business_name: state.leadData.company,
+              'Selected Debrief Slot': slotText,
+              'Primary Constraint': document.getElementById('archetypeTitle') ? document.getElementById('archetypeTitle').textContent : 'Diagnostic Completed',
+              'Reserved At': new Date().toLocaleString(),
+              botcheck: false
+            })
+          }).catch(e => console.warn('Debrief booking email error:', e));
+        } catch (e) {
+          console.warn('Debrief notification notice:', e);
+        }
       });
-    });
-
-    const settingsDrawer = document.getElementById('settingsDrawer');
-    const drawerBox = document.getElementById('drawerBox');
-    const openSettingsBtn = document.getElementById('openSettingsBtn');
-    const closeSettingsBtn = document.getElementById('closeSettingsBtn');
-    const saveSettingsBtn = document.getElementById('saveSettingsBtn');
-    const webhookUrlInput = document.getElementById('webhookUrlInput');
-    const calendarUrlInput = document.getElementById('calendarUrlInput');
-    const copyPayloadBtn = document.getElementById('copyPayloadBtn');
-
-    webhookUrlInput.value = state.webhookUrl;
-    calendarUrlInput.value = state.calendarUrl;
-
-    openSettingsBtn.addEventListener('click', () => {
-      settingsDrawer.classList.remove('hidden');
-      setTimeout(() => {
-        settingsDrawer.classList.remove('opacity-0');
-        drawerBox.classList.remove('translate-x-full');
-      }, 10);
-    });
-
-    function closeSettings() {
-      settingsDrawer.classList.add('opacity-0');
-      drawerBox.classList.add('translate-x-full');
-      setTimeout(() => settingsDrawer.classList.add('hidden'), 200);
-    }
-
-    closeSettingsBtn.addEventListener('click', closeSettings);
-
-    saveSettingsBtn.addEventListener('click', () => {
-      state.webhookUrl = webhookUrlInput.value.trim();
-      state.calendarUrl = calendarUrlInput.value.trim();
-      localStorage.setItem('klein_webhook_url', state.webhookUrl);
-      localStorage.setItem('klein_calendar_url', state.calendarUrl);
-      closeSettings();
-      showToast('Settings & Webhooks saved.');
-    });
-
-    copyPayloadBtn.addEventListener('click', () => {
-      const code = document.getElementById('payloadPreview').textContent;
-      const el = document.createElement('textarea');
-      el.value = code;
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand('copy');
-      document.body.removeChild(el);
-      showToast('Telemetry JSON copied to clipboard.');
     });
 
     function showToast(msg) {
@@ -1790,13 +1930,13 @@
         try {
           const raw = localStorage.getItem('klein_survey_progress');
           if (raw) savedProgress = JSON.parse(raw);
-        } catch (e) {}
+        } catch (e) { }
 
         let dossierData = null;
         try {
           const raw = localStorage.getItem('klein_diagnostic_result');
           if (raw) dossierData = JSON.parse(raw);
-        } catch (e) {}
+        } catch (e) { }
 
         if (savedProgress || dossierData) {
           if (savedProgress) {
@@ -1839,4 +1979,5 @@
     };
   </script>
 </body>
+
 </html>
