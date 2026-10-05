@@ -89,3 +89,112 @@ if (testimonialTrack) {
     updateCarousel();
   }
 }
+
+// Sync homepage buttons if user saved progress or completed the short form
+function syncDiagnosticButtons() {
+  try {
+    const progressRaw = localStorage.getItem('klein_survey_progress');
+    const dossierRaw = localStorage.getItem('klein_diagnostic_result');
+    const progress = progressRaw ? JSON.parse(progressRaw) : null;
+    const dossier = dossierRaw ? JSON.parse(dossierRaw) : null;
+
+    const hasProgress = progress && (progress.hasSaved || (progress.answers && Object.keys(progress.answers).length > 0) || progress.isShortFormCompleted);
+    const isShortFormOnly = progress && progress.isShortFormCompleted;
+    const hasDossier = !!(dossier && (dossier.diagnostics || dossier.client)) || !!(progress && (progress.isCompleted || progress.isShortFormCompleted));
+
+    // Reveal dossier links next to survey buttons when available
+    const hookDossierBtn = document.getElementById('hookDossierBtn');
+    if (hookDossierBtn) {
+      if (hasDossier) {
+        hookDossierBtn.style.display = 'inline-flex';
+        if (dossier && dossier.diagnostics && dossier.diagnostics.primaryConstraint) {
+          hookDossierBtn.title = `View Unlocked Dossier: ${dossier.diagnostics.primaryConstraint}`;
+        }
+      } else {
+        hookDossierBtn.style.display = 'none';
+      }
+    }
+
+    const panelDossierBtn = document.getElementById('panelDossierBtn');
+    if (panelDossierBtn) {
+      panelDossierBtn.style.display = hasDossier ? 'inline-flex' : 'none';
+    }
+
+    const navDossierLink = document.getElementById('navDossierLink');
+    if (navDossierLink) {
+      navDossierLink.style.display = hasDossier ? 'inline-block' : 'none';
+    }
+
+    if (hasProgress || isShortFormOnly || hasDossier) {
+      document.querySelectorAll('a[href="survey.html"], a[href="/survey.html"]').forEach(btn => {
+        // Skip dossier-specific links
+        if (btn.id === 'hookDossierBtn' || btn.id === 'panelDossierBtn' || btn.id === 'navDossierLink') return;
+
+        // Primary header navigation link
+        if (btn.closest('.site-nav')) {
+          btn.textContent = hasDossier ? 'Diagnostic' : 'Continue Diagnostic';
+          if (!hasDossier) {
+            btn.classList.add('nav-diagnostic-active');
+          }
+        }
+        // "Who I am Looking For" action card
+        else if (btn.classList.contains('hook-action-btn')) {
+          btn.innerHTML = hasDossier ? 'Upgrade / Re-Run &rarr;' : 'Continue Diagnostic &rarr;';
+          const card = btn.closest('.hook-action-card');
+          if (card) {
+            const badge = card.querySelector('.hook-action-badge');
+            if (badge) {
+              if (dossier && dossier.diagnostics && dossier.diagnostics.primaryConstraint) {
+                badge.textContent = `Constraint Diagnosed: ${dossier.diagnostics.primaryConstraint}`;
+              } else if (hasDossier) {
+                badge.textContent = 'Constraint Dossier Unlocked';
+              } else if (isShortFormOnly) {
+                badge.textContent = 'Express Audit Saved';
+              } else {
+                badge.textContent = 'Diagnostic In Progress';
+              }
+            }
+            const title = card.querySelector('.hook-action-title');
+            if (title) {
+              title.textContent = hasDossier
+                ? 'Your Executive Constraint Dossier is ready.'
+                : 'Ready to continue your operational diagnostic?';
+            }
+            const desc = card.querySelector('.hook-action-desc');
+            if (desc) {
+              desc.textContent = hasDossier
+                ? 'Your 6-dimension constraint scorecard and 1-page action plan are compiled. Review your dossier or deepen your diagnostic evaluation.'
+                : 'Your answers are saved. Resume where you left off to identify your primary operational constraint.';
+            }
+          }
+        }
+        // Owner-Bottleneck section CTA or other links
+        else {
+          btn.innerHTML = hasDossier ? 'Upgrade / Re-Run &rarr;' : 'Continue Diagnostic &rarr;';
+          const panelWrap = btn.closest('.panel-action-wrap');
+          if (panelWrap) {
+            const label = panelWrap.querySelector('strong');
+            if (label) label.textContent = hasDossier ? 'Your operational scorecard is ready' : 'Resume your operational scorecard';
+            const sub = panelWrap.querySelector('span');
+            if (sub) {
+              sub.textContent = hasDossier
+                ? 'Your customized 6-dimension scorecard is compiled. View your dossier or refine your answers.'
+                : (isShortFormOnly
+                  ? 'Your 11-scenario express audit is ready. Pick up where you left off to review or expand.'
+                  : 'Your answers have been saved. Continue the audit to get your customized scorecard.');
+            }
+          }
+        }
+      });
+    }
+  } catch (err) {
+    console.warn('Diagnostic button sync notice:', err);
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', syncDiagnosticButtons);
+} else {
+  syncDiagnosticButtons();
+}
+

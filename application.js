@@ -96,6 +96,32 @@
     const state = { step: -1, answers: {}, editing: false, sending: false };
     let lastTrigger = null;
 
+    let diagnosticData = null;
+    try {
+      const stored = localStorage.getItem('klein_diagnostic_result');
+      if (stored) {
+        diagnosticData = JSON.parse(stored);
+        if (diagnosticData.client) {
+          if (diagnosticData.client.company && !state.answers.business_name) {
+            state.answers.business_name = diagnosticData.client.company;
+          }
+          if (diagnosticData.client.name && !state.answers.full_name) {
+            state.answers.full_name = diagnosticData.client.name;
+          }
+          if (diagnosticData.client.email && !state.answers.email) {
+            state.answers.email = diagnosticData.client.email;
+          }
+        }
+        if (diagnosticData.diagnostics && diagnosticData.diagnostics.primaryConstraint && !state.answers.bottleneck) {
+          state.answers.bottleneck = '[Diagnostic Identified Constraint: ' + diagnosticData.diagnostics.primaryConstraint + ']\n' + 
+            (diagnosticData.diagnostics.archetypeSummary || '') + 
+            '\n\nAdditional notes on what is getting in the way:';
+        }
+      }
+    } catch (e) {
+      console.warn('Diagnostic prefill notice:', e);
+    }
+
     if (dialog && triggers.length) {
       triggers.forEach(function (trigger) {
         trigger.addEventListener('click', function (event) {
@@ -136,6 +162,13 @@
         top.appendChild(close);
       }
       shell.appendChild(top);
+
+      if (diagnosticData && diagnosticData.diagnostics && diagnosticData.diagnostics.primaryConstraint && state.step !== 'success') {
+        const diagBanner = element('div', 'application-diagnostic-banner');
+        diagBanner.appendChild(element('span', 'application-diagnostic-badge', '✓ Diagnostic Attached'));
+        diagBanner.appendChild(element('span', 'application-diagnostic-text', diagnosticData.diagnostics.primaryConstraint));
+        shell.appendChild(diagBanner);
+      }
 
       if (typeof state.step === 'number' && state.step >= 0) {
         const progress = element('div', 'application-progress-wrap');
@@ -354,6 +387,14 @@
           if (state.answers[field.name]) payload[field.label] = displayAnswer(field, state.answers[field.name]);
         });
       });
+      if (diagnosticData && diagnosticData.diagnostics) {
+        payload['Diagnostic Constraint'] = diagnosticData.diagnostics.primaryConstraint;
+        if (diagnosticData.diagnostics.dimensionBreakdown) {
+          payload['Diagnostic Breakdown'] = Object.entries(diagnosticData.diagnostics.dimensionBreakdown).map(function (entry) {
+            return entry[0] + ': ' + entry[1] + '%';
+          }).join(', ');
+        }
+      }
       const params = new URLSearchParams(window.location.search);
       ['utm_source', 'utm_medium', 'utm_campaign'].forEach(function (key) {
         if (params.has(key)) payload[key] = params.get(key);

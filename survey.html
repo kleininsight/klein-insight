@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
+  <title>Business Constraint &amp; Operational Diagnostic | Klein Insight</title>
+  <meta name="description" content="Identify your primary business constraint across 6 dimensions. Executive operational diagnostic by Klein Insight.">
+  <meta name="theme-color" content="#121e27">
+  
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f5f8',
+              100: '#eaf2f7',
+              200: '#d8e2e9',
+              300: '#9ec5dc',
+              400: '#7eaec9',
+              500: '#598dae',
+              600: '#487b9c',
+              700: '#36607d',
+              800: '#26455b',
+              900: '#1a2936',
+              950: '#121e27',
+            },
+            ink: {
+              DEFAULT: '#141f28',
+              soft: '#4a5560',
+              muted: '#647c8f',
+            },
+            surface: {
+              paper: '#f8fafc',
+              light: '#edf3f7',
+              card: '#ffffff',
+              border: '#d8e2e9',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      --ink: #141f28;
+      --ink-soft: #4a5560;
+      --paper: #f8fafc;
+      --surface: #edf3f7;
+      --line: #d8e2e9;
+      --accent: #487b9c;
+      --accent-brand: #598dae;
+      --accent-dark: #36607d;
+      --accent-light: #eaf2f7;
+      --dark: #121e27;
+      --white: #ffffff;
+      --radius: 18px;
+      --shadow: 0 18px 50px rgba(18, 30, 39, 0.07);
+    }
+
+    body {
+      background-color: var(--surface);
+      color: var(--ink);
+      font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .app-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 35px rgba(18, 30, 39, 0.04);
+    }
+
+    .app-card-accent {
+      background: #ffffff;
+      border: 1px solid rgba(89, 141, 174, 0.4);
+      border-radius: var(--radius);
+      box-shadow: 0 16px 45px rgba(18, 30, 39, 0.07);
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 10px;
+      background: #1a2936;
+      color: #598dae;
+      border: 1px solid rgba(89, 141, 174, 0.35);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--accent-dark);
+    }
+
+    @keyframes chatFadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .chat-bubble-animate {
+      animation: chatFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .typing-dot {
+      animation: typingBounce 1.4s infinite ease-in-out both;
+    }
+    .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+    .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+    @keyframes typingBounce {
+      0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
+      40% { transform: scale(1); opacity: 1; }
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #edf3f7;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd8e2;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #8ba2b3;
+    }
+
+    /* Print / PDF Styling */
+    @media print {
+      @page {
+        size: letter portrait;
+        margin: 0.3in 0.35in;
+      }
+      
+      *, *::before, *::after {
+        box-shadow: none !important;
+        text-shadow: none !important;
+      }
+
+      html, body {
+        background: #ffffff !important;
+        color: #141f28 !important;
+        font-size: 10px !important;
+        line-height: 1.3 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+
+      header, 
+      #chatOverlay, 
+      #settingsDrawer, 
+      #toast, 
+      #slotPickerSection, 
+      .no-print {
+        display: none !important;
+      }
+
+      .print-only-block {
+        display: block !important;
+      }
+
+      main {
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        space-y: 5px !important;
+      }
+
+      .app-card, .app-card-accent {
+        background: #ffffff !important;
+        border: 1px solid #d8e2e9 !important;
+        color: #141f28 !important;
+        page-break-inside: avoid !important;
+        padding: 8px 12px !important;
+        border-radius: 6px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        margin-bottom: 6px !important;
+      }
+
+      #chartContainerWrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 110px !important;
+      }
+
+      #radarChart {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 110px !important;
+        display: block !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-[#edf3f7] text-[#141f28] font-sans min-h-screen antialiased flex flex-col selection:bg-brand-600 selection:text-white relative">
+
+  <!-- ========================================================================= -->
+  <!-- FULL-PAGE CONVERSATIONAL DIAGNOSTIC OVERLAY (LIGHT THEME)                  -->
+  <!-- ========================================================================= -->
+  <div id="chatOverlay" class="fixed inset-0 z-50 bg-[#0d171f]/75 backdrop-blur-sm flex flex-col items-center justify-center p-0 sm:p-4 md:p-6 transition-opacity duration-300">
+    <div class="w-full max-w-2xl h-[100dvh] sm:h-[820px] sm:max-h-[92vh] bg-white rounded-none sm:rounded-2xl border-0 sm:border border-[#d8e2e9] shadow-2xl flex flex-col overflow-hidden relative">
+      
+      <!-- Concierge Header -->
+      <div class="p-3.5 sm:p-4 border-b border-[#d8e2e9] bg-[#f8fafc] flex items-center justify-between flex-shrink-0">
+        <div class="flex items-center gap-2.5 sm:gap-3">
+          <div class="relative">
+            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#1a2936] text-[#598dae] border border-[rgba(89,141,174,0.35)] flex items-center justify-center font-bold text-xs sm:text-sm shadow-sm">
+              KI
+            </div>
+            <span class="absolute -bottom-0.5 -right-0.5 w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"></span>
+          </div>
+          <div>
+            <div class="font-bold text-xs sm:text-sm text-[#141f28] flex items-center gap-1.5 sm:gap-2">
+              <span>Klein Insight Diagnostic</span>
+              <span class="text-[9px] sm:text-[10px] text-[#36607d] font-semibold border border-[rgba(89,141,174,0.3)] bg-[#eaf2f7] px-2 py-0.5 rounded-full" id="auditTypeBadge">Strategy Audit</span>
+            </div>
+            <span class="text-[10px] sm:text-[11px] text-[#4a5560] block leading-tight font-medium" id="chatStepTracker">Choose Evaluation Depth</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-1.5 sm:gap-2">
+          <button id="saveExitChatBtn" class="text-xs text-[#36607d] hover:text-[#141f28] hover:border-[#487b9c] transition-colors flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[#d8e2e9] bg-white shadow-sm font-semibold" title="Save Progress and Return to Homepage (Esc)">
+            <svg class="w-3.5 h-3.5 text-[#487b9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/></svg>
+            <span>Save &amp; Exit</span>
+            <kbd class="hidden sm:inline-block text-[9px] font-mono text-[#647c8f] bg-[#edf3f7] px-1 py-0.2 rounded border border-[#d8e2e9]">Esc</kbd>
+          </button>
+
+          <button id="restartChatBtn" class="text-xs text-[#4a5560] hover:text-[#141f28] hover:border-[#487b9c] transition-colors flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-[#d8e2e9] bg-white shadow-sm" title="Restart Audit">
+            <svg class="w-3.5 h-3.5 text-[#487b9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            <span class="hidden sm:inline font-semibold">Reset</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Intake Progress Bar -->
+      <div class="w-full bg-[#edf3f7] h-1.5 flex-shrink-0">
+        <div id="chatProgressBar" class="bg-gradient-to-r from-brand-500 via-brand-600 to-brand-700 h-full w-[0%] transition-all duration-300"></div>
+      </div>
+
+      <!-- Scrollable Message Stream -->
+      <div id="chatStream" class="flex-grow p-4 sm:p-6 overflow-y-auto space-y-4 text-xs sm:text-sm scroll-smooth bg-white">
+        <!-- Messages injected dynamically -->
+      </div>
+
+      <!-- Typing Indicator -->
+      <div id="typingIndicator" class="hidden items-center gap-2 py-2 px-3 mx-4 sm:mx-6 mb-2 rounded-xl bg-[#f0f5f8] border border-[#d8e2e9] w-fit text-[#4a5560] text-xs">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#487b9c] typing-dot"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-[#487b9c] typing-dot"></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-[#487b9c] typing-dot"></span>
+        <span class="text-[10px] sm:text-[11px] text-[#4a5560] font-mono">Analyzing operational vectors...</span>
+      </div>
+
+      <!-- Pinned Bottom Action Station -->
+      <div class="p-3.5 sm:p-4 border-t border-[#d8e2e9] bg-[#f8fafc]/95 backdrop-blur-md flex-shrink-0">
+        <div id="activeInputContainer" class="w-full">
+          <!-- Dynamic Controls Injected Here -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MAIN WORKSPACE: Executive Diagnostic Dossier (Light Theme)                -->
+  <!-- ========================================================================= -->
+
+  <header class="border-b border-[#d8e2e9] bg-white/95 backdrop-blur sticky top-0 z-40 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <a href="index.html" class="flex items-center gap-3 text-decoration-none group" aria-label="Klein Insight home">
+          <div class="w-8 h-8 rounded-lg bg-[#1a2936] border border-brand-500/40 text-brand-300 flex items-center justify-center font-bold text-xs shadow-sm group-hover:border-brand-500 transition-colors">
+            KI
+          </div>
+          <div>
+            <span class="font-bold text-sm sm:text-base tracking-tight text-[#141f28] block leading-none group-hover:text-[#487b9c] transition-colors">Klein Insight</span>
+            <span class="text-[10px] sm:text-[11px] text-[#4a5560] font-medium">Business Strategy &amp; Growth Coaching</span>
+          </div>
+        </a>
+      </div>
+      
+      <div class="flex items-center space-x-2 sm:space-x-3">
+        <button id="saveExitDossierBtn" class="text-xs px-2.5 sm:px-3 py-1.5 rounded-lg border border-[#d8e2e9] bg-white hover:bg-[#edf3f7] text-[#36607d] font-semibold transition-colors flex items-center gap-1.5 shadow-sm" title="Save &amp; Exit to Homepage (Esc)">
+          <svg class="w-3.5 h-3.5 text-[#487b9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/></svg>
+          <span class="hidden sm:inline">Save &amp; Exit</span>
+          <kbd class="hidden md:inline-block text-[9px] font-mono text-[#647c8f] bg-[#edf3f7] px-1 py-0.2 rounded border border-[#d8e2e9]">Esc</kbd>
+        </button>
+
+        <a href="index.html" class="text-xs px-2.5 sm:px-3 py-1.5 rounded-lg border border-[#d8e2e9] bg-white hover:bg-[#edf3f7] text-[#36607d] font-semibold transition-colors flex items-center gap-1.5 shadow-sm">
+          <svg class="w-3.5 h-3.5 text-[#487b9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+          <span class="hidden sm:inline">Back to Site</span>
+        </a>
+
+        <a href="application.html" class="text-xs px-2.5 sm:px-3 py-1.5 rounded-lg bg-[#487b9c] hover:bg-[#36607d] text-white font-bold transition-colors flex items-center gap-1.5 shadow-sm">
+          <span>Apply Now</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+
+        <button id="openSettingsBtn" class="text-xs p-1.5 sm:px-2.5 sm:py-1.5 rounded-lg border border-[#d8e2e9] bg-white hover:bg-[#edf3f7] text-[#4a5560] hover:text-[#141f28] transition-colors flex items-center gap-1.5 shadow-sm" title="Configure Webhook / Calendar Integrations">
+          <svg class="w-3.5 h-3.5 text-[#487b9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3" stroke-width="2"/></svg>
+          <span class="hidden md:inline font-medium">Settings</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Client Dossier Header Banner -->
+  <div class="border-b border-[#d8e2e9] bg-[#eaf2f7] px-4 sm:px-6 py-2.5 sm:py-3">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 text-xs">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
+        <span id="dossierClientHeader" class="font-bold text-[#141f28] tracking-wide truncate">Diagnostic Briefing: Prepared for Executive Review</span>
+      </div>
+      <div class="text-[#4a5560] font-mono text-[10px] sm:text-[11px]" id="auditBaselineLabel">
+        Format: Express 11-Scenario Constraint Triage
+      </div>
+    </div>
+  </div>
+
+  <!-- Primary Dashboard: 3 FULL-WIDTH CARDS -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 py-5 sm:py-6 space-y-6">
+
+    <!-- ===================================================================== -->
+    <!-- CARD 1 (FULL WIDTH): Primary Constraint & 6-Dimension Scorecard       -->
+    <!-- ===================================================================== -->
+    <div class="w-full app-card-accent p-5 sm:p-7 relative overflow-hidden">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2 sm:mb-3">
+        <span class="eyebrow flex items-center gap-2">
+          <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#487b9c] animate-pulse flex-shrink-0"></span>
+          Primary Identified Business Constraint
+        </span>
+        <span id="constraintSeverityBadge" class="text-[11px] sm:text-xs px-3 py-1 rounded-full font-bold bg-rose-50 text-rose-700 border border-rose-200 w-fit">
+          Critical Structural Choke
+        </span>
+      </div>
+
+      <!-- Archetype Headline -->
+      <div class="mb-4 sm:mb-5">
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-[#141f28] tracking-tight" id="archetypeTitle">
+          The Central Hub Trap (Owner Dependency)
+        </h2>
+        <p class="text-[#4a5560] text-xs sm:text-sm mt-1.5 max-w-4xl leading-relaxed font-medium" id="archetypeSummary">
+          Your day-to-day operations and growth are tethered directly to your personal cognitive bandwidth. Problems, routine decisions, and client escalations default back to you.
+        </p>
+      </div>
+
+      <!-- 6-Dimension Friction Breakdown -->
+      <div class="mt-4 sm:mt-5 pt-4 border-t border-[#d8e2e9]">
+        <div class="text-xs font-bold text-[#141f28] mb-2 flex justify-between items-center">
+          <span>6-Dimension Friction Breakdown (Demand, Sales, Capacity, Owner Dependency, Operations, Economics)</span>
+          <span class="text-[10px] sm:text-[11px] text-[#36607d] font-mono font-semibold" id="chartSubtext">Diagnostic Signal Analysis</span>
+        </div>
+        <div class="h-44 sm:h-52 w-full relative bg-[#f8fafc] border border-[#d8e2e9] rounded-xl p-3" id="chartContainerWrapper">
+          <canvas id="radarChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- CARD 2 (FULL WIDTH): Synthesis, Contradictions & Action Roadmap       -->
+    <!-- ===================================================================== -->
+    <div id="bottleneckSynthesisCard" class="w-full app-card p-5 sm:p-7 space-y-5">
+      <div class="flex items-center justify-between border-b border-[#d8e2e9] pb-3">
+        <h3 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#141f28] flex items-center gap-2">
+          <svg class="w-4 h-4 text-[#d99236] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span>Diagnostic Synthesis: Primary Bottlenecks &amp; Alignment Signals</span>
+        </h3>
+        <span class="text-[10px] px-2.5 py-0.5 rounded bg-[#edf3f7] text-[#36607d] border border-[#d8e2e9] font-mono font-bold" id="reportModeBadge">Express Report</span>
+      </div>
+
+      <!-- Emotional Contradictions Section -->
+      <div class="space-y-3">
+        <div class="text-xs font-bold text-[#b45309] uppercase tracking-wider flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#d99236]"></span>
+          <span>Behavioral &amp; Psychological Friction Points:</span>
+        </div>
+        <div class="space-y-2.5 text-xs sm:text-sm text-[#4a5560]" id="contradictionList">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+
+      <!-- Strategic Action Plan Section -->
+      <div class="pt-4 border-t border-[#d8e2e9] space-y-3">
+        <div class="text-xs font-bold text-[#36607d] uppercase tracking-wider flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#487b9c]"></span>
+          <span>Recommended Advisory Sprints (Immediate Focus):</span>
+        </div>
+        <div class="space-y-2.5 text-xs sm:text-sm text-[#141f28]" id="actionPlanList">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- CARD 3 (FULL WIDTH, LAST): Advisory Architecture, Pricing & Action    -->
+    <!-- ===================================================================== -->
+    <div id="asymmetricCard" class="w-full app-card-accent p-5 sm:p-7 space-y-6">
+      
+      <!-- Card Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[#d8e2e9] pb-3 gap-2">
+        <div class="flex items-center gap-2 text-[#36607d] text-xs sm:text-sm font-bold uppercase tracking-wider">
+          <svg class="w-4 h-4 text-[#487b9c] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          <span>The 6-Month One-on-One Strategy Partnership</span>
+        </div>
+        <span class="text-[10px] sm:text-xs px-3 py-1 rounded-full bg-[#eaf2f7] text-[#36607d] border border-[rgba(89,141,174,0.4)] font-bold w-fit">
+          $1,000/mo Founding Commitment (Normally $1,500/mo)
+        </span>
+      </div>
+
+      <!-- Core Partnership Narrative & Pricing Overview -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left: Partnership Model & Specific Pricing Structure (from index.html) -->
+        <div class="lg:col-span-7 space-y-4 text-xs sm:text-sm text-[#4a5560] leading-relaxed">
+          <p>
+            The Klein Insight engagement is a <strong class="text-[#141f28]">six-month, one-on-one strategy partnership</strong> designed exclusively for established owners ready to transform how their business operates. Limited to <strong class="text-[#141f28]">20 dedicated business owners</strong> at any given time to ensure uncompromising focus.
+          </p>
+          <p>
+            We start with what you want to achieve, then work backward to dismantle the operational constraints, flawed assumptions, and bottlenecks capping your ceiling.
+          </p>
+
+          <!-- Pricing & Terms Callout matching index.html #roi -->
+          <div class="p-4 rounded-xl bg-[#edf3f7] border border-[rgba(89,141,174,0.35)] space-y-2.5 text-[#141f28]">
+            <div class="flex items-center justify-between">
+              <span class="font-extrabold text-[#141f28] text-sm">Transparent Investment &amp; Commitment</span>
+              <span class="text-[11px] font-mono text-emerald-700 bg-emerald-100 border border-emerald-300 px-2 py-0.5 rounded-full font-bold">Save $500/mo</span>
+            </div>
+            <p class="text-xs text-[#354c5e] leading-relaxed">
+              Investment is fixed at <strong class="text-[#141f28] font-bold">$1,000/month</strong> (reflecting your <strong class="text-[#36607d] font-bold">$500/month Founding-Client discount</strong> from the standard $1,500/mo rate) over our <strong class="text-[#141f28] font-bold">6-month commitment ($6,000 total commitment)</strong>.
+            </p>
+            <div class="pt-2 border-t border-[#d8e2e9] grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px]">
+              <div>
+                <strong class="text-[#141f28] block font-bold">Weekly Sessions</strong>
+                <span class="text-[#647c8f]">Private 1-on-1 strategy</span>
+              </div>
+              <div>
+                <strong class="text-[#141f28] block font-bold">Direct Support</strong>
+                <span class="text-[#647c8f]">Guidance between calls</span>
+              </div>
+              <div>
+                <strong class="text-[#141f28] block font-bold">Custom Systems</strong>
+                <span class="text-[#647c8f]">Tailored SOPs &amp; models</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- The ROI of Hidden Leverage (from index.html #roi) -->
+          <div class="space-y-2 text-xs">
+            <span class="font-bold uppercase tracking-wider text-[#141f28] block text-[11px]">The ROI of Hidden Leverage:</span>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[#4a5560]">
+              <div class="p-3 rounded-lg bg-[#f8fafc] border border-[#d8e2e9]">
+                <strong class="text-[#141f28] block mb-1 font-bold">Time Liberation</strong>
+                Valuing founder time at $150/hr, freeing just <strong class="text-[#141f28]">7 hours per month</strong> from broken workflows completely pays for this partnership.
+              </div>
+              <div class="p-3 rounded-lg bg-[#f8fafc] border border-[#d8e2e9]">
+                <strong class="text-[#141f28] block mb-1 font-bold">Scaling Leverage</strong>
+                Unlocking just a fraction of your hidden capacity covers the entire program. Everything after that is pure profit and freedom.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: The 5-Stage Framework & Schedule Debrief -->
+        <div class="lg:col-span-5 space-y-4">
+          
+          <!-- 5-Stage Roadmap from index.html -->
+          <div class="p-4 rounded-xl bg-[#f8fafc] border border-[#d8e2e9] space-y-2.5">
+            <span class="font-bold text-[#36607d] text-xs uppercase tracking-wider block">
+              Our 5-Stage Transformation Architecture
+            </span>
+            <ol class="space-y-2 text-xs text-[#4a5560]">
+              <li class="flex items-start gap-2">
+                <span class="text-[#487b9c] font-bold font-mono text-[11px]">01</span>
+                <span><strong class="text-[#141f28]">Diagnose the Real Constraint:</strong> Audit marketing, operations, capacity &amp; leadership.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-[#487b9c] font-bold font-mono text-[11px]">02</span>
+                <span><strong class="text-[#141f28]">Define the Starting Line:</strong> Establish baselines and clear 6-month outcomes.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-[#487b9c] font-bold font-mono text-[11px]">03</span>
+                <span><strong class="text-[#141f28]">Implement What Matters Most:</strong> Build practical workflows, messaging &amp; tools.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-[#487b9c] font-bold font-mono text-[11px]">04</span>
+                <span><strong class="text-[#141f28]">Make Progress Repeatable:</strong> Sustainable operating rhythm team runs without you.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-[#487b9c] font-bold font-mono text-[11px]">05</span>
+                <span><strong class="text-[#141f28]">Measure Results:</strong> Compare with baseline, refine &amp; set next growth targets.</span>
+              </li>
+            </ol>
+          </div>
+
+          <!-- Inline Scheduler -->
+          <div class="p-4 rounded-xl bg-[#f8fafc] border border-[#d8e2e9] space-y-3" id="slotPickerSection">
+            <div class="flex items-center justify-between text-xs">
+              <span class="font-bold text-[#141f28]">Schedule 20-Min Strategy Debrief:</span>
+              <span class="text-[#36607d] text-[10px] font-semibold">Pre-populated with diagnostic</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2" id="slotPicker">
+              <button class="slot-btn min-h-[44px] py-2 px-2.5 rounded-lg border border-[#d8e2e9] bg-white text-xs text-[#141f28] hover:border-[#487b9c] hover:bg-[#eaf2f7] transition-all text-left shadow-sm">
+                <span class="font-bold block text-[11px]">Tomorrow</span>
+                <span class="text-[10px] text-[#647c8f]">10:00 AM EDT</span>
+              </button>
+              <button class="slot-btn min-h-[44px] py-2 px-2.5 rounded-lg border border-[#d8e2e9] bg-white text-xs text-[#141f28] hover:border-[#487b9c] hover:bg-[#eaf2f7] transition-all text-left shadow-sm">
+                <span class="font-bold block text-[11px]">Tomorrow</span>
+                <span class="text-[10px] text-[#647c8f]">2:30 PM EDT</span>
+              </button>
+              <button class="slot-btn min-h-[44px] py-2 px-2.5 rounded-lg border border-[#d8e2e9] bg-white text-xs text-[#141f28] hover:border-[#487b9c] hover:bg-[#eaf2f7] transition-all text-left shadow-sm">
+                <span class="font-bold block text-[11px]">Thursday</span>
+                <span class="text-[10px] text-[#647c8f]">11:15 AM EDT</span>
+              </button>
+              <button class="slot-btn min-h-[44px] py-2 px-2.5 rounded-lg border border-[#d8e2e9] bg-white text-xs text-[#141f28] hover:border-[#487b9c] hover:bg-[#eaf2f7] transition-all text-left shadow-sm">
+                <span class="font-bold block text-[11px]">Thursday</span>
+                <span class="text-[10px] text-[#647c8f]">4:00 PM EDT</span>
+              </button>
+            </div>
+
+            <div id="bookingConfirmation" class="hidden p-3 rounded-lg bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs text-center font-bold">
+              ✓ Debrief reserved. Confirmation dispatched with your constraint audit dossier.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Action Buttons Row -->
+      <div class="pt-4 border-t border-[#d8e2e9] grid grid-cols-1 sm:grid-cols-4 gap-3 no-print">
+        <a href="application.html" class="min-h-[46px] py-2.5 px-4 rounded-xl bg-[#487b9c] hover:bg-[#36607d] text-white font-bold text-xs sm:text-sm transition-all shadow-md shadow-[rgba(72,123,156,0.25)] flex items-center justify-center gap-2">
+          <span>Apply for Partnership</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+
+        <button id="reopenChatBtn" class="min-h-[46px] py-2.5 px-4 rounded-xl border border-[#487b9c] bg-[#eaf2f7] hover:bg-[#36607d] hover:text-white text-[#36607d] font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span>Re-Run Diagnostic</span>
+        </button>
+
+        <button id="printBtn" class="min-h-[46px] py-2.5 px-4 rounded-xl border border-[#d8e2e9] bg-white hover:bg-[#f8fafc] text-[#141f28] font-bold text-xs sm:text-sm transition-all shadow-sm flex items-center justify-center gap-2">
+          <svg class="w-4 h-4 text-[#4a5560]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+          <span>Download PDF Dossier</span>
+        </button>
+
+        <a href="index.html#contact" class="min-h-[46px] py-2.5 px-4 rounded-xl border border-[#d8e2e9] bg-white hover:bg-[#f8fafc] text-[#141f28] font-bold text-xs sm:text-sm transition-all shadow-sm flex items-center justify-center gap-2">
+          <span>Start a Conversation</span>
+          <svg class="w-4 h-4 text-[#4a5560]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+        </a>
+      </div>
+
+      <!-- Print-Only Callout -->
+      <div class="hidden print-only-block pt-2 border-t border-[#d8e2e9] text-xs text-[#4a5560]">
+        <strong>Strategic Advisory:</strong> Prepared by Joe Klein, Klein Insight. For operational blueprint implementation and 6-month partnership applications, visit <strong>kleininsight.com</strong> or email <strong>joe@kleininsight.com</strong>.
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- INTEGRATION & WEBHOOK DRAWER (LIGHT THEME)                                -->
+  <!-- ========================================================================= -->
+  <div id="settingsDrawer" class="fixed inset-0 z-50 bg-[#0d171f]/50 backdrop-blur-sm flex justify-end hidden opacity-0 transition-opacity duration-200">
+    <div class="bg-white border-l border-[#d8e2e9] w-full max-w-md h-full p-5 sm:p-6 shadow-2xl flex flex-col justify-between overflow-y-auto transform translate-x-full transition-transform duration-200" id="drawerBox">
+      <div class="space-y-5">
+        <div class="flex items-center justify-between border-b border-[#d8e2e9] pb-3">
+          <h3 class="text-sm font-extrabold text-[#141f28] flex items-center gap-2">
+            <svg class="w-4 h-4 text-[#487b9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a2 2 0 002 2h3a1 1 0 011 1v3a2 2 0 002 2h1a2 2 0 100 4h-1a2 2 0 00-2 2v3a1 1 0 01-1 1h-3a2 2 0 00-2-2V9a2 2 0 00-2-2H4a1 1 0 01-1-1V5a2 2 0 012-2h3a2 2 0 002-2V4z"/></svg>
+            Integration Scaffolding
+          </h3>
+          <button id="closeSettingsBtn" class="text-[#4a5560] hover:text-[#141f28] p-1 rounded-lg">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+
+        <p class="text-xs text-[#4a5560] leading-relaxed">
+          Configure external endpoints (Zapier / Make / HubSpot / Webhook) to receive full diagnostic answers, constraint scores, and lead contact details upon completion.
+        </p>
+
+        <div class="space-y-1.5">
+          <label class="block text-xs font-bold text-[#141f28]">Webhook URL (CRM Dispatch)</label>
+          <input type="url" id="webhookUrlInput" placeholder="https://hook.us1.make.com/..." class="w-full px-3 py-2 rounded-lg bg-[#f8fafc] border border-[#d8e2e9] text-base sm:text-xs text-[#141f28] focus:outline-none focus:border-[#487b9c] font-mono">
+          <span class="text-[10px] text-[#647c8f] block">Sends full constraint profile, contradictory signals, and contact dossier.</span>
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="block text-xs font-bold text-[#141f28]">External Booking URL (Calendly / SavvyCal)</label>
+          <input type="url" id="calendarUrlInput" placeholder="https://calendly.com/kleininsight/20min" class="w-full px-3 py-2 rounded-lg bg-[#f8fafc] border border-[#d8e2e9] text-base sm:text-xs text-[#141f28] focus:outline-none focus:border-[#487b9c] font-mono">
+        </div>
+
+        <div class="space-y-1.5">
+          <div class="flex items-center justify-between">
+            <label class="block text-xs font-bold text-[#141f28]">Real-Time Telemetry Payload</label>
+            <button id="copyPayloadBtn" class="text-[10px] text-[#487b9c] hover:text-[#36607d] font-bold">Copy JSON</button>
+          </div>
+          <pre id="payloadPreview" class="p-3 rounded-lg bg-[#f0f5f8] border border-[#d8e2e9] text-[11px] text-[#141f28] font-mono overflow-x-auto max-h-48"></pre>
+        </div>
+      </div>
+
+      <div class="pt-4 border-t border-[#d8e2e9]">
+        <button id="saveSettingsBtn" class="w-full py-2.5 rounded-lg bg-[#487b9c] hover:bg-[#36607d] text-xs font-bold text-white transition-colors">
+          Save Configuration
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 bg-[#141f28] border border-[rgba(89,141,174,0.5)] text-white text-xs px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-200">
+    <span id="toastMessage">Configuration saved.</span>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- SCRIPT ENGINE                                                             -->
+  <!-- ========================================================================= -->
+  <script>
+    /* Complete Question Registry */
+    const allScenarios = [
+      // 1. Operations
+      {
+        id: 'monday_morning',
+        category: 'operations',
+        title: 'The Monday Morning Test',
+        prompt: 'You walk into Monday morning with a full list of things that need attention. Before you can get to what you actually wanted to work on, three new problems have already landed on your desk.',
+        subtext: 'I feel like this happens regularly.',
+        isExpress: true
+      },
+      // 2. Capacity
+      {
+        id: 'customer_rush',
+        category: 'capacity',
+        title: 'The Customer Rush',
+        prompt: 'Business suddenly gets busy. Instead of simply being excited about the additional revenue, your first thought is, <strong class="text-[#141f28] font-bold">"How are we going to handle all of this?"</strong>',
+        subtext: 'Does growth immediately trigger anxiety about execution?',
+        isExpress: true
+      },
+      // 3. Owner Dependency
+      {
+        id: 'vacation_test',
+        category: 'owner',
+        title: 'The Vacation Test',
+        prompt: 'You take a few days completely away from the business. Your phone is nearby, and part of you is still waiting for something to go wrong or for someone to need you.',
+        subtext: 'Stepping away feels like an operational risk.',
+        isExpress: false
+      },
+      // 4. Owner Dependency
+      {
+        id: 'decision_test',
+        category: 'owner',
+        title: 'The Decision Test',
+        prompt: 'An employee runs into a problem that should be fairly routine. Instead of solving it themselves, they come to you because you’re the person who knows what to do.',
+        subtext: 'This happens more often than I’d like.',
+        isExpress: true
+      },
+      // 5. Owner Dependency
+      {
+        id: 'delegation_test',
+        category: 'owner',
+        title: 'The Delegation Test',
+        prompt: 'You hand something off to someone else, but you eventually find yourself checking on it, correcting it, or taking it back because it would have been easier to do it yourself.',
+        subtext: 'Delegation often turns into rework.',
+        isExpress: true
+      },
+      // 6. Capacity
+      {
+        id: 'growth_test',
+        category: 'capacity',
+        title: 'The Growth Test',
+        prompt: 'You imagine the business becoming significantly busier over the next year. Your first reaction isn’t "That would be great"—you immediately start thinking about everything that could break.',
+        subtext: 'Growth feels threatening to quality or sanity.',
+        isExpress: false
+      },
+      // 7. Operations
+      {
+        id: 'repeated_problem',
+        category: 'operations',
+        title: 'The Repeated-Problem Test',
+        prompt: 'You solve what feels like the same problem for the third or fourth time because whatever caused it wasn’t really fixed the first time.',
+        subtext: 'Fixes feel temporary rather than structural.',
+        isExpress: true
+      },
+      // 8. Operations
+      {
+        id: 'explanation_test',
+        category: 'operations',
+        title: 'The Explanation Test',
+        prompt: 'Someone new joins the business and asks, "How do we normally do this?" You realize the answer is basically, <strong class="text-[#141f28] font-bold">"I’ll show you."</strong>',
+        subtext: 'Knowledge lives in heads rather than documented systems.',
+        isExpress: true
+      },
+      // 9. Owner Dependency
+      {
+        id: 'help_desk_test',
+        category: 'owner',
+        title: 'The Owner-as-Help-Desk Test',
+        prompt: 'Your day gets interrupted by questions that other people could probably answer if the information, process, or authority were easier to access.',
+        subtext: 'You function as the central operating router.',
+        isExpress: false
+      },
+      // 10. Economics
+      {
+        id: 'busy_not_better',
+        category: 'economics',
+        title: 'The Busy-But-Not-Better Test',
+        prompt: 'You look back at how hard you’ve been working and think, "We’re doing more, but I don’t know if the business is actually better off because of it."',
+        subtext: 'Effort is increasing faster than tangible progress.',
+        isExpress: false
+      },
+      // 11. Sales / Conversion
+      {
+        id: 'customer_inquiry',
+        category: 'sales',
+        title: 'The Customer Inquiry Test',
+        prompt: 'A potential customer reaches out, but for whatever reason they don’t move forward. You find yourself wondering what happened because you don’t really have a clear answer.',
+        subtext: 'Prospect dropout feels like a black box.',
+        isExpress: true
+      },
+      // 12. Demand
+      {
+        id: 'feast_famine',
+        category: 'demand',
+        title: 'The Feast-or-Famine Test',
+        prompt: 'Things are busy and you feel good about the business. Then you hit a slower period and almost immediately start wondering where the next customers are going to come from.',
+        subtext: 'Pipeline confidence fluctuates with current workload.',
+        isExpress: true
+      },
+      // 13. Operations
+      {
+        id: 'wrong_work',
+        category: 'operations',
+        title: 'The Wrong-Work Test',
+        prompt: 'At the end of a long day, you realize you were busy almost the entire time, but very little of what you did actually moved the business forward.',
+        subtext: 'High activity, low strategic leverage.',
+        isExpress: false
+      },
+      // 14. Owner Dependency
+      {
+        id: 'should_do_else',
+        category: 'owner',
+        title: 'The "I Should Be Doing Something Else" Test',
+        prompt: 'You spend part of your day doing work you know you shouldn’t still be doing, but finding someone else to handle it feels like more trouble than just doing it yourself.',
+        subtext: 'The switching cost of training feels prohibitive.',
+        isExpress: false
+      },
+      // 15. Capacity
+      {
+        id: 'bottleneck_test',
+        category: 'capacity',
+        title: 'The Bottleneck Test',
+        prompt: 'You could bring in substantially more business tomorrow, but you’re not completely confident the rest of the business could keep up.',
+        subtext: 'Lead generation is artificially constrained by delivery fear.',
+        isExpress: false
+      },
+      // 16. Economics
+      {
+        id: 'money_test',
+        category: 'economics',
+        title: 'The Money Test',
+        prompt: 'You have a month where the business is extremely busy, but when you look at what you actually made from all that work, you wonder whether it was worth the effort.',
+        subtext: 'Margin and net return don\'t match operational stress.',
+        isExpress: true
+      },
+      // 17. Owner Dependency
+      {
+        id: 'everything_comes_back',
+        category: 'owner',
+        title: 'The "Everything Comes Back to Me" Test',
+        prompt: 'You notice that regardless of how many people are involved, important decisions, problems, and exceptions eventually seem to find their way back to you.',
+        subtext: 'Accountability gravitates back to the center.',
+        isExpress: false
+      },
+      // 18. Operations
+      {
+        id: 'change_test',
+        category: 'operations',
+        title: 'The Change Test',
+        prompt: 'You know there are things about the business that need to change, but there are so many possible things to fix that you aren’t sure which one deserves your attention first.',
+        subtext: 'Operational fog makes prioritization difficult.',
+        isExpress: false
+      },
+      // 19. Operations
+      {
+        id: 'shiny_object',
+        category: 'operations',
+        title: 'The Shiny-Object Test',
+        prompt: 'You get excited about a new idea that could improve the business, but you already have several things you started previously that haven’t been fully implemented.',
+        subtext: 'Unfinished initiatives create organizational drag.',
+        isExpress: false
+      },
+      // 20. Emotional Contradiction
+      {
+        id: 'land_large_contradiction',
+        category: 'capacity',
+        isContradiction: true,
+        title: 'The Growth Contradiction',
+        prompt: 'You get a message saying you just landed a large new customer. You’re excited about the opportunity, but almost immediately start thinking about everything you’re going to have to do to deliver it.',
+        subtext: 'Excitement is instantly overtaken by delivery dread.',
+        isExpress: true
+      },
+      // 21. Emotional Contradiction
+      {
+        id: 'quiet_week_contradiction',
+        category: 'demand',
+        isContradiction: true,
+        title: 'The Breathing Room Contradiction',
+        prompt: 'You finally have a week where things are relatively quiet. Instead of enjoying the breathing room, you start worrying that business is slowing down.',
+        subtext: 'Peace feels like a threat rather than recovery.',
+        isExpress: false
+      },
+      // 22. Alignment
+      {
+        id: 'five_year_test',
+        category: 'economics',
+        title: 'The Five-Year Test',
+        prompt: 'Imagine nothing fundamentally changes. Five years from now, you’re still running the business essentially the same way you are today.',
+        subtext: '<strong class="text-[#141f28] font-bold">That thought bothers me.</strong>',
+        isExpress: true
+      }
+    ];
+
+    const state = {
+      mode: 'express', // 'express' (11 questions) or 'deep' (22 questions)
+      activeScenarios: [],
+      step: -1,
+      answers: {},
+      leadData: {
+        name: 'Executive Lead',
+        email: '',
+        company: 'Your Company'
+      },
+      webhookUrl: localStorage.getItem('klein_webhook_url') || '',
+      calendarUrl: localStorage.getItem('klein_calendar_url') || '',
+    };
+
+    const chatStream = document.getElementById('chatStream');
+    const activeInputContainer = document.getElementById('activeInputContainer');
+    const typingIndicator = document.getElementById('typingIndicator');
+    const chatProgressBar = document.getElementById('chatProgressBar');
+    const chatOverlay = document.getElementById('chatOverlay');
+    const chatStepTracker = document.getElementById('chatStepTracker');
+
+    function scrollToQuestion(element) {
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } else {
+            chatStream.scrollTo({ top: chatStream.scrollHeight, behavior: 'smooth' });
+          }
+        }, 60);
+      });
+    }
+
+    function appendBotMessage(title, textHtml, callback) {
+      typingIndicator.classList.remove('hidden');
+      typingIndicator.classList.add('flex');
+      chatStream.scrollTop = chatStream.scrollHeight;
+
+      setTimeout(() => {
+        typingIndicator.classList.add('hidden');
+        typingIndicator.classList.remove('flex');
+
+        const bubble = document.createElement('div');
+        bubble.className = 'chat-bubble-animate flex items-start gap-2.5 sm:gap-3 text-xs sm:text-sm';
+        bubble.innerHTML = `
+          <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-[#1a2936] text-[#598dae] border border-[rgba(89,141,174,0.35)] flex items-center justify-center font-bold text-xs flex-shrink-0 shadow-sm">
+            KI
+          </div>
+          <div class="bg-[#f0f5f8] border border-[#d8e2e9] p-3.5 sm:p-4 rounded-2xl rounded-tl-sm text-[#141f28] max-w-lg leading-relaxed shadow-sm space-y-1">
+            ${title ? `<div class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#36607d] font-mono">${title}</div>` : ''}
+            <div>${textHtml}</div>
+          </div>
+        `;
+        chatStream.appendChild(bubble);
+
+        if (callback) callback();
+        scrollToQuestion(bubble);
+      }, 180);
+    }
+
+    function submitUserAnswer(text) {
+      const bubble = document.createElement('div');
+      bubble.className = 'chat-bubble-animate flex justify-end text-xs sm:text-sm';
+      bubble.innerHTML = `
+        <div class="bg-[#487b9c] text-white font-bold px-4 py-2.5 rounded-2xl rounded-tr-sm max-w-md shadow-sm">
+          ${text}
+        </div>
+      `;
+      chatStream.appendChild(bubble);
+      chatStream.scrollTop = chatStream.scrollHeight;
+    }
+
+    function renderPastConversation(scenariosToPopulate) {
+      chatStream.innerHTML = '';
+
+      // 1. Initial audit mode choice bubble
+      const modeLabel = state.mode === 'express' ? 'Express Audit (11 Scenarios)' : 'Deep-Dive Audit (22 Scenarios)';
+      const modeBubble = document.createElement('div');
+      modeBubble.className = 'chat-bubble-animate flex items-start gap-2.5 sm:gap-3 text-xs sm:text-sm';
+      modeBubble.innerHTML = `
+        <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-[#1a2936] text-[#598dae] border border-[rgba(89,141,174,0.35)] flex items-center justify-center font-bold text-xs flex-shrink-0 shadow-sm">
+          KI
+        </div>
+        <div class="bg-[#f0f5f8] border border-[#d8e2e9] p-3.5 sm:p-4 rounded-2xl rounded-tl-sm text-[#141f28] max-w-lg leading-relaxed shadow-sm space-y-1">
+          <div class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#36607d] font-mono">Overview &amp; Mode Selection</div>
+          <div>Welcome back to the <strong>Klein Insight Business Constraint Diagnostic</strong>. Resuming your previously saved evaluation.</div>
+        </div>
+      `;
+      chatStream.appendChild(modeBubble);
+      submitUserAnswer(modeLabel);
+
+      // 2. Populate each previous question and answer
+      scenariosToPopulate.forEach((s) => {
+        const val = state.answers[s.id];
+        if (val === undefined) return;
+
+        // Question Bubble
+        const fullPrompt = `${s.prompt}${s.subtext ? `<div class="text-[#4a5560] text-xs mt-1.5 italic font-medium">${s.subtext}</div>` : ''}`;
+        const qBubble = document.createElement('div');
+        qBubble.className = 'chat-bubble-animate flex items-start gap-2.5 sm:gap-3 text-xs sm:text-sm';
+        qBubble.innerHTML = `
+          <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-[#1a2936] text-[#598dae] border border-[rgba(89,141,174,0.35)] flex items-center justify-center font-bold text-xs flex-shrink-0 shadow-sm">
+            KI
+          </div>
+          <div class="bg-[#f0f5f8] border border-[#d8e2e9] p-3.5 sm:p-4 rounded-2xl rounded-tl-sm text-[#141f28] max-w-lg leading-relaxed shadow-sm space-y-1">
+            ${s.title ? `<div class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#36607d] font-mono">${s.title}</div>` : ''}
+            <div>${fullPrompt}</div>
+          </div>
+        `;
+        chatStream.appendChild(qBubble);
+
+        // User Answer Bubble
+        const label = val === 2 ? 'Agree' : (val === 1 ? 'Unsure' : 'Disagree');
+        submitUserAnswer(label);
+      });
+
+      // 3. Resumed indicator badge
+      const divider = document.createElement('div');
+      divider.className = 'text-center my-3';
+      divider.innerHTML = `
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono font-bold tracking-wider uppercase text-[#36607d] bg-[#eaf2f7] border border-[rgba(89,141,174,0.3)] shadow-sm">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          Resuming from Scenario ${state.step + 1} of ${state.activeScenarios.length}
+        </span>
+      `;
+      chatStream.appendChild(divider);
+      chatStream.scrollTop = chatStream.scrollHeight;
+    }
+
+    function renderWelcomeScreen() {
+      chatProgressBar.style.width = '0%';
+      chatStepTracker.textContent = 'Choose Evaluation Depth';
+      document.getElementById('auditTypeBadge').textContent = 'Audit Setup';
+
+      let savedProgress = null;
+      try {
+        const raw = localStorage.getItem('klein_survey_progress');
+        if (raw) savedProgress = JSON.parse(raw);
+      } catch (e) {}
+
+      // If user previously completed only the short form (express audit)
+      if (savedProgress && savedProgress.isShortFormCompleted) {
+        const prompt = `
+          Welcome back! You previously completed the <strong class="text-[#141f28] font-bold">11-question Express Diagnostic</strong>.<br><br>
+          You can view your unlocked Constraint Dossier, or upgrade to the full 22-question Deep-Dive to evaluate all 6 friction vectors and psychological contradiction signals.
+        `;
+
+        appendBotMessage('Welcome Back', prompt, () => {
+          activeInputContainer.innerHTML = `
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <button id="resumeDossierBtn" class="min-h-[50px] p-3 rounded-xl bg-[#487b9c] hover:bg-[#36607d] text-white text-left transition-all shadow-md flex flex-col justify-center">
+                <span class="font-bold text-xs sm:text-sm">📊 View My Unlocked Dossier</span>
+                <span class="text-[10px] text-white/90 mt-0.5">Review your action plan &amp; scorecard</span>
+              </button>
+              <button id="upgradeDeepBtn" class="min-h-[50px] p-3 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#487b9c] hover:bg-[#eaf2f7] text-[#141f28] text-left transition-all flex flex-col justify-center shadow-sm">
+                <span class="font-bold text-xs sm:text-sm">🔍 Upgrade to 22-Question Audit</span>
+                <span class="text-[10px] text-[#4a5560] mt-0.5">Complete remaining 11 questions</span>
+              </button>
+            </div>
+            <div class="text-center mt-2.5">
+              <button id="startFreshBtn" class="text-[11px] text-[#647c8f] hover:text-[#141f28] font-semibold underline">Or start fresh with a new audit</button>
+            </div>
+          `;
+
+          document.getElementById('resumeDossierBtn').addEventListener('click', () => {
+            state.answers = savedProgress.answers || {};
+            state.leadData = savedProgress.leadData || state.leadData;
+            state.mode = 'express';
+            state.activeScenarios = allScenarios.filter(s => s.isExpress);
+            const analysis = analyzeConstraints();
+            chatOverlay.classList.add('opacity-0', 'pointer-events-none');
+            syncDashboard(analysis);
+            showToast('Viewing your saved constraint dossier.');
+          });
+
+          document.getElementById('upgradeDeepBtn').addEventListener('click', () => {
+            state.answers = savedProgress.answers || {};
+            state.leadData = savedProgress.leadData || state.leadData;
+            state.mode = 'deep';
+            state.activeScenarios = allScenarios;
+            const unansweredIdx = allScenarios.findIndex(s => state.answers[s.id] === undefined);
+            state.step = unansweredIdx >= 0 ? unansweredIdx : 0;
+            document.getElementById('auditTypeBadge').textContent = 'Deep-Dive (22 Qs)';
+            document.getElementById('reportModeBadge').textContent = 'Deep-Dive Diagnostic Report';
+            const answeredScenarios = state.activeScenarios.slice(0, state.step);
+            renderPastConversation(answeredScenarios);
+            renderCurrentScenario();
+          });
+
+          document.getElementById('startFreshBtn').addEventListener('click', () => {
+            localStorage.removeItem('klein_survey_progress');
+            state.answers = {};
+            chatStream.innerHTML = '';
+            renderStandardWelcomeScreen();
+          });
+        });
+        return;
+      }
+
+      // If user saved mid-way through an audit
+      const hasAnsweredAny = savedProgress && savedProgress.answers && Object.keys(savedProgress.answers).length > 0;
+      if (savedProgress && (savedProgress.hasSaved || hasAnsweredAny) && !savedProgress.isCompleted) {
+        const total = savedProgress.totalScenarios || (savedProgress.mode === 'deep' ? 22 : 11);
+        const answeredCount = savedProgress.answers ? Object.keys(savedProgress.answers).length : 0;
+        const currentScenarioNum = Math.min(total, Math.max(1, (typeof savedProgress.step === 'number' ? savedProgress.step : answeredCount) + 1));
+        const prompt = `
+          Welcome back! You have an audit in progress saved at <strong class="text-[#141f28] font-bold">Scenario ${currentScenarioNum} of ${total}</strong>.<br><br>
+          Would you like to pick up where you left off or start over?
+        `;
+
+        appendBotMessage('Diagnostic In Progress', prompt, () => {
+          activeInputContainer.innerHTML = `
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <button id="resumeProgressBtn" class="min-h-[50px] p-3 rounded-xl bg-[#487b9c] hover:bg-[#36607d] text-white text-left transition-all shadow-md flex flex-col justify-center">
+                <span class="font-bold text-xs sm:text-sm">▶ Resume Diagnostic</span>
+                <span class="text-[10px] text-white/90 mt-0.5">Continue from Scenario ${currentScenarioNum}</span>
+              </button>
+              <button id="startFreshBtn" class="min-h-[50px] p-3 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#487b9c] hover:bg-[#eaf2f7] text-[#141f28] text-left transition-all flex flex-col justify-center shadow-sm">
+                <span class="font-bold text-xs sm:text-sm">↺ Start Fresh</span>
+                <span class="text-[10px] text-[#4a5560] mt-0.5">Clear previous answers</span>
+              </button>
+            </div>
+          `;
+
+          document.getElementById('resumeProgressBtn').addEventListener('click', () => {
+            state.answers = savedProgress.answers || {};
+            state.leadData = savedProgress.leadData || state.leadData;
+            state.mode = savedProgress.mode || 'express';
+            state.activeScenarios = state.mode === 'express' ? allScenarios.filter(s => s.isExpress) : allScenarios;
+            const nextIdx = state.activeScenarios.findIndex(s => state.answers[s.id] === undefined);
+            state.step = nextIdx >= 0 ? nextIdx : (typeof savedProgress.step === 'number' ? savedProgress.step : 0);
+            document.getElementById('auditTypeBadge').textContent = state.mode === 'express' ? 'Express (11 Qs)' : 'Deep-Dive (22 Qs)';
+            document.getElementById('reportModeBadge').textContent = state.mode === 'express' ? 'Express Diagnostic Report' : 'Deep-Dive Diagnostic Report';
+            const answeredScenarios = state.activeScenarios.slice(0, state.step);
+            renderPastConversation(answeredScenarios);
+            renderCurrentScenario();
+          });
+
+          document.getElementById('startFreshBtn').addEventListener('click', () => {
+            localStorage.removeItem('klein_survey_progress');
+            state.answers = {};
+            chatStream.innerHTML = '';
+            renderStandardWelcomeScreen();
+          });
+        });
+        return;
+      }
+
+      renderStandardWelcomeScreen();
+    }
+
+    function renderStandardWelcomeScreen() {
+      const prompt = `
+        Welcome to the <strong class="text-[#141f28] font-bold">Klein Insight Business Constraint Diagnostic</strong>.<br><br>
+        Rather than asking for proprietary financial numbers that produce fragile estimations, this system diagnoses your <strong class="text-[#141f28] font-bold">actual operational friction, recurring bottlenecks, and behavioral roadblocks</strong>.<br><br>
+        Choose your preferred evaluation depth to get started:
+      `;
+
+      appendBotMessage('Overview &amp; Mode Selection', prompt, () => {
+        activeInputContainer.innerHTML = `
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <button id="startExpressBtn" class="min-h-[54px] p-3 rounded-xl bg-[#487b9c] hover:bg-[#36607d] text-white text-left transition-all shadow-md shadow-[rgba(72,123,156,0.25)] flex flex-col justify-center border border-[#36607d]">
+              <span class="font-bold text-xs sm:text-sm flex items-center gap-1.5">
+                <span>⚡ Express Audit</span>
+                <span class="text-[10px] bg-white/20 px-1.5 py-0.2 rounded font-semibold">11 Questions</span>
+              </span>
+              <span class="text-[10px] text-white/90 mt-0.5">Rapid constraint triage &amp; focused action plan (~90 sec)</span>
+            </button>
+
+            <button id="startFullBtn" class="min-h-[54px] p-3 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#487b9c] hover:bg-[#eaf2f7] text-[#141f28] text-left transition-all flex flex-col justify-center shadow-sm">
+              <span class="font-bold text-xs sm:text-sm flex items-center gap-1.5">
+                <span>🔍 Deep-Dive Audit</span>
+                <span class="text-[10px] bg-[#edf3f7] text-[#36607d] border border-[#d8e2e9] px-1.5 py-0.2 rounded font-bold">22 Questions</span>
+              </span>
+              <span class="text-[10px] text-[#4a5560] mt-0.5">Comprehensive 6-dimension evaluation &amp; contradiction mapping</span>
+            </button>
+          </div>
+        `;
+
+        document.getElementById('startExpressBtn').addEventListener('click', () => {
+          state.mode = 'express';
+          state.activeScenarios = allScenarios.filter(s => s.isExpress);
+          document.getElementById('auditTypeBadge').textContent = 'Express (11 Qs)';
+          document.getElementById('reportModeBadge').textContent = 'Express Diagnostic Report';
+          document.getElementById('auditBaselineLabel').textContent = 'Format: Express 11-Scenario Constraint Triage';
+          submitUserAnswer("Express Audit (11 Scenarios)");
+          state.step = 0;
+          renderCurrentScenario();
+        });
+
+        document.getElementById('startFullBtn').addEventListener('click', () => {
+          state.mode = 'deep';
+          state.activeScenarios = allScenarios;
+          document.getElementById('auditTypeBadge').textContent = 'Deep-Dive (22 Qs)';
+          document.getElementById('reportModeBadge').textContent = 'Deep-Dive Diagnostic Report';
+          document.getElementById('auditBaselineLabel').textContent = 'Format: Comprehensive 22-Scenario Constraint Audit';
+          submitUserAnswer("Deep-Dive Audit (22 Scenarios)");
+          state.step = 0;
+          renderCurrentScenario();
+        });
+      });
+    }
+
+    function renderCurrentScenario() {
+      if (state.step >= state.activeScenarios.length) {
+        renderContactStep();
+        return;
+      }
+
+      const s = state.activeScenarios[state.step];
+      const stepPercent = Math.min(100, Math.round(((state.step + 1) / (state.activeScenarios.length + 1)) * 100));
+      chatProgressBar.style.width = stepPercent + '%';
+      chatStepTracker.textContent = `Scenario ${state.step + 1} of ${state.activeScenarios.length}`;
+
+      const fullPrompt = `${s.prompt}${s.subtext ? `<div class="text-[#4a5560] text-xs mt-1.5 italic font-medium">${s.subtext}</div>` : ''}`;
+
+      appendBotMessage(s.title, fullPrompt, () => {
+        activeInputContainer.innerHTML = `
+          <div class="grid grid-cols-3 gap-2">
+            <button type="button" class="diag-btn min-h-[48px] py-2.5 px-2 rounded-xl border border-[#487b9c] bg-[#eaf2f7] hover:bg-[#36607d] hover:text-white text-[#36607d] font-bold text-xs transition-all flex flex-col items-center justify-center text-center shadow-sm" data-val="2" data-label="Agree">
+              <span class="font-bold text-xs sm:text-sm">Agree</span>
+              <span class="text-[9px] opacity-80 hidden sm:inline">Sounds like me</span>
+            </button>
+            <button type="button" class="diag-btn min-h-[48px] py-2.5 px-2 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#487b9c] hover:bg-[#eaf2f7] text-[#141f28] font-bold text-xs transition-all flex flex-col items-center justify-center text-center shadow-sm" data-val="1" data-label="Unsure">
+              <span class="font-bold text-xs sm:text-sm">Unsure</span>
+              <span class="text-[9px] opacity-80 hidden sm:inline">Sometimes / Not sure</span>
+            </button>
+            <button type="button" class="diag-btn min-h-[48px] py-2.5 px-2 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#487b9c] hover:bg-[#eaf2f7] text-[#141f28] font-bold text-xs transition-all flex flex-col items-center justify-center text-center shadow-sm" data-val="0" data-label="Disagree">
+              <span class="font-bold text-xs sm:text-sm">Disagree</span>
+              <span class="text-[9px] opacity-80 hidden sm:inline">Doesn't sound like me</span>
+            </button>
+          </div>
+        `;
+
+        const buttons = activeInputContainer.querySelectorAll('.diag-btn');
+        buttons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const val = parseInt(btn.dataset.val, 10);
+            const label = btn.dataset.label;
+            state.answers[s.id] = val;
+
+            submitUserAnswer(`${label}`);
+            state.step++;
+            activeInputContainer.innerHTML = '';
+            saveProgressLocally(false);
+            setTimeout(renderCurrentScenario, 120);
+          });
+        });
+      });
+    }
+
+    function renderContactStep() {
+      chatProgressBar.style.width = '100%';
+      chatStepTracker.textContent = 'Dossier Delivery';
+
+      const prompt = `
+        Scoring complete. Converging signals have compiled your <strong class="text-[#141f28] font-bold">Executive Constraint Dossier</strong>.<br><br>
+        Where should we deliver your customized 1-Page Action Plan?
+      `;
+
+      appendBotMessage('Final Step', prompt, () => {
+        activeInputContainer.innerHTML = `
+          <form id="chatLeadForm" class="space-y-2.5">
+            <input type="text" id="chatLeadName" required placeholder="Full Name (e.g. Alex Mercer)" class="w-full px-3.5 py-2.5 rounded-lg bg-white border border-[#d8e2e9] text-base sm:text-xs text-[#141f28] placeholder-[#8ba2b3] focus:outline-none focus:border-[#487b9c] focus:ring-2 focus:ring-[#eaf2f7]">
+            <input type="email" id="chatLeadEmail" required placeholder="Work Email (alex@firm.com)" class="w-full px-3.5 py-2.5 rounded-lg bg-white border border-[#d8e2e9] text-base sm:text-xs text-[#141f28] placeholder-[#8ba2b3] focus:outline-none focus:border-[#487b9c] focus:ring-2 focus:ring-[#eaf2f7]">
+            <input type="text" id="chatLeadCompany" required placeholder="Company Domain / Name" class="w-full px-3.5 py-2.5 rounded-lg bg-white border border-[#d8e2e9] text-base sm:text-xs text-[#141f28] placeholder-[#8ba2b3] focus:outline-none focus:border-[#487b9c] focus:ring-2 focus:ring-[#eaf2f7]">
+            <button type="submit" id="generateReportBtn" class="w-full min-h-[46px] py-3 rounded-lg bg-[#487b9c] hover:bg-[#36607d] text-white font-bold text-xs sm:text-sm tracking-wide transition-all shadow-md shadow-[rgba(72,123,156,0.25)] flex items-center justify-center gap-2">
+              <span>Unlock Constraint Dossier</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </button>
+          </form>
+        `;
+
+        document.getElementById('chatLeadForm').addEventListener('submit', (e) => {
+          e.preventDefault();
+          state.leadData = {
+            name: document.getElementById('chatLeadName').value.trim() || 'Executive Lead',
+            email: document.getElementById('chatLeadEmail').value.trim(),
+            company: document.getElementById('chatLeadCompany').value.trim() || 'Your Company'
+          };
+          submitUserAnswer(`Dossier Recipient: ${state.leadData.name} (${state.leadData.email})`);
+          completeIntake();
+        });
+      });
+    }
+
+    async function completeIntake() {
+      activeInputContainer.innerHTML = `
+        <div class="p-3 text-center text-xs sm:text-sm text-[#36607d] font-bold flex items-center justify-center gap-2">
+          <svg class="animate-spin h-4 w-4 text-[#487b9c]" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+          Compiling converging evidence &amp; unlocking dossier...
+        </div>
+      `;
+
+      const analysis = analyzeConstraints();
+      const telemetry = updateTelemetryPreview(analysis);
+
+      // Save diagnostic snapshot to localStorage for seamless application.html prefill
+      try {
+        localStorage.setItem('klein_diagnostic_result', JSON.stringify({
+          client: state.leadData,
+          diagnostics: {
+            primaryConstraint: analysis.archetype.title,
+            archetypeSummary: analysis.archetype.summary,
+            severityLabel: analysis.archetype.severity,
+            dimensionBreakdown: analysis.percentages,
+            convergingPattern: {
+              primary: analysis.primaryKey,
+              secondary: analysis.secondaryKey
+            }
+          },
+          timestamp: new Date().toISOString()
+        }));
+
+        localStorage.setItem('klein_survey_progress', JSON.stringify({
+          hasSaved: true,
+          mode: state.mode,
+          step: state.activeScenarios.length,
+          totalScenarios: state.activeScenarios.length,
+          answers: state.answers,
+          leadData: state.leadData,
+          isShortFormCompleted: state.mode === 'express',
+          isCompleted: true,
+          savedAt: new Date().toISOString()
+        }));
+      } catch (err) {
+        console.warn('LocalStorage save error:', err);
+      }
+
+      // Auto-dispatch lead dossier to Joe via Web3Forms
+      try {
+        const emailPayload = {
+          access_key: '5e33b3d7-0efc-43f8-8669-dec872870e3d',
+          subject: `New Constraint Diagnostic Dossier: ${state.leadData.name} (${state.leadData.company})`,
+          from_name: 'Klein Insight Diagnostic',
+          name: state.leadData.name,
+          email: state.leadData.email,
+          business_name: state.leadData.company,
+          'Primary Constraint': analysis.archetype.title,
+          'Constraint Severity': analysis.archetype.severity,
+          'Archetype Summary': analysis.archetype.summary,
+          'Dimension Breakdown': Object.entries(analysis.percentages).map(([k, v]) => `${k}: ${v}%`).join(', '),
+          'Audit Mode': state.mode === 'express' ? 'Express (11 Scenarios)' : 'Deep-Dive (22 Scenarios)',
+          botcheck: false
+        };
+
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(emailPayload)
+        }).catch(e => console.warn('Web3Forms notification notice:', e));
+      } catch (err) {
+        console.warn('Web3Forms error:', err);
+      }
+
+      if (state.webhookUrl) {
+        try {
+          await fetch(state.webhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            mode: 'no-cors',
+            body: JSON.stringify(telemetry)
+          });
+        } catch (e) {
+          console.warn('Webhook transmission error:', e);
+        }
+      }
+
+      if (state.leadData.name && state.leadData.company) {
+        document.getElementById('dossierClientHeader').textContent = `Klein Insight Constraint Dossier: Prepared for ${state.leadData.name} (${state.leadData.company})`;
+      }
+
+      setTimeout(() => {
+        chatOverlay.classList.add('opacity-0', 'pointer-events-none');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        syncDashboard(analysis);
+        showToast('Constraint Dossier Unlocked & Saved.');
+      }, 600);
+    }
+
+    function analyzeConstraints() {
+      const catScores = {
+        demand: { earned: 0, max: 0 },
+        sales: { earned: 0, max: 0 },
+        capacity: { earned: 0, max: 0 },
+        owner: { earned: 0, max: 0 },
+        operations: { earned: 0, max: 0 },
+        economics: { earned: 0, max: 0 }
+      };
+
+      state.activeScenarios.forEach(s => {
+        const val = state.answers[s.id] !== undefined ? state.answers[s.id] : 1;
+        catScores[s.category].earned += val;
+        catScores[s.category].max += 2;
+      });
+
+      const percentages = {};
+      Object.keys(catScores).forEach(cat => {
+        percentages[cat] = catScores[cat].max > 0 ? Math.round((catScores[cat].earned / catScores[cat].max) * 100) : 0;
+      });
+
+      const sortedCategories = Object.keys(percentages).sort((a, b) => percentages[b] - percentages[a]);
+      const primaryKey = sortedCategories[0];
+      const secondaryKey = sortedCategories[1];
+
+      let archetype = {
+        title: 'The Central Hub Trap (Owner Dependency)',
+        summary: 'Regardless of team size or revenue, the business routes exceptions, decisions, and problem-solving through you. Time away feels high-risk, and delegation frequently degrades into checking and rework.',
+        severity: 'Key-Person Dependency'
+      };
+
+      if (primaryKey === 'capacity') {
+        archetype = {
+          title: 'The Capacity Wall (Delivery Choke)',
+          summary: 'Inbound demand and market opportunities exist, but growth triggers immediate execution anxiety. The fear of delivery breakdown or quality degradation artificially throttles your business scale.',
+          severity: 'Delivery Bottleneck'
+        };
+      } else if (primaryKey === 'operations') {
+        archetype = {
+          title: 'The Reactive Firefighter Loop',
+          summary: 'Your strategic agenda is consistently displaced by routine operational emergencies. The business stays busy and solves the same problems repeatedly without becoming meaningfully easier to run.',
+          severity: 'Process Rigidity Drag'
+        };
+      } else if (primaryKey === 'economics') {
+        archetype = {
+          title: 'The High-Effort / Low-Yield Treadmill',
+          summary: 'The business generates revenue and workload, but the personal return and net margin fail to justify the operational stress. More volume currently equates to more complexity rather than more profit.',
+          severity: 'Economic Efficiency Drag'
+        };
+      } else if (primaryKey === 'demand' || primaryKey === 'sales') {
+        archetype = {
+          title: 'The Black-Box Pipeline',
+          summary: 'Qualified inquiries fail to convert predictably, and quiet weeks trigger immediate pipeline anxiety. You lack systematic visibility into why interested prospects disengage.',
+          severity: 'Conversion Friction'
+        };
+      }
+
+      // Check Emotional Contradictions
+      const contradictions = [];
+      if (state.answers['land_large_contradiction'] === 2) {
+        contradictions.push(`
+          <div class="p-3.5 rounded-xl bg-amber-50/90 border border-amber-200 flex items-start gap-2.5">
+            <span class="w-2 h-2 rounded-full bg-amber-500 mt-1.5 flex-shrink-0"></span>
+            <div>
+              <strong class="text-[#78350f] font-bold">Growth vs. Delivery Dread:</strong> Landing a major customer instantly triggers anxiety about workload and operational breakdown rather than celebration. This reveals that your fulfillment workflows are near their breaking point.
+            </div>
+          </div>
+        `);
+      }
+      if (state.answers['quiet_week_contradiction'] === 2) {
+        contradictions.push(`
+          <div class="p-3.5 rounded-xl bg-amber-50/90 border border-amber-200 flex items-start gap-2.5">
+            <span class="w-2 h-2 rounded-full bg-amber-500 mt-1.5 flex-shrink-0"></span>
+            <div>
+              <strong class="text-[#78350f] font-bold">Breathing Room Panic:</strong> Slower operational weeks trigger anxiety over future pipeline rather than providing restorative space. This reflects an uncodified lead generation process.
+            </div>
+          </div>
+        `);
+      }
+      if (state.answers['five_year_test'] === 2) {
+        contradictions.push(`
+          <div class="p-3.5 rounded-xl bg-rose-50 border border-rose-200 flex items-start gap-2.5">
+            <span class="w-2 h-2 rounded-full bg-rose-500 mt-1.5 flex-shrink-0"></span>
+            <div>
+              <strong class="text-[#991b1b] font-bold">The Five-Year Impasse:</strong> You indicated deep dissatisfaction with running the business five years from now the way it is operated today. This establishes that incremental firefighting is no longer acceptable; architectural change is required.
+            </div>
+          </div>
+        `);
+      }
+      if (contradictions.length === 0) {
+        contradictions.push(`
+          <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 flex items-start gap-2.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0"></span>
+            <div>
+              <strong class="text-[#065f46] font-bold">Consistent Psychological Baseline:</strong> Your operational reactions to workload spikes and quiet weeks show baseline stability. Operational gains can focus directly on codifying repeatable workflows and unblocking throughput.
+            </div>
+          </div>
+        `);
+      }
+
+      // Prescribed Action Steps
+      const actionSteps = [];
+      if (primaryKey === 'owner' || secondaryKey === 'owner') {
+        actionSteps.push(`
+          <div class="p-3.5 rounded-xl bg-[#f0f5f8] border border-[#d8e2e9] border-l-4 border-l-[#487b9c] flex items-start gap-2.5">
+            <div>
+              <strong class="text-[#141f28] font-bold">Sprint 1: Codify the Decision Architecture:</strong> Document routine problem-solving protocols and explicit decision thresholds for your staff. Move from "I'll show you" shadowing to a codified operational handbook that liberates executive time.
+            </div>
+          </div>
+        `);
+      }
+      if (primaryKey === 'capacity' || secondaryKey === 'capacity') {
+        actionSteps.push(`
+          <div class="p-3.5 rounded-xl bg-[#f0f5f8] border border-[#d8e2e9] border-l-4 border-l-[#487b9c] flex items-start gap-2.5">
+            <div>
+              <strong class="text-[#141f28] font-bold">Sprint 2: Standardize Fulfillment Capacity:</strong> Decouple client delivery from founder heroics. Install standardized onboarding workflows and resource checklists so taking on 25%+ more volume does not threaten delivery quality.
+            </div>
+          </div>
+        `);
+      }
+      if (primaryKey === 'operations' || secondaryKey === 'operations') {
+        actionSteps.push(`
+          <div class="p-3.5 rounded-xl bg-[#f0f5f8] border border-[#d8e2e9] border-l-4 border-l-[#487b9c] flex items-start gap-2.5">
+            <div>
+              <strong class="text-[#141f28] font-bold">Sprint 3: Triage the Repeated-Problem Loop:</strong> Perform a root-cause audit on the 3 issues repeatedly landing on your desk each Monday morning. Install permanent systemic fixes rather than recurring operational band-aids.
+            </div>
+          </div>
+        `);
+      }
+      if (primaryKey === 'demand' || primaryKey === 'sales' || secondaryKey === 'demand' || secondaryKey === 'sales') {
+        actionSteps.push(`
+          <div class="p-3.5 rounded-xl bg-[#f0f5f8] border border-[#d8e2e9] border-l-4 border-l-[#487b9c] flex items-start gap-2.5">
+            <div>
+              <strong class="text-[#141f28] font-bold">Sprint 4: Pipeline Triage &amp; Conversion Clarity:</strong> Implement automated speed-to-lead follow-up sequences and structured inquiry tracking to eliminate the black-box loss of qualified prospects.
+            </div>
+          </div>
+        `);
+      }
+      if (actionSteps.length < 2) {
+        actionSteps.push(`
+          <div class="p-3.5 rounded-xl bg-[#f0f5f8] border border-[#d8e2e9] border-l-4 border-l-[#487b9c] flex items-start gap-2.5">
+            <div>
+              <strong class="text-[#141f28] font-bold">Sprint 5: Executive Time Reallocation:</strong> Audit and systematically eliminate lower-value tasks trapping founder bandwidth, reclaiming 8–15 hours weekly for strategic growth.
+            </div>
+          </div>
+        `);
+      }
+
+      return {
+        percentages,
+        primaryKey,
+        secondaryKey,
+        archetype,
+        contradictions,
+        actionSteps
+      };
+    }
+
+    let radarChart = null;
+
+    function syncDashboard(analysis) {
+      document.getElementById('archetypeTitle').textContent = analysis.archetype.title;
+      document.getElementById('archetypeSummary').textContent = analysis.archetype.summary;
+
+      const badge = document.getElementById('constraintSeverityBadge');
+      badge.textContent = analysis.archetype.severity;
+
+      document.getElementById('contradictionList').innerHTML = analysis.contradictions.join('');
+      document.getElementById('actionPlanList').innerHTML = analysis.actionSteps.join('');
+
+      renderOrUpdateChart(analysis.percentages);
+      updateTelemetryPreview(analysis);
+    }
+
+    function renderOrUpdateChart(percentages) {
+      const canvas = document.getElementById('radarChart');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      const labels = ['Demand', 'Sales/Conv', 'Capacity', 'Owner Dep.', 'Operations', 'Economics'];
+      const data = [
+        percentages.demand || 0,
+        percentages.sales || 0,
+        percentages.capacity || 0,
+        percentages.owner || 0,
+        percentages.operations || 0,
+        percentages.economics || 0
+      ];
+
+      if (radarChart) {
+        radarChart.data.datasets[0].data = data;
+        radarChart.update();
+        return;
+      }
+
+      radarChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Friction Index (%)',
+            data: data,
+            backgroundColor: [
+              'rgba(89, 141, 174, 0.85)',
+              'rgba(72, 123, 156, 0.85)',
+              'rgba(217, 112, 90, 0.85)',
+              'rgba(217, 146, 54, 0.85)',
+              'rgba(90, 125, 154, 0.85)',
+              'rgba(74, 155, 142, 0.85)'
+            ],
+            borderColor: [
+              '#487b9c',
+              '#36607d',
+              '#c25a45',
+              '#bf7a22',
+              '#43617b',
+              '#348275'
+            ],
+            borderWidth: 1.5,
+            borderRadius: 6,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function (context) {
+                  return ' Friction Index: ' + context.raw + '%';
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { color: '#4a5560', font: { size: 10, weight: '600' } }
+            },
+            y: {
+              max: 100,
+              min: 0,
+              grid: { color: 'rgba(216, 226, 233, 0.7)' },
+              ticks: {
+                color: '#647c8f',
+                font: { size: 9 },
+                callback: function (val) { return val + '%'; }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function updateTelemetryPreview(analysis) {
+      const payload = {
+        timestamp: new Date().toISOString(),
+        advisoryFirm: 'Klein Insight',
+        website: 'https://kleininsight.com',
+        auditMode: state.mode,
+        client: state.leadData,
+        rawAnswers: state.answers,
+        diagnostics: {
+          primaryConstraint: analysis.archetype.title,
+          severityLabel: analysis.archetype.severity,
+          dimensionBreakdown: analysis.percentages,
+          convergingPattern: {
+            primary: analysis.primaryKey,
+            secondary: analysis.secondaryKey
+          }
+        }
+      };
+
+      const pre = document.getElementById('payloadPreview');
+      if (pre) pre.textContent = JSON.stringify(payload, null, 2);
+      return payload;
+    }
+
+    function saveProgressLocally(redirectHome = false) {
+      try {
+        const isCompleted = state.activeScenarios && state.activeScenarios.length > 0 && state.step >= state.activeScenarios.length;
+        const progressData = {
+          hasSaved: true,
+          mode: state.mode || 'express',
+          step: typeof state.step === 'number' && state.step >= 0 ? state.step : 0,
+          answers: state.answers || {},
+          leadData: state.leadData || {},
+          totalScenarios: state.activeScenarios && state.activeScenarios.length ? state.activeScenarios.length : (state.mode === 'deep' ? 22 : 11),
+          isShortFormCompleted: (state.mode === 'express' && (isCompleted || Object.keys(state.answers || {}).length >= 11)),
+          isCompleted: isCompleted,
+          savedAt: new Date().toISOString()
+        };
+        localStorage.setItem('klein_survey_progress', JSON.stringify(progressData));
+        if (redirectHome) {
+          showToast('Diagnostic progress saved. Returning home...');
+          setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 350);
+        }
+      } catch (err) {
+        console.warn('Error saving diagnostic progress:', err);
+        if (redirectHome) {
+          window.location.href = 'index.html';
+        }
+      }
+    }
+
+    const saveExitChatBtn = document.getElementById('saveExitChatBtn');
+    if (saveExitChatBtn) {
+      saveExitChatBtn.addEventListener('click', () => {
+        saveProgressLocally(true);
+      });
+    }
+
+    const saveExitDossierBtn = document.getElementById('saveExitDossierBtn');
+    if (saveExitDossierBtn) {
+      saveExitDossierBtn.addEventListener('click', () => {
+        saveProgressLocally(true);
+      });
+    }
+
+    // Esc key triggers Save and Exit
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' || e.key === 'Esc') {
+        const settingsDrawer = document.getElementById('settingsDrawer');
+        if (settingsDrawer && !settingsDrawer.classList.contains('hidden') && !settingsDrawer.classList.contains('opacity-0')) {
+          closeSettings();
+          return;
+        }
+        saveProgressLocally(true);
+      }
+    });
+
+    function restartIntake() {
+      localStorage.removeItem('klein_survey_progress');
+      state.step = -1;
+      state.answers = {};
+      chatStream.innerHTML = '';
+      chatOverlay.classList.remove('opacity-0', 'pointer-events-none');
+      renderWelcomeScreen();
+    }
+
+    document.getElementById('restartChatBtn').addEventListener('click', () => {
+      restartIntake();
+      showToast('Diagnostic reset.');
+    });
+
+    document.querySelectorAll('#reopenChatBtn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        restartIntake();
+      });
+    });
+
+    function triggerPrintWithChartResize() {
+      if (radarChart) {
+        radarChart.resize();
+      }
+      setTimeout(() => {
+        window.print();
+      }, 120);
+    }
+
+    document.querySelectorAll('#printBtn').forEach(btn => {
+      btn.addEventListener('click', triggerPrintWithChartResize);
+    });
+
+    window.addEventListener('beforeprint', () => {
+      if (radarChart) {
+        radarChart.resize();
+      }
+    });
+
+    window.addEventListener('afterprint', () => {
+      if (radarChart) {
+        radarChart.resize();
+      }
+    });
+
+    const bookingConfirmation = document.getElementById('bookingConfirmation');
+    document.querySelectorAll('#slotPicker .slot-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (state.calendarUrl) {
+          window.open(state.calendarUrl, '_blank');
+          return;
+        }
+        document.querySelectorAll('#slotPicker .slot-btn').forEach(b => b.classList.remove('border-emerald-600', 'bg-emerald-50', 'text-emerald-900'));
+        btn.classList.add('border-emerald-600', 'bg-emerald-50', 'text-emerald-900');
+        bookingConfirmation.classList.remove('hidden');
+        showToast('Debrief Reserved! Confirmation dispatched.');
+      });
+    });
+
+    const settingsDrawer = document.getElementById('settingsDrawer');
+    const drawerBox = document.getElementById('drawerBox');
+    const openSettingsBtn = document.getElementById('openSettingsBtn');
+    const closeSettingsBtn = document.getElementById('closeSettingsBtn');
+    const saveSettingsBtn = document.getElementById('saveSettingsBtn');
+    const webhookUrlInput = document.getElementById('webhookUrlInput');
+    const calendarUrlInput = document.getElementById('calendarUrlInput');
+    const copyPayloadBtn = document.getElementById('copyPayloadBtn');
+
+    webhookUrlInput.value = state.webhookUrl;
+    calendarUrlInput.value = state.calendarUrl;
+
+    openSettingsBtn.addEventListener('click', () => {
+      settingsDrawer.classList.remove('hidden');
+      setTimeout(() => {
+        settingsDrawer.classList.remove('opacity-0');
+        drawerBox.classList.remove('translate-x-full');
+      }, 10);
+    });
+
+    function closeSettings() {
+      settingsDrawer.classList.add('opacity-0');
+      drawerBox.classList.add('translate-x-full');
+      setTimeout(() => settingsDrawer.classList.add('hidden'), 200);
+    }
+
+    closeSettingsBtn.addEventListener('click', closeSettings);
+
+    saveSettingsBtn.addEventListener('click', () => {
+      state.webhookUrl = webhookUrlInput.value.trim();
+      state.calendarUrl = calendarUrlInput.value.trim();
+      localStorage.setItem('klein_webhook_url', state.webhookUrl);
+      localStorage.setItem('klein_calendar_url', state.calendarUrl);
+      closeSettings();
+      showToast('Settings & Webhooks saved.');
+    });
+
+    copyPayloadBtn.addEventListener('click', () => {
+      const code = document.getElementById('payloadPreview').textContent;
+      const el = document.createElement('textarea');
+      el.value = code;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+      showToast('Telemetry JSON copied to clipboard.');
+    });
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toastMessage');
+      toastMessage.textContent = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 3000);
+    }
+
+    window.onload = function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const wantsDossier = urlParams.get('view') === 'dossier' || window.location.hash === '#dossier';
+
+      if (wantsDossier) {
+        let savedProgress = null;
+        try {
+          const raw = localStorage.getItem('klein_survey_progress');
+          if (raw) savedProgress = JSON.parse(raw);
+        } catch (e) {}
+
+        let dossierData = null;
+        try {
+          const raw = localStorage.getItem('klein_diagnostic_result');
+          if (raw) dossierData = JSON.parse(raw);
+        } catch (e) {}
+
+        if (savedProgress || dossierData) {
+          if (savedProgress) {
+            state.answers = savedProgress.answers || {};
+            state.leadData = savedProgress.leadData || state.leadData;
+            state.mode = savedProgress.mode || (Object.keys(state.answers).length > 11 ? 'deep' : 'express');
+          }
+          if (dossierData && dossierData.client) {
+            state.leadData = dossierData.client;
+          }
+          state.activeScenarios = state.mode === 'deep' ? allScenarios : allScenarios.filter(s => s.isExpress);
+          const analysis = analyzeConstraints();
+
+          if (state.leadData && state.leadData.name && state.leadData.company) {
+            const clientHeader = document.getElementById('dossierClientHeader');
+            if (clientHeader) {
+              clientHeader.textContent = `Klein Insight Constraint Dossier: Prepared for ${state.leadData.name} (${state.leadData.company})`;
+            }
+          }
+          const reportBadge = document.getElementById('reportModeBadge');
+          if (reportBadge) {
+            reportBadge.textContent = state.mode === 'deep' ? 'Deep-Dive Diagnostic Report' : 'Express Diagnostic Report';
+          }
+          const baselineLabel = document.getElementById('auditBaselineLabel');
+          if (baselineLabel) {
+            baselineLabel.textContent = state.mode === 'deep'
+              ? 'Format: Comprehensive 22-Scenario Constraint Audit'
+              : 'Format: Express 11-Scenario Constraint Triage';
+          }
+
+          chatOverlay.classList.add('opacity-0', 'pointer-events-none');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          syncDashboard(analysis);
+          showToast('Viewing your executive constraint dossier.');
+          return;
+        }
+      }
+
+      renderWelcomeScreen();
+    };
+  </script>
+</body>
+</html>

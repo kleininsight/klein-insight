@@ -14,9 +14,9 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://kleininsight.com/">
 
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css">
-  <link rel="stylesheet" href="/application.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="application.css">
 
   <script type="application/ld+json">
   {
@@ -34,7 +34,7 @@
 
   <header class="site-header">
     <div class="container nav-wrap">
-      <a class="brand" href="/" aria-label="Klein Insight home">
+      <a class="brand" href="./" aria-label="Klein Insight home">
         <img class="brand-logo" src="images/logo-v1.png" alt="Klein Insight - Driven by Curiosity, Grounded in Strategy"
           width="282" height="148">
       </a>
@@ -46,6 +46,8 @@
       <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
         <a href="#about">About</a>
         <a href="#services">Strategy Coaching</a>
+        <a href="survey.html" id="navDiagnosticLink">Diagnostic</a>
+        <a href="survey.html?view=dossier" id="navDossierLink" class="nav-dossier-link" style="display: none;">My Dossier</a>
         <a class="nav-cta" href="#contact">Let's Talk</a>
       </nav>
     </div>
@@ -64,7 +66,7 @@
         </div>
 
         <div class="hero-actions">
-          <a class="button button-primary" href="/application.html" data-application-trigger>Apply Now</a>
+          <a class="button button-primary" href="application.html" data-application-trigger>Apply Now</a>
           <div class="hero-notes">
             <p class="hero-note">*Space is limited.</p>
           </div>
@@ -110,6 +112,27 @@
             </a>
           </li>
         </ul>
+
+        <div class="hook-action">
+          <div class="hook-action-card">
+            <div class="hook-action-content">
+              <span class="hook-action-badge">Free Interactive Diagnostic</span>
+              <h3 class="hook-action-title">Not sure which constraint is capping your business?</h3>
+              <p class="hook-action-desc">
+                Take our 90-second operational diagnostic. Pinpoint where friction is hiding across your capacity, sales
+                conversion, operations, and owner dependency—without sharing confidential financial statements.
+              </p>
+            </div>
+            <div class="hook-action-buttons">
+              <a class="button button-primary hook-action-btn" href="survey.html">
+                Take the Constraint Diagnostic &rarr;
+              </a>
+              <a class="hook-dossier-btn" id="hookDossierBtn" href="survey.html?view=dossier" style="display: none;">
+                <span>📊 View Constraint Dossier</span>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -285,7 +308,7 @@
         <div class="offering-action">
           <p><strong>What working together looks like:</strong> Weekly private strategy sessions, direct feedback,
             tailored templates when useful, and accountability for the work between sessions.</p>
-          <a class="button button-primary" href="/application.html" data-application-trigger>Start Application</a>
+          <a class="button button-primary" href="application.html" data-application-trigger>Start Application</a>
         </div>
       </div>
     </section>
@@ -335,6 +358,25 @@
             systems, people, decision-making, and structure that allow the business to keep moving without everything
             depending on you.
           </p>
+
+          <div class="panel-action-wrap"
+            style="margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(89, 141, 174, 0.3); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
+            <div>
+              <strong style="color: #ffffff; display: block; font-size: 16px; margin-bottom: 4px;">Score your
+                operational dependency</strong>
+              <span style="color: #c5d2da; font-size: 14px;">Take the 90-second constraint audit to get your customized
+                6-dimension scorecard.</span>
+            </div>
+            <div class="panel-action-buttons" style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+              <a class="button button-primary panel-survey-btn" href="survey.html"
+                style="background: var(--accent-brand); border: 1px solid rgba(255, 255, 255, 0.2);">
+                Audit Your Constraint &rarr;
+              </a>
+              <a class="panel-dossier-btn" id="panelDossierBtn" href="survey.html?view=dossier" style="display: none;">
+                <span>📊 View Dossier</span>
+              </a>
+            </div>
+          </div>
         </aside>
       </div>
     </section>
@@ -509,7 +551,7 @@
   <footer class="site-footer">
     <div class="container footer-wrap">
       <div>
-        <a class="brand footer-brand" href="/" aria-label="Klein Insight home">
+        <a class="brand footer-brand" href="./" aria-label="Klein Insight home">
           <span class="brand-mark">KI</span>
           <span class="brand-name">Klein Insight</span>
         </a>
@@ -526,8 +568,8 @@
     <div data-application-root></div>
   </dialog>
 
-  <script src="/script.js"></script>
-  <script src="/application.js"></script>
+  <script src="script.js"></script>
+  <script src="application.js"></script>
 </body>
 
 </html>
