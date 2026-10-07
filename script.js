@@ -93,99 +93,198 @@ if (testimonialTrack) {
 // Sync homepage buttons if user saved progress or completed the short form
 function syncDiagnosticButtons() {
   try {
+    // 1. Check URL parameters for override or testing (?unlocked=true, ?deep=1, ?v=2, or ?reset=1, ?v=1)
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('unlocked') === 'true' || params.get('deep') === '1' || params.get('v') === '2') {
+      try { localStorage.setItem('klein_deep_unlocked', 'true'); } catch (e) { }
+    } else if (params.get('reset') === '1' || params.get('v') === '1') {
+      try { localStorage.removeItem('klein_deep_unlocked'); } catch (e) { }
+    }
+
+    const isCallBookedExplicit = localStorage.getItem('klein_deep_unlocked') === 'true';
+
     const progressRaw = localStorage.getItem('klein_survey_progress');
     const dossierRaw = localStorage.getItem('klein_diagnostic_result');
+    const leadgenRaw = localStorage.getItem('klein_leadgen_results');
     const progress = progressRaw ? JSON.parse(progressRaw) : null;
     const dossier = dossierRaw ? JSON.parse(dossierRaw) : null;
+    const leadgen = leadgenRaw ? JSON.parse(leadgenRaw) : null;
 
-    const hasProgress = progress && (progress.hasSaved || (progress.answers && Object.keys(progress.answers).length > 0) || progress.isShortFormCompleted);
-    const isShortFormOnly = progress && progress.isShortFormCompleted;
-    const hasDossier = !!(dossier && (dossier.diagnostics || dossier.client)) || !!(progress && (progress.isCompleted || progress.isShortFormCompleted));
+    const hasSurveyFinished = !!(leadgen && leadgen.analysis && leadgen.analysis.profileTitle);
+    const hasDossier = !!(dossier && (dossier.diagnostics || dossier.client)) ||
+                       !!(progress && (progress.isCompleted || progress.isShortFormCompleted)) ||
+                       !!(progress && progress.answers && Object.keys(progress.answers).length >= 14);
 
-    // Reveal dossier links next to survey buttons when available
-    const hookDossierBtn = document.getElementById('hookDossierBtn');
-    if (hookDossierBtn) {
-      if (hasDossier) {
-        hookDossierBtn.style.display = 'inline-flex';
-        if (dossier && dossier.diagnostics && dossier.diagnostics.primaryConstraint) {
-          hookDossierBtn.title = `View Unlocked Dossier: ${dossier.diagnostics.primaryConstraint}`;
+    const isCallBooked = isCallBookedExplicit || hasDossier;
+
+    // Elements
+    const hookCardV1 = document.getElementById('hookCardV1');
+    const hookCardV2 = document.getElementById('hookCardV2');
+    const hookSurveyBtn = document.getElementById('hookSurveyBtn');
+    const hookProfileBtn = document.getElementById('hookProfileBtn');
+    const hookDeepBtn = document.getElementById('hookDeepBtn');
+    const hookProfileBtnV2 = document.getElementById('hookProfileBtnV2');
+
+    const panelActionV1 = document.getElementById('panelActionV1');
+    const panelActionV2 = document.getElementById('panelActionV2');
+    const panelSurveyBtn = document.getElementById('panelSurveyBtn');
+    const panelProfileBtn = document.getElementById('panelProfileBtn');
+    const panelDeepBtn = document.getElementById('panelDeepBtn');
+    const panelProfileBtnV2 = document.getElementById('panelProfileBtnV2');
+
+    const navDiagnosticLink = document.getElementById('navDiagnosticLink');
+    const navDossierLink = document.getElementById('navDossierLink');
+    const navDeepLink = document.getElementById('navDeepLink');
+
+    if (!isCallBooked) {
+      // =========================================================================
+      // NO CALL BOOKED: V1 Cards Active
+      // =========================================================================
+      if (hookCardV1) hookCardV1.style.display = 'block';
+      if (hookCardV2) hookCardV2.style.display = 'none';
+      if (panelActionV1) panelActionV1.style.display = 'flex';
+      if (panelActionV2) panelActionV2.style.display = 'none';
+      if (navDeepLink) navDeepLink.style.display = 'none';
+
+      if (!hasSurveyFinished) {
+        // -----------------------------------------------------------------------
+        // STATE 1: If survey untaken, ONLY survey button
+        // -----------------------------------------------------------------------
+        if (hookSurveyBtn) hookSurveyBtn.style.display = 'inline-flex';
+        if (hookProfileBtn) hookProfileBtn.style.display = 'none';
+        if (panelSurveyBtn) panelSurveyBtn.style.display = 'inline-flex';
+        if (panelProfileBtn) panelProfileBtn.style.display = 'none';
+
+        if (navDiagnosticLink) navDiagnosticLink.style.display = 'inline-block';
+        if (navDossierLink) navDossierLink.style.display = 'none';
+      } else {
+        // -----------------------------------------------------------------------
+        // STATE 2: If survey finished, ONLY profile button (use link in profile to retake)
+        // -----------------------------------------------------------------------
+        if (hookSurveyBtn) hookSurveyBtn.style.display = 'none';
+        if (hookProfileBtn) {
+          hookProfileBtn.style.display = 'inline-flex';
+          hookProfileBtn.href = 'survey.html?view=results';
+          hookProfileBtn.innerHTML = `<span>📊 View 3-Min Profile &rarr;</span>`;
+        }
+
+        if (panelSurveyBtn) panelSurveyBtn.style.display = 'none';
+        if (panelProfileBtn) {
+          panelProfileBtn.style.display = 'inline-flex';
+          panelProfileBtn.href = 'survey.html?view=results';
+          panelProfileBtn.innerHTML = `<span>📊 View 3-Min Profile &rarr;</span>`;
+        }
+
+        // Update V1 card copy to highlight completed profile
+        if (hookCardV1) {
+          const badge = hookCardV1.querySelector('.hook-action-badge');
+          if (badge) badge.textContent = `✓ Profile Ready: ${leadgen.analysis.profileTitle}`;
+          const title = hookCardV1.querySelector('.hook-action-title');
+          if (title) title.textContent = `Your Operational Profile (${leadgen.analysis.profileTitle}) is ready.`;
+          const desc = hookCardV1.querySelector('.hook-action-desc');
+          if (desc) desc.textContent = `Your 3-minute assessment identified your operating pattern: ${leadgen.analysis.profileTitle}. Review your breakdown or schedule your strategy call with Joe.`;
+        }
+
+        if (navDiagnosticLink) navDiagnosticLink.style.display = 'none';
+        if (navDossierLink) {
+          navDossierLink.style.display = 'inline-block';
+          navDossierLink.href = 'survey.html?view=results';
+          navDossierLink.textContent = '3-Min Profile';
+        }
+      }
+    } else {
+      // =========================================================================
+      // CALL BOOKED: V2 Cards Active
+      // =========================================================================
+      if (hookCardV1) hookCardV1.style.display = 'none';
+      if (hookCardV2) hookCardV2.style.display = 'block';
+      if (panelActionV1) panelActionV1.style.display = 'none';
+      if (panelActionV2) panelActionV2.style.display = 'flex';
+      if (navDiagnosticLink) navDiagnosticLink.style.display = 'none';
+
+      if (!hasDossier) {
+        // -----------------------------------------------------------------------
+        // STATE 3: If call booked (no assessment yet) JUST assessment and profile buttons
+        // -----------------------------------------------------------------------
+        if (hookDeepBtn) {
+          hookDeepBtn.style.display = 'inline-flex';
+          hookDeepBtn.href = 'survey-deep.html';
+          hookDeepBtn.innerHTML = `In-Depth Assessment &rarr;`;
+        }
+        if (hookProfileBtnV2) {
+          hookProfileBtnV2.style.display = 'inline-flex';
+          hookProfileBtnV2.href = hasSurveyFinished ? 'survey.html?view=results' : 'survey.html';
+          hookProfileBtnV2.innerHTML = hasSurveyFinished ? `3-Min Profile &rarr;` : `Take 3-Min Assessment &rarr;`;
+        }
+
+        if (panelDeepBtn) {
+          panelDeepBtn.href = 'survey-deep.html';
+          panelDeepBtn.innerHTML = `Launch In-Depth Assessment &rarr;`;
+        }
+        if (panelProfileBtnV2) {
+          panelProfileBtnV2.href = hasSurveyFinished ? 'survey.html?view=results' : 'survey.html';
+          panelProfileBtnV2.innerHTML = hasSurveyFinished ? `View 3-Min Profile &rarr;` : `Take 3-Min Assessment &rarr;`;
+        }
+
+        if (navDeepLink) {
+          navDeepLink.style.display = 'inline-block';
+          navDeepLink.href = 'survey-deep.html';
+          navDeepLink.textContent = 'In-Depth Assessment';
+        }
+        if (navDossierLink) {
+          navDossierLink.style.display = 'inline-block';
+          navDossierLink.href = hasSurveyFinished ? 'survey.html?view=results' : 'survey.html';
+          navDossierLink.textContent = hasSurveyFinished ? '3-Min Profile' : '3-Min Assessment';
         }
       } else {
-        hookDossierBtn.style.display = 'none';
+        // -----------------------------------------------------------------------
+        // STATE 4: If call booked and dossier available, BOTH profile and dossier buttons
+        // (retake from there as w/ profile)
+        // -----------------------------------------------------------------------
+        if (hookDeepBtn) {
+          hookDeepBtn.style.display = 'inline-flex';
+          hookDeepBtn.href = 'survey-deep.html?view=dossier';
+          hookDeepBtn.innerHTML = `📊 View Executive Dossier &rarr;`;
+        }
+        if (hookProfileBtnV2) {
+          hookProfileBtnV2.style.display = 'inline-flex';
+          hookProfileBtnV2.href = hasSurveyFinished ? 'survey.html?view=results' : 'survey.html';
+          hookProfileBtnV2.innerHTML = hasSurveyFinished ? `📊 View 3-Min Profile &rarr;` : `3-Min Assessment &rarr;`;
+        }
+
+        if (hookCardV2) {
+          const badge = hookCardV2.querySelector('.hook-action-badge');
+          if (badge) {
+            badge.textContent = `✓ Executive Dossier Ready`;
+            badge.style.background = 'rgba(16, 185, 129, 0.12)';
+            badge.style.color = '#047857';
+          }
+          const title = hookCardV2.querySelector('.hook-action-title');
+          if (title) title.textContent = `Your Executive Constraint Dossier is Ready`;
+          const desc = hookCardV2.querySelector('.hook-action-desc');
+          if (desc) desc.textContent = `Your synthesized 3-phase constraint audit, operating friction scorecard, and focus sprints are saved. Review your briefing or download your 3-page PDF dossier.`;
+        }
+
+        if (panelDeepBtn) {
+          panelDeepBtn.href = 'survey-deep.html?view=dossier';
+          panelDeepBtn.innerHTML = `📊 View Executive Dossier &rarr;`;
+        }
+        if (panelProfileBtnV2) {
+          panelProfileBtnV2.href = hasSurveyFinished ? 'survey.html?view=results' : 'survey.html';
+          panelProfileBtnV2.innerHTML = hasSurveyFinished ? `View 3-Min Profile &rarr;` : `Take 3-Min Assessment &rarr;`;
+        }
+
+        if (navDeepLink) {
+          navDeepLink.style.display = 'inline-block';
+          navDeepLink.href = 'survey-deep.html?view=dossier';
+          navDeepLink.textContent = 'Executive Dossier';
+        }
+        if (navDossierLink) {
+          navDossierLink.style.display = 'inline-block';
+          navDossierLink.href = hasSurveyFinished ? 'survey.html?view=results' : 'survey.html';
+          navDossierLink.textContent = hasSurveyFinished ? '3-Min Profile' : '3-Min Assessment';
+        }
       }
-    }
-
-    const panelDossierBtn = document.getElementById('panelDossierBtn');
-    if (panelDossierBtn) {
-      panelDossierBtn.style.display = hasDossier ? 'inline-flex' : 'none';
-    }
-
-    const navDossierLink = document.getElementById('navDossierLink');
-    if (navDossierLink) {
-      navDossierLink.style.display = hasDossier ? 'inline-block' : 'none';
-    }
-
-    if (hasProgress || isShortFormOnly || hasDossier) {
-      document.querySelectorAll('a[href="survey.html"], a[href="/survey.html"]').forEach(btn => {
-        // Skip dossier-specific links
-        if (btn.id === 'hookDossierBtn' || btn.id === 'panelDossierBtn' || btn.id === 'navDossierLink') return;
-
-        // Primary header navigation link
-        if (btn.closest('.site-nav')) {
-          btn.textContent = hasDossier ? 'Diagnostic' : 'Continue Diagnostic';
-          if (!hasDossier) {
-            btn.classList.add('nav-diagnostic-active');
-          }
-        }
-        // "Who I am Looking For" action card
-        else if (btn.classList.contains('hook-action-btn')) {
-          btn.innerHTML = hasDossier ? 'Upgrade / Re-Run &rarr;' : 'Continue Diagnostic &rarr;';
-          const card = btn.closest('.hook-action-card');
-          if (card) {
-            const badge = card.querySelector('.hook-action-badge');
-            if (badge) {
-              if (dossier && dossier.diagnostics && dossier.diagnostics.primaryConstraint) {
-                badge.textContent = `Constraint Diagnosed: ${dossier.diagnostics.primaryConstraint}`;
-              } else if (hasDossier) {
-                badge.textContent = 'Constraint Dossier Unlocked';
-              } else if (isShortFormOnly) {
-                badge.textContent = 'Express Audit Saved';
-              } else {
-                badge.textContent = 'Diagnostic In Progress';
-              }
-            }
-            const title = card.querySelector('.hook-action-title');
-            if (title) {
-              title.textContent = hasDossier
-                ? 'Your Executive Constraint Dossier is ready.'
-                : 'Ready to continue your operational diagnostic?';
-            }
-            const desc = card.querySelector('.hook-action-desc');
-            if (desc) {
-              desc.textContent = hasDossier
-                ? 'Your 6-dimension constraint scorecard and 1-page action plan are compiled. Review your dossier or deepen your diagnostic evaluation.'
-                : 'Your answers are saved. Resume where you left off to identify your primary operational constraint.';
-            }
-          }
-        }
-        // Owner-Bottleneck section CTA or other links
-        else {
-          btn.innerHTML = hasDossier ? 'Upgrade / Re-Run &rarr;' : 'Continue Diagnostic &rarr;';
-          const panelWrap = btn.closest('.panel-action-wrap');
-          if (panelWrap) {
-            const label = panelWrap.querySelector('strong');
-            if (label) label.textContent = hasDossier ? 'Your operational scorecard is ready' : 'Resume your operational scorecard';
-            const sub = panelWrap.querySelector('span');
-            if (sub) {
-              sub.textContent = hasDossier
-                ? 'Your customized 6-dimension scorecard is compiled. View your dossier or refine your answers.'
-                : (isShortFormOnly
-                  ? 'Your 11-scenario express audit is ready. Pick up where you left off to review or expand.'
-                  : 'Your answers have been saved. Continue the audit to get your customized scorecard.');
-            }
-          }
-        }
-      });
     }
   } catch (err) {
     console.warn('Diagnostic button sync notice:', err);
@@ -223,6 +322,23 @@ function preloadContactDetails() {
         if (!leadName && savedContact.name) leadName = savedContact.name;
         if (!leadEmail && savedContact.email) leadEmail = savedContact.email;
         if (!leadBusiness && (savedContact.business || savedContact.company)) leadBusiness = savedContact.business || savedContact.company;
+      }
+    } catch (e) { }
+  }
+
+  // 2b. Check leadgen assessment results
+  if (!leadName || !leadEmail || !leadBusiness) {
+    try {
+      const leadgenRaw = localStorage.getItem('klein_leadgen_results');
+      if (leadgenRaw) {
+        const leadgen = JSON.parse(leadgenRaw);
+        if (leadgen && leadgen.lead) {
+          if (!leadName && leadgen.lead.name) leadName = leadgen.lead.name;
+          if (!leadEmail && leadgen.lead.email) leadEmail = leadgen.lead.email;
+          if (!leadBusiness && (leadgen.lead.company || leadgen.lead.business)) {
+            leadBusiness = leadgen.lead.company || leadgen.lead.business;
+          }
+        }
       }
     } catch (e) { }
   }
@@ -295,7 +411,14 @@ function preloadContactDetails() {
     } catch (e) { }
   };
 
-  contactForm.addEventListener('submit', saveCurrentContact);
+  contactForm.addEventListener('submit', () => {
+    saveCurrentContact();
+    try {
+      localStorage.setItem('klein_deep_unlocked', 'true');
+      localStorage.setItem('klein_contact_submitted', 'true');
+    } catch (e) { }
+    syncDiagnosticButtons();
+  });
   if (nameInput) nameInput.addEventListener('change', saveCurrentContact);
   if (emailInput) emailInput.addEventListener('change', saveCurrentContact);
   if (businessInput) businessInput.addEventListener('change', saveCurrentContact);

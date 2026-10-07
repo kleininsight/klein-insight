@@ -85,6 +85,7 @@
         opacity: 0;
         transform: translateY(6px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -100,17 +101,21 @@
     <div class="max-w-4xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-2 group">
         <span class="w-3 h-3 rounded-full bg-[#487b9c] group-hover:scale-110 transition-transform"></span>
-        <span class="font-extrabold text-lg tracking-tight text-[#141f28]">Klein<span class="text-[#487b9c]">Insight</span></span>
-        <span class="text-[10px] uppercase font-mono font-semibold tracking-wider text-[#647c8f] hidden sm:inline ml-2 border-l border-[#d8e2e9] pl-3">
+        <span class="font-extrabold text-lg tracking-tight text-[#141f28]">Klein<span
+            class="text-[#487b9c]">Insight</span></span>
+        <span
+          class="text-[10px] uppercase font-mono font-semibold tracking-wider text-[#647c8f] hidden sm:inline ml-2 border-l border-[#d8e2e9] pl-3">
           Owner Assessment
         </span>
       </a>
 
       <div class="flex items-center gap-3">
-        <span id="headerProgressBadge" class="hidden text-xs font-mono font-semibold text-[#36607d] bg-[#eaf2f7] px-2.5 py-1 rounded-full border border-[rgba(89,141,174,0.3)]">
+        <span id="headerProgressBadge"
+          class="hidden text-xs font-mono font-semibold text-[#36607d] bg-[#eaf2f7] px-2.5 py-1 rounded-full border border-[rgba(89,141,174,0.3)]">
           Question <span id="headerCurrentQ">1</span> of 17
         </span>
-        <a href="index.html" class="text-xs font-semibold text-[#4a5560] hover:text-[#141f28] transition-colors py-1.5 px-3 rounded-lg border border-[#d8e2e9] hover:bg-[#f8fafc]">
+        <a href="index.html"
+          class="text-xs font-semibold text-[#4a5560] hover:text-[#141f28] transition-colors py-1.5 px-3 rounded-lg border border-[#d8e2e9] hover:bg-[#f8fafc]">
           &larr; Exit to Home
         </a>
       </div>
@@ -125,8 +130,9 @@
       <!-- VIEW 1: INTRO / HOOK SCREEN                                           -->
       <!-- ===================================================================== -->
       <div id="introView" class="app-card p-6 sm:p-10 space-y-6 fade-in">
-        
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#eaf2f7] text-[#36607d] border border-[rgba(89,141,174,0.35)] text-xs font-bold tracking-wide">
+
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#eaf2f7] text-[#36607d] border border-[rgba(89,141,174,0.35)] text-xs font-bold tracking-wide">
           <span class="w-2 h-2 rounded-full bg-[#487b9c] animate-pulse"></span>
           3-Minute Client Conversion Assessment
         </div>
@@ -136,20 +142,29 @@
             &ldquo;What the hell is wrong with me?&rdquo;
           </h1>
           <p class="text-base sm:text-lg text-[#36607d] font-semibold">
-            Ever met a business owner who is pulling in massive success, looked at how they operate, and thought to yourself: <em class="text-[#141f28]">If this person can do it, why am I grinding 60 hours a week just to stay afloat?</em>
+            Ever met a business owner who is pulling in massive success, looked at how they operate, and thought to
+            yourself: <em class="text-[#141f28]">If this person can do it, why am I grinding 60 hours a week just to
+              stay afloat?</em>
           </p>
         </div>
 
         <div class="space-y-4 text-sm sm:text-base text-[#4a5560] leading-relaxed">
           <p>
-            You are intelligent. You make good money. But right now, <strong class="text-[#141f28]">you are the bottleneck</strong>. Transitioning to the next phase of growth feels terrifying because your brain is already running at 100 miles an hour (as someone with ADHD, I know that feeling intimately). Adding more employees or more clients just feels like adding more noise to a system that’s already stretched thin.
+            You are intelligent. You make good money. But right now, <strong class="text-[#141f28]">you are the
+              bottleneck</strong>. Transitioning to the next phase of growth feels terrifying because your brain is
+            already running at 100 miles an hour (as someone with ADHD, I know that feeling intimately). Adding more
+            employees or more clients just feels like adding more noise to a system that’s already stretched thin.
           </p>
           <p>
-            After 11 years of doing market research for major corporations, I realized that scaling a business isn't about working harder. It’s about building a framework that doesn't rely entirely on your personal brainpower.
+            After 11 years of doing market research for major corporations, I realized that scaling a business isn't
+            about working harder. It’s about building a framework that doesn't rely entirely on your personal
+            brainpower.
           </p>
-          <div class="p-4 rounded-xl bg-[#f0f5f8] border border-[#d8e2e9] text-xs sm:text-sm text-[#141f28] font-medium flex items-center gap-3">
+          <div
+            class="p-4 rounded-xl bg-[#f0f5f8] border border-[#d8e2e9] text-xs sm:text-sm text-[#141f28] font-medium flex items-center gap-3">
             <svg class="w-5 h-5 text-[#487b9c] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             <span>Take this 3-minute assessment to see exactly where your operations are trapping you.</span>
           </div>
@@ -168,7 +183,7 @@
       <!-- VIEW 2: QUESTION RUNNER (1-AT-A-TIME)                                  -->
       <!-- ===================================================================== -->
       <div id="questionView" class="hidden app-card p-6 sm:p-9 space-y-6 fade-in">
-        
+
         <!-- Stage & Progress Header -->
         <div class="space-y-2">
           <div class="flex items-center justify-between text-xs">
@@ -181,22 +196,26 @@
 
           <!-- Progress Bar -->
           <div class="w-full bg-[#edf3f7] h-2 rounded-full overflow-hidden">
-            <div id="progressBar" class="bg-[#487b9c] h-full transition-all duration-300 rounded-full" style="width: 6%;"></div>
+            <div id="progressBar" class="bg-[#487b9c] h-full transition-all duration-300 rounded-full"
+              style="width: 6%;"></div>
           </div>
         </div>
 
         <!-- Stage Goal / Note -->
         <div id="stageGoalCallout" class="p-3 rounded-lg bg-[#f8fafc] border border-[#d8e2e9] text-xs text-[#647c8f]">
-          <strong class="text-[#141f28]">Stage Goal:</strong> Build immediate trust by accurately naming your daily frustrations.
+          <strong class="text-[#141f28]">Stage Goal:</strong> Build immediate trust by accurately naming your daily
+          frustrations.
         </div>
 
         <!-- Question Prompt Card -->
         <div class="py-2">
           <h2 id="questionPrompt" class="text-lg sm:text-xl font-bold text-[#141f28] leading-snug">
-            Reacting to whatever urgent fire breaks out each morning makes it incredibly difficult to make the proactive changes my business needs.
+            Reacting to whatever urgent fire breaks out each morning makes it incredibly difficult to make the proactive
+            changes my business needs.
           </h2>
           <p id="stage5Instruction" class="hidden text-xs text-[#36607d] mt-2 font-medium">
-            Instructions: Please answer these final three questions to help quantify what solving these bottlenecks would look like for your business.
+            Instructions: Please answer these final three questions to help quantify what solving these bottlenecks
+            would look like for your business.
           </p>
         </div>
 
@@ -238,9 +257,10 @@
       <!-- VIEW 3: CONTACT GATE (AFTER QUESTION 17)                              -->
       <!-- ===================================================================== -->
       <div id="contactGateView" class="hidden app-card p-6 sm:p-9 space-y-6 fade-in">
-        
+
         <div class="space-y-2">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold">
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold">
             <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
             </svg>
@@ -250,14 +270,16 @@
             Calculating Your Operational Profile...
           </h2>
           <p class="text-xs sm:text-sm text-[#4a5560] leading-relaxed">
-            We are analyzing your 17 responses across operational reactivity, delegation bottlenecks, capacity ceilings, and personal impact. Where should we send your full diagnostic breakdown?
+            We are analyzing your 17 responses across operational reactivity, delegation bottlenecks, capacity ceilings,
+            and personal impact. Where should we send your full diagnostic breakdown?
           </p>
         </div>
 
         <form id="leadForm" class="space-y-4">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label class="block text-xs font-bold text-[#141f28] mb-1">First Name <span class="text-rose-500">*</span></label>
+              <label class="block text-xs font-bold text-[#141f28] mb-1">First Name <span
+                  class="text-rose-500">*</span></label>
               <input type="text" id="leadFirstName" required placeholder="Joe"
                 class="w-full px-3.5 py-2.5 rounded-lg border border-[#d8e2e9] focus:outline-none focus:ring-2 focus:ring-[#487b9c] focus:border-[#487b9c] text-sm text-[#141f28]">
             </div>
@@ -269,7 +291,8 @@
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-[#141f28] mb-1">Business Email <span class="text-rose-500">*</span></label>
+            <label class="block text-xs font-bold text-[#141f28] mb-1">Business Email <span
+                class="text-rose-500">*</span></label>
             <input type="email" id="leadEmail" required placeholder="joe@company.com"
               class="w-full px-3.5 py-2.5 rounded-lg border border-[#d8e2e9] focus:outline-none focus:ring-2 focus:ring-[#487b9c] focus:border-[#487b9c] text-sm text-[#141f28]">
           </div>
@@ -280,7 +303,8 @@
               class="w-full px-3.5 py-2.5 rounded-lg border border-[#d8e2e9] focus:outline-none focus:ring-2 focus:ring-[#487b9c] focus:border-[#487b9c] text-sm text-[#141f28]">
           </div>
 
-          <div id="leadFormError" class="hidden text-xs text-rose-600 font-semibold bg-rose-50 p-2.5 rounded-lg border border-rose-200">
+          <div id="leadFormError"
+            class="hidden text-xs text-rose-600 font-semibold bg-rose-50 p-2.5 rounded-lg border border-rose-200">
             Please enter a valid email address and your name to proceed.
           </div>
 
@@ -302,10 +326,10 @@
       <!-- VIEW 4: RESULTS & STRATEGY CALL CTA                                   -->
       <!-- ===================================================================== -->
       <div id="resultsView" class="hidden space-y-6 fade-in">
-        
+
         <!-- Main Profile Card -->
         <div class="app-card-accent p-6 sm:p-9 space-y-6">
-          
+
           <!-- Header Meta -->
           <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[#d8e2e9] gap-2">
             <div>
@@ -316,7 +340,8 @@
                 Executive Lead
               </h3>
             </div>
-            <div id="tierBadge" class="text-xs px-3 py-1 rounded-full font-bold bg-[#eaf2f7] text-[#36607d] border border-[rgba(89,141,174,0.4)] w-fit">
+            <div id="tierBadge"
+              class="text-xs px-3 py-1 rounded-full font-bold bg-[#eaf2f7] text-[#36607d] border border-[rgba(89,141,174,0.4)] w-fit">
               Tier 1 Archetype
             </div>
           </div>
@@ -326,7 +351,8 @@
             <span class="text-xs uppercase tracking-wider text-[#647c8f] font-mono font-bold block">
               YOUR OPERATIONAL PROFILE
             </span>
-            <h2 id="resultProfileTitle" class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#141f28] tracking-tight">
+            <h2 id="resultProfileTitle"
+              class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#141f28] tracking-tight">
               The Chained Architect
             </h2>
           </div>
@@ -340,7 +366,8 @@
           <div class="p-4 sm:p-5 rounded-xl bg-[#f8fafc] border border-[#d8e2e9] space-y-3">
             <div class="text-xs font-bold uppercase tracking-wider text-[#36607d] flex items-center gap-1.5">
               <svg class="w-4 h-4 text-[#487b9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
               <span>The Diagnostic Breakdown</span>
             </div>
@@ -356,7 +383,9 @@
                 <span class="w-2 h-2 rounded-full bg-[#487b9c]"></span>
                 Your Immediate Strategic Takeaway
               </span>
-              <span class="text-[10px] font-mono bg-white border border-[#d8e2e9] px-2 py-0.5 rounded-full text-[#36607d] font-bold">Actionable Framework</span>
+              <span
+                class="text-[10px] font-mono bg-white border border-[#d8e2e9] px-2 py-0.5 rounded-full text-[#36607d] font-bold">Actionable
+                Framework</span>
             </div>
             <p id="resultTakeawayText" class="text-xs sm:text-sm text-[#354c5e] leading-relaxed font-medium">
               <!-- Injected via JS -->
@@ -369,27 +398,36 @@
               What This Means For Your Business...
             </h4>
             <p>
-              There is no cookie-cutter fix for operations. A blue-collar trade shop requires completely different tactical systems than a high-volume white-collar firm.
+              There is no cookie-cutter fix for operations. A blue-collar trade shop requires completely different
+              tactical systems than a high-volume white-collar firm.
             </p>
             <p id="bridgeProfileMention">
-              Because your profile shows a mix of <strong class="text-[#141f28]" id="bridgeProfileNames">these operational friction points</strong>, the tactics needed to unlock your time are highly specific to your layout.
+              Because your profile shows a mix of <strong class="text-[#141f28]" id="bridgeProfileNames">these
+                operational friction points</strong>, the tactics needed to unlock your time are highly specific to your
+              layout.
             </p>
             <p class="p-3.5 rounded-lg bg-[#f0f5f8] border border-[#d8e2e9] text-xs text-[#141f28]">
-              <strong>Please note:</strong> This was obviously a very brief assessment designed to flag high-level symptoms. To give you real, strategic clarity, we need a complete diagnostic. When you schedule a zero-pressure strategy call below, you will immediately get access to our full, comprehensive operational assessment. This is a much longer, highly detailed deep dive that maps out your exact workflow, team metrics, and revenue bottlenecks.
+              <strong>Please note:</strong> This was obviously a very brief assessment designed to flag high-level
+              symptoms. To give you real, strategic clarity, we need a complete diagnostic. When you schedule a
+              zero-pressure strategy call below, you will immediately get access to our full, comprehensive operational
+              assessment. This is a much longer, highly detailed deep dive that maps out your exact workflow, team
+              metrics, and revenue bottlenecks.
             </p>
             <p>
-              I want to help you fix this. I hired a business coach myself when I was stuck in a loop with my own fast-moving brain, and it saved my sanity. Let's look over your initial answers and get you that deep-dive tool. If I am not the right fit to help you, I promise I will at least point you in the right direction!
+              I want to help you fix this. I hired a business coach myself when I was stuck in a loop with my own
+              fast-moving brain, and it saved my sanity. Let's look over your initial answers and get you that deep-dive
+              tool. If I am not the right fit to help you, I promise I will at least point you in the right direction!
             </p>
           </div>
 
           <!-- CTAs -->
           <div class="pt-4 border-t border-[#d8e2e9] space-y-3">
-            
+
             <!-- Primary CTA (Let's Talk / Strategy Call) -->
             <button id="primaryCtaBtn"
               class="w-full min-h-[50px] py-3.5 px-6 rounded-xl bg-[#487b9c] hover:bg-[#36607d] text-white font-extrabold text-sm sm:text-base transition-all shadow-md shadow-[rgba(72,123,156,0.3)] flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 group">
-              <span>Claim Your Full Assessment &amp; Book Your Strategy Call &rarr;</span>
-              <span class="text-[11px] font-normal text-white/80">(Let's Talk)</span>
+              <span>Book Your Strategy Call &rarr;</span>
+              <span class="text-[11px] font-normal text-white/80">(Unlocks In-Depth Assessment)</span>
             </button>
 
             <!-- Secondary CTA (Review & Email Results) -->
@@ -398,19 +436,39 @@
                 class="text-xs text-[#36607d] hover:text-[#141f28] underline font-semibold transition-colors py-1">
                 If you would just like me to review your results and email them to you, please click here.
               </button>
+              <div class="text-[11px] text-[#647c8f] mt-0.5">
+                Joe personally reviews each submission and reaches out within 24–48 hours.
+              </div>
             </div>
 
             <!-- Confirmation Banner for Secondary CTA -->
-            <div id="secondaryConfirmation" class="hidden p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 space-y-1">
-              <div class="font-bold flex items-center gap-1.5">
-                <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div id="secondaryConfirmation"
+              class="hidden p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 space-y-2">
+              <div class="font-bold flex items-center gap-1.5 text-sm text-emerald-950">
+                <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor"
+                  viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
-                <span>Results Submitted for Personal Review!</span>
+                <span>Submitted for Personal Review</span>
               </div>
-              <p>
-                Joe Klein has received your operational breakdown and responses. He will personally review your answers and email your tailored strategic takeaway to <strong id="confirmEmail">your email</strong> shortly.
+              <p class="leading-relaxed">
+                Joe Klein has received your operational breakdown and responses. He will be personally reviewing your
+                submission and reaching out directly to <strong id="confirmEmail" class="underline">your email</strong>
+                within <strong>24–48 hours</strong> with your tailored strategic takeaways and next steps.
               </p>
+              <div
+                class="pt-2 border-t border-emerald-200 text-[11px] text-emerald-700 flex items-center gap-1.5 font-medium">
+                <span>✓ Unlocked:</span>
+                <span>You now have access to our full in-depth operational diagnostic on the home page.</span>
+              </div>
+            </div>
+
+            <!-- Retake Assessment Action -->
+            <div class="text-center pt-2 border-t border-[#d8e2e9]">
+              <button id="retakeAssessmentBtn" type="button"
+                class="text-xs text-[#647c8f] hover:text-[#141f28] underline transition-colors">
+                Want to retake the assessment? Click here &rarr;
+              </button>
             </div>
 
           </div>
@@ -424,7 +482,8 @@
 
   <!-- Footer -->
   <footer class="w-full bg-white border-t border-[#d8e2e9] py-5 mt-auto">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#647c8f]">
+    <div
+      class="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#647c8f]">
       <div>
         &copy; 2026 Klein Insight. Strategic advisory for established business owners.
       </div>
@@ -618,7 +677,7 @@
           const name = params.get('name') || '';
           const email = params.get('email') || '';
           const company = params.get('company') || params.get('business') || '';
-          
+
           if (name) {
             const parts = name.trim().split(' ');
             state.lead.firstName = parts[0] || '';
@@ -633,7 +692,7 @@
           const lNameInput = document.getElementById('leadLastName');
           const emailInput = document.getElementById('leadEmail');
           const compInput = document.getElementById('leadCompany');
-          
+
           if (fNameInput && state.lead.firstName) fNameInput.value = state.lead.firstName;
           if (lNameInput && state.lead.lastName) lNameInput.value = state.lead.lastName;
           if (emailInput && state.lead.email) emailInput.value = state.lead.email;
@@ -783,6 +842,7 @@
             analysis: analysis,
             completedAt: new Date().toISOString()
           }));
+          localStorage.setItem('klein_deep_unlocked', 'true');
         } catch (err) {
           console.warn('LocalStorage save error:', err);
         }
@@ -908,7 +968,7 @@
               Left unaddressed, these specific operating bottlenecks will quietly cap your revenue ceiling and create unnecessary drag on your energy. When you schedule a strategy call, you'll get immediate access to our full, comprehensive operational assessment to map out exact remedies.
             </p>
           `;
-          
+
           if (triggeredStages.includes(1)) {
             takeaway = "The Morning Triage Protocol: Ban ad-hoc morning task assignment. Implement a 15-minute daily standup and a strict priority queue to separate urgent noise from strategic business drivers.";
           } else if (triggeredStages.includes(2)) {
@@ -985,6 +1045,9 @@
         // Wire Primary CTA
         const primaryCta = document.getElementById('primaryCtaBtn');
         primaryCta.onclick = function () {
+          try {
+            localStorage.setItem('klein_deep_unlocked', 'true');
+          } catch (e) { }
           dispatchLeadEmailToJoe('Clicked Primary CTA - Book Strategy Call / Let\'s Talk');
           const params = new URLSearchParams();
           if (state.lead.name) params.set('name', state.lead.name);
@@ -999,11 +1062,27 @@
         const secondaryCta = document.getElementById('secondaryCtaBtn');
         const secondaryConfirmation = document.getElementById('secondaryConfirmation');
         secondaryCta.onclick = function () {
-          dispatchLeadEmailToJoe('Clicked Secondary CTA - Request Review & Email Breakdown');
+          try {
+            localStorage.setItem('klein_deep_unlocked', 'true');
+          } catch (e) { }
+          dispatchLeadEmailToJoe('Clicked Secondary CTA - Request Review & Email Breakdown (24-48h)');
           secondaryConfirmation.classList.remove('hidden');
           secondaryCta.classList.add('opacity-50', 'pointer-events-none');
           secondaryConfirmation.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         };
+
+        // Wire Retake Button
+        const retakeBtn = document.getElementById('retakeAssessmentBtn');
+        if (retakeBtn) {
+          retakeBtn.onclick = function () {
+            state.currentIndex = 0;
+            state.answers = {};
+            resultsView.classList.add('hidden');
+            questionView.classList.remove('hidden');
+            headerProgressBadge.classList.remove('hidden');
+            renderCurrentQuestion();
+          };
+        }
       }
 
       // WEB3FORMS DISPATCH ENGINE
@@ -1058,8 +1137,35 @@
         }
       }
 
-      // Initialize URL params on load
+      function checkExistingResults() {
+        try {
+          const params = new URLSearchParams(window.location.search);
+          const viewParam = params.get('view');
+          const isRestart = params.get('restart') === 'true' || params.get('retake') === 'true';
+          const savedResultsRaw = localStorage.getItem('klein_leadgen_results');
+          if (savedResultsRaw && (viewParam === 'results' || viewParam === 'dossier' || params.has('review') || !isRestart)) {
+            const saved = JSON.parse(savedResultsRaw);
+            if (saved && saved.analysis && saved.lead) {
+              state.lead = saved.lead;
+              state.answers = saved.answers || {};
+              state.analysis = saved.analysis;
+              introView.classList.add('hidden');
+              questionView.classList.add('hidden');
+              contactGateView.classList.add('hidden');
+              headerProgressBadge.classList.add('hidden');
+              renderResultsScreen(saved.analysis);
+              return true;
+            }
+          }
+        } catch (e) {
+          console.warn('Check existing results note:', e);
+        }
+        return false;
+      }
+
+      // Initialize URL params and check existing results on load
       parseUrlParams();
+      checkExistingResults();
     })();
   </script>
 </body>

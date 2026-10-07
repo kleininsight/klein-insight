@@ -47,8 +47,8 @@
         <a href="#about">About</a>
         <a href="#services">Strategy Coaching</a>
         <a href="survey.html" id="navDiagnosticLink">Assessment</a>
-        <a href="survey.html?view=dossier" id="navDossierLink" class="nav-dossier-link" style="display: none;">My
-          Dossier</a>
+        <a href="survey.html?view=results" id="navDossierLink" class="nav-dossier-link" style="display: none;">My Profile</a>
+        <a href="survey-deep.html" id="navDeepLink" class="nav-deep-link" style="display: none;">Full Diagnostic</a>
         <a class="nav-cta" href="#contact">Let's Talk</a>
       </nav>
     </div>
@@ -115,20 +115,42 @@
         </ul>
 
         <div class="hook-action">
-          <div class="hook-action-card">
+          <!-- V1 Default Hook Card: 3-Minute Assessment Only (No Call Booked / No Email Sent) -->
+          <div class="hook-action-card" id="hookCardV1">
             <div class="hook-action-content">
               <span class="hook-action-badge">Free Executive Assessment</span>
               <h3 class="hook-action-title">Not sure which operating pattern is capping your business?</h3>
               <p class="hook-action-desc">
-                Take our 2-minute Owner Constraint Assessment. Pinpoint where friction is hiding across your delegation, decision centralization, reactive firefighting, and growth-load coupling—and discover what becomes possible when resolved.
+                Take our 3-minute Owner Assessment. Pinpoint where friction is hiding across your daily operations, delegation, capacity ceilings, and personal life—and discover what type of business owner you are.
               </p>
             </div>
             <div class="hook-action-buttons">
-              <a class="button button-primary hook-action-btn" href="survey.html">
-                Take the Owner Assessment &rarr;
+              <a class="button button-primary hook-action-btn" id="hookSurveyBtn" href="survey.html">
+                Take the 3-Min Assessment &rarr;
               </a>
-              <a class="hook-dossier-btn" id="hookDossierBtn" href="survey.html?view=dossier" style="display: none;">
-                <span>📊 View Constraint Dossier</span>
+              <a class="button button-primary hook-dossier-btn" id="hookProfileBtn" href="survey.html?view=results" style="display: none; background: #487b9c; border: 1px solid #36607d;">
+                <span>📊 View 3-Min Profile &rarr;</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- V2 Unlocked Hook Card: Both Surveys Visible with Dedicated Copy & Buttons (Call Booked / Email Sent) -->
+          <div class="hook-action-card" id="hookCardV2" style="display: none; border-color: rgba(72, 123, 156, 0.45); box-shadow: 0 10px 28px -4px rgba(72, 123, 156, 0.15);">
+            <div class="hook-action-content">
+              <span class="hook-action-badge" style="background: rgba(16, 185, 129, 0.12); color: #047857; border-color: rgba(16, 185, 129, 0.3);">
+                ✓ In-Depth Diagnostic Unlocked
+              </span>
+              <h3 class="hook-action-title">Your Comprehensive Operational Assessment is Ready</h3>
+              <p class="hook-action-desc">
+                Now that you've connected with Joe, your full 21-scenario deep-dive assessment is unlocked. Measure your 6-dimension operating friction scorecard, uncodified knowledge traps, and generate your 3-page executive PDF dossier.
+              </p>
+            </div>
+            <div class="hook-action-buttons" style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+              <a class="button button-primary" id="hookDeepBtn" href="survey-deep.html" style="background: #487b9c; border: 1px solid #36607d;">
+                Launch Full Diagnostic &amp; Dossier &rarr;
+              </a>
+              <a class="button" id="hookProfileBtnV2" href="survey.html?view=results" style="background: rgba(255, 255, 255, 0.85); color: #141f28; border: 1px solid rgba(89, 141, 174, 0.35);">
+                Review 3-Min Profile &rarr;
               </a>
             </div>
           </div>
@@ -359,21 +381,60 @@
             depending on you.
           </p>
 
-          <div class="panel-action-wrap"
+          <!-- V1 Default Panel Action: 3-Minute Assessment Only (No Call Booked / No Email Sent) -->
+          <div class="panel-action-wrap" id="panelActionV1"
             style="margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(89, 141, 174, 0.3); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
             <div>
-              <strong style="color: #ffffff; display: block; font-size: 16px; margin-bottom: 4px;">Assess your
-                owner operating constraints</strong>
-              <span style="color: #c5d2da; font-size: 14px;">Take our 2-minute assessment to identify your operating pattern, self-reinforcing loops, and change readiness.</span>
+              <strong style="color: #ffffff; display: block; font-size: 16px; margin-bottom: 4px;">What Type of Business Owner Are You?</strong>
+              <span style="color: #c5d2da; font-size: 14px;">Take our 3-minute assessment to see exactly where your operations are trapping you.</span>
             </div>
             <div class="panel-action-buttons" style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
-              <a class="button button-primary panel-survey-btn" href="survey.html"
+              <a class="button button-primary panel-survey-btn" id="panelSurveyBtn" href="survey.html"
                 style="background: var(--accent-brand); border: 1px solid rgba(255, 255, 255, 0.2);">
-                Assess Your Operating Constraint &rarr;
+                Take 3-Min Assessment &rarr;
               </a>
-              <a class="panel-dossier-btn" id="panelDossierBtn" href="survey.html?view=dossier" style="display: none;">
-                <span>📊 View Dossier</span>
+              <a class="button button-primary panel-dossier-btn" id="panelProfileBtn" href="survey.html?view=results" style="display: none; background: var(--accent-brand); border: 1px solid rgba(255, 255, 255, 0.2);">
+                <span>📊 View 3-Min Profile &rarr;</span>
               </a>
+            </div>
+          </div>
+
+          <!-- V2 Unlocked Panel Action: Both Surveys Visible with Dedicated Cards & Buttons (Call Booked / Email Sent) -->
+          <div class="panel-action-wrap" id="panelActionV2"
+            style="margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(89, 141, 174, 0.3); display: none; flex-direction: column; gap: 16px;">
+            <div>
+              <span style="font-size: 11px; font-family: monospace; font-weight: bold; color: #34d399; text-transform: uppercase; letter-spacing: 0.05em; display: block;">✓ Strategy Tools Unlocked</span>
+              <strong style="color: #ffffff; display: block; font-size: 17px; margin-top: 2px;">Your Strategy Assessment Suite</strong>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; width: 100%;">
+              <!-- In-Depth Survey Card -->
+              <div style="background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(89, 141, 174, 0.45); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; justify-content: space-between; gap: 14px;">
+                <div>
+                  <span style="font-size: 10px; font-weight: 700; color: #93c5fd; background: rgba(59, 130, 246, 0.2); padding: 2px 8px; border-radius: 9999px; text-transform: uppercase; font-family: monospace;">Comprehensive Diagnostic</span>
+                  <h4 style="color: #ffffff; font-size: 15px; font-weight: 700; margin: 8px 0 4px;">In-Depth Operational Assessment &amp; PDF Dossier</h4>
+                  <p style="color: #c5d2da; font-size: 13px; line-height: 1.45; margin: 0;">
+                    Complete 21-scenario forced-choice diagnostic. Generates your 6-dimension operating friction scorecard, uncodified knowledge audit, and 3-page executive briefing.
+                  </p>
+                </div>
+                <a class="button button-primary" id="panelDeepBtn" href="survey-deep.html" style="background: var(--accent-brand); border: 1px solid rgba(255, 255, 255, 0.2); font-size: 13px; text-align: center; justify-content: center; padding: 10px 16px;">
+                  Launch Full Diagnostic &amp; Dossier &rarr;
+                </a>
+              </div>
+
+              <!-- 3-Min Assessment Card -->
+              <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; justify-content: space-between; gap: 14px;">
+                <div>
+                  <span style="font-size: 10px; font-weight: 700; color: #cbd5e1; background: rgba(255, 255, 255, 0.1); padding: 2px 8px; border-radius: 9999px; text-transform: uppercase; font-family: monospace;">Lead-Gen Quick Quiz</span>
+                  <h4 style="color: #ffffff; font-size: 15px; font-weight: 700; margin: 8px 0 4px;">3-Minute Owner Profile</h4>
+                  <p style="color: #c5d2da; font-size: 13px; line-height: 1.45; margin: 0;">
+                    17-question rapid evaluation across operational fires, approval bottlenecks, and family impact. Review your archetype and initial takeaways.
+                  </p>
+                </div>
+                <a class="button" id="panelProfileBtnV2" href="survey.html?view=results" style="background: rgba(255, 255, 255, 0.1); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.2); font-size: 13px; text-align: center; justify-content: center; padding: 10px 16px;">
+                  View 3-Min Profile &rarr;
+                </a>
+              </div>
             </div>
           </div>
         </aside>

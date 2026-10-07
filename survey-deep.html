@@ -1180,6 +1180,20 @@
           if (p.leadData && p.leadData.email) preloadedLead = p.leadData;
         }
       }
+      if (!preloadedLead) {
+        const cRaw = localStorage.getItem('klein_contact_details');
+        if (cRaw) {
+          const c = JSON.parse(cRaw);
+          if (c && c.email) preloadedLead = { name: c.name || '', email: c.email, company: c.business || '' };
+        }
+      }
+      if (!preloadedLead) {
+        const lRaw = localStorage.getItem('klein_leadgen_results');
+        if (lRaw) {
+          const l = JSON.parse(lRaw);
+          if (l && l.lead && l.lead.email) preloadedLead = { name: l.lead.name || '', email: l.lead.email, company: l.lead.company || '' };
+        }
+      }
     } catch (e) { }
 
     const urlParams = new URLSearchParams(window.location.search);
@@ -1658,11 +1672,28 @@
 
       if (!leadEmail) {
         try {
-          const prog = JSON.parse(localStorage.getItem('klein_survey_progress') || '{}');
-          if (prog.leadData && prog.leadData.email) {
-            leadEmail = prog.leadData.email.trim();
-            leadName = prog.leadData.name || leadName;
-            leadCompany = prog.leadData.company || leadCompany;
+          const cRaw = localStorage.getItem('klein_contact_details');
+          if (cRaw) {
+            const c = JSON.parse(cRaw);
+            if (c && c.email) {
+              leadEmail = c.email.trim();
+              leadName = c.name || leadName;
+              leadCompany = c.business || leadCompany;
+            }
+          }
+        } catch (e) { }
+      }
+
+      if (!leadEmail) {
+        try {
+          const lRaw = localStorage.getItem('klein_leadgen_results');
+          if (lRaw) {
+            const l = JSON.parse(lRaw);
+            if (l && l.lead && l.lead.email) {
+              leadEmail = l.lead.email.trim();
+              leadName = l.lead.name || leadName;
+              leadCompany = l.lead.company || leadCompany;
+            }
           }
         } catch (e) { }
       }
@@ -1752,6 +1783,8 @@
           timestamp: new Date().toISOString()
         }));
 
+        state.step = state.activeScenarios.length;
+
         localStorage.setItem('klein_survey_progress', JSON.stringify({
           hasSaved: true,
           mode: state.mode,
@@ -1763,6 +1796,9 @@
           isCompleted: true,
           savedAt: new Date().toISOString()
         }));
+
+        // Unlock V2 state across entire site
+        localStorage.setItem('klein_deep_unlocked', 'true');
 
         if (state.leadData && state.leadData.email) {
           localStorage.setItem('klein_contact_details', JSON.stringify({
@@ -2481,19 +2517,34 @@
 
     function saveProgressLocally(redirectHome = false) {
       try {
-        const isCompleted = state.activeScenarios && state.activeScenarios.length > 0 && state.step >= state.activeScenarios.length;
+        let previouslyCompleted = false;
+        try {
+          const prev = JSON.parse(localStorage.getItem('klein_survey_progress') || '{}');
+          if (prev.isCompleted || prev.isShortFormCompleted) previouslyCompleted = true;
+          const diag = JSON.parse(localStorage.getItem('klein_diagnostic_result') || '{}');
+          if (diag && diag.diagnostics && diag.diagnostics.primaryConstraint) previouslyCompleted = true;
+        } catch (e) { }
+
+        const answersCount = state.answers ? Object.keys(state.answers).length : 0;
+        const total = state.activeScenarios && state.activeScenarios.length ? state.activeScenarios.length : (state.mode === 'deep' ? 21 : 14);
+        const isCompleted = previouslyCompleted || (state.activeScenarios && state.activeScenarios.length > 0 && (state.step >= state.activeScenarios.length || answersCount >= total));
+
         const progressData = {
           hasSaved: true,
-          mode: state.mode || 'express',
-          step: typeof state.step === 'number' && state.step >= 0 ? state.step : 0,
+          mode: state.mode || 'deep',
+          step: typeof state.step === 'number' && state.step >= 0 ? state.step : (isCompleted ? total : answersCount),
           answers: state.answers || {},
           leadData: state.leadData || {},
-          totalScenarios: state.activeScenarios && state.activeScenarios.length ? state.activeScenarios.length : (state.mode === 'deep' ? 21 : 14),
-          isShortFormCompleted: (state.mode === 'express' && (isCompleted || Object.keys(state.answers || {}).length >= 14)),
+          totalScenarios: total,
+          isShortFormCompleted: (state.mode === 'express' && (isCompleted || answersCount >= 14)),
           isCompleted: isCompleted,
           savedAt: new Date().toISOString()
         };
         localStorage.setItem('klein_survey_progress', JSON.stringify(progressData));
+
+        if (isCompleted) {
+          localStorage.setItem('klein_deep_unlocked', 'true');
+        }
         if (state.leadData && (state.leadData.email || state.leadData.name || state.leadData.company)) {
           const cData = {
             name: state.leadData.name && state.leadData.name !== 'Executive Lead' ? state.leadData.name : '',
@@ -2594,21 +2645,26 @@
 
     window.onload = function () {
       const urlParams = new URLSearchParams(window.location.search);
+      const isRestart = urlParams.get('restart') === 'true' || urlParams.get('mode') === 'restart' || urlParams.get('retake') === 'true';
       const wantsDossier = urlParams.get('view') === 'dossier' || window.location.hash === '#dossier';
 
-      if (wantsDossier) {
-        let savedProgress = null;
-        try {
-          const raw = localStorage.getItem('klein_survey_progress');
-          if (raw) savedProgress = JSON.parse(raw);
-        } catch (e) { }
+      let savedProgress = null;
+      try {
+        const raw = localStorage.getItem('klein_survey_progress');
+        if (raw) savedProgress = JSON.parse(raw);
+      } catch (e) { }
 
-        let dossierData = null;
-        try {
-          const raw = localStorage.getItem('klein_diagnostic_result');
-          if (raw) dossierData = JSON.parse(raw);
-        } catch (e) { }
+      let dossierData = null;
+      try {
+        const raw = localStorage.getItem('klein_diagnostic_result');
+        if (raw) dossierData = JSON.parse(raw);
+      } catch (e) { }
 
+      const isCompleted = (savedProgress && (savedProgress.isCompleted || savedProgress.isShortFormCompleted)) ||
+                          (dossierData && dossierData.diagnostics && dossierData.diagnostics.primaryConstraint) ||
+                          (savedProgress && savedProgress.answers && Object.keys(savedProgress.answers).length >= 14);
+
+      if ((wantsDossier || isCompleted) && !isRestart) {
         if (savedProgress || dossierData) {
           if (savedProgress) {
             state.answers = savedProgress.answers || {};
@@ -2618,7 +2674,27 @@
           if (dossierData && dossierData.client) {
             state.leadData = dossierData.client;
           }
+
+          // Fallback to pre-saved contact details if needed
+          if (!state.leadData || !state.leadData.email) {
+            try {
+              const cRaw = localStorage.getItem('klein_contact_details');
+              if (cRaw) {
+                const c = JSON.parse(cRaw);
+                if (c && c.email) {
+                  state.leadData = { name: c.name || '', email: c.email, company: c.business || '' };
+                }
+              }
+            } catch (e) { }
+          }
+
           state.activeScenarios = buildScenarioList(state.mode);
+          state.step = state.activeScenarios.length;
+
+          try {
+            localStorage.setItem('klein_deep_unlocked', 'true');
+          } catch (e) { }
+
           const analysis = analyzeConstraints();
 
           if (state.leadData && state.leadData.name && state.leadData.company) {
@@ -2641,7 +2717,7 @@
           chatOverlay.classList.add('opacity-0', 'pointer-events-none');
           window.scrollTo({ top: 0, behavior: 'smooth' });
           syncDashboard(analysis);
-          showToast('Viewing your executive constraint dossier.');
+          showToast('Executive Constraint Dossier Loaded.');
           return;
         }
       }
