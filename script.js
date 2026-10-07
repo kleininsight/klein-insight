@@ -109,7 +109,7 @@ function syncDiagnosticButtons() {
     }
 
     const isCallBookedExplicit = localStorage.getItem('klein_call_booked') === 'true' ||
-                                 localStorage.getItem('klein_contact_submitted') === 'true';
+      localStorage.getItem('klein_contact_submitted') === 'true';
 
     const progressRaw = localStorage.getItem('klein_survey_progress');
     const dossierRaw = localStorage.getItem('klein_diagnostic_result');
@@ -120,8 +120,8 @@ function syncDiagnosticButtons() {
 
     const hasSurveyFinished = !!(leadgen && leadgen.analysis && leadgen.analysis.profileTitle);
     const hasDossier = !!(dossier && (dossier.diagnostics || dossier.client)) ||
-                       !!(progress && (progress.isCompleted || progress.isShortFormCompleted)) ||
-                       !!(progress && progress.answers && Object.keys(progress.answers).length >= 14);
+      !!(progress && (progress.isCompleted || progress.isShortFormCompleted)) ||
+      !!(progress && progress.answers && Object.keys(progress.answers).length >= 14);
 
     const isCallBooked = isCallBookedExplicit || hasDossier;
 
@@ -249,7 +249,7 @@ function syncDiagnosticButtons() {
         if (hookProfileBtnV2) {
           hookProfileBtnV2.style.display = 'inline-flex';
           hookProfileBtnV2.href = hasSurveyFinished ? 'survey.html?view=results' : 'survey.html';
-          hookProfileBtnV2.innerHTML = hasSurveyFinished ? `3-Min Profile &rarr;` : `Take 3-Min Assessment &rarr;`;
+          hookProfileBtnV2.innerHTML = hasSurveyFinished ? `Pulse &rarr;` : `Take 3-Min Assessment &rarr;`;
         }
 
         if (panelDeepBtn) {
@@ -258,7 +258,7 @@ function syncDiagnosticButtons() {
         }
         if (panelProfileBtnV2) {
           panelProfileBtnV2.href = hasSurveyFinished ? 'survey.html?view=results' : 'survey.html';
-          panelProfileBtnV2.innerHTML = hasSurveyFinished ? `View 3-Min Profile &rarr;` : `Take 3-Min Assessment &rarr;`;
+          panelProfileBtnV2.innerHTML = hasSurveyFinished ? `View Pulse &rarr;` : `Take 3-Min Assessment &rarr;`;
         }
 
         if (navDeepLink) {
@@ -269,7 +269,7 @@ function syncDiagnosticButtons() {
         if (navDossierLink) {
           navDossierLink.style.display = 'inline-block';
           navDossierLink.href = hasSurveyFinished ? 'survey.html?view=results' : 'survey.html';
-          navDossierLink.textContent = hasSurveyFinished ? '3-Min Profile' : '3-Min Assessment';
+          navDossierLink.textContent = hasSurveyFinished ? 'Pulse' : '3-Min Assessment';
         }
       } else {
         // -----------------------------------------------------------------------
@@ -284,7 +284,7 @@ function syncDiagnosticButtons() {
         if (hookProfileBtnV2) {
           hookProfileBtnV2.style.display = 'inline-flex';
           hookProfileBtnV2.href = hasSurveyFinished ? 'survey.html?view=results' : 'survey.html';
-          hookProfileBtnV2.innerHTML = hasSurveyFinished ? `📊 View 3-Min Profile &rarr;` : `3-Min Assessment &rarr;`;
+          hookProfileBtnV2.innerHTML = hasSurveyFinished ? `📊 View Pulse &rarr;` : `3-Min Assessment &rarr;`;
         }
 
         if (hookCardV2) {
@@ -306,18 +306,18 @@ function syncDiagnosticButtons() {
         }
         if (panelProfileBtnV2) {
           panelProfileBtnV2.href = hasSurveyFinished ? 'survey.html?view=results' : 'survey.html';
-          panelProfileBtnV2.innerHTML = hasSurveyFinished ? `View 3-Min Profile &rarr;` : `Take 3-Min Assessment &rarr;`;
+          panelProfileBtnV2.innerHTML = hasSurveyFinished ? `View Pulse &rarr;` : `Take 3-Min Assessment &rarr;`;
         }
 
         if (navDeepLink) {
           navDeepLink.style.display = 'inline-block';
           navDeepLink.href = 'survey-deep.html?view=dossier';
-          navDeepLink.textContent = 'Dossier';
+          navDeepLink.textContent = 'In-Depth';
         }
         if (navDossierLink) {
           navDossierLink.style.display = 'inline-block';
           navDossierLink.href = hasSurveyFinished ? 'survey.html?view=results' : 'survey.html';
-          navDossierLink.textContent = hasSurveyFinished ? '3-Min Profile' : '3-Min Assessment';
+          navDossierLink.textContent = hasSurveyFinished ? 'Pulse' : '3-Min Assessment';
         }
       }
     }
