@@ -170,26 +170,26 @@ function syncDiagnosticButtons() {
         } catch (e) { }
 
         const hasPartial = partialProgress && (partialProgress.currentIndex > 0 || (partialProgress.answers && Object.keys(partialProgress.answers).length > 0));
-        const resumeNum = hasPartial ? Math.min(17, (partialProgress.currentIndex || 0) + 1) : 1;
+        const resumeNum = hasPartial ? Math.min(23, (partialProgress.currentIndex || 0) + 1) : 1;
 
         if (hookSurveyBtn) {
           hookSurveyBtn.style.display = 'inline-flex';
           hookSurveyBtn.innerHTML = hasPartial
-            ? `Resume 3-Min Assessment (${resumeNum}/17) &rarr;`
+            ? `Resume 3-Min Assessment (${resumeNum}/23) &rarr;`
             : `Take 3-Min Assessment &rarr;`;
         }
         if (hookProfileBtn) hookProfileBtn.style.display = 'none';
         if (panelSurveyBtn) {
           panelSurveyBtn.style.display = 'inline-flex';
           panelSurveyBtn.innerHTML = hasPartial
-            ? `Resume 3-Min Assessment (${resumeNum}/17) &rarr;`
+            ? `Resume 3-Min Assessment (${resumeNum}/23) &rarr;`
             : `Take 3-Min Assessment &rarr;`;
         }
         if (panelProfileBtn) panelProfileBtn.style.display = 'none';
 
         if (navDiagnosticLink) {
           navDiagnosticLink.style.display = 'inline-block';
-          navDiagnosticLink.textContent = hasPartial ? `Resume (${resumeNum}/17)` : `3-Min Assessment`;
+          navDiagnosticLink.textContent = hasPartial ? `Resume (${resumeNum}/23)` : `3-Min Assessment`;
         }
         if (navDossierLink) navDossierLink.style.display = 'none';
       } else {
@@ -200,31 +200,31 @@ function syncDiagnosticButtons() {
         if (hookProfileBtn) {
           hookProfileBtn.style.display = 'inline-flex';
           hookProfileBtn.href = 'survey.html?view=results';
-          hookProfileBtn.innerHTML = `<span>📊 View 3-Min Profile &rarr;</span>`;
+          hookProfileBtn.innerHTML = `<span>✓ Pulse Check Submitted &rarr;</span>`;
         }
 
         if (panelSurveyBtn) panelSurveyBtn.style.display = 'none';
         if (panelProfileBtn) {
           panelProfileBtn.style.display = 'inline-flex';
           panelProfileBtn.href = 'survey.html?view=results';
-          panelProfileBtn.innerHTML = `<span>📊 View 3-Min Profile &rarr;</span>`;
+          panelProfileBtn.innerHTML = `<span>✓ Pulse Check Submitted &rarr;</span>`;
         }
 
-        // Update V1 card copy to highlight completed profile
+        // Update V1 card copy to highlight completed pulse check submitted for personal review
         if (hookCardV1) {
           const badge = hookCardV1.querySelector('.hook-action-badge');
-          if (badge) badge.textContent = `✓ Profile Ready: ${leadgen.analysis.profileTitle}`;
+          if (badge) badge.textContent = `✓ Pulse Check Submitted`;
           const title = hookCardV1.querySelector('.hook-action-title');
-          if (title) title.textContent = `Your Operational Profile (${leadgen.analysis.profileTitle}) is ready.`;
+          if (title) title.textContent = `Your Leadership Pulse Check was submitted for personal review.`;
           const desc = hookCardV1.querySelector('.hook-action-desc');
-          if (desc) desc.textContent = `Your 3-minute assessment identified your operating pattern: ${leadgen.analysis.profileTitle}. Review your breakdown or schedule your strategy call with Joe.`;
+          if (desc) desc.textContent = `Joe is reviewing your 23 responses and will email you with your tailored leadership feedback. Or schedule a strategy conversation directly.`;
         }
 
         if (navDiagnosticLink) navDiagnosticLink.style.display = 'none';
         if (navDossierLink) {
           navDossierLink.style.display = 'inline-block';
           navDossierLink.href = 'survey.html?view=results';
-          navDossierLink.textContent = '3-Min Profile';
+          navDossierLink.textContent = 'Pulse Check Status';
         }
       }
     } else {
@@ -334,10 +334,15 @@ function preloadContactDetails() {
   const nameInput = document.getElementById('name');
   const emailInput = document.getElementById('email');
   const businessInput = document.getElementById('business');
+  const scheduleCallToggle = document.getElementById('scheduleCallToggle');
+  const phoneFieldWrap = document.getElementById('phoneFieldWrap');
+  const phoneInput = document.getElementById('phone');
 
   let leadName = '';
   let leadEmail = '';
   let leadBusiness = '';
+  let leadPhone = '';
+  let leadScheduleCall = false;
 
   // 1. Check URL query parameters
   try {
@@ -346,26 +351,37 @@ function preloadContactDetails() {
     if (params.get('email')) leadEmail = params.get('email').trim();
     if (params.get('business')) leadBusiness = params.get('business').trim();
     if (!leadBusiness && params.get('company')) leadBusiness = params.get('company').trim();
+    if (params.get('phone')) {
+      leadPhone = params.get('phone').trim();
+      leadScheduleCall = true;
+    }
+    const scheduleParam = (params.get('schedule_call') || params.get('call') || '').toLowerCase();
+    if (scheduleParam === 'yes' || scheduleParam === 'true' || scheduleParam === '1') {
+      leadScheduleCall = true;
+    }
   } catch (e) { }
 
   // 2. Check explicitly saved contact details
-  if (!leadName || !leadEmail || !leadBusiness) {
+  if (!leadName || !leadEmail || !leadBusiness || !leadPhone) {
     try {
       if (!leadName) leadName = localStorage.getItem('klein_contact_name') || '';
       if (!leadBusiness) leadBusiness = localStorage.getItem('klein_contact_business') || '';
       if (!leadEmail) leadEmail = localStorage.getItem('klein_contact_email') || '';
+      if (!leadPhone) leadPhone = localStorage.getItem('klein_contact_phone') || '';
       const savedContactRaw = localStorage.getItem('klein_contact_details');
       if (savedContactRaw) {
         const savedContact = JSON.parse(savedContactRaw);
         if (!leadName && savedContact.name) leadName = savedContact.name;
         if (!leadEmail && savedContact.email) leadEmail = savedContact.email;
         if (!leadBusiness && (savedContact.business || savedContact.company)) leadBusiness = savedContact.business || savedContact.company;
+        if (!leadPhone && savedContact.phone) leadPhone = savedContact.phone;
+        if (savedContact.scheduleCall) leadScheduleCall = true;
       }
     } catch (e) { }
   }
 
   // 2b. Check leadgen assessment results
-  if (!leadName || !leadEmail || !leadBusiness) {
+  if (!leadName || !leadEmail || !leadBusiness || !leadPhone) {
     try {
       const leadgenRaw = localStorage.getItem('klein_leadgen_results');
       if (leadgenRaw) {
@@ -373,6 +389,7 @@ function preloadContactDetails() {
         if (leadgen && leadgen.lead) {
           if (!leadName && leadgen.lead.name) leadName = leadgen.lead.name;
           if (!leadEmail && leadgen.lead.email) leadEmail = leadgen.lead.email;
+          if (!leadPhone && leadgen.lead.phone) leadPhone = leadgen.lead.phone;
           if (!leadBusiness && (leadgen.lead.company || leadgen.lead.business)) {
             leadBusiness = leadgen.lead.company || leadgen.lead.business;
           }
@@ -382,7 +399,7 @@ function preloadContactDetails() {
   }
 
   // 3. Check diagnostic dossier results
-  if (!leadName || !leadEmail || !leadBusiness) {
+  if (!leadName || !leadEmail || !leadBusiness || !leadPhone) {
     try {
       const dossierRaw = localStorage.getItem('klein_diagnostic_result');
       if (dossierRaw) {
@@ -394,6 +411,9 @@ function preloadContactDetails() {
           if (!leadEmail && dossier.client.email && dossier.client.email.includes('@')) {
             leadEmail = dossier.client.email;
           }
+          if (!leadPhone && dossier.client.phone) {
+            leadPhone = dossier.client.phone;
+          }
           if (!leadBusiness && dossier.client.company && dossier.client.company !== 'Your Company') {
             leadBusiness = dossier.client.company;
           }
@@ -403,7 +423,7 @@ function preloadContactDetails() {
   }
 
   // 4. Check survey progress leadData
-  if (!leadName || !leadEmail || !leadBusiness) {
+  if (!leadName || !leadEmail || !leadBusiness || !leadPhone) {
     try {
       const progressRaw = localStorage.getItem('klein_survey_progress');
       if (progressRaw) {
@@ -414,6 +434,9 @@ function preloadContactDetails() {
           }
           if (!leadEmail && progress.leadData.email && progress.leadData.email.includes('@')) {
             leadEmail = progress.leadData.email;
+          }
+          if (!leadPhone && progress.leadData.phone) {
+            leadPhone = progress.leadData.phone;
           }
           if (!leadBusiness && progress.leadData.company && progress.leadData.company !== 'Your Company') {
             leadBusiness = progress.leadData.company;
@@ -433,6 +456,46 @@ function preloadContactDetails() {
   if (businessInput && !businessInput.value && leadBusiness) {
     businessInput.value = leadBusiness;
   }
+  if (phoneInput && !phoneInput.value && leadPhone) {
+    phoneInput.value = leadPhone;
+    leadScheduleCall = true;
+  }
+
+  const updatePhoneFieldVisibility = (focusOnShow = false) => {
+    if (!scheduleCallToggle || !phoneFieldWrap) return;
+    const isChecked = scheduleCallToggle.checked;
+    phoneFieldWrap.style.display = isChecked ? 'block' : 'none';
+    phoneFieldWrap.setAttribute('aria-hidden', (!isChecked).toString());
+    scheduleCallToggle.setAttribute('aria-expanded', isChecked.toString());
+    if (phoneInput) {
+      phoneInput.required = isChecked;
+      if (isChecked && focusOnShow) {
+        setTimeout(() => phoneInput.focus(), 60);
+      }
+    }
+  };
+
+  if (scheduleCallToggle) {
+    if (leadScheduleCall) {
+      scheduleCallToggle.checked = true;
+    }
+    updatePhoneFieldVisibility(false);
+
+    scheduleCallToggle.addEventListener('change', () => {
+      updatePhoneFieldVisibility(true);
+      saveCurrentContact();
+    });
+
+    const toggleRow = document.querySelector('.schedule-call-toggle-wrap .toggle-row');
+    if (toggleRow) {
+      toggleRow.addEventListener('click', (e) => {
+        if (e.target !== scheduleCallToggle && !e.target.closest('label')) {
+          scheduleCallToggle.checked = !scheduleCallToggle.checked;
+          scheduleCallToggle.dispatchEvent(new Event('change'));
+        }
+      });
+    }
+  }
 
   // Auto-save any manual updates in the form so it is remembered
   const saveCurrentContact = () => {
@@ -441,10 +504,15 @@ function preloadContactDetails() {
         name: nameInput ? nameInput.value.trim() : '',
         email: emailInput ? emailInput.value.trim() : '',
         business: businessInput ? businessInput.value.trim() : '',
+        phone: phoneInput ? phoneInput.value.trim() : '',
+        scheduleCall: scheduleCallToggle ? scheduleCallToggle.checked : false,
         savedAt: new Date().toISOString()
       };
-      if (current.email || current.name || current.business) {
+      if (current.email || current.name || current.business || current.phone) {
         localStorage.setItem('klein_contact_details', JSON.stringify(current));
+      }
+      if (current.phone) {
+        localStorage.setItem('klein_contact_phone', current.phone);
       }
     } catch (e) { }
   };
@@ -456,7 +524,7 @@ function preloadContactDetails() {
     return div.innerHTML;
   };
 
-  const renderNextStepsCard = (name, business) => {
+  const renderNextStepsCard = (name, business, phone, wantsCall) => {
     const contactFormWrap = document.getElementById('contactFormWrap');
     const contactNextSteps = document.getElementById('contactNextSteps');
     const nextStepsHeading = document.getElementById('nextStepsHeading');
@@ -480,7 +548,16 @@ function preloadContactDetails() {
     }
 
     if (nextStepsIntro) {
-      if (cleanBusiness) {
+      const isCallRequested = wantsCall || (scheduleCallToggle && scheduleCallToggle.checked) || localStorage.getItem('klein_contact_wants_call') === 'true';
+      const contactPhone = (phone || (phoneInput ? phoneInput.value : '') || localStorage.getItem('klein_contact_phone') || '').trim();
+
+      if (isCallRequested && contactPhone) {
+        if (cleanBusiness) {
+          nextStepsIntro.textContent = `Your inquiry regarding ${cleanBusiness} has been sent straight to Joe's inbox. Since you requested to schedule a call, he will review the information you provided and text you at ${contactPhone} to set up a time.`;
+        } else {
+          nextStepsIntro.textContent = `Your inquiry has been sent straight to Joe's inbox. Since you requested to schedule a call, he will review the information you provided and text you at ${contactPhone} to set up a time.`;
+        }
+      } else if (cleanBusiness) {
         nextStepsIntro.textContent = `Your inquiry regarding ${cleanBusiness} has been sent straight to Joe's inbox. He personally reviews every note and will get back to you within 1 business day.`;
       } else {
         nextStepsIntro.textContent = `Your inquiry has been sent straight to Joe's inbox. He personally reviews every note and will get back to you within 1 business day.`;
@@ -506,7 +583,9 @@ function preloadContactDetails() {
     if (isSubmitted) {
       const savedName = localStorage.getItem('klein_contact_name') || leadName || '';
       const savedBusiness = localStorage.getItem('klein_contact_business') || leadBusiness || '';
-      renderNextStepsCard(savedName, savedBusiness);
+      const savedPhone = localStorage.getItem('klein_contact_phone') || leadPhone || '';
+      const savedWantsCall = localStorage.getItem('klein_contact_wants_call') === 'true';
+      renderNextStepsCard(savedName, savedBusiness, savedPhone, savedWantsCall);
     }
   } catch (e) { }
 
@@ -524,7 +603,20 @@ function preloadContactDetails() {
     const name = nameInput ? nameInput.value.trim() : '';
     const email = emailInput ? emailInput.value.trim() : '';
     const business = businessInput ? businessInput.value.trim() : '';
+    const phone = phoneInput ? phoneInput.value.trim() : '';
+    const wantsCall = scheduleCallToggle ? scheduleCallToggle.checked : false;
     const submitBtn = document.getElementById('contactSubmitBtn');
+
+    if (wantsCall && !phone) {
+      if (phoneInput) {
+        phoneInput.required = true;
+        phoneInput.focus();
+        if (typeof phoneInput.reportValidity === 'function') {
+          phoneInput.reportValidity();
+        }
+      }
+      return;
+    }
 
     if (submitBtn) {
       submitBtn.disabled = true;
@@ -536,9 +628,11 @@ function preloadContactDetails() {
       localStorage.setItem('klein_call_booked', 'true');
       localStorage.setItem('klein_contact_submitted', 'true');
       localStorage.setItem('klein_deep_unlocked', 'true');
+      localStorage.setItem('klein_contact_wants_call', wantsCall ? 'true' : 'false');
       if (name) localStorage.setItem('klein_contact_name', name);
       if (business) localStorage.setItem('klein_contact_business', business);
       if (email) localStorage.setItem('klein_contact_email', email);
+      if (phone) localStorage.setItem('klein_contact_phone', phone);
     } catch (e) { }
 
     // Dispatch form via fetch
@@ -553,7 +647,7 @@ function preloadContactDetails() {
       console.warn('Web3Forms dispatch note:', err);
     }
 
-    renderNextStepsCard(name, business);
+    renderNextStepsCard(name, business, phone, wantsCall);
     syncDiagnosticButtons();
 
     const contactCard = document.getElementById('contactCard');
@@ -565,6 +659,10 @@ function preloadContactDetails() {
   if (nameInput) nameInput.addEventListener('change', saveCurrentContact);
   if (emailInput) emailInput.addEventListener('change', saveCurrentContact);
   if (businessInput) businessInput.addEventListener('change', saveCurrentContact);
+  if (phoneInput) {
+    phoneInput.addEventListener('change', saveCurrentContact);
+    phoneInput.addEventListener('input', saveCurrentContact);
+  }
 }
 
 function initPageInteractions() {

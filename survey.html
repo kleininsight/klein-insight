@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>What Type of Business Owner Are You? | 3-Minute Assessment | Klein Insight</title>
+  <title>Leadership Pulse Check | 5-Minute Leadership Style Snapshot | Klein Insight</title>
   <meta name="description"
-    content="Take this 3-minute operational assessment to see exactly where your business operations are trapping you, identify your owner profile, and unlock your strategic roadmap.">
+    content="Take the Leadership Pulse Check: a quick, honest snapshot of your unique Business Leadership Style in under 5 minutes. No grades, no perfect score, just a clear mirror of how you operate.">
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -105,7 +105,7 @@
             class="text-[#487b9c]">Insight</span></span>
         <span
           class="text-[10px] uppercase font-mono font-semibold tracking-wider text-[#647c8f] hidden sm:inline ml-2 border-l border-[#d8e2e9] pl-3">
-          Owner Assessment
+          Leadership Pulse Check
         </span>
       </a>
 
@@ -145,23 +145,43 @@
         <div
           class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#eaf2f7] text-[#36607d] border border-[rgba(89,141,174,0.35)] text-xs font-bold tracking-wide">
           <span class="w-2 h-2 rounded-full bg-[#487b9c] animate-pulse"></span>
-          3-Minute Business Owner Assessment
+          Under 5 Minutes &middot; Leadership Style Snapshot
         </div>
 
         <div class="space-y-4">
           <h1 class="text-2xl sm:text-3xl font-extrabold text-[#141f28] tracking-tight leading-tight">
-            Operational Health &amp; Growth Assessment
+            Leadership Pulse Check
           </h1>
           <p class="text-sm sm:text-base text-[#4a5560] leading-relaxed">
-            This quick diagnostic helps identify your operational strengths, uncover hidden friction points, and clarify what is required to build a scalable, autonomous business.
+            Welcome! This quick evaluation is designed to give you a high-level snapshot of your unique
+            <strong class="text-[#141f28]">Business Leadership Style</strong> in under 5 minutes.
           </p>
+          <p class="text-sm sm:text-base text-[#4a5560] leading-relaxed">
+            This is not a test, and you are not being graded. There is no "perfect" score or "unhealthy" business model.
+            It is a tool designed to hold up a mirror to your daily habits and show you exactly how you operate.
+          </p>
+
+          <div class="space-y-3">
+            <p class="text-sm sm:text-base font-bold text-[#141f28]">To get the most accurate snapshot of your style:</p>
+            <ul class="space-y-2.5">
+              <li class="flex items-start gap-3 text-sm sm:text-base text-[#4a5560] leading-relaxed">
+                <span class="w-6 h-6 rounded-full bg-[#eaf2f7] text-[#36607d] border border-[rgba(89,141,174,0.35)] flex items-center justify-center flex-shrink-0 text-xs font-bold mt-0.5">1</span>
+                <span><strong class="text-[#141f28]">Go with your gut.</strong> This is a high-level check, so try not to overthink the statements.</span>
+              </li>
+              <li class="flex items-start gap-3 text-sm sm:text-base text-[#4a5560] leading-relaxed">
+                <span class="w-6 h-6 rounded-full bg-[#eaf2f7] text-[#36607d] border border-[rgba(89,141,174,0.35)] flex items-center justify-center flex-shrink-0 text-xs font-bold mt-0.5">2</span>
+                <span><strong class="text-[#141f28]">Be fiercely honest.</strong> Your true style only shines through if you answer based on what you actually do every day.</span>
+              </li>
+            </ul>
+          </div>
+
           <div
             class="p-4 rounded-xl bg-[#f0f5f8] border border-[#d8e2e9] text-xs sm:text-sm text-[#141f28] font-medium flex items-center gap-3">
             <svg class="w-5 h-5 text-[#487b9c] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <span>Please let us know how much you agree or disagree with the following statements. This assessment should only take a few minutes.</span>
+            <span>For each statement below, simply tell us how much you agree or disagree.</span>
           </div>
         </div>
 
@@ -171,7 +191,7 @@
             <span id="startAssessmentBtnText">Begin Assessment &rarr;</span>
           </button>
           <div id="introResumeCallout" class="hidden mt-3 text-xs text-[#4a5560] flex items-center gap-2">
-            <span>Progress saved at Question <strong id="introSavedQ" class="text-[#141f28]">1</strong> of 17.</span>
+            <span>Progress saved at Statement <strong id="introSavedQ" class="text-[#141f28]">1</strong> of <span id="introTotalQ">23</span>.</span>
             <button type="button" id="introStartFreshBtn" class="text-[#487b9c] hover:underline font-bold">Or start over</button>
           </div>
         </div>
@@ -188,9 +208,9 @@
           <div class="flex items-center justify-between text-xs">
             <span id="stageLabel" class="font-bold uppercase tracking-wider text-[#36607d] flex items-center gap-1.5">
               <span class="w-2 h-2 rounded-full bg-[#487b9c]"></span>
-              The "Operational Reality"
+              Leadership Pulse Check
             </span>
-            <span id="questionStepText" class="font-mono text-[#647c8f] font-semibold">1 / 17</span>
+            <span id="questionStepText" class="font-mono text-[#647c8f] font-semibold">1 / 23</span>
           </div>
 
           <!-- Progress Bar -->
@@ -203,8 +223,7 @@
         <!-- Question Prompt Card -->
         <div class="py-2">
           <h2 id="questionPrompt" class="text-lg sm:text-xl font-bold text-[#141f28] leading-snug">
-            Reacting to whatever urgent fire breaks out each morning makes it incredibly difficult to make the proactive
-            changes my business needs.
+            <!-- Injected via JS (randomized order) -->
           </h2>
         </div>
 
@@ -255,7 +274,7 @@
       </div>
 
       <!-- ===================================================================== -->
-      <!-- VIEW 3: CONTACT GATE (AFTER QUESTION 17)                              -->
+      <!-- VIEW 3: CONTACT GATE (AFTER FINAL STATEMENT)                          -->
       <!-- ===================================================================== -->
       <div id="contactGateView" class="hidden app-card p-6 sm:p-9 space-y-6 fade-in">
 
@@ -265,14 +284,13 @@
             <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
             </svg>
-            Assessment Completed
+            Pulse Check Completed
           </div>
           <h2 class="text-2xl sm:text-3xl font-extrabold text-[#141f28] tracking-tight">
-            Calculating Your Operational Profile...
+            Where Should Joe Send Your Personal Review?
           </h2>
           <p class="text-xs sm:text-sm text-[#4a5560] leading-relaxed">
-            We are analyzing your 17 responses across operational reactivity, delegation bottlenecks, capacity ceilings,
-            and personal impact. Where should we send your full diagnostic breakdown?
+            Joe personally reviews every submission. Enter your contact details below, and Joe will review your answers across all 23 areas and email you tailored feedback on your unique leadership style and operating rhythm.
           </p>
         </div>
 
@@ -312,173 +330,102 @@
           <div class="pt-2">
             <button type="submit" id="submitLeadBtn"
               class="w-full min-h-[48px] py-3 px-6 rounded-xl bg-[#487b9c] hover:bg-[#36607d] text-white font-bold text-sm sm:text-base transition-all shadow-md shadow-[rgba(72,123,156,0.25)] flex items-center justify-center gap-2">
-              <span>Reveal My Operational Profile &rarr;</span>
+              <span>Submit for Personal Review &rarr;</span>
             </button>
           </div>
 
           <p class="text-[11px] text-[#647c8f] text-center">
-            Your information is private and never shared. We will send a direct copy of your results to your email.
+            Your information is private and never shared. Joe will reach out directly to your email with your review.
           </p>
         </form>
 
       </div>
 
       <!-- ===================================================================== -->
-      <!-- VIEW 4: RESULTS & STRATEGY CALL CTA                                   -->
+      <!-- VIEW 4: THANK YOU & PERSONAL REVIEW CONFIRMATION                      -->
       <!-- ===================================================================== -->
       <div id="resultsView" class="hidden space-y-6 fade-in">
 
-        <!-- Main Profile Card -->
         <div class="app-card-accent p-6 sm:p-9 space-y-6">
 
-          <!-- Header Meta -->
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[#d8e2e9] gap-2">
-            <div>
-              <span class="text-[11px] font-mono text-[#36607d] font-bold uppercase tracking-wider block">
-                Executive Briefing Prepared For
-              </span>
-              <h3 id="resultClientName" class="text-base font-extrabold text-[#141f28]">
-                Executive Lead
-              </h3>
-            </div>
-            <div id="tierBadge"
-              class="text-xs px-3 py-1 rounded-full font-bold bg-[#eaf2f7] text-[#36607d] border border-[rgba(89,141,174,0.4)] w-fit">
-              Tier 1 Archetype
-            </div>
-          </div>
-
-          <!-- Archetype Title -->
-          <div class="space-y-2">
-            <span class="text-xs uppercase tracking-wider text-[#647c8f] font-mono font-bold block">
-              YOUR OPERATIONAL PROFILE
-            </span>
-            <h2 id="resultProfileTitle"
-              class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#141f28] tracking-tight">
-              The Chained Architect
-            </h2>
-          </div>
-
-          <!-- Strengths Recognition Card -->
-          <div id="strengthsContainer" class="p-4 sm:p-5 rounded-xl bg-white border border-[#d8e2e9] shadow-sm space-y-3">
-            <!-- Injected via JS -->
-          </div>
-
-          <!-- Frictions Card (Single card, light branded blue, header "Frictions:", bullets, no stage numbers, no red) -->
-          <div id="frictionsContainer" class="p-4 sm:p-5 rounded-xl bg-[#f0f5f8] border border-[rgba(72,123,156,0.3)] space-y-3">
-            <!-- Injected via JS -->
-          </div>
-
-          <!-- Profile Breakdown Narrative -->
-          <div class="p-4 sm:p-5 rounded-xl bg-[#f8fafc] border border-[#d8e2e9] space-y-3">
-            <div class="text-xs font-bold uppercase tracking-wider text-[#36607d] flex items-center gap-1.5">
-              <svg class="w-4 h-4 text-[#487b9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          <!-- Confirmation Header -->
+          <div class="space-y-3">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold w-fit">
+              <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              <span>The Diagnostic Breakdown</span>
+              <span>Submitted for Personal Review</span>
             </div>
-            <div id="resultBreakdownText" class="text-xs sm:text-sm text-[#141f28] leading-relaxed space-y-3">
-              <!-- Injected via JS -->
-            </div>
-          </div>
-
-          <!-- Strategic Takeaway Module -->
-          <div class="p-4 sm:p-5 rounded-xl bg-[#edf3f7] border border-[rgba(89,141,174,0.4)] space-y-2 text-[#141f28]">
-            <div class="flex items-center justify-between">
-              <span class="font-bold text-xs uppercase tracking-wider text-[#141f28] flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-[#487b9c]"></span>
-                Your Immediate Strategic Takeaway
-              </span>
-              <span
-                class="text-[10px] font-mono bg-white border border-[#d8e2e9] px-2 py-0.5 rounded-full text-[#36607d] font-bold">Actionable
-                Framework</span>
-            </div>
-            <p id="resultTakeawayText" class="text-xs sm:text-sm text-[#354c5e] leading-relaxed font-medium">
-              <!-- Injected via JS -->
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-[#141f28] tracking-tight">
+              Thank You, <span id="thankYouClientName">Leader</span>!
+            </h2>
+            <p class="text-sm sm:text-base text-[#4a5560] leading-relaxed">
+              Joe Klein has received your complete Leadership Pulse Check responses. Rather than relying on generic automated scores, Joe personally reviews your answers across all 23 operational, friction, growth, and balance areas.
             </p>
           </div>
 
-          <!-- Joe's Bridge: What This Means For Your Business -->
-          <div class="space-y-3 pt-2 text-xs sm:text-sm text-[#4a5560] leading-relaxed">
-            <h4 class="font-extrabold text-[#141f28] text-sm uppercase tracking-wider">
-              What This Means For Your Business...
-            </h4>
-            <p>
-              There is no cookie-cutter fix for operations. A blue-collar trade shop requires completely different
-              tactical systems than a high-volume white-collar firm.
-            </p>
-            <p id="bridgeProfileMention">
-              Because your profile shows a mix of <strong class="text-[#141f28]" id="bridgeProfileNames">these
-                operational friction points</strong>, the tactics needed to unlock your time are highly specific to your
-              layout.
-            </p>
-            <p class="p-3.5 rounded-lg bg-[#f0f5f8] border border-[#d8e2e9] text-xs text-[#141f28]">
-              <strong>Please note:</strong> This was obviously a very brief assessment designed to flag high-level
-              symptoms. To give you real, strategic clarity, we need a complete diagnostic. When you schedule a
-              zero-pressure strategy call below, you will immediately get access to our full, comprehensive operational
-              assessment. This is a much longer, highly detailed deep dive that maps out your exact workflow, team
-              metrics, and revenue bottlenecks.
-            </p>
-            <p>
-              I want to help you fix this. I hired a business coach myself when I was stuck in a loop with my own
-              fast-moving brain, and it saved my sanity. Let's look over your initial answers and get you that deep-dive
-              tool. If I am not the right fit to help you, I promise I will at least point you in the right direction!
-            </p>
+          <!-- What Happens Next Box -->
+          <div class="p-5 rounded-xl bg-[#f0f5f8] border border-[#d8e2e9] space-y-3">
+            <div class="text-xs font-bold uppercase tracking-wider text-[#36607d] flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#487b9c]"></span>
+              <span>What Happens Next</span>
+            </div>
+            <ul class="space-y-2.5 text-xs sm:text-sm text-[#141f28]">
+              <li class="flex items-start gap-2.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#487b9c] mt-2 flex-shrink-0"></span>
+                <span><strong>Direct Personal Review:</strong> Joe will examine your specific answers to identify your operational style, strengths, and primary friction points.</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#487b9c] mt-2 flex-shrink-0"></span>
+                <span><strong>Email Feedback:</strong> You'll receive a personal email at <strong id="confirmEmail" class="underline text-[#36607d]">your email</strong> within <strong>24–48 hours</strong> with actionable strategic observations. It will arrive directly from <a href="mailto:joe@kleininsight.com" class="text-[#36607d] hover:text-[#141f28] underline font-bold">joe@kleininsight.com</a> (feel free to reach out anytime).</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#487b9c] mt-2 flex-shrink-0"></span>
+                <span><strong>Zero Obligation:</strong> No automated spam or high-pressure sales pitches. Just honest, practical business insights.</span>
+              </li>
+            </ul>
           </div>
 
-          <!-- CTAs -->
-          <div class="pt-4 border-t border-[#d8e2e9] space-y-3">
-
-            <!-- Primary CTA (Let's Talk / Strategy Call) -->
-            <button id="primaryCtaBtn"
-              class="w-full min-h-[50px] py-3.5 px-6 rounded-xl bg-[#487b9c] hover:bg-[#36607d] text-white font-extrabold text-sm sm:text-base transition-all shadow-md shadow-[rgba(72,123,156,0.3)] flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 group">
-              <span>Book Your Strategy Call &rarr;</span>
-              <span class="text-[11px] font-normal text-white/80">(Unlocks In-Depth Assessment)</span>
-            </button>
-
-            <!-- Secondary CTA (Review & Email Results) -->
-            <div class="text-center pt-1">
-              <button id="secondaryCtaBtn" type="button"
-                class="text-xs text-[#36607d] hover:text-[#141f28] underline font-semibold transition-colors py-1">
-                If you would just like me to review your results and email them to you, please click here.
-              </button>
-              <div class="text-[11px] text-[#647c8f] mt-0.5">
-                Joe personally reviews each submission and reaches out within 24–48 hours.
-              </div>
-            </div>
-
-            <!-- Confirmation Banner for Secondary CTA -->
-            <div id="secondaryConfirmation"
-              class="hidden p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 space-y-2">
-              <div class="font-bold flex items-center gap-1.5 text-sm text-emerald-950">
-                <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor"
-                  viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Submitted for Personal Review</span>
-              </div>
-              <p class="leading-relaxed">
-                Joe Klein has received your operational breakdown and responses. He will be personally reviewing your
-                submission and reaching out directly to <strong id="confirmEmail" class="underline">your email</strong>
-                within <strong>24–48 hours</strong> with your tailored strategic takeaways and next steps.
+          <!-- Call to Action Section -->
+          <div class="pt-4 border-t border-[#d8e2e9] space-y-4">
+            <div>
+              <h3 class="font-extrabold text-[#141f28] text-sm uppercase tracking-wider mb-1.5">
+                Want to Discuss Your Results Live?
+              </h3>
+              <p class="text-xs sm:text-sm text-[#4a5560] leading-relaxed mb-4">
+                If you would prefer to walk through your operational challenges together right away, you can schedule a no-pressure strategy conversation directly with Joe.
               </p>
-              <div
-                class="pt-2 border-t border-emerald-200 text-[11px] text-emerald-700 flex items-center gap-1.5 font-medium">
-                <span>✓ Unlocked:</span>
-                <span>You now have access to our full in-depth operational diagnostic on the home page.</span>
-              </div>
+              
+              <!-- Primary CTA (Book a Call / Strategy Call) -->
+              <button id="primaryCtaBtn"
+                class="w-full min-h-[50px] py-3.5 px-6 rounded-xl bg-[#487b9c] hover:bg-[#36607d] text-white font-extrabold text-sm sm:text-base transition-all shadow-md shadow-[rgba(72,123,156,0.3)] flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 group">
+                <span>Book a Strategy Conversation with Joe &rarr;</span>
+                <span class="text-[11px] font-normal text-white/80">(Zero Pressure)</span>
+              </button>
             </div>
 
             <!-- Retake Assessment Action -->
-            <div class="text-center pt-2 border-t border-[#d8e2e9]">
+            <div class="text-center pt-3 border-t border-[#d8e2e9]">
               <button id="retakeAssessmentBtn" type="button"
                 class="text-xs text-[#647c8f] hover:text-[#141f28] underline transition-colors">
-                Want to retake the assessment? Click here &rarr;
+                Want to retake the Pulse Check? Click here &rarr;
               </button>
             </div>
 
           </div>
 
+        </div>
+
+        <!-- Hidden Diagnostic Profile Containers (Preserved for future automated rubric integration) -->
+        <div id="hiddenProfileData" style="display: none !important;" aria-hidden="true">
+          <span id="resultClientName"></span>
+          <span id="tierBadge"></span>
+          <span id="resultProfileTitle"></span>
+          <div id="strengthsContainer"></div>
+          <div id="frictionsContainer"></div>
+          <div id="resultBreakdownText"></div>
+          <span id="resultTakeawayText"></span>
+          <span id="bridgeProfileNames"></span>
         </div>
 
       </div>
@@ -512,143 +459,72 @@
   <!-- ========================================================================= -->
   <script>
     (function () {
-      // 17 Questions across 5 Stages as designed by Joe Klein
+      // Leadership Pulse Check: 23 statements across 5 categories as designed by Joe Klein.
+      // Statements are presented in a randomized order per session (see state.order).
+      // reverse: true = positive-habit statement; DISAGREEMENT signals friction.
       const QUESTIONS = [
-        // Stage 1: The "Operational Reality" (The Safe Truths)
-        {
-          id: 1,
-          stage: 1,
-          stageTitle: 'The "Operational Reality"',
-          stageGoal: 'Build immediate trust by accurately naming your daily frustrations.',
-          prompt: "Reacting to whatever urgent fire breaks out each morning makes it incredibly difficult to make the proactive changes my business needs."
-        },
-        {
-          id: 2,
-          stage: 1,
-          stageTitle: 'The "Operational Reality"',
-          stageGoal: 'Build immediate trust by accurately naming your daily frustrations.',
-          prompt: "In the interest of moving quickly, I often find it's faster to just handle routine tasks myself than to take the time to delegate them."
-        },
-        {
-          id: 3,
-          stage: 1,
-          stageTitle: 'The "Operational Reality"',
-          stageGoal: 'Build immediate trust by accurately naming your daily frustrations.',
-          prompt: "When making big strategic decisions, I often wish I had a clearer, more predictable picture of our exact sales data and metrics."
-        },
+        // Category 1: Operational Reality
+        { id: 1, stage: 1, stageTitle: 'Operational Reality', reverse: false, prompt: "I frequently postpone long-term planning because immediate, daily problems demand my attention." },
+        { id: 2, stage: 1, stageTitle: 'Operational Reality', reverse: false, prompt: "I am the primary person responsible for handling customer complaints or technical troubleshooting on a daily basis." },
+        { id: 3, stage: 1, stageTitle: 'Operational Reality', reverse: false, prompt: "It’s usually faster to just do tasks myself." },
+        { id: 4, stage: 1, stageTitle: 'Operational Reality', reverse: false, prompt: "I tend to take on tasks because it’s faster to do it myself." },
+        { id: 5, stage: 1, stageTitle: 'Operational Reality', reverse: true, prompt: "I have a clear, up-to-date system for tracking our business metrics." },
+        { id: 6, stage: 1, stageTitle: 'Operational Reality', reverse: true, prompt: "I regularly log data on how efficiently our day-to-day operations are running." },
+        { id: 7, stage: 1, stageTitle: 'Operational Reality', reverse: true, prompt: "I have a reliable method for measuring how satisfied our customers are." },
 
-        // Stage 2: The "Friction & Frustration" (The Internal Grind)
-        {
-          id: 4,
-          stage: 2,
-          stageTitle: 'The "Friction & Frustration"',
-          stageGoal: 'Highlight how your high standards and intelligence are accidentally creating a bottleneck.',
-          prompt: "I often feel like the bottleneck because my team frequently relies on my explicit approval before they can take the next step or finish a job."
-        },
-        {
-          id: 5,
-          stage: 2,
-          stageTitle: 'The "Friction & Frustration"',
-          stageGoal: 'Highlight how your high standards and intelligence are accidentally creating a bottleneck.',
-          prompt: "It is incredibly frustrating when a project is marked 'done' by the team, but I still have to step in to fix the loose ends myself."
-        },
-        {
-          id: 6,
-          stage: 2,
-          stageTitle: 'The "Friction & Frustration"',
-          stageGoal: 'Highlight how your high standards and intelligence are accidentally creating a bottleneck.',
-          prompt: "I have a long list of great initiatives I’ve started for the business that are currently sitting half-finished due to a lack of time."
-        },
-        {
-          id: 7,
-          stage: 2,
-          stageTitle: 'The "Friction & Frustration"',
-          stageGoal: 'Highlight how your high standards and intelligence are accidentally creating a bottleneck.',
-          prompt: "I feel stretched thin because finding and keeping people who can truly 'own' their responsibilities is a constant battle."
-        },
+        // Category 2: Friction & Frustration
+        { id: 8, stage: 2, stageTitle: 'Friction & Frustration', reverse: false, prompt: "Tasks and/or jobs usually require my supervision for quality control." },
+        { id: 9, stage: 2, stageTitle: 'Friction & Frustration', reverse: false, prompt: "I prefer to personally oversee critical workflows to guarantee our customers get the best results." },
+        { id: 10, stage: 2, stageTitle: 'Friction & Frustration', reverse: false, prompt: "My team frequently relies on my guidance and input to get their daily tasks done correctly." },
+        { id: 11, stage: 2, stageTitle: 'Friction & Frustration', reverse: false, prompt: "Keeping daily operations running smoothly leaves little time for long-term planning." },
+        { id: 12, stage: 2, stageTitle: 'Friction & Frustration', reverse: false, prompt: "It is difficult to find people to hire that meet my standards for work." },
 
-        // Stage 3: The "Growth Bottleneck" (The Scaling Fear)
-        {
-          id: 8,
-          stage: 3,
-          stageTitle: 'The "Growth Bottleneck"',
-          stageGoal: 'Address the friction of hiring and seeing others surpass you.',
-          prompt: "I hesitate to hire more employees because I'm worried it will just mean more people I have to personally manage and fix mistakes for."
-        },
-        {
-          id: 9,
-          stage: 3,
-          stageTitle: 'The "Growth Bottleneck"',
-          stageGoal: 'Address the friction of hiring and seeing others surpass you.',
-          prompt: "Given the sheer amount of energy, intelligence, and time I pour into this business, I know the financial return should be significantly higher than it currently is."
-        },
-        {
-          id: 10,
-          stage: 3,
-          stageTitle: 'The "Growth Bottleneck"',
-          stageGoal: 'Address the friction of hiring and seeing others surpass you.',
-          prompt: "I have actually passed up growth opportunities simply because our current setup couldn't handle the extra work without burning me out."
-        },
+        // Category 3: Growth Bottleneck
+        { id: 13, stage: 3, stageTitle: 'Growth Bottleneck', reverse: false, prompt: "I am more focused on building a high-quality business for the future than on maximizing my immediate personal payout." },
+        { id: 14, stage: 3, stageTitle: 'Growth Bottleneck', reverse: false, prompt: "I am willing to absorb higher operational costs if it means delivering the best possible service to our clients." },
+        { id: 15, stage: 3, stageTitle: 'Growth Bottleneck', reverse: false, prompt: "I will pass on a new business opportunity if I feel our internal processes aren't ready yet." },
+        { id: 16, stage: 3, stageTitle: 'Growth Bottleneck', reverse: false, prompt: "I believe it is better to grow slowly and steadily than to stretch our current team too thin for a new deal." },
 
-        // Stage 4: The "Home Life Impact" (The Deep Vulnerability)
-        {
-          id: 11,
-          stage: 4,
-          stageTitle: 'The "Home Life Impact"',
-          stageGoal: 'Face the personal and relational cost of running on a hamster wheel.',
-          prompt: "I find myself mentally 'on the clock' or constantly answering business messages even when I am physically at home with my family."
-        },
-        {
-          id: 12,
-          stage: 4,
-          stageTitle: 'The "Home Life Impact"',
-          stageGoal: 'Face the personal and relational cost of running on a hamster wheel.',
-          prompt: "Stepping away from the business for a few days feels so risky that a true, worry-free vacation is almost impossible right now."
-        },
-        {
-          id: 13,
-          stage: 4,
-          stageTitle: 'The "Home Life Impact"',
-          stageGoal: 'Face the personal and relational cost of running on a hamster wheel.',
-          prompt: "I missed a personal or family milestone recently because an operational issue required me to stay working."
-        },
-        {
-          id: 14,
-          stage: 4,
-          stageTitle: 'The "Home Life Impact"',
-          stageGoal: 'Face the personal and relational cost of running on a hamster wheel.',
-          prompt: "I often feel like my family gets the leftover, exhausted version of me at the end of the day."
-        },
+        // Category 4: Home Life Balance
+        { id: 17, stage: 4, stageTitle: 'Home Life Balance', reverse: false, prompt: "I find it difficult to mentally disconnect from work when I am at home." },
+        { id: 18, stage: 4, stageTitle: 'Home Life Balance', reverse: false, prompt: "If I am physically capable of getting out of bed, I believe I should be at work." },
+        { id: 19, stage: 4, stageTitle: 'Home Life Balance', reverse: false, prompt: "I have missed personal or family events I truly wanted to attend because I had to work." },
+        { id: 20, stage: 4, stageTitle: 'Home Life Balance', reverse: false, prompt: "The people closest to me do not realize just how physically or mentally exhausted I really am." },
 
-        // Stage 5: The "Value & Impact" Check (The Final Calculation)
-        {
-          id: 15,
-          stage: 5,
-          stageTitle: 'The "Value & Impact" Check',
-          stageGoal: 'Help quantify what solving these bottlenecks would look like for your business.',
-          prompt: "I could take a 2-week vacation later this month on short notice, and I would only need to respond to a few messages here or there rather than being bombarded with urgent calls."
-        },
-        {
-          id: 16,
-          stage: 5,
-          stageTitle: 'The "Value & Impact" Check',
-          stageGoal: 'Help quantify what solving these bottlenecks would look like for your business.',
-          prompt: "I am genuinely satisfied with how much money my business is currently making relative to the sheer amount of effort I put into it."
-        },
-        {
-          id: 17,
-          stage: 5,
-          stageTitle: 'The "Value & Impact" Check',
-          stageGoal: 'Help quantify what solving these bottlenecks would look like for your business.',
-          prompt: "I don't feel like my dedication to running this business is causing me to spend too much time away from my family."
-        }
+        // Category 5: Impact
+        { id: 21, stage: 5, stageTitle: 'Impact', reverse: true, prompt: "I could take a sudden, two-week vacation right now and completely relax, knowing the business can run smoothly without me." },
+        { id: 22, stage: 5, stageTitle: 'Impact', reverse: true, prompt: "I am genuinely satisfied with the current pace of my business's growth." },
+        { id: 23, stage: 5, stageTitle: 'Impact', reverse: true, prompt: "I have more than enough quality time to dedicate to my friends and family." }
       ];
+
+      const QUESTION_BY_ID = {};
+      QUESTIONS.forEach(q => { QUESTION_BY_ID[q.id] = q; });
+      const PROGRESS_VERSION = 2; // bump when the question set changes so stale saved progress is discarded
+
+      // Fisher-Yates shuffle of question ids for randomized presentation
+      function createRandomOrder() {
+        const ids = QUESTIONS.map(q => q.id);
+        for (let i = ids.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [ids[i], ids[j]] = [ids[j], ids[i]];
+        }
+        return ids;
+      }
+
+      function isValidOrder(order) {
+        return Array.isArray(order) && order.length === QUESTIONS.length &&
+          QUESTIONS.every(q => order.includes(q.id));
+      }
+
+      function getCurrentQuestion() {
+        return QUESTION_BY_ID[state.order[state.currentIndex]];
+      }
 
       // Stage Profiles metadata for blended or specific triggers
       const STAGE_IDENTITIES = {
         1: {
           title: "The Firefighter",
-          shortDesc: "Highly reactive daily operations dictating your morning, leaving no room for proactive planning."
+          shortDesc: "Immediate daily problems and hands-on troubleshooting dictate your schedule, while long-term planning and business metrics take a back seat."
         },
         2: {
           title: "The Bottleneck / Soloist",
@@ -656,7 +532,7 @@
         },
         3: {
           title: "The Capped Operator",
-          shortDesc: "Terrified of hiring or scaling because current operational framework will snap under more weight."
+          shortDesc: "A fierce commitment to quality and team capacity that leads you to pass on opportunities until every process feels ready."
         },
         4: {
           title: "The Exhausted Provider",
@@ -664,14 +540,15 @@
         },
         5: {
           title: "The Chained Producer",
-          shortDesc: "Severe disconnect between massive effort invested and true operational freedom or financial peace."
+          shortDesc: "Severe disconnect between massive effort invested and true freedom, growth pace, or quality personal time."
         }
       };
 
       // State Management
       const state = {
         currentIndex: 0,
-        answers: {}, // questionId: "Agree" | "Unsure" | "Disagree"
+        order: createRandomOrder(), // randomized question ids; persisted so resume keeps the same order
+        answers: {}, // questionId: "Strongly Agree" | "Agree" | "Unsure" | "Disagree" | "Strongly Disagree"
         lead: {
           firstName: '',
           lastName: '',
@@ -742,7 +619,7 @@
       choiceButtons.forEach(btn => {
         btn.addEventListener('click', () => {
           const val = btn.dataset.val;
-          const currentQ = QUESTIONS[state.currentIndex];
+          const currentQ = getCurrentQuestion();
           state.answers[currentQ.id] = val;
 
           // Highlight selection briefly before advance
@@ -774,15 +651,15 @@
       });
 
       function renderCurrentQuestion() {
-        const q = QUESTIONS[state.currentIndex];
+        const q = getCurrentQuestion();
         const total = QUESTIONS.length;
         const progressPct = Math.round(((state.currentIndex + 1) / total) * 100);
 
         questionStepText.textContent = `${state.currentIndex + 1} / ${total}`;
         progressBar.style.width = `${progressPct}%`;
 
-        // User request: stage name only (no "Stage X: ")
-        stageLabel.innerHTML = `<span class="w-2 h-2 rounded-full bg-[#487b9c]"></span> ${q.stageTitle}`;
+        // Statements are randomized, so the category name is intentionally hidden to avoid priming answers
+        stageLabel.innerHTML = `<span class="w-2 h-2 rounded-full bg-[#487b9c]"></span> Leadership Pulse Check`;
         questionPrompt.textContent = q.prompt;
 
         // Handle Back button visibility
@@ -857,7 +734,7 @@
         }
 
         // Auto-dispatch lead dossier to Joe via Web3Forms
-        dispatchLeadEmailToJoe('Lead Gate Completed - Profile Revealed');
+        dispatchLeadEmailToJoe('Pulse Check Submitted - Request Personal Review');
 
         // Render Results Screen
         renderResultsScreen(analysis);
@@ -866,34 +743,34 @@
       // SCORING LOGIC (Joe Klein's Methodology with 5-Point Scale)
       const FRICTIONS_DATA = {
         1: {
-          title: "Reactive Daily Firefighting",
-          desc: "Urgent morning disruptions repeatedly displace the high-leverage strategic work needed to advance the business."
+          title: "Reactive Operations & Limited Visibility",
+          desc: "Immediate daily problems repeatedly displace long-term planning, and without reliable tracking of metrics, efficiency, and customer satisfaction, key decisions rely on instinct."
         },
         2: {
           title: "The Approval & Delegation Bottleneck",
-          desc: "Team momentum stalls waiting for your explicit approval, and fixing loose ends prevents genuine operational autonomy."
+          desc: "Quality control, critical workflows, and daily guidance all route through you, which stalls team momentum and prevents genuine operational autonomy."
         },
         3: {
-          title: "Scaling & Headcount Hesitation",
-          desc: "Passing up growth opportunities or hesitating to hire out of concern that extra staff will only multiply your management burden."
+          title: "Quality-First Growth Restraint",
+          desc: "A strong commitment to quality and team capacity leads you to absorb extra costs and pass on new opportunities, which can quietly cap your growth rate."
         },
         4: {
           title: "Spillover into Personal & Family Life",
-          desc: "Remaining mentally on the clock during evenings at home, bringing an exhausted, leftover version of yourself to the people who matter most."
+          desc: "Struggling to disconnect at home, missing events that matter, and carrying an exhaustion the people closest to you may not even see."
         },
         5: {
           title: "Effort-to-Freedom Disconnect",
-          desc: "A persistent mismatch between the intense daily energy invested and the operational freedom, peace of mind, or financial return realized."
+          desc: "A persistent mismatch between the intense daily energy invested and the freedom, growth pace, or quality personal time it returns."
         }
       };
 
       function parseStrengths(answers) {
         const strengths = [];
 
-        // 1. High Standards & Craftsmanship (Q2 / Q5)
-        const q2 = answers[2] || '';
-        const q5 = answers[5] || '';
-        if (q2.includes('Agree') || q5.includes('Agree')) {
+        // 1. High Standards & Craftsmanship (Q3 faster to do myself / Q8 supervision for quality control)
+        const qDoMyself = answers[3] || '';
+        const qSupervision = answers[8] || '';
+        if (qDoMyself.includes('Agree') || qSupervision.includes('Agree')) {
           strengths.push({
             title: "Commitment to Uncompromising Quality & Craftsmanship",
             desc: "You refuse to accept mediocre work or let client outcomes slip. While this habit often creates an operational bottleneck, it reflects the obsessive high standard that built your company's reputation and client trust in the first place."
@@ -905,10 +782,10 @@
           });
         }
 
-        // 2. Entrepreneurial Agility & Crisis Management (Q1 / Q6)
-        const q1 = answers[1] || '';
-        const q6 = answers[6] || '';
-        if (q1.includes('Agree') || q6.includes('Agree')) {
+        // 2. Entrepreneurial Agility & Crisis Management (Q1 daily problems / Q2 primary troubleshooter)
+        const qDailyProblems = answers[1] || '';
+        const qTroubleshooter = answers[2] || '';
+        if (qDailyProblems.includes('Agree') || qTroubleshooter.includes('Agree')) {
           strengths.push({
             title: "Entrepreneurial Problem-Solving & Agility",
             desc: "You possess remarkable entrepreneurial reflexes and the grit to tackle complex fires in real time. Your mind naturally generates new growth initiatives and innovative directions for the enterprise."
@@ -920,10 +797,10 @@
           });
         }
 
-        // 3. Prudent Risk Management & Stewardship (Q8 / Q10)
-        const q8 = answers[8] || '';
-        const q10 = answers[10] || '';
-        if (q8.includes('Agree') || q10.includes('Agree')) {
+        // 3. Prudent Risk Management & Stewardship (Q15 pass on opportunity / Q16 grow slowly)
+        const qPassOnDeal = answers[15] || '';
+        const qGrowSlowly = answers[16] || '';
+        if (qPassOnDeal.includes('Agree') || qGrowSlowly.includes('Agree')) {
           strengths.push({
             title: "Protective Stewardship & Disciplined Scaling",
             desc: "You refuse to hire recklessly or add overhead without assurance of quality. This disciplined caution protects company solvency, cash flow, and team culture from runaway bloat."
@@ -935,10 +812,10 @@
           });
         }
 
-        // 4. Devotion to Family & Team as Provider (Q11 / Q14)
-        const q11 = answers[11] || '';
-        const q14 = answers[14] || '';
-        if (q11.includes('Agree') || q14.includes('Agree')) {
+        // 4. Devotion to Family & Team as Provider (Q17 can't disconnect / Q20 hidden exhaustion)
+        const qDisconnect = answers[17] || '';
+        const qExhausted = answers[20] || '';
+        if (qDisconnect.includes('Agree') || qExhausted.includes('Agree')) {
           strengths.push({
             title: "Fierce Dedication as a Provider",
             desc: "Your willingness to bear heavy workloads is driven by deep responsibility for the family and employees who depend on you. You carry the burden because you genuinely care about protecting their future."
@@ -959,58 +836,33 @@
 
         function getFrictionWeight(ans, isReverse) {
           if (!ans) return 0;
-          if (!isReverse) {
-            // Stages 1-4: Agreement = friction
-            if (ans === 'Strongly Agree' || ans === 'Agree') return 1.0;
-            if (ans === 'Unsure') return 0.5;
-            return 0;
-          } else {
-            // Stage 5: Disagreement = friction
-            if (ans === 'Strongly Disagree' || ans === 'Disagree') return 1.0;
-            if (ans === 'Unsure') return 0.5;
-            return 0;
-          }
+          if (ans === 'Unsure') return 0.5;
+          const agrees = ans === 'Strongly Agree' || ans === 'Agree';
+          const disagrees = ans === 'Strongly Disagree' || ans === 'Disagree';
+          // Standard statements: agreement = friction. Reverse (positive-habit) statements: disagreement = friction.
+          return (isReverse ? disagrees : agrees) ? 1.0 : 0;
         }
 
-        // Stage 1: Questions 1, 2, 3 (3 questions, triggered if score >= 1.5)
-        const s1Score = [1, 2, 3].reduce((sum, id) => sum + getFrictionWeight(answers[id], false), 0);
-        const s1Triggered = s1Score >= 1.5;
+        // Each category is triggered when its friction score reaches 50% of its maximum
+        // (Operational Reality 7 → 3.5, Friction 5 → 2.5, Growth 4 → 2, Home Life 4 → 2, Impact 3 → 1.5)
+        const STAGES = [1, 2, 3, 4, 5];
+        const stageResults = {};
+        STAGES.forEach(stage => {
+          const stageQs = QUESTIONS.filter(q => q.stage === stage);
+          const score = stageQs.reduce((sum, q) => sum + getFrictionWeight(answers[q.id], q.reverse), 0);
+          stageResults[stage] = { score, max: stageQs.length, triggered: score >= stageQs.length / 2 };
+        });
 
-        // Stage 2: Questions 4, 5, 6, 7 (4 questions, triggered if score >= 2.0)
-        const s2Score = [4, 5, 6, 7].reduce((sum, id) => sum + getFrictionWeight(answers[id], false), 0);
-        const s2Triggered = s2Score >= 2.0;
-
-        // Stage 3: Questions 8, 9, 10 (3 questions, triggered if score >= 1.5)
-        const s3Score = [8, 9, 10].reduce((sum, id) => sum + getFrictionWeight(answers[id], false), 0);
-        const s3Triggered = s3Score >= 1.5;
-
-        // Stage 4: Questions 11, 12, 13, 14 (4 questions, triggered if score >= 2.0)
-        const s4Score = [11, 12, 13, 14].reduce((sum, id) => sum + getFrictionWeight(answers[id], false), 0);
-        const s4Triggered = s4Score >= 2.0;
-
-        // Stage 5: Questions 15, 16, 17 (3 questions, reverse scored, triggered if score >= 1.5)
-        const s5Score = [15, 16, 17].reduce((sum, id) => sum + getFrictionWeight(answers[id], true), 0);
-        const s5Triggered = s5Score >= 1.5;
-
-        const triggeredStages = [];
-        if (s1Triggered) triggeredStages.push(1);
-        if (s2Triggered) triggeredStages.push(2);
-        if (s3Triggered) triggeredStages.push(3);
-        if (s4Triggered) triggeredStages.push(4);
-        if (s5Triggered) triggeredStages.push(5);
-
+        const triggeredStages = STAGES.filter(s => stageResults[s].triggered);
         const countTriggered = triggeredStages.length;
 
-        // Check for Mythical Legend: Disagree to Stages 1-4 and Agree to Stage 5
-        const allS1toS4Disagree = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].every(id => {
-          const a = answers[id];
-          return a === 'Disagree' || a === 'Strongly Disagree';
+        // Check for Mythical Legend: every statement answered firmly in the no-friction direction
+        const isMythicalLegend = QUESTIONS.every(q => {
+          const a = answers[q.id];
+          const agrees = a === 'Agree' || a === 'Strongly Agree';
+          const disagrees = a === 'Disagree' || a === 'Strongly Disagree';
+          return q.reverse ? agrees : disagrees;
         });
-        const allS5Agree = [15, 16, 17].every(id => {
-          const a = answers[id];
-          return a === 'Agree' || a === 'Strongly Agree';
-        });
-        const isMythicalLegend = allS1toS4Disagree && allS5Agree;
 
         let profileTitle = '';
         let tierLabel = '';
@@ -1125,11 +977,11 @@
           countTriggered,
           triggeredStages,
           stageScores: {
-            s1: `${s1Score}/3 (${s1Triggered ? 'Triggered' : 'Normal'})`,
-            s2: `${s2Score}/4 (${s2Triggered ? 'Triggered' : 'Normal'})`,
-            s3: `${s3Score}/3 (${s3Triggered ? 'Triggered' : 'Normal'})`,
-            s4: `${s4Score}/4 (${s4Triggered ? 'Triggered' : 'Normal'})`,
-            s5: `${s5Score}/3 (${s5Triggered ? 'Triggered' : 'Normal'})`
+            s1: `${stageResults[1].score}/${stageResults[1].max} (${stageResults[1].triggered ? 'Triggered' : 'Normal'})`,
+            s2: `${stageResults[2].score}/${stageResults[2].max} (${stageResults[2].triggered ? 'Triggered' : 'Normal'})`,
+            s3: `${stageResults[3].score}/${stageResults[3].max} (${stageResults[3].triggered ? 'Triggered' : 'Normal'})`,
+            s4: `${stageResults[4].score}/${stageResults[4].max} (${stageResults[4].triggered ? 'Triggered' : 'Normal'})`,
+            s5: `${stageResults[5].score}/${stageResults[5].max} (${stageResults[5].triggered ? 'Triggered' : 'Normal'})`
           }
         };
       }
@@ -1224,41 +1076,22 @@
           }
         }
 
-        // Wire Primary CTA (Book a Call / Strategy Call)
-        const primaryCta = document.getElementById('primaryCtaBtn');
-        const secondaryCta = document.getElementById('secondaryCtaBtn');
-        const secondaryConfirmation = document.getElementById('secondaryConfirmation');
+        const thankYouClientName = document.getElementById('thankYouClientName');
+        if (thankYouClientName) {
+          thankYouClientName.textContent = state.lead.firstName || state.lead.name || 'Leader';
+        }
 
+        // Wire Primary CTA (Book a Strategy Conversation with Joe)
+        const primaryCta = document.getElementById('primaryCtaBtn');
         if (primaryCta) {
-          primaryCta.innerHTML = `<span>Book Your Strategy Call &rarr;</span><span class="text-[11px] font-normal text-white/80">(Unlocks In-Depth Assessment)</span>`;
           primaryCta.onclick = function () {
-            dispatchLeadEmailToJoe('Clicked Primary CTA - Book Strategy Call / Let\'s Talk');
+            dispatchLeadEmailToJoe('Clicked Primary CTA - Book Strategy Conversation from Thank You Page');
             const params = new URLSearchParams();
             if (state.lead.name) params.set('name', state.lead.name);
             if (state.lead.email) params.set('email', state.lead.email);
             if (state.lead.company) params.set('business', state.lead.company);
-            params.set('utm_source', 'assessment_leadgen');
-            params.set('profile', analysis.profileTitle);
+            params.set('utm_source', 'pulse_check_thank_you');
             window.location.href = `index.html?${params.toString()}#contact`;
-          };
-        }
-
-        // Wire Secondary CTA (Submit Email for Personal Review)
-        if (secondaryCta) {
-          secondaryCta.style.display = 'inline-block';
-          secondaryCta.onclick = function () {
-            try {
-              localStorage.setItem('klein_call_booked', 'true');
-              localStorage.setItem('klein_deep_unlocked', 'true');
-            } catch (e) { }
-            dispatchLeadEmailToJoe('Clicked Secondary CTA - Request Review & Email Breakdown (24-48h)');
-            if (secondaryConfirmation) {
-              secondaryConfirmation.classList.remove('hidden');
-              secondaryConfirmation.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }
-            secondaryCta.classList.add('opacity-50', 'pointer-events-none');
-            secondaryCta.textContent = '✓ Results submitted for personal review.';
-            syncNavbarButtons();
           };
         }
 
@@ -1270,6 +1103,7 @@
               localStorage.removeItem('klein_leadgen_progress');
             } catch (e) { }
             state.currentIndex = 0;
+            state.order = createRandomOrder();
             state.answers = {};
             resultsView.classList.add('hidden');
             questionView.classList.remove('hidden');
@@ -1287,10 +1121,12 @@
           const lead = state.lead;
           const analysis = state.analysis || calculateScoringProfile();
 
-          // Format all 17 answers
+          // Format all answers grouped by category (canonical order), plus the randomized order shown
           const formattedAnswers = QUESTIONS.map((q, idx) => {
             const ans = state.answers[q.id] || 'Unanswered';
-            return `${idx + 1}. [Stage ${q.stage}] "${q.prompt}"\n   Response: ${ans}`;
+            const shownAt = state.order.indexOf(q.id) + 1;
+            const reverseNote = q.reverse ? ' (reverse-scored)' : '';
+            return `${idx + 1}. [${q.stageTitle}]${reverseNote} "${q.prompt}"\n   Response: ${ans} | Shown as #${shownAt}`;
           }).join('\n\n');
 
           const payload = {
@@ -1303,14 +1139,14 @@
             'Action Trigger': actionTrigger,
             'Calculated Profile': analysis.profileTitle,
             'Tier Level': analysis.tierLabel,
-            'Stages Triggered Count': `${analysis.countTriggered} of 5`,
-            'Stage 1 (Operational Reality)': analysis.stageScores.s1,
-            'Stage 2 (Friction & Frustration)': analysis.stageScores.s2,
-            'Stage 3 (Growth Bottleneck)': analysis.stageScores.s3,
-            'Stage 4 (Home Life Impact)': analysis.stageScores.s4,
-            'Stage 5 (Value & Impact Check)': analysis.stageScores.s5,
+            'Categories Triggered Count': `${analysis.countTriggered} of 5`,
+            'Category 1 (Operational Reality)': analysis.stageScores.s1,
+            'Category 2 (Friction & Frustration)': analysis.stageScores.s2,
+            'Category 3 (Growth Bottleneck)': analysis.stageScores.s3,
+            'Category 4 (Home Life Balance)': analysis.stageScores.s4,
+            'Category 5 (Impact)': analysis.stageScores.s5,
             'Strategic Takeaway': analysis.takeaway,
-            'All 17 Scenario Answers': formattedAnswers,
+            [`All ${QUESTIONS.length} Statement Answers`]: formattedAnswers,
             botcheck: false
           };
 
@@ -1383,7 +1219,9 @@
           const hasAnswers = Object.keys(state.answers || {}).length > 0;
           if (hasAnswers || state.currentIndex > 0) {
             localStorage.setItem('klein_leadgen_progress', JSON.stringify({
+              version: PROGRESS_VERSION,
               currentIndex: state.currentIndex,
+              order: state.order,
               answers: state.answers,
               lead: state.lead,
               savedAt: new Date().toISOString()
@@ -1426,18 +1264,27 @@
           const raw = localStorage.getItem('klein_leadgen_progress');
           if (raw) {
             const saved = JSON.parse(raw);
+            // Discard progress saved against an older question set (or without a valid randomized order)
+            if (saved && (saved.version !== PROGRESS_VERSION || !isValidOrder(saved.order))) {
+              localStorage.removeItem('klein_leadgen_progress');
+              return false;
+            }
             if (saved && ((saved.answers && Object.keys(saved.answers).length > 0) || saved.currentIndex > 0)) {
-              state.currentIndex = typeof saved.currentIndex === 'number' ? saved.currentIndex : 0;
+              state.currentIndex = typeof saved.currentIndex === 'number'
+                ? Math.min(Math.max(saved.currentIndex, 0), QUESTIONS.length - 1) : 0;
+              state.order = saved.order;
               state.answers = saved.answers || {};
               state.lead = saved.lead || state.lead;
 
               const introResumeCallout = document.getElementById('introResumeCallout');
               const introSavedQ = document.getElementById('introSavedQ');
+              const introTotalQ = document.getElementById('introTotalQ');
               const startAssessmentBtnText = document.getElementById('startAssessmentBtnText');
 
               if (introResumeCallout && introSavedQ && startAssessmentBtnText) {
-                introSavedQ.textContent = Math.min(17, state.currentIndex + 1);
-                startAssessmentBtnText.innerHTML = `Resume Assessment (${state.currentIndex + 1} of 17) &rarr;`;
+                introSavedQ.textContent = state.currentIndex + 1;
+                if (introTotalQ) introTotalQ.textContent = QUESTIONS.length;
+                startAssessmentBtnText.innerHTML = `Resume Assessment (${state.currentIndex + 1} of ${QUESTIONS.length}) &rarr;`;
                 introResumeCallout.classList.remove('hidden');
               }
               return true;
@@ -1456,6 +1303,7 @@
             localStorage.removeItem('klein_leadgen_progress');
           } catch (e) { }
           state.currentIndex = 0;
+          state.order = createRandomOrder();
           state.answers = {};
           const introResumeCallout = document.getElementById('introResumeCallout');
           const startAssessmentBtnText = document.getElementById('startAssessmentBtnText');

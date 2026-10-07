@@ -234,13 +234,13 @@ textarea.application-control {
   font-weight: 750;
 }
 
-.application-rating-option input:checked + span {
+.application-rating-option input:checked+span {
   border-color: var(--accent-dark);
   background: var(--accent-dark);
   color: var(--white);
 }
 
-.application-rating-option input:focus-visible + span,
+.application-rating-option input:focus-visible+span,
 .application-close:focus-visible,
 .application-edit:focus-visible,
 .application-button:focus-visible,
@@ -385,5 +385,3 @@ textarea.application-control {
 }
 
 }
-
-
