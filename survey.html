@@ -109,14 +109,25 @@
         </span>
       </a>
 
-      <div class="flex items-center gap-3">
-        <span id="headerProgressBadge"
-          class="hidden text-xs font-mono font-semibold text-[#36607d] bg-[#eaf2f7] px-2.5 py-1 rounded-full border border-[rgba(89,141,174,0.3)]">
-          Question <span id="headerCurrentQ">1</span> of 17
-        </span>
-        <a href="index.html"
-          class="text-xs font-semibold text-[#4a5560] hover:text-[#141f28] transition-colors py-1.5 px-3 rounded-lg border border-[#d8e2e9] hover:bg-[#f8fafc]">
-          &larr; Exit to Home
+      <div class="flex items-center gap-2 sm:gap-2.5">
+        <button id="saveExitSurveyBtn"
+          class="text-xs px-2 sm:px-2.5 py-1.5 rounded-lg border border-[#d8e2e9] bg-white hover:bg-[#edf3f7] text-[#36607d] font-semibold transition-colors flex items-center gap-1.5 shadow-sm whitespace-nowrap flex-shrink-0"
+          title="Save &amp; Exit to Homepage (Esc)"
+          aria-label="Save and Exit">
+          <svg class="w-3.5 h-3.5 text-[#487b9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+          </svg>
+          <span class="hidden sm:inline">Save &amp; Exit</span>
+          <kbd
+            class="hidden md:inline-block text-[9px] font-mono text-[#647c8f] bg-[#edf3f7] px-1 py-0.2 rounded border border-[#d8e2e9]">Esc</kbd>
+        </button>
+        <a href="index.html#contact" id="navLetsTalkBtn"
+          class="text-xs px-2.5 sm:px-3 py-1.5 rounded-lg bg-[#487b9c] hover:bg-[#36607d] text-white font-bold transition-colors flex items-center gap-1.5 shadow-sm whitespace-nowrap flex-shrink-0">
+          <span>Let's Talk</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
         </a>
       </div>
     </div>
@@ -134,31 +145,15 @@
         <div
           class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#eaf2f7] text-[#36607d] border border-[rgba(89,141,174,0.35)] text-xs font-bold tracking-wide">
           <span class="w-2 h-2 rounded-full bg-[#487b9c] animate-pulse"></span>
-          3-Minute Client Conversion Assessment
+          3-Minute Business Owner Assessment
         </div>
 
-        <div class="space-y-3">
-          <h1 class="text-3xl sm:text-4xl font-extrabold text-[#141f28] tracking-tight leading-tight">
-            &ldquo;What the hell is wrong with me?&rdquo;
+        <div class="space-y-4">
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-[#141f28] tracking-tight leading-tight">
+            Operational Health &amp; Growth Assessment
           </h1>
-          <p class="text-base sm:text-lg text-[#36607d] font-semibold">
-            Ever met a business owner who is pulling in massive success, looked at how they operate, and thought to
-            yourself: <em class="text-[#141f28]">If this person can do it, why am I grinding 60 hours a week just to
-              stay afloat?</em>
-          </p>
-        </div>
-
-        <div class="space-y-4 text-sm sm:text-base text-[#4a5560] leading-relaxed">
-          <p>
-            You are intelligent. You make good money. But right now, <strong class="text-[#141f28]">you are the
-              bottleneck</strong>. Transitioning to the next phase of growth feels terrifying because your brain is
-            already running at 100 miles an hour (as someone with ADHD, I know that feeling intimately). Adding more
-            employees or more clients just feels like adding more noise to a system that’s already stretched thin.
-          </p>
-          <p>
-            After 11 years of doing market research for major corporations, I realized that scaling a business isn't
-            about working harder. It’s about building a framework that doesn't rely entirely on your personal
-            brainpower.
+          <p class="text-sm sm:text-base text-[#4a5560] leading-relaxed">
+            This quick diagnostic helps identify your operational strengths, uncover hidden friction points, and clarify what is required to build a scalable, autonomous business.
           </p>
           <div
             class="p-4 rounded-xl bg-[#f0f5f8] border border-[#d8e2e9] text-xs sm:text-sm text-[#141f28] font-medium flex items-center gap-3">
@@ -166,15 +161,19 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <span>Take this 3-minute assessment to see exactly where your operations are trapping you.</span>
+            <span>Please let us know how much you agree or disagree with the following statements. This assessment should only take a few minutes.</span>
           </div>
         </div>
 
-        <div class="pt-2">
+        <div class="pt-2" id="introActionContainer">
           <button id="startAssessmentBtn"
             class="w-full sm:w-auto min-h-[48px] px-8 py-3 rounded-xl bg-[#487b9c] hover:bg-[#36607d] text-white font-bold text-sm sm:text-base transition-all shadow-md shadow-[rgba(72,123,156,0.25)] flex items-center justify-center gap-2 group">
-            <span>Begin Assessment &rarr;</span>
+            <span id="startAssessmentBtnText">Begin Assessment &rarr;</span>
           </button>
+          <div id="introResumeCallout" class="hidden mt-3 text-xs text-[#4a5560] flex items-center gap-2">
+            <span>Progress saved at Question <strong id="introSavedQ" class="text-[#141f28]">1</strong> of 17.</span>
+            <button type="button" id="introStartFreshBtn" class="text-[#487b9c] hover:underline font-bold">Or start over</button>
+          </div>
         </div>
 
       </div>
@@ -189,7 +188,7 @@
           <div class="flex items-center justify-between text-xs">
             <span id="stageLabel" class="font-bold uppercase tracking-wider text-[#36607d] flex items-center gap-1.5">
               <span class="w-2 h-2 rounded-full bg-[#487b9c]"></span>
-              Stage 1: The "Operational Reality"
+              The "Operational Reality"
             </span>
             <span id="questionStepText" class="font-mono text-[#647c8f] font-semibold">1 / 17</span>
           </div>
@@ -201,42 +200,44 @@
           </div>
         </div>
 
-        <!-- Stage Goal / Note -->
-        <div id="stageGoalCallout" class="p-3 rounded-lg bg-[#f8fafc] border border-[#d8e2e9] text-xs text-[#647c8f]">
-          <strong class="text-[#141f28]">Stage Goal:</strong> Build immediate trust by accurately naming your daily
-          frustrations.
-        </div>
-
         <!-- Question Prompt Card -->
         <div class="py-2">
           <h2 id="questionPrompt" class="text-lg sm:text-xl font-bold text-[#141f28] leading-snug">
             Reacting to whatever urgent fire breaks out each morning makes it incredibly difficult to make the proactive
             changes my business needs.
           </h2>
-          <p id="stage5Instruction" class="hidden text-xs text-[#36607d] mt-2 font-medium">
-            Instructions: Please answer these final three questions to help quantify what solving these bottlenecks
-            would look like for your business.
-          </p>
         </div>
 
-        <!-- Trinary Choice Options -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+        <!-- 5-Point Choice Options -->
+        <div class="grid grid-cols-1 sm:grid-cols-5 gap-2 sm:gap-2 pt-2">
+          <button type="button" data-val="Strongly Agree"
+            class="choice-btn w-full min-h-[50px] sm:min-h-[64px] px-3.5 py-3 sm:px-2 sm:py-2.5 rounded-xl border border-[#d8e2e9] bg-white text-[#141f28] font-bold text-xs sm:text-xs flex sm:flex-col items-center justify-start sm:justify-center gap-2 hover:border-[#487b9c]">
+            <span class="w-2.5 h-2.5 rounded-full border-2 border-[#1b2e3c] flex-shrink-0"></span>
+            <span class="text-left sm:text-center">Strongly Agree</span>
+          </button>
+
           <button type="button" data-val="Agree"
-            class="choice-btn w-full min-h-[52px] p-3.5 rounded-xl border border-[#d8e2e9] bg-white text-[#141f28] font-bold text-sm flex items-center justify-center gap-2 hover:border-[#487b9c]">
+            class="choice-btn w-full min-h-[50px] sm:min-h-[64px] px-3.5 py-3 sm:px-2 sm:py-2.5 rounded-xl border border-[#d8e2e9] bg-white text-[#141f28] font-bold text-xs sm:text-xs flex sm:flex-col items-center justify-start sm:justify-center gap-2 hover:border-[#487b9c]">
             <span class="w-2.5 h-2.5 rounded-full border-2 border-[#487b9c] flex-shrink-0"></span>
-            <span>Agree</span>
+            <span class="text-left sm:text-center">Agree</span>
           </button>
 
           <button type="button" data-val="Unsure"
-            class="choice-btn w-full min-h-[52px] p-3.5 rounded-xl border border-[#d8e2e9] bg-white text-[#141f28] font-bold text-sm flex items-center justify-center gap-2 hover:border-[#487b9c]">
+            class="choice-btn w-full min-h-[50px] sm:min-h-[64px] px-3.5 py-3 sm:px-2 sm:py-2.5 rounded-xl border border-[#d8e2e9] bg-white text-[#141f28] font-bold text-xs sm:text-xs flex sm:flex-col items-center justify-start sm:justify-center gap-2 hover:border-[#487b9c]">
             <span class="w-2.5 h-2.5 rounded-full border-2 border-[#8baec1] flex-shrink-0"></span>
-            <span>Unsure</span>
+            <span class="text-left sm:text-center">Unsure</span>
           </button>
 
           <button type="button" data-val="Disagree"
-            class="choice-btn w-full min-h-[52px] p-3.5 rounded-xl border border-[#d8e2e9] bg-white text-[#141f28] font-bold text-sm flex items-center justify-center gap-2 hover:border-[#487b9c]">
-            <span class="w-2.5 h-2.5 rounded-full border-2 border-[#cbd5e1] flex-shrink-0"></span>
-            <span>Disagree</span>
+            class="choice-btn w-full min-h-[50px] sm:min-h-[64px] px-3.5 py-3 sm:px-2 sm:py-2.5 rounded-xl border border-[#d8e2e9] bg-white text-[#141f28] font-bold text-xs sm:text-xs flex sm:flex-col items-center justify-start sm:justify-center gap-2 hover:border-[#487b9c]">
+            <span class="w-2.5 h-2.5 rounded-full border-2 border-[#b8cbd7] flex-shrink-0"></span>
+            <span class="text-left sm:text-center">Disagree</span>
+          </button>
+
+          <button type="button" data-val="Strongly Disagree"
+            class="choice-btn w-full min-h-[50px] sm:min-h-[64px] px-3.5 py-3 sm:px-2 sm:py-2.5 rounded-xl border border-[#d8e2e9] bg-white text-[#141f28] font-bold text-xs sm:text-xs flex sm:flex-col items-center justify-start sm:justify-center gap-2 hover:border-[#487b9c]">
+            <span class="w-2.5 h-2.5 rounded-full border-2 border-[#d8e2e9] flex-shrink-0"></span>
+            <span class="text-left sm:text-center">Strongly Disagree</span>
           </button>
         </div>
 
@@ -357,8 +358,13 @@
             </h2>
           </div>
 
-          <!-- Triggered Stages Badges -->
-          <div id="triggeredStagesContainer" class="flex flex-wrap gap-2 pt-1">
+          <!-- Strengths Recognition Card -->
+          <div id="strengthsContainer" class="p-4 sm:p-5 rounded-xl bg-white border border-[#d8e2e9] shadow-sm space-y-3">
+            <!-- Injected via JS -->
+          </div>
+
+          <!-- Frictions Card (Single card, light branded blue, header "Frictions:", bullets, no stage numbers, no red) -->
+          <div id="frictionsContainer" class="p-4 sm:p-5 rounded-xl bg-[#f0f5f8] border border-[rgba(72,123,156,0.3)] space-y-3">
             <!-- Injected via JS -->
           </div>
 
@@ -494,6 +500,12 @@
       </div>
     </div>
   </footer>
+
+  <!-- Toast Container -->
+  <div id="toast"
+    class="fixed bottom-5 right-5 z-50 bg-[#141f28] border border-[rgba(89,141,174,0.5)] text-white text-xs px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-200">
+    <span id="toastMessage">Assessment progress saved.</span>
+  </div>
 
   <!-- ========================================================================= -->
   <!-- JAVASCRIPT ENGINE                                                         -->
@@ -709,14 +721,10 @@
       const resultsView = document.getElementById('resultsView');
 
       const startAssessmentBtn = document.getElementById('startAssessmentBtn');
-      const headerProgressBadge = document.getElementById('headerProgressBadge');
-      const headerCurrentQ = document.getElementById('headerCurrentQ');
       const stageLabel = document.getElementById('stageLabel');
       const questionStepText = document.getElementById('questionStepText');
       const progressBar = document.getElementById('progressBar');
-      const stageGoalCallout = document.getElementById('stageGoalCallout');
       const questionPrompt = document.getElementById('questionPrompt');
-      const stage5Instruction = document.getElementById('stage5Instruction');
       const choiceButtons = document.querySelectorAll('.choice-btn');
       const prevBtn = document.getElementById('prevBtn');
 
@@ -727,7 +735,7 @@
       startAssessmentBtn.addEventListener('click', () => {
         introView.classList.add('hidden');
         questionView.classList.remove('hidden');
-        headerProgressBadge.classList.remove('hidden');
+        syncNavbarButtons();
         renderCurrentQuestion();
       });
 
@@ -741,12 +749,16 @@
           choiceButtons.forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
 
+          savePartialProgress(false);
+
           setTimeout(() => {
             if (state.currentIndex < QUESTIONS.length - 1) {
               state.currentIndex++;
+              savePartialProgress(false);
               renderCurrentQuestion();
             } else {
               // Assessment finished -> show contact gate
+              savePartialProgress(false);
               showContactGate();
             }
           }, 180);
@@ -756,6 +768,7 @@
       prevBtn.addEventListener('click', () => {
         if (state.currentIndex > 0) {
           state.currentIndex--;
+          savePartialProgress(false);
           renderCurrentQuestion();
         }
       });
@@ -765,19 +778,12 @@
         const total = QUESTIONS.length;
         const progressPct = Math.round(((state.currentIndex + 1) / total) * 100);
 
-        headerCurrentQ.textContent = state.currentIndex + 1;
         questionStepText.textContent = `${state.currentIndex + 1} / ${total}`;
         progressBar.style.width = `${progressPct}%`;
 
-        stageLabel.innerHTML = `<span class="w-2 h-2 rounded-full bg-[#487b9c]"></span> Stage ${q.stage}: ${q.stageTitle}`;
-        stageGoalCallout.innerHTML = `<strong class="text-[#141f28]">Stage ${q.stage} Goal:</strong> ${q.stageGoal}`;
+        // User request: stage name only (no "Stage X: ")
+        stageLabel.innerHTML = `<span class="w-2 h-2 rounded-full bg-[#487b9c]"></span> ${q.stageTitle}`;
         questionPrompt.textContent = q.prompt;
-
-        if (q.stage === 5) {
-          stage5Instruction.classList.remove('hidden');
-        } else {
-          stage5Instruction.classList.add('hidden');
-        }
 
         // Handle Back button visibility
         if (state.currentIndex > 0) {
@@ -799,7 +805,6 @@
 
       function showContactGate() {
         questionView.classList.add('hidden');
-        headerProgressBadge.classList.add('hidden');
         contactGateView.classList.remove('hidden');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
@@ -842,7 +847,11 @@
             analysis: analysis,
             completedAt: new Date().toISOString()
           }));
-          localStorage.setItem('klein_deep_unlocked', 'true');
+          localStorage.removeItem('klein_leadgen_progress');
+          // Intake assessment completed, but call is not booked yet
+          if (localStorage.getItem('klein_call_booked') !== 'true' && localStorage.getItem('klein_contact_submitted') !== 'true') {
+            try { localStorage.removeItem('klein_deep_unlocked'); } catch (e) { }
+          }
         } catch (err) {
           console.warn('LocalStorage save error:', err);
         }
@@ -854,29 +863,134 @@
         renderResultsScreen(analysis);
       });
 
-      // SCORING LOGIC (Joe Klein's Exact Methodology)
+      // SCORING LOGIC (Joe Klein's Methodology with 5-Point Scale)
+      const FRICTIONS_DATA = {
+        1: {
+          title: "Reactive Daily Firefighting",
+          desc: "Urgent morning disruptions repeatedly displace the high-leverage strategic work needed to advance the business."
+        },
+        2: {
+          title: "The Approval & Delegation Bottleneck",
+          desc: "Team momentum stalls waiting for your explicit approval, and fixing loose ends prevents genuine operational autonomy."
+        },
+        3: {
+          title: "Scaling & Headcount Hesitation",
+          desc: "Passing up growth opportunities or hesitating to hire out of concern that extra staff will only multiply your management burden."
+        },
+        4: {
+          title: "Spillover into Personal & Family Life",
+          desc: "Remaining mentally on the clock during evenings at home, bringing an exhausted, leftover version of yourself to the people who matter most."
+        },
+        5: {
+          title: "Effort-to-Freedom Disconnect",
+          desc: "A persistent mismatch between the intense daily energy invested and the operational freedom, peace of mind, or financial return realized."
+        }
+      };
+
+      function parseStrengths(answers) {
+        const strengths = [];
+
+        // 1. High Standards & Craftsmanship (Q2 / Q5)
+        const q2 = answers[2] || '';
+        const q5 = answers[5] || '';
+        if (q2.includes('Agree') || q5.includes('Agree')) {
+          strengths.push({
+            title: "Commitment to Uncompromising Quality & Craftsmanship",
+            desc: "You refuse to accept mediocre work or let client outcomes slip. While this habit often creates an operational bottleneck, it reflects the obsessive high standard that built your company's reputation and client trust in the first place."
+          });
+        } else {
+          strengths.push({
+            title: "Capacity for Delegation & Team Empowerment",
+            desc: "You demonstrate trust in your team and don't instinctively hoard routine tasks, laying the groundwork for scalable leadership."
+          });
+        }
+
+        // 2. Entrepreneurial Agility & Crisis Management (Q1 / Q6)
+        const q1 = answers[1] || '';
+        const q6 = answers[6] || '';
+        if (q1.includes('Agree') || q6.includes('Agree')) {
+          strengths.push({
+            title: "Entrepreneurial Problem-Solving & Agility",
+            desc: "You possess remarkable entrepreneurial reflexes and the grit to tackle complex fires in real time. Your mind naturally generates new growth initiatives and innovative directions for the enterprise."
+          });
+        } else {
+          strengths.push({
+            title: "Disciplined Operational Focus",
+            desc: "You maintain steady execution cadence without allowing unexpected daily interruptions to derail core company priorities."
+          });
+        }
+
+        // 3. Prudent Risk Management & Stewardship (Q8 / Q10)
+        const q8 = answers[8] || '';
+        const q10 = answers[10] || '';
+        if (q8.includes('Agree') || q10.includes('Agree')) {
+          strengths.push({
+            title: "Protective Stewardship & Disciplined Scaling",
+            desc: "You refuse to hire recklessly or add overhead without assurance of quality. This disciplined caution protects company solvency, cash flow, and team culture from runaway bloat."
+          });
+        } else {
+          strengths.push({
+            title: "Appetite for Expansion & Calculated Risk",
+            desc: "You are not intimidated by expansion, maintaining an active appetite for seizing new market opportunities and building headcount."
+          });
+        }
+
+        // 4. Devotion to Family & Team as Provider (Q11 / Q14)
+        const q11 = answers[11] || '';
+        const q14 = answers[14] || '';
+        if (q11.includes('Agree') || q14.includes('Agree')) {
+          strengths.push({
+            title: "Fierce Dedication as a Provider",
+            desc: "Your willingness to bear heavy workloads is driven by deep responsibility for the family and employees who depend on you. You carry the burden because you genuinely care about protecting their future."
+          });
+        } else {
+          strengths.push({
+            title: "Sustained Personal Boundaries & Longevity",
+            desc: "You maintain conscious boundaries between work obligations and your home life, protecting the personal energy required for long-term executive stamina."
+          });
+        }
+
+        // Return top 3 strengths
+        return strengths.slice(0, 3);
+      }
+
       function calculateScoringProfile() {
         const answers = state.answers;
 
-        // Stage 1: Questions 1, 2, 3 (Target: Agree or Unsure)
-        const s1Target = [1, 2, 3].filter(id => answers[id] === 'Agree' || answers[id] === 'Unsure').length;
-        const s1Triggered = s1Target >= 2; // > half of 3
+        function getFrictionWeight(ans, isReverse) {
+          if (!ans) return 0;
+          if (!isReverse) {
+            // Stages 1-4: Agreement = friction
+            if (ans === 'Strongly Agree' || ans === 'Agree') return 1.0;
+            if (ans === 'Unsure') return 0.5;
+            return 0;
+          } else {
+            // Stage 5: Disagreement = friction
+            if (ans === 'Strongly Disagree' || ans === 'Disagree') return 1.0;
+            if (ans === 'Unsure') return 0.5;
+            return 0;
+          }
+        }
 
-        // Stage 2: Questions 4, 5, 6, 7 (Target: Agree or Unsure)
-        const s2Target = [4, 5, 6, 7].filter(id => answers[id] === 'Agree' || answers[id] === 'Unsure').length;
-        const s2Triggered = s2Target >= 3; // > half of 4 (3 or 4)
+        // Stage 1: Questions 1, 2, 3 (3 questions, triggered if score >= 1.5)
+        const s1Score = [1, 2, 3].reduce((sum, id) => sum + getFrictionWeight(answers[id], false), 0);
+        const s1Triggered = s1Score >= 1.5;
 
-        // Stage 3: Questions 8, 9, 10 (Target: Agree or Unsure)
-        const s3Target = [8, 9, 10].filter(id => answers[id] === 'Agree' || answers[id] === 'Unsure').length;
-        const s3Triggered = s3Target >= 2; // > half of 3
+        // Stage 2: Questions 4, 5, 6, 7 (4 questions, triggered if score >= 2.0)
+        const s2Score = [4, 5, 6, 7].reduce((sum, id) => sum + getFrictionWeight(answers[id], false), 0);
+        const s2Triggered = s2Score >= 2.0;
 
-        // Stage 4: Questions 11, 12, 13, 14 (Target: Agree or Unsure)
-        const s4Target = [11, 12, 13, 14].filter(id => answers[id] === 'Agree' || answers[id] === 'Unsure').length;
-        const s4Triggered = s4Target >= 3; // > half of 4 (3 or 4)
+        // Stage 3: Questions 8, 9, 10 (3 questions, triggered if score >= 1.5)
+        const s3Score = [8, 9, 10].reduce((sum, id) => sum + getFrictionWeight(answers[id], false), 0);
+        const s3Triggered = s3Score >= 1.5;
 
-        // Stage 5: Questions 15, 16, 17 (Target: Disagree or Unsure)
-        const s5Target = [15, 16, 17].filter(id => answers[id] === 'Disagree' || answers[id] === 'Unsure').length;
-        const s5Triggered = s5Target >= 2; // > half of 3
+        // Stage 4: Questions 11, 12, 13, 14 (4 questions, triggered if score >= 2.0)
+        const s4Score = [11, 12, 13, 14].reduce((sum, id) => sum + getFrictionWeight(answers[id], false), 0);
+        const s4Triggered = s4Score >= 2.0;
+
+        // Stage 5: Questions 15, 16, 17 (3 questions, reverse scored, triggered if score >= 1.5)
+        const s5Score = [15, 16, 17].reduce((sum, id) => sum + getFrictionWeight(answers[id], true), 0);
+        const s5Triggered = s5Score >= 1.5;
 
         const triggeredStages = [];
         if (s1Triggered) triggeredStages.push(1);
@@ -887,9 +1001,15 @@
 
         const countTriggered = triggeredStages.length;
 
-        // Check for Mythical Legend: 100% Disagree to Stages 1-4 and 100% Agree to Stage 5
-        const allS1toS4Disagree = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].every(id => answers[id] === 'Disagree');
-        const allS5Agree = [15, 16, 17].every(id => answers[id] === 'Agree');
+        // Check for Mythical Legend: Disagree to Stages 1-4 and Agree to Stage 5
+        const allS1toS4Disagree = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].every(id => {
+          const a = answers[id];
+          return a === 'Disagree' || a === 'Strongly Disagree';
+        });
+        const allS5Agree = [15, 16, 17].every(id => {
+          const a = answers[id];
+          return a === 'Agree' || a === 'Strongly Agree';
+        });
         const isMythicalLegend = allS1toS4Disagree && allS5Agree;
 
         let profileTitle = '';
@@ -902,13 +1022,13 @@
           profileTitle = 'The Mythical Legend';
           breakdownNarrative = `
             <p>
-              <strong>Wow. You're perfect!</strong> Your business runs flawlessly, your team never bothers you, your pockets are overflowing with cash, and your family throws you a parade every time you walk through the door.
+              <strong>Exceptional operational baseline.</strong> Your business shows remarkable operational independence, healthy financial returns, and minimal personal friction in daily execution.
             </p>
             <p>
-              Jokes aside—while we'd love to believe your business has reached operational nirvana, this brief 17-question quiz obviously can't capture every moving part of a complex operation. True optimization is a moving target. If you're completely content, keep crushing it.
+              While this initial assessment indicates exceptional health, ongoing optimization remains a moving target in growing businesses. If you are fully content with your operational balance, keep up the fantastic work.
             </p>
             <p>
-              If you suspect there’s still room to smooth things out, optimize your margins, or prepare for what's next, I’d be more than happy to chat. If you decide to set up a consultation, we'll open up our full, deep-dive assessment for you—it’s a much longer, granular evaluation designed to stress-test even the strongest businesses and find the microscopic leaks you might be missing.
+              If you suspect there is still room to optimize margins, streamline key client funnels, or prepare for what's next, Joe Klein is always glad to connect. When you schedule a consultation, you'll receive access to our full, deep-dive assessment to stress-test your architecture and identify hidden growth levers.
             </p>
           `;
           takeaway = "The Asymmetric Upside Audit: Stress-test high-margin advisory offerings, asset protection, and executive succession planning while your baseline operations run autonomously.";
@@ -919,13 +1039,13 @@
           profileTitle = 'The Prisoners of Success';
           breakdownNarrative = `
             <p>
-              You are making 'good' money on paper, but you are paying for it with your sanity, your time, and your family life. You look around at other owners who seem to have it figured out and think, <em>'What the hell is wrong with me?'</em>
+              You have built an enterprise that generates real revenue through sheer intelligence, grit, and exceptionally high standards. But right now, you are paying for that revenue with your personal peace, your schedule, and your family life.
             </p>
             <p>
-              <strong>Nothing is wrong with you.</strong> You are simply trapped in the Operator's Trap. You are terrified to hire more people because you don't want to play babysitter, your team relies on you for every micro-decision, and you are bringing the most exhausted, leftover version of yourself home to your family.
+              <strong>You are caught in the classic Operator's Trap.</strong> Because your standards are high, your team reflexively leans on you for micro-decisions and troubleshooting. You hesitate to hire because you don't want the burden of babysitting, and at the end of the day, you find yourself bringing the most exhausted, depleted version of yourself home to your family.
             </p>
             <p>
-              You don't need to work harder. You need a structural framework that lets the business run smoothly without your constant physical presence. When you schedule a strategy call, you'll get immediate access to our full, comprehensive operational assessment—a much longer, highly detailed deep dive that uncovers the hidden friction points this quick quiz couldn't capture.
+              You don't need to work harder—your work ethic is already proven. What you need is an operational architecture that decouples daily execution from your personal brainpower. When you schedule a strategy call, you'll get immediate access to our comprehensive operational assessment—a deep dive that maps your exact workflow, team handoffs, and revenue bottlenecks.
             </p>
           `;
           takeaway = "The Operational Decompression Protocol: Stop managing execution directly. Introduce asynchronous daily status checkpoints, protect your calendar with zero-interruption focus blocks, and transition client communication to a designated account buffer.";
@@ -936,13 +1056,13 @@
           profileTitle = 'The Chained Architect';
           breakdownNarrative = `
             <p>
-              You are highly intelligent and you’ve built a business that successfully generates revenue—the architecture works, but you are completely chained to it. You have designed a system where your personal brainpower is the engine.
+              You are highly capable and you have engineered an operation that reliably generates revenue—the underlying architecture works, but you remain chained to its daily maintenance. You have created an ecosystem where your personal intellect and oversight are the central engine.
             </p>
             <p>
-              Because your brain runs at 100 miles an hour, you can sustain this longer than most, but you are currently trading your personal freedom to maintain operational stability. You want to scale or smooth things out, but you are trapped because lifting your foot off the gas feels like the whole machine will stall.
+              Because your brain operates with high velocity, you can sustain this intensity longer than most. However, you are currently trading your personal time and mental freedom to maintain that stability. You want to scale without chaos, but lifting your foot off the gas creates the uneasy feeling that key deliverables will fall through the cracks.
             </p>
             <p>
-              When you schedule a strategy call, you'll get immediate access to our full, comprehensive operational assessment—a much longer, highly detailed deep dive that uncovers the hidden friction points this quick quiz couldn't capture.
+              When you schedule a strategy call, you'll get immediate access to our full, comprehensive operational assessment—a detailed diagnostic that isolates the specific handoffs and approval loops keeping you tethered to daily operations.
             </p>
           `;
           takeaway = "The Cognitive Decoupling Sprint: Audit the 5 recurring decisions only you make, establish written 80/20 decision rules, and give team leads financial/execution authority up to $1,000 without prior signoff.";
@@ -959,7 +1079,7 @@
 
           breakdownNarrative = `
             <p>
-              Your responses reveal an acute concentration in specific operating friction areas rather than across-the-board burnout. While your overall business maintains traction, these targeted friction points act as operational speed governors:
+              Your responses reveal an acute concentration in specific operating friction areas rather than across-the-board burnout. While your overall business maintains solid traction, these targeted friction points act as operational speed governors:
             </p>
             <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm">
               ${descriptions}
@@ -985,13 +1105,13 @@
           profileTitle = 'The Stable Operator (With Hidden Leaks)';
           breakdownNarrative = `
             <p>
-              On the surface, things look relatively stable. You aren't constantly fighting catastrophic fires, and you've managed to avoid the worst of the Operator's Trap.
+              On the surface, your operational foundation demonstrates commendable stability. You have avoided catastrophic firefighting, and your core business rhythms are functioning with baseline consistency.
             </p>
             <p>
-              However, because this is an obviously brief assessment, we don't know the exact severity or financial impact of the few bottlenecks you did flag. Even a minor leak in a client funnel or a small gap in team autonomy can quietly bleed thousands of dollars or add unnecessary friction to your week. If there is a specific roadblock you're quietly navigating, let's chat.
+              However, this preliminary screen focuses on high-level indicators. Even in stable operations, subtle friction points—such as hidden handoff delays, proposal bottlenecks, or informal decision channels—can quietly consume 5 to 10 hours of executive time each week and suppress profit margins.
             </p>
             <p>
-              When you schedule a strategy call, you'll get immediate access to our full, comprehensive operational assessment—a much longer, highly detailed deep dive that uncovers the hidden friction points this quick quiz couldn't capture.
+              When you schedule a strategy call, you'll get immediate access to our full operational assessment—a comprehensive diagnostic that stress-tests your workflows and pinpoints microscopic leaks before they impact growth.
             </p>
           `;
           takeaway = "The Micro-Leak Audit: Systematically review your proposal conversion, billing lag, and team handoffs to recover 3–5 hours of silent operational friction each week.";
@@ -1005,11 +1125,11 @@
           countTriggered,
           triggeredStages,
           stageScores: {
-            s1: `${s1Target}/3 (${s1Triggered ? 'Triggered' : 'Normal'})`,
-            s2: `${s2Target}/4 (${s2Triggered ? 'Triggered' : 'Normal'})`,
-            s3: `${s3Target}/3 (${s3Triggered ? 'Triggered' : 'Normal'})`,
-            s4: `${s4Target}/4 (${s4Triggered ? 'Triggered' : 'Normal'})`,
-            s5: `${s5Target}/3 (${s5Triggered ? 'Triggered' : 'Normal'})`
+            s1: `${s1Score}/3 (${s1Triggered ? 'Triggered' : 'Normal'})`,
+            s2: `${s2Score}/4 (${s2Triggered ? 'Triggered' : 'Normal'})`,
+            s3: `${s3Score}/3 (${s3Triggered ? 'Triggered' : 'Normal'})`,
+            s4: `${s4Score}/4 (${s4Triggered ? 'Triggered' : 'Normal'})`,
+            s5: `${s5Score}/3 (${s5Triggered ? 'Triggered' : 'Normal'})`
           }
         };
       }
@@ -1027,62 +1147,138 @@
         document.getElementById('confirmEmail').textContent = state.lead.email;
         document.getElementById('bridgeProfileNames').textContent = analysis.profileTitle;
 
-        // Render Triggered Stages tags
-        const tagsContainer = document.getElementById('triggeredStagesContainer');
-        tagsContainer.innerHTML = '';
-        if (analysis.triggeredStages.length === 0) {
-          tagsContainer.innerHTML = `<span class="text-[11px] px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold font-mono">No Acute Stage Traps Flagged</span>`;
-        } else {
-          analysis.triggeredStages.forEach(s => {
-            const iden = STAGE_IDENTITIES[s];
-            const badge = document.createElement('span');
-            badge.className = 'text-[11px] px-2.5 py-1 rounded-md bg-rose-50 text-rose-800 border border-rose-200 font-semibold font-mono';
-            badge.textContent = `Stage ${s} Friction: ${iden.title}`;
-            tagsContainer.appendChild(badge);
-          });
+        // Render Strengths Card (Lead with recognition of strengths)
+        const strengthsContainer = document.getElementById('strengthsContainer');
+        if (strengthsContainer) {
+          const strengths = parseStrengths(state.answers);
+          const strengthCards = strengths.map(s => `
+            <div class="flex items-start gap-2.5 text-xs sm:text-sm">
+              <div class="w-5 h-5 rounded-full bg-[#edf3f7] text-[#487b9c] flex items-center justify-center flex-shrink-0 mt-0.5 border border-[#cfdfeb]">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div class="leading-relaxed">
+                <strong class="font-bold text-[#141f28]">${s.title}:</strong>
+                <span class="text-[#4a5560] block sm:inline mt-0.5 sm:mt-0"> ${s.desc}</span>
+              </div>
+            </div>
+          `).join('');
+
+          strengthsContainer.innerHTML = `
+            <div class="space-y-3">
+              <div class="flex items-center justify-between pb-2 border-b border-[#edf3f7]">
+                <div class="text-xs font-bold uppercase tracking-wider text-[#36607d] flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-[#487b9c]"></span>
+                  <span>Core Operational Strengths</span>
+                </div>
+                <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-[#eaf2f7] text-[#36607d] border border-[rgba(89,141,174,0.3)]">Identified</span>
+              </div>
+              <div class="space-y-3">
+                ${strengthCards}
+              </div>
+            </div>
+          `;
         }
 
-        // Wire Primary CTA
-        const primaryCta = document.getElementById('primaryCtaBtn');
-        primaryCta.onclick = function () {
-          try {
-            localStorage.setItem('klein_deep_unlocked', 'true');
-          } catch (e) { }
-          dispatchLeadEmailToJoe('Clicked Primary CTA - Book Strategy Call / Let\'s Talk');
-          const params = new URLSearchParams();
-          if (state.lead.name) params.set('name', state.lead.name);
-          if (state.lead.email) params.set('email', state.lead.email);
-          if (state.lead.company) params.set('business', state.lead.company);
-          params.set('utm_source', 'assessment_leadgen');
-          params.set('profile', analysis.profileTitle);
-          window.location.href = `https://kleininsight.com/?${params.toString()}#contact`;
-        };
+        // Render Single Frictions Card (Single card, light branded blue, header "Frictions:", bullets, no stage numbers, no red)
+        const frictionsContainer = document.getElementById('frictionsContainer');
+        if (frictionsContainer) {
+          if (analysis.triggeredStages.length === 0) {
+            frictionsContainer.innerHTML = `
+              <div class="space-y-2">
+                <div class="text-xs font-bold uppercase tracking-wider text-[#36607d] flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-[#487b9c]"></span>
+                  <span>Frictions:</span>
+                </div>
+                <p class="text-xs sm:text-sm text-[#354c5e] leading-relaxed">
+                  No acute operational friction points were triggered in this preliminary review. Your core workflows demonstrate solid stability, though subtle optimizations in capacity and team autonomy can further free your schedule.
+                </p>
+              </div>
+            `;
+          } else {
+            const listItems = analysis.triggeredStages.map(stageNum => {
+              const f = FRICTIONS_DATA[stageNum];
+              return `
+                <li class="flex items-start gap-2.5 text-xs sm:text-sm text-[#141f28] leading-relaxed">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#487b9c] mt-2 flex-shrink-0"></span>
+                  <div>
+                    <strong class="font-bold text-[#141f28]">${f.title}:</strong>
+                    <span class="text-[#354c5e]"> ${f.desc}</span>
+                  </div>
+                </li>
+              `;
+            }).join('');
 
-        // Wire Secondary CTA
+            frictionsContainer.innerHTML = `
+              <div class="space-y-3">
+                <div class="text-xs font-bold uppercase tracking-wider text-[#36607d] flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-[#487b9c]"></span>
+                  <span>Frictions:</span>
+                </div>
+                <ul class="space-y-2.5">
+                  ${listItems}
+                </ul>
+              </div>
+            `;
+          }
+        }
+
+        // Wire Primary CTA (Book a Call / Strategy Call)
+        const primaryCta = document.getElementById('primaryCtaBtn');
         const secondaryCta = document.getElementById('secondaryCtaBtn');
         const secondaryConfirmation = document.getElementById('secondaryConfirmation');
-        secondaryCta.onclick = function () {
-          try {
-            localStorage.setItem('klein_deep_unlocked', 'true');
-          } catch (e) { }
-          dispatchLeadEmailToJoe('Clicked Secondary CTA - Request Review & Email Breakdown (24-48h)');
-          secondaryConfirmation.classList.remove('hidden');
-          secondaryCta.classList.add('opacity-50', 'pointer-events-none');
-          secondaryConfirmation.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        };
+
+        if (primaryCta) {
+          primaryCta.innerHTML = `<span>Book Your Strategy Call &rarr;</span><span class="text-[11px] font-normal text-white/80">(Unlocks In-Depth Assessment)</span>`;
+          primaryCta.onclick = function () {
+            dispatchLeadEmailToJoe('Clicked Primary CTA - Book Strategy Call / Let\'s Talk');
+            const params = new URLSearchParams();
+            if (state.lead.name) params.set('name', state.lead.name);
+            if (state.lead.email) params.set('email', state.lead.email);
+            if (state.lead.company) params.set('business', state.lead.company);
+            params.set('utm_source', 'assessment_leadgen');
+            params.set('profile', analysis.profileTitle);
+            window.location.href = `index.html?${params.toString()}#contact`;
+          };
+        }
+
+        // Wire Secondary CTA (Submit Email for Personal Review)
+        if (secondaryCta) {
+          secondaryCta.style.display = 'inline-block';
+          secondaryCta.onclick = function () {
+            try {
+              localStorage.setItem('klein_call_booked', 'true');
+              localStorage.setItem('klein_deep_unlocked', 'true');
+            } catch (e) { }
+            dispatchLeadEmailToJoe('Clicked Secondary CTA - Request Review & Email Breakdown (24-48h)');
+            if (secondaryConfirmation) {
+              secondaryConfirmation.classList.remove('hidden');
+              secondaryConfirmation.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+            secondaryCta.classList.add('opacity-50', 'pointer-events-none');
+            secondaryCta.textContent = '✓ Results submitted for personal review.';
+            syncNavbarButtons();
+          };
+        }
 
         // Wire Retake Button
         const retakeBtn = document.getElementById('retakeAssessmentBtn');
         if (retakeBtn) {
           retakeBtn.onclick = function () {
+            try {
+              localStorage.removeItem('klein_leadgen_progress');
+            } catch (e) { }
             state.currentIndex = 0;
             state.answers = {};
             resultsView.classList.add('hidden');
             questionView.classList.remove('hidden');
-            headerProgressBadge.classList.remove('hidden');
+            syncNavbarButtons();
             renderCurrentQuestion();
           };
         }
+
+        syncNavbarButtons();
       }
 
       // WEB3FORMS DISPATCH ENGINE
@@ -1152,7 +1348,6 @@
               introView.classList.add('hidden');
               questionView.classList.add('hidden');
               contactGateView.classList.add('hidden');
-              headerProgressBadge.classList.add('hidden');
               renderResultsScreen(saved.analysis);
               return true;
             }
@@ -1163,9 +1358,124 @@
         return false;
       }
 
+      function syncNavbarButtons() {
+        try {
+          const isCallBooked = localStorage.getItem('klein_call_booked') === 'true' ||
+                               localStorage.getItem('klein_contact_submitted') === 'true';
+          const navLetsTalkBtn = document.getElementById('navLetsTalkBtn');
+          if (navLetsTalkBtn) {
+            navLetsTalkBtn.style.display = isCallBooked ? 'none' : 'inline-flex';
+          }
+        } catch (e) { }
+      }
+
+      function showToast(msg) {
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+        if (!toast || !toastMessage) return;
+        toastMessage.textContent = msg;
+        toast.classList.remove('translate-y-20', 'opacity-0');
+        setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 2500);
+      }
+
+      function savePartialProgress(redirectHome = false) {
+        try {
+          const hasAnswers = Object.keys(state.answers || {}).length > 0;
+          if (hasAnswers || state.currentIndex > 0) {
+            localStorage.setItem('klein_leadgen_progress', JSON.stringify({
+              currentIndex: state.currentIndex,
+              answers: state.answers,
+              lead: state.lead,
+              savedAt: new Date().toISOString()
+            }));
+          }
+          if (redirectHome) {
+            showToast('Progress saved. Returning home...');
+            setTimeout(() => {
+              window.location.href = 'index.html';
+            }, 300);
+          }
+        } catch (e) {
+          console.warn('Partial save note:', e);
+          if (redirectHome) window.location.href = 'index.html';
+        }
+      }
+
+      const saveExitSurveyBtn = document.getElementById('saveExitSurveyBtn');
+      if (saveExitSurveyBtn) {
+        saveExitSurveyBtn.addEventListener('click', () => {
+          savePartialProgress(true);
+        });
+      }
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' || e.key === 'Esc') {
+          savePartialProgress(true);
+        }
+      });
+
+      function checkExistingProgress() {
+        try {
+          const params = new URLSearchParams(window.location.search);
+          const isRestart = params.get('restart') === 'true' || params.get('retake') === 'true';
+          if (isRestart) {
+            localStorage.removeItem('klein_leadgen_progress');
+            return false;
+          }
+
+          const raw = localStorage.getItem('klein_leadgen_progress');
+          if (raw) {
+            const saved = JSON.parse(raw);
+            if (saved && ((saved.answers && Object.keys(saved.answers).length > 0) || saved.currentIndex > 0)) {
+              state.currentIndex = typeof saved.currentIndex === 'number' ? saved.currentIndex : 0;
+              state.answers = saved.answers || {};
+              state.lead = saved.lead || state.lead;
+
+              const introResumeCallout = document.getElementById('introResumeCallout');
+              const introSavedQ = document.getElementById('introSavedQ');
+              const startAssessmentBtnText = document.getElementById('startAssessmentBtnText');
+
+              if (introResumeCallout && introSavedQ && startAssessmentBtnText) {
+                introSavedQ.textContent = Math.min(17, state.currentIndex + 1);
+                startAssessmentBtnText.innerHTML = `Resume Assessment (${state.currentIndex + 1} of 17) &rarr;`;
+                introResumeCallout.classList.remove('hidden');
+              }
+              return true;
+            }
+          }
+        } catch (e) {
+          console.warn('Check existing progress note:', e);
+        }
+        return false;
+      }
+
+      const introStartFreshBtn = document.getElementById('introStartFreshBtn');
+      if (introStartFreshBtn) {
+        introStartFreshBtn.addEventListener('click', () => {
+          try {
+            localStorage.removeItem('klein_leadgen_progress');
+          } catch (e) { }
+          state.currentIndex = 0;
+          state.answers = {};
+          const introResumeCallout = document.getElementById('introResumeCallout');
+          const startAssessmentBtnText = document.getElementById('startAssessmentBtnText');
+          if (introResumeCallout) introResumeCallout.classList.add('hidden');
+          if (startAssessmentBtnText) startAssessmentBtnText.innerHTML = 'Begin Assessment &rarr;';
+          showToast('Progress reset. Starting fresh.');
+        });
+      }
+
       // Initialize URL params and check existing results on load
       parseUrlParams();
-      checkExistingResults();
+      // Ensure stale call-booked flags aren't falsely set if only the intake assessment was completed
+      if (localStorage.getItem('klein_call_booked') !== 'true' && localStorage.getItem('klein_contact_submitted') !== 'true') {
+        try { localStorage.removeItem('klein_deep_unlocked'); } catch (e) { }
+      }
+      const hasCompletedResults = checkExistingResults();
+      if (!hasCompletedResults) {
+        checkExistingProgress();
+      }
+      syncNavbarButtons();
     })();
   </script>
 </body>

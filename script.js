@@ -96,12 +96,20 @@ function syncDiagnosticButtons() {
     // 1. Check URL parameters for override or testing (?unlocked=true, ?deep=1, ?v=2, or ?reset=1, ?v=1)
     const params = new URLSearchParams(window.location.search);
     if (params.get('unlocked') === 'true' || params.get('deep') === '1' || params.get('v') === '2') {
-      try { localStorage.setItem('klein_deep_unlocked', 'true'); } catch (e) { }
+      try {
+        localStorage.setItem('klein_call_booked', 'true');
+        localStorage.setItem('klein_deep_unlocked', 'true');
+      } catch (e) { }
     } else if (params.get('reset') === '1' || params.get('v') === '1') {
-      try { localStorage.removeItem('klein_deep_unlocked'); } catch (e) { }
+      try {
+        localStorage.removeItem('klein_call_booked');
+        localStorage.removeItem('klein_contact_submitted');
+        localStorage.removeItem('klein_deep_unlocked');
+      } catch (e) { }
     }
 
-    const isCallBookedExplicit = localStorage.getItem('klein_deep_unlocked') === 'true';
+    const isCallBookedExplicit = localStorage.getItem('klein_call_booked') === 'true' ||
+                                 localStorage.getItem('klein_contact_submitted') === 'true';
 
     const progressRaw = localStorage.getItem('klein_survey_progress');
     const dossierRaw = localStorage.getItem('klein_diagnostic_result');
@@ -135,6 +143,11 @@ function syncDiagnosticButtons() {
     const navDiagnosticLink = document.getElementById('navDiagnosticLink');
     const navDossierLink = document.getElementById('navDossierLink');
     const navDeepLink = document.getElementById('navDeepLink');
+    const navCta = document.querySelector('.nav-cta');
+
+    if (navCta) {
+      navCta.style.display = isCallBooked ? 'none' : 'inline-flex';
+    }
 
     if (!isCallBooked) {
       // =========================================================================
@@ -148,14 +161,36 @@ function syncDiagnosticButtons() {
 
       if (!hasSurveyFinished) {
         // -----------------------------------------------------------------------
-        // STATE 1: If survey untaken, ONLY survey button
+        // STATE 1: If survey untaken, ONLY survey button (or Resume if partial progress saved)
         // -----------------------------------------------------------------------
-        if (hookSurveyBtn) hookSurveyBtn.style.display = 'inline-flex';
+        let partialProgress = null;
+        try {
+          const rawProgress = localStorage.getItem('klein_leadgen_progress');
+          if (rawProgress) partialProgress = JSON.parse(rawProgress);
+        } catch (e) { }
+
+        const hasPartial = partialProgress && (partialProgress.currentIndex > 0 || (partialProgress.answers && Object.keys(partialProgress.answers).length > 0));
+        const resumeNum = hasPartial ? Math.min(17, (partialProgress.currentIndex || 0) + 1) : 1;
+
+        if (hookSurveyBtn) {
+          hookSurveyBtn.style.display = 'inline-flex';
+          hookSurveyBtn.innerHTML = hasPartial
+            ? `Resume 3-Min Assessment (${resumeNum}/17) &rarr;`
+            : `Take 3-Min Assessment &rarr;`;
+        }
         if (hookProfileBtn) hookProfileBtn.style.display = 'none';
-        if (panelSurveyBtn) panelSurveyBtn.style.display = 'inline-flex';
+        if (panelSurveyBtn) {
+          panelSurveyBtn.style.display = 'inline-flex';
+          panelSurveyBtn.innerHTML = hasPartial
+            ? `Resume 3-Min Assessment (${resumeNum}/17) &rarr;`
+            : `Take 3-Min Assessment &rarr;`;
+        }
         if (panelProfileBtn) panelProfileBtn.style.display = 'none';
 
-        if (navDiagnosticLink) navDiagnosticLink.style.display = 'inline-block';
+        if (navDiagnosticLink) {
+          navDiagnosticLink.style.display = 'inline-block';
+          navDiagnosticLink.textContent = hasPartial ? `Resume (${resumeNum}/17)` : `3-Min Assessment`;
+        }
         if (navDossierLink) navDossierLink.style.display = 'none';
       } else {
         // -----------------------------------------------------------------------
@@ -277,7 +312,7 @@ function syncDiagnosticButtons() {
         if (navDeepLink) {
           navDeepLink.style.display = 'inline-block';
           navDeepLink.href = 'survey-deep.html?view=dossier';
-          navDeepLink.textContent = 'Executive Dossier';
+          navDeepLink.textContent = 'Dossier';
         }
         if (navDossierLink) {
           navDossierLink.style.display = 'inline-block';
@@ -414,8 +449,9 @@ function preloadContactDetails() {
   contactForm.addEventListener('submit', () => {
     saveCurrentContact();
     try {
-      localStorage.setItem('klein_deep_unlocked', 'true');
+      localStorage.setItem('klein_call_booked', 'true');
       localStorage.setItem('klein_contact_submitted', 'true');
+      localStorage.setItem('klein_deep_unlocked', 'true');
     } catch (e) { }
     syncDiagnosticButtons();
   });

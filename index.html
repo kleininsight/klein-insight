@@ -44,11 +44,11 @@
       </button>
 
       <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
-        <a href="#about">About</a>
         <a href="#services">Strategy Coaching</a>
+        <a href="#about">About</a>
         <a href="survey.html" id="navDiagnosticLink">Assessment</a>
-        <a href="survey.html?view=results" id="navDossierLink" class="nav-dossier-link" style="display: none;">My Profile</a>
-        <a href="survey-deep.html" id="navDeepLink" class="nav-deep-link" style="display: none;">Full Diagnostic</a>
+        <a href="survey.html?view=results" id="navDossierLink" class="nav-dossier-link" style="display: none;">3-Min Profile</a>
+        <a href="survey-deep.html" id="navDeepLink" class="nav-deep-link" style="display: none;">Dossier</a>
         <a class="nav-cta" href="#contact">Let's Talk</a>
       </nav>
     </div>
@@ -128,7 +128,7 @@
               <a class="button button-primary hook-action-btn" id="hookSurveyBtn" href="survey.html">
                 Take the 3-Min Assessment &rarr;
               </a>
-              <a class="button button-primary hook-dossier-btn" id="hookProfileBtn" href="survey.html?view=results" style="display: none; background: #487b9c; border: 1px solid #36607d;">
+              <a class="button button-primary hook-dossier-btn" id="hookProfileBtn" href="survey.html?view=results" style="display: none;">
                 <span>📊 View 3-Min Profile &rarr;</span>
               </a>
             </div>
@@ -145,11 +145,11 @@
                 Now that you've connected with Joe, your full 21-scenario deep-dive assessment is unlocked. Measure your 6-dimension operating friction scorecard, uncodified knowledge traps, and generate your 3-page executive PDF dossier.
               </p>
             </div>
-            <div class="hook-action-buttons" style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
-              <a class="button button-primary" id="hookDeepBtn" href="survey-deep.html" style="background: #487b9c; border: 1px solid #36607d;">
+            <div class="hook-action-buttons">
+              <a class="button button-primary" id="hookDeepBtn" href="survey-deep.html">
                 Launch Full Diagnostic &amp; Dossier &rarr;
               </a>
-              <a class="button" id="hookProfileBtnV2" href="survey.html?view=results" style="background: rgba(255, 255, 255, 0.85); color: #141f28; border: 1px solid rgba(89, 141, 174, 0.35);">
+              <a class="button" id="hookProfileBtnV2" href="survey.html?view=results">
                 Review 3-Min Profile &rarr;
               </a>
             </div>
@@ -192,91 +192,6 @@
           <span class="testimonial-position" role="status" data-testimonial-position></span>
           <button class="testimonial-control" type="button" data-testimonial-next
             aria-controls="testimonial-track">Next</button>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="about">
-      <div class="container">
-        <div class="section-heading about-heading">
-          <p class="eyebrow">About Me</p>
-          <h2>The common thread throughout my life has been helping people move forward.</h2>
-        </div>
-
-        <div class="about-grid">
-          <div class="about-profile">
-            <div class="about-photo-wrap">
-              <img class="about-photo" src="images/Headshot 2.png" alt="Joe Klein, founder of Klein Insight" width="720"
-                height="720">
-            </div>
-            <div class="about-credentials">
-              <p><strong>B.A., Managerial Economics</strong><br>University of California, Davis</p>
-              <p><strong>Former Senior Market Research Specialist</strong><br>11 years at SMUD</p>
-            </div>
-            <!-- Replace these platform links with your profile URLs. -->
-            <nav class="about-social" aria-label="Joe Klein's social profiles">
-              <a href="https://www.facebook.com/profile.php?id=61594345559602" target="_blank" rel="noopener noreferrer"
-                aria-label="Facebook (opens in a new tab)">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path
-                    d="M15.5 3H18V0h-2.5C11.7 0 10 2.3 10 5.7V8H7v3.5h3V24h3.5V11.5H17l.5-3.5h-4V5.9c0-1.7.4-2.9 2-2.9Z" />
-                </svg>
-              </a>
-              <a href="https://www.instagram.com/kleininsight/" target="_blank" rel="noopener noreferrer"
-                aria-label="Instagram (opens in a new tab)">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2" />
-                  <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2" />
-                  <circle cx="17.5" cy="6.5" r="1.25" />
-                </svg>
-              </a>
-              <a href="https://www.linkedin.com/in/kleinjoes89/" target="_blank" rel="noopener noreferrer"
-                aria-label="LinkedIn (opens in a new tab)">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path
-                    d="M3 9h4v12H3V9Zm2-6a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm5 6h4v1.6c.6-1.1 1.8-1.9 3.5-1.9 3.4 0 4.5 2.2 4.5 5.2V21h-4v-6.4c0-1.5-.3-2.6-1.8-2.6-1.6 0-2.2 1.1-2.2 2.6V21h-4V9Z" />
-                </svg>
-              </a>
-            </nav>
-          </div>
-          <div class="about-copy">
-            <p>
-              Running a business is one of the loneliest, hardest challenges you can take on—and I know that firsthand.
-            </p>
-            <p>
-              Before launching this practice, I spent a decade as a professional market researcher and strategist. On
-              any given day, I was managing a crushing workload of 10 to 12 major marketing and research initiatives.
-              These weren't repetitive tasks; they were highly complex, vastly different projects that required intense
-              cognitive energy. I was performing at an elite level, but the corporate machine was consuming me. After
-              five years of sustaining that pace, I looked in the mirror and realized I was literally going grey in my
-              beard from the stress.
-            </p>
-            <p>
-              The breaking point—my epiphany—came when my wife got pregnant.
-            </p>
-            <p>
-              I was commuting an hour each way, completely drained. By the time I walked through the front door, I was
-              physically present but mentally absent. I only had enough energy to eat dinner and maybe watch an episode
-              of The Big Bang Theory with my wife before falling asleep on the couch.
-            </p>
-            <p>
-              Then, the reality of the situation hit me like a ton of bricks: If I am too burnt out to be the supportive
-              partner my pregnant wife deserves right now, how the hell am I going to be a present, energized father to
-              a newborn?
-            </p>
-            <p>
-              I refused to let my career rob my family of the man they needed. I made the radical decision to leave that
-              stable, high-paying corporate role. I didn't leave because I lost my passion for strategy—I left because I
-              wanted to apply that decade of elite marketing, data, and market research experience to something that
-              actually matters: helping driven, ambitious independent business owners unlock their true potential.
-            </p>
-            <p>
-              If you are currently sacrificing your health, your family, or your sanity to keep your business growing, I
-              know exactly what that feels like. Let's fix the bottlenecks, build an scalable engine, and get your life
-              back.
-            </p>
-            <p class="about-quote">My job is to help you be successful in whatever you are trying to accomplish.</p>
-          </div>
         </div>
       </div>
     </section>
@@ -383,17 +298,16 @@
 
           <!-- V1 Default Panel Action: 3-Minute Assessment Only (No Call Booked / No Email Sent) -->
           <div class="panel-action-wrap" id="panelActionV1"
-            style="margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(89, 141, 174, 0.3); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
-            <div>
-              <strong style="color: #ffffff; display: block; font-size: 16px; margin-bottom: 4px;">What Type of Business Owner Are You?</strong>
-              <span style="color: #c5d2da; font-size: 14px;">Take our 3-minute assessment to see exactly where your operations are trapping you.</span>
+            style="margin-top: 28px; padding-top: 24px; border-top: 1px solid rgba(89, 141, 174, 0.3); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px;">
+            <div style="max-width: 580px;">
+              <strong style="color: #ffffff; display: block; font-size: 16px; margin-bottom: 6px;">What Type of Business Owner Are You?</strong>
+              <span style="color: #c5d2da; font-size: 14px; line-height: 1.5; display: inline-block;">Take our 3-minute assessment to see exactly where your operations are trapping you.</span>
             </div>
-            <div class="panel-action-buttons" style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
-              <a class="button button-primary panel-survey-btn" id="panelSurveyBtn" href="survey.html"
-                style="background: var(--accent-brand); border: 1px solid rgba(255, 255, 255, 0.2);">
+            <div class="panel-action-buttons" style="margin-top: 8px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+              <a class="button button-primary panel-survey-btn" id="panelSurveyBtn" href="survey.html">
                 Take 3-Min Assessment &rarr;
               </a>
-              <a class="button button-primary panel-dossier-btn" id="panelProfileBtn" href="survey.html?view=results" style="display: none; background: var(--accent-brand); border: 1px solid rgba(255, 255, 255, 0.2);">
+              <a class="button button-primary panel-dossier-btn" id="panelProfileBtn" href="survey.html?view=results" style="display: none;">
                 <span>📊 View 3-Min Profile &rarr;</span>
               </a>
             </div>
@@ -401,37 +315,37 @@
 
           <!-- V2 Unlocked Panel Action: Both Surveys Visible with Dedicated Cards & Buttons (Call Booked / Email Sent) -->
           <div class="panel-action-wrap" id="panelActionV2"
-            style="margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(89, 141, 174, 0.3); display: none; flex-direction: column; gap: 16px;">
+            style="margin-top: 28px; padding-top: 24px; border-top: 1px solid rgba(89, 141, 174, 0.3); display: none; flex-direction: column; gap: 18px;">
             <div>
               <span style="font-size: 11px; font-family: monospace; font-weight: bold; color: #34d399; text-transform: uppercase; letter-spacing: 0.05em; display: block;">✓ Strategy Tools Unlocked</span>
-              <strong style="color: #ffffff; display: block; font-size: 17px; margin-top: 2px;">Your Strategy Assessment Suite</strong>
+              <strong style="color: #ffffff; display: block; font-size: 17px; margin-top: 4px;">Your Strategy Assessment Suite</strong>
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; width: 100%;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; width: 100%;">
               <!-- In-Depth Survey Card -->
-              <div style="background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(89, 141, 174, 0.45); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; justify-content: space-between; gap: 14px;">
+              <div style="background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(89, 141, 174, 0.45); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; gap: 18px;">
                 <div>
-                  <span style="font-size: 10px; font-weight: 700; color: #93c5fd; background: rgba(59, 130, 246, 0.2); padding: 2px 8px; border-radius: 9999px; text-transform: uppercase; font-family: monospace;">Comprehensive Diagnostic</span>
-                  <h4 style="color: #ffffff; font-size: 15px; font-weight: 700; margin: 8px 0 4px;">In-Depth Operational Assessment &amp; PDF Dossier</h4>
-                  <p style="color: #c5d2da; font-size: 13px; line-height: 1.45; margin: 0;">
+                  <span style="font-size: 10px; font-weight: 700; color: #93c5fd; background: rgba(59, 130, 246, 0.2); padding: 3px 9px; border-radius: 9999px; text-transform: uppercase; font-family: monospace;">Comprehensive Diagnostic</span>
+                  <h4 style="color: #ffffff; font-size: 15px; font-weight: 700; margin: 10px 0 6px;">In-Depth Operational Assessment &amp; PDF Dossier</h4>
+                  <p style="color: #c5d2da; font-size: 13.5px; line-height: 1.5; margin: 0 0 16px;">
                     Complete 21-scenario forced-choice diagnostic. Generates your 6-dimension operating friction scorecard, uncodified knowledge audit, and 3-page executive briefing.
                   </p>
                 </div>
-                <a class="button button-primary" id="panelDeepBtn" href="survey-deep.html" style="background: var(--accent-brand); border: 1px solid rgba(255, 255, 255, 0.2); font-size: 13px; text-align: center; justify-content: center; padding: 10px 16px;">
+                <a class="button button-primary panel-survey-btn" id="panelDeepBtn" href="survey-deep.html" style="margin-top: 8px;">
                   Launch Full Diagnostic &amp; Dossier &rarr;
                 </a>
               </div>
 
               <!-- 3-Min Assessment Card -->
-              <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 12px; padding: 18px; display: flex; flex-direction: column; justify-content: space-between; gap: 14px;">
+              <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 12px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; gap: 18px;">
                 <div>
-                  <span style="font-size: 10px; font-weight: 700; color: #cbd5e1; background: rgba(255, 255, 255, 0.1); padding: 2px 8px; border-radius: 9999px; text-transform: uppercase; font-family: monospace;">Lead-Gen Quick Quiz</span>
-                  <h4 style="color: #ffffff; font-size: 15px; font-weight: 700; margin: 8px 0 4px;">3-Minute Owner Profile</h4>
-                  <p style="color: #c5d2da; font-size: 13px; line-height: 1.45; margin: 0;">
+                  <span style="font-size: 10px; font-weight: 700; color: #cbd5e1; background: rgba(255, 255, 255, 0.1); padding: 3px 9px; border-radius: 9999px; text-transform: uppercase; font-family: monospace;">Lead-Gen Quick Quiz</span>
+                  <h4 style="color: #ffffff; font-size: 15px; font-weight: 700; margin: 10px 0 6px;">3-Minute Owner Profile</h4>
+                  <p style="color: #c5d2da; font-size: 13.5px; line-height: 1.5; margin: 0 0 16px;">
                     17-question rapid evaluation across operational fires, approval bottlenecks, and family impact. Review your archetype and initial takeaways.
                   </p>
                 </div>
-                <a class="button" id="panelProfileBtnV2" href="survey.html?view=results" style="background: rgba(255, 255, 255, 0.1); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.2); font-size: 13px; text-align: center; justify-content: center; padding: 10px 16px;">
+                <a class="button" id="panelProfileBtnV2" href="survey.html?view=results" style="margin-top: 8px;">
                   View 3-Min Profile &rarr;
                 </a>
               </div>
@@ -483,19 +397,24 @@
           </div>
         </div>
 
-        <div class="section-heading" style="margin-top: 40px; margin-bottom: 0;">
-          <p class="services-copy">
-            <strong>I am not going to sell you a secret formula or force your business into a predetermined
-              program.</strong>
-          </p>
-          <p class="services-copy">
-            You already know your business. I bring an outside perspective, accountability, and more than a decade of
-            professional experience working through complex problems when we need to dig deeper.
-          </p>
-          <p class="services-copy">
-            <strong>Momentum is not about doing more. It is about consistently moving what matters in the direction you
-              actually want to go.</strong>
-          </p>
+        <div class="services-action-wrap">
+          <div class="services-action-copy">
+            <p class="services-copy">
+              <strong>I am not going to sell you a secret formula or force your business into a predetermined
+                program.</strong>
+            </p>
+            <p class="services-copy">
+              You already know your business. I bring an outside perspective, accountability, and more than a decade of
+              professional experience working through complex problems when we need to dig deeper.
+            </p>
+            <p class="services-copy">
+              <strong>Momentum is not about doing more. It is about consistently moving what matters in the direction you
+                actually want to go.</strong>
+            </p>
+          </div>
+          <div class="services-action-btn">
+            <a class="button button-primary" href="application.html" data-application-trigger>Apply Now</a>
+          </div>
         </div>
       </div>
     </section>
@@ -603,6 +522,91 @@
             </button>
 
           </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-heading about-heading">
+          <p class="eyebrow">About Me</p>
+          <h2>The common thread throughout my life has been helping people move forward.</h2>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-profile">
+            <div class="about-photo-wrap">
+              <img class="about-photo" src="images/Headshot 2.png" alt="Joe Klein, founder of Klein Insight" width="720"
+                height="720">
+            </div>
+            <div class="about-credentials">
+              <p><strong>B.A., Managerial Economics</strong><br>University of California, Davis</p>
+              <p><strong>Former Senior Market Research Specialist</strong><br>11 years at SMUD</p>
+            </div>
+            <!-- Replace these platform links with your profile URLs. -->
+            <nav class="about-social" aria-label="Joe Klein's social profiles">
+              <a href="https://www.facebook.com/profile.php?id=61594345559602" target="_blank" rel="noopener noreferrer"
+                aria-label="Facebook (opens in a new tab)">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path
+                    d="M15.5 3H18V0h-2.5C11.7 0 10 2.3 10 5.7V8H7v3.5h3V24h3.5V11.5H17l.5-3.5h-4V5.9c0-1.7.4-2.9 2-2.9Z" />
+                </svg>
+              </a>
+              <a href="https://www.instagram.com/kleininsight/" target="_blank" rel="noopener noreferrer"
+                aria-label="Instagram (opens in a new tab)">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2" />
+                  <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2" />
+                  <circle cx="17.5" cy="6.5" r="1.25" />
+                </svg>
+              </a>
+              <a href="https://www.linkedin.com/in/kleinjoes89/" target="_blank" rel="noopener noreferrer"
+                aria-label="LinkedIn (opens in a new tab)">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path
+                    d="M3 9h4v12H3V9Zm2-6a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm5 6h4v1.6c.6-1.1 1.8-1.9 3.5-1.9 3.4 0 4.5 2.2 4.5 5.2V21h-4v-6.4c0-1.5-.3-2.6-1.8-2.6-1.6 0-2.2 1.1-2.2 2.6V21h-4V9Z" />
+                </svg>
+              </a>
+            </nav>
+          </div>
+          <div class="about-copy">
+            <p>
+              Running a business is one of the loneliest, hardest challenges you can take on—and I know that firsthand.
+            </p>
+            <p>
+              Before launching this practice, I spent a decade as a professional market researcher and strategist. On
+              any given day, I was managing a crushing workload of 10 to 12 major marketing and research initiatives.
+              These weren't repetitive tasks; they were highly complex, vastly different projects that required intense
+              cognitive energy. I was performing at an elite level, but the corporate machine was consuming me. After
+              five years of sustaining that pace, I looked in the mirror and realized I was literally going grey in my
+              beard from the stress.
+            </p>
+            <p>
+              The breaking point—my epiphany—came when my wife got pregnant.
+            </p>
+            <p>
+              I was commuting an hour each way, completely drained. By the time I walked through the front door, I was
+              physically present but mentally absent. I only had enough energy to eat dinner and maybe watch an episode
+              of The Big Bang Theory with my wife before falling asleep on the couch.
+            </p>
+            <p>
+              Then, the reality of the situation hit me like a ton of bricks: If I am too burnt out to be the supportive
+              partner my pregnant wife deserves right now, how the hell am I going to be a present, energized father to
+              a newborn?
+            </p>
+            <p>
+              I refused to let my career rob my family of the man they needed. I made the radical decision to leave that
+              stable, high-paying corporate role. I didn't leave because I lost my passion for strategy—I left because I
+              wanted to apply that decade of elite marketing, data, and market research experience to something that
+              actually matters: helping driven, ambitious independent business owners unlock their true potential.
+            </p>
+            <p>
+              If you are currently sacrificing your health, your family, or your sanity to keep your business growing, I
+              know exactly what that feels like. Let's fix the bottlenecks, build an scalable engine, and get your life
+              back.
+            </p>
+            <p class="about-quote">My job is to help you be successful in whatever you are trying to accomplish.</p>
+          </div>
         </div>
       </div>
     </section>
