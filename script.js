@@ -351,6 +351,9 @@ function preloadContactDetails() {
   // 2. Check explicitly saved contact details
   if (!leadName || !leadEmail || !leadBusiness) {
     try {
+      if (!leadName) leadName = localStorage.getItem('klein_contact_name') || '';
+      if (!leadBusiness) leadBusiness = localStorage.getItem('klein_contact_business') || '';
+      if (!leadEmail) leadEmail = localStorage.getItem('klein_contact_email') || '';
       const savedContactRaw = localStorage.getItem('klein_contact_details');
       if (savedContactRaw) {
         const savedContact = JSON.parse(savedContactRaw);
@@ -446,15 +449,119 @@ function preloadContactDetails() {
     } catch (e) { }
   };
 
-  contactForm.addEventListener('submit', () => {
+  const escapeText = (str) => {
+    if (!str) return '';
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  };
+
+  const renderNextStepsCard = (name, business) => {
+    const contactFormWrap = document.getElementById('contactFormWrap');
+    const contactNextSteps = document.getElementById('contactNextSteps');
+    const nextStepsHeading = document.getElementById('nextStepsHeading');
+    const nextStepsIntro = document.getElementById('nextStepsIntro');
+
+    if (!contactNextSteps) return;
+
+    if (contactFormWrap) contactFormWrap.style.display = 'none';
+    contactNextSteps.style.display = 'block';
+
+    const cleanName = (name || '').trim();
+    const firstName = cleanName ? cleanName.split(' ')[0] : '';
+    const cleanBusiness = (business || '').trim();
+
+    if (nextStepsHeading) {
+      if (firstName) {
+        nextStepsHeading.innerHTML = `Thank you, ${escapeText(firstName)}!`;
+      } else {
+        nextStepsHeading.textContent = `Thank you for reaching out!`;
+      }
+    }
+
+    if (nextStepsIntro) {
+      if (cleanBusiness) {
+        nextStepsIntro.textContent = `Your inquiry regarding ${cleanBusiness} has been sent straight to Joe's inbox. He personally reviews every note and will get back to you within 1 business day.`;
+      } else {
+        nextStepsIntro.textContent = `Your inquiry has been sent straight to Joe's inbox. He personally reviews every note and will get back to you within 1 business day.`;
+      }
+    }
+  };
+
+  const showForm = () => {
+    const contactFormWrap = document.getElementById('contactFormWrap');
+    const contactNextSteps = document.getElementById('contactNextSteps');
+    const submitBtn = document.getElementById('contactSubmitBtn');
+    if (contactFormWrap) contactFormWrap.style.display = 'block';
+    if (contactNextSteps) contactNextSteps.style.display = 'none';
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send Request';
+    }
+  };
+
+  // If already submitted in this browser session, display Next Steps card
+  try {
+    const isSubmitted = localStorage.getItem('klein_contact_submitted') === 'true';
+    if (isSubmitted) {
+      const savedName = localStorage.getItem('klein_contact_name') || leadName || '';
+      const savedBusiness = localStorage.getItem('klein_contact_business') || leadBusiness || '';
+      renderNextStepsCard(savedName, savedBusiness);
+    }
+  } catch (e) { }
+
+  const nextStepsResetBtn = document.getElementById('nextStepsResetBtn');
+  if (nextStepsResetBtn) {
+    nextStepsResetBtn.addEventListener('click', () => {
+      showForm();
+      if (nameInput) nameInput.focus();
+    });
+  }
+
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const name = nameInput ? nameInput.value.trim() : '';
+    const email = emailInput ? emailInput.value.trim() : '';
+    const business = businessInput ? businessInput.value.trim() : '';
+    const submitBtn = document.getElementById('contactSubmitBtn');
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending Request...';
+    }
+
     saveCurrentContact();
     try {
       localStorage.setItem('klein_call_booked', 'true');
       localStorage.setItem('klein_contact_submitted', 'true');
       localStorage.setItem('klein_deep_unlocked', 'true');
+      if (name) localStorage.setItem('klein_contact_name', name);
+      if (business) localStorage.setItem('klein_contact_business', business);
+      if (email) localStorage.setItem('klein_contact_email', email);
     } catch (e) { }
+
+    // Dispatch form via fetch
+    try {
+      const formData = new FormData(contactForm);
+      await fetch(contactForm.action || 'https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+    } catch (err) {
+      console.warn('Web3Forms dispatch note:', err);
+    }
+
+    renderNextStepsCard(name, business);
     syncDiagnosticButtons();
+
+    const contactCard = document.getElementById('contactCard');
+    if (contactCard) {
+      contactCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
   });
+
   if (nameInput) nameInput.addEventListener('change', saveCurrentContact);
   if (emailInput) emailInput.addEventListener('change', saveCurrentContact);
   if (businessInput) businessInput.addEventListener('change', saveCurrentContact);

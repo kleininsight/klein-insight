@@ -10,7 +10,7 @@
       description: 'A little context helps me understand the size and stage of the business.',
       fields: [
         { name: 'business_name', label: 'Business name', type: 'text', required: true, autocomplete: 'organization', maxLength: 120 },
-        { name: 'business_website', label: 'Website (optional)', type: 'url', autocomplete: 'url', placeholder: 'https://example.com', maxLength: 250 },
+        { name: 'business_website', label: 'Website (optional)', type: 'text', autocomplete: 'url', placeholder: 'example.com (or https://...)', maxLength: 250 },
         { name: 'years_operating', label: 'How long have you operated the business?', type: 'select', required: true, options: [
           { value: 'Under 2 years', label: 'Under 2 years' },
           { value: '2–5 years', label: '2–5 years' },
@@ -89,6 +89,41 @@
     return node;
   }
 
+  function normalizeText(val) {
+    return String(val || '').replace(/[\u2013\u2014]/g, '-').trim();
+  }
+
+  function mapYearsOperating(val) {
+    if (!val) return '';
+    const s = normalizeText(val);
+    if (/under\s*2/i.test(s)) return 'Under 2 years';
+    if (/2\s*-\s*5/i.test(s)) return '2–5 years';
+    if (/6\s*-\s*10|5\s*-\s*10/i.test(s)) return '6–10 years';
+    if (/10/i.test(s)) return 'More than 10 years';
+    return val;
+  }
+
+  function mapTeamSize(val) {
+    if (!val) return '';
+    const s = normalizeText(val).toLowerCase();
+    if (s === 'solo' || /just\s*me|1\s*person/i.test(s)) return 'Just me';
+    if (s === 'small' || /2\s*-\s*5/i.test(s)) return '2–5 people';
+    if (s === 'medium' || s === 'growing' || /6\s*-\s*20/i.test(s)) return '6–20 people';
+    if (s === 'large' || s === 'established' || /20/i.test(s)) return 'More than 20 people';
+    return val;
+  }
+
+  function mapRevenueRange(val) {
+    if (!val) return '';
+    const s = normalizeText(val);
+    if (/under\s*\$*100/i.test(s)) return 'Under $100,000';
+    if (/100.*249/i.test(s)) return '$100,000–$249,999';
+    if (/250.*499/i.test(s)) return '$250,000–$499,999';
+    if (/500.*999/i.test(s)) return '$500,000–$999,999';
+    if (/million|1,000,000/i.test(s)) return '$1 million or more';
+    return val;
+  }
+
   function setupApplication(root) {
     const dialog = root.closest('dialog');
     const triggers = dialog ? document.querySelectorAll('[data-application-trigger]') : [];
@@ -97,29 +132,72 @@
     let lastTrigger = null;
 
     let diagnosticData = null;
+    let businessProfile = null;
+    let surveyAnswers = {};
+    let clientData = null;
+
     try {
-      const stored = localStorage.getItem('klein_diagnostic_result');
-      if (stored) {
-        diagnosticData = JSON.parse(stored);
-        if (diagnosticData.client) {
-          if (diagnosticData.client.company && !state.answers.business_name) {
-            state.answers.business_name = diagnosticData.client.company;
-          }
-          if (diagnosticData.client.name && !state.answers.full_name) {
-            state.answers.full_name = diagnosticData.client.name;
-          }
-          if (diagnosticData.client.email && !state.answers.email) {
-            state.answers.email = diagnosticData.client.email;
-          }
-        }
-        if (diagnosticData.diagnostics && diagnosticData.diagnostics.primaryConstraint && !state.answers.bottleneck) {
-          state.answers.bottleneck = '[Diagnostic Identified Constraint: ' + diagnosticData.diagnostics.primaryConstraint + ']\n' + 
-            (diagnosticData.diagnostics.archetypeSummary || '') + 
-            '\n\nAdditional notes on what is getting in the way:';
+      const storedDiag = localStorage.getItem('klein_diagnostic_result') || localStorage.getItem('klein_completed_dossier');
+      if (storedDiag) {
+        diagnosticData = JSON.parse(storedDiag);
+        if (diagnosticData.businessProfile) businessProfile = diagnosticData.businessProfile;
+        if (diagnosticData.client) clientData = diagnosticData.client;
+        if (diagnosticData.answers) surveyAnswers = diagnosticData.answers;
+      }
+      const storedProgress = localStorage.getItem('klein_survey_progress');
+      if (storedProgress) {
+        const prog = JSON.parse(storedProgress);
+        if (!businessProfile && prog.businessProfile) businessProfile = prog.businessProfile;
+        if (!clientData && prog.leadData) clientData = prog.leadData;
+        if (prog.answers) surveyAnswers = Object.assign({}, prog.answers, surveyAnswers);
+      }
+      const storedContact = localStorage.getItem('klein_contact_details');
+      if (storedContact) {
+        const c = JSON.parse(storedContact);
+        if (!clientData) clientData = { name: c.name, email: c.email, company: c.business };
+        else {
+          if (!clientData.name && c.name) clientData.name = c.name;
+          if (!clientData.email && c.email) clientData.email = c.email;
+          if (!clientData.company && c.business) clientData.company = c.business;
         }
       }
     } catch (e) {
-      console.warn('Diagnostic prefill notice:', e);
+      console.warn('Survey data loading error:', e);
+    }
+
+    // Auto-fill Question 1 ("Your business") fields from survey data
+    if (businessProfile || clientData) {
+      const comp = (businessProfile && businessProfile.company) || (clientData && clientData.company);
+      if (comp && comp !== 'Your Company' && !state.answers.business_name) {
+        state.answers.business_name = comp;
+      }
+
+      if (businessProfile) {
+        if (businessProfile.yearsOperating && !state.answers.years_operating) {
+          state.answers.years_operating = mapYearsOperating(businessProfile.yearsOperating);
+        }
+        if (businessProfile.teamSize && !state.answers.team_size) {
+          state.answers.team_size = mapTeamSize(businessProfile.teamSize);
+        }
+        if (businessProfile.revenueRange && !state.answers.revenue_range) {
+          state.answers.revenue_range = mapRevenueRange(businessProfile.revenueRange);
+        }
+        if (businessProfile.webPresence === 'website' && !state.answers.business_website) {
+          if (comp && (comp.includes('.com') || comp.includes('.io') || comp.includes('.co') || comp.includes('.net') || comp.includes('.org') || comp.includes('.agency') || comp.includes('.app'))) {
+            state.answers.business_website = comp.toLowerCase();
+          }
+        }
+      }
+    }
+
+    // Auto-fill contact info
+    if (clientData) {
+      if (clientData.name && clientData.name !== 'Executive Lead' && !state.answers.full_name) {
+        state.answers.full_name = clientData.name;
+      }
+      if (clientData.email && !state.answers.email) {
+        state.answers.email = clientData.email;
+      }
     }
 
     if (dialog && triggers.length) {
@@ -211,6 +289,13 @@
 
     function renderStep(shell, index) {
       const step = steps[index];
+      if (index === 0 && (businessProfile || (clientData && clientData.company))) {
+        const prefillNote = element('div', 'application-diagnostic-banner');
+        prefillNote.style.marginBottom = '16px';
+        prefillNote.appendChild(element('span', 'application-diagnostic-badge', '✓ Pre-filled'));
+        prefillNote.appendChild(element('span', 'application-diagnostic-text', 'Company profile details auto-filled from your Owner Constraint Assessment.'));
+        shell.appendChild(prefillNote);
+      }
       if (step.description) shell.appendChild(element('p', 'application-intro', step.description));
       const form = element('form', 'application-form');
       step.fields.forEach(function (field) { form.appendChild(renderField(field)); });
@@ -245,6 +330,7 @@
         const group = element('fieldset', 'application-fieldset');
         group.appendChild(element('legend', 'application-label', field.label));
         if (field.help) group.appendChild(element('p', 'application-help', field.help));
+
         const options = element('div', 'application-rating');
         for (let number = 1; number <= 10; number += 1) {
           const label = element('label', 'application-rating-option');
@@ -253,7 +339,7 @@
           input.name = field.name;
           input.value = String(number);
           input.required = !!field.required;
-          input.checked = state.answers[field.name] === input.value;
+          input.checked = String(state.answers[field.name]) === input.value;
           label.appendChild(input);
           label.appendChild(element('span', '', String(number)));
           options.appendChild(label);
@@ -280,11 +366,18 @@
         const placeholder = element('option', '', 'Select one');
         placeholder.value = '';
         control.appendChild(placeholder);
+        const currVal = state.answers[field.name] || '';
         field.options.forEach(function (option) {
           const item = element('option', '', option.label);
           item.value = option.value;
+          if (currVal && (option.value === currVal || normalizeText(option.value) === normalizeText(currVal))) {
+            item.selected = true;
+          }
           control.appendChild(item);
         });
+        if (currVal) {
+          control.value = currVal;
+        }
       } else {
         control = element('input', 'application-control');
         control.type = field.type;
@@ -296,7 +389,9 @@
       if (field.placeholder) control.placeholder = field.placeholder;
       if (field.maxLength) control.maxLength = field.maxLength;
       if (field.help) control.setAttribute('aria-describedby', id + '-help');
-      control.value = state.answers[field.name] || '';
+      if (state.answers[field.name]) {
+        control.value = state.answers[field.name];
+      }
       wrap.appendChild(control);
       return wrap;
     }
@@ -363,7 +458,9 @@
       if (!raw) return 'Not provided';
       if (field.type === 'rating') return raw + ' out of 10';
       if (field.options) {
-        const option = field.options.find(function (item) { return item.value === raw; });
+        const option = field.options.find(function (item) {
+          return item.value === raw || normalizeText(item.value) === normalizeText(raw);
+        });
         if (option) return option.label;
       }
       return raw;

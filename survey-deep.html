@@ -332,7 +332,7 @@
               class="absolute -bottom-0.5 -right-0.5 w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"></span>
           </div>
           <div>
-            <div class="font-bold text-xs sm:text-sm text-[#141f28] flex items-center gap-1.5 sm:gap-2">
+            <div class="font-bold text-xs sm:text-sm text-[#141f28] hidden sm:flex items-center gap-1.5 sm:gap-2">
               <span>Klein Insight</span>
               <span
                 class="text-[9px] sm:text-[10px] text-[#36607d] font-semibold border border-[rgba(89,141,174,0.3)] bg-[#eaf2f7] px-2 py-0.5 rounded-full"
@@ -484,6 +484,24 @@
                 Lead</strong> &bull; <strong id="coverCompanyName" class="text-[#141f28] font-bold">Your
                 Company</strong>
             </p>
+            <div id="coverContextPills" class="flex flex-wrap items-center gap-1.5 sm:gap-2 mt-2.5">
+              <span id="coverPillYears" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#f0f5f8] text-[#36607d] border border-[#d8e2e9]">
+                <svg class="w-3 h-3 text-[#487b9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span id="coverPillYearsText">2–5 Years Operating</span>
+              </span>
+              <span id="coverPillTeam" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#f0f5f8] text-[#36607d] border border-[#d8e2e9]">
+                <svg class="w-3 h-3 text-[#487b9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                <span id="coverPillTeamText">Core Team</span>
+              </span>
+              <span id="coverPillRevenue" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#f0f5f8] text-[#36607d] border border-[#d8e2e9]">
+                <svg class="w-3 h-3 text-[#487b9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span id="coverPillRevenueText">$250,000–$499,999</span>
+              </span>
+              <span id="coverPillWeb" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#f0f5f8] text-[#36607d] border border-[#d8e2e9]">
+                <svg class="w-3 h-3 text-[#487b9c]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+                <span id="coverPillWebText">Digital Presence</span>
+              </span>
+            </div>
           </div>
           <div
             class="text-left sm:text-right font-mono text-[10px] sm:text-[11px] text-[#647c8f] bg-[#f8fafc] sm:bg-transparent p-2.5 sm:p-0 rounded-lg border border-[#d8e2e9] sm:border-0 flex-shrink-0">
@@ -859,13 +877,14 @@
        Phase 3: Drive, Commitment & Change Readiness (Multiple Choice)
        ========================================================================= */
 
-    // Phase 1 Questions (Emotional Experience)
+    // Phase 1 Questions (Emotional Experience & Bottleneck Reality - 5-Point Likert Scale)
     const phase1Scenarios = [
+      // --- Baseline Emotional Experience ---
       {
         id: 'p1_growth_stress',
         phase: 1,
         pattern: 'coupling',
-        title: 'Phase 1: Growth & Workload Stress',
+        title: 'Growth & Workload Stress',
         prompt: 'It’s difficult to feel genuinely excited about bringing in substantial new business because I immediately get stressed about the additional personal workload and delivery demands.',
         subtext: 'Does growth immediately trigger anxiety about your personal execution capacity?',
         isExpress: true
@@ -874,7 +893,7 @@
         id: 'p1_strategic_bandwidth',
         phase: 1,
         pattern: 'reactive',
-        title: 'Phase 1: Strategic Bandwidth',
+        title: 'Strategic Bandwidth',
         prompt: 'At the end of a long week, I realize I was busy almost the entire time, but it’s difficult to find the time to focus on work that would actually move the business forward.',
         subtext: 'Immediate operational fires repeatedly displace forward-looking strategic priorities.',
         isExpress: true
@@ -883,7 +902,7 @@
         id: 'p1_disconnect',
         phase: 1,
         pattern: 'centralization',
-        title: 'Phase 1: Ability to Disconnect',
+        title: 'Ability to Disconnect',
         prompt: 'It is difficult for me to fully step away from the business—even during evenings, weekends, or vacations—without feeling that something will stall or go wrong.',
         subtext: 'Stepping away feels like an operational risk to the company.',
         isExpress: true
@@ -891,8 +910,8 @@
       {
         id: 'p1_return_on_effort',
         phase: 1,
-        pattern: 'effort_pressure',
-        title: 'Phase 1: Return on Effort',
+        pattern: 'coupling',
+        title: 'Return on Effort',
         prompt: 'I feel like I am working harder and putting in more hours, but the financial return and progress of the business don’t reflect that amount of effort.',
         subtext: 'Effort is increasing faster than tangible financial or operational leverage.',
         isExpress: true
@@ -900,8 +919,8 @@
       {
         id: 'p1_recurring_problems',
         phase: 1,
-        pattern: 'operations_drag',
-        title: 'Phase 1: Recurring Problem Frustration',
+        pattern: 'reactive',
+        title: 'Recurring Problem Frustration',
         prompt: 'I often feel frustrated because we seem to solve what feels like the same operational problems repeatedly without them staying permanently fixed.',
         subtext: 'Fixes often feel like temporary band-aids rather than permanent structural solutions.',
         isExpress: false
@@ -910,7 +929,7 @@
         id: 'p1_pipeline_anxiety',
         phase: 1,
         pattern: 'commercial',
-        title: 'Phase 1: Commercial Anxiety',
+        title: 'Commercial Anxiety',
         prompt: 'When business hits a quieter period, I almost immediately start worrying about where the next customers or revenue are going to come from.',
         subtext: 'Pipeline confidence fluctuates heavily with current workload rather than a predictable acquisition engine.',
         isExpress: false
@@ -919,9 +938,135 @@
         id: 'p1_central_router',
         phase: 1,
         pattern: 'centralization',
-        title: 'Phase 1: The Decision Router',
+        title: 'The Decision Router',
         prompt: 'Important decisions, routine exceptions, and problem-solving inevitably find their way back to my desk to be resolved.',
         subtext: 'Accountability continually gravitates back to the center.',
+        isExpress: false
+      },
+
+      // --- Theme 2: The Main Bottleneck (Application Q2) ---
+      {
+        id: 'p1_bottleneck_clarity',
+        phase: 1,
+        pattern: 'reactive',
+        title: 'Bottleneck Bandwidth',
+        prompt: 'I know what the #1 operational bottleneck capping our growth is, but carving out the uninterrupted time and bandwidth to eliminate it feels nearly impossible.',
+        subtext: 'Is identifying the constraint straightforward, but finding the execution space the real obstacle?',
+        isExpress: true
+      },
+      {
+        id: 'p1_bottleneck_control',
+        phase: 1,
+        pattern: 'centralization',
+        title: 'Quality & Control Ceiling',
+        prompt: 'Our operations depend so heavily on my personal standards that taking on significantly more revenue feels like it would sacrifice quality or compromise control.',
+        subtext: 'Does maintaining high standards currently cap your company\'s delivery capacity?',
+        isExpress: true
+      },
+      {
+        id: 'p1_bottleneck_capacity',
+        phase: 1,
+        pattern: 'coupling',
+        title: 'Fulfillment Capacity Trap',
+        prompt: 'Our current fulfillment engine is operating near its ceiling; taking on 30% more clients right now would push our daily delivery to a breaking point.',
+        subtext: 'Has fulfillment capacity become a hard constraint on top-line revenue growth?',
+        isExpress: false
+      },
+
+      // --- Theme 3: What You Have Tried (Application Q3) ---
+      {
+        id: 'p1_tried_decaying_systems',
+        phase: 1,
+        pattern: 'drift',
+        title: 'Decaying System Attempts',
+        prompt: 'We have tried implementing new software, procedures, or tools in the past, but they gradually decayed and daily operations reverted back to old habits.',
+        subtext: 'Do operational improvements struggle to stick without your constant personal enforcement?',
+        isExpress: true
+      },
+      {
+        id: 'p1_tried_delegation_rework',
+        phase: 1,
+        pattern: 'delegation',
+        title: 'Delegation & Rework Friction',
+        prompt: (profile) => {
+          if (profile && profile.teamSize === 'solo') {
+            return 'Bringing on outside contractors or freelancers in the past created more administrative friction and rework for me than actual relief.';
+          }
+          return 'Delegating core responsibilities to team members in the past often resulted in subpar execution that forced me to step back in and redo the work myself.';
+        },
+        subtext: 'Has past handoff friction reinforced the belief that executing it yourself is safer and faster?',
+        isExpress: false
+      },
+      {
+        id: 'p1_tried_interrupted_initiatives',
+        phase: 1,
+        pattern: 'drift',
+        title: 'Initiative Execution Stamina',
+        prompt: 'We have started important internal initiatives to fix our operational bottlenecks, but urgent client emergencies forced us to abandon them halfway through.',
+        subtext: 'Do client emergencies and daily noise consistently derail internal operational improvements?',
+        isExpress: false
+      },
+
+      // --- Theme 4: Six-Month Goals (Application Q4) ---
+      {
+        id: 'p1_goal_operational_independence',
+        phase: 1,
+        pattern: 'centralization',
+        title: 'Operational Independence Target',
+        prompt: 'A successful six months means our business can operate smoothly for two consecutive weeks without needing my daily guidance, oversight, or emergency calls.',
+        subtext: 'Is building operational independence and true executive detachment your top outcome?',
+        isExpress: true
+      },
+      {
+        id: 'p1_goal_systematic_pipeline',
+        phase: 1,
+        pattern: 'commercial',
+        title: 'Predictable Pipeline Target',
+        prompt: (profile) => {
+          if (profile && (profile.webPresence === 'social_referral' || profile.webPresence === 'none')) {
+            return 'Our top priority over the next two quarters is transitioning from opportunistic word-of-mouth referrals to a predictable, documented customer acquisition engine.';
+          }
+          return 'Our top priority over the next two quarters is turning our digital presence into a predictable acquisition engine that does not depend on personal founder sales hustle.';
+        },
+        subtext: 'Are you actively aiming to replace unpredictable sales with an engineered commercial engine?',
+        isExpress: false
+      },
+      {
+        id: 'p1_goal_margin_leverage',
+        phase: 1,
+        pattern: 'coupling',
+        title: 'Profit & Operational Leverage',
+        prompt: 'Over the next six months, increasing net profit margins and operational leverage is vastly more important to me than simply growing gross top-line revenue.',
+        subtext: 'Are you prioritizing financial leverage and executive sanity over mindless headcount expansion?',
+        isExpress: false
+      },
+
+      // --- Theme 5: Readiness to Change (Application Q5) ---
+      {
+        id: 'p1_readiness_let_go',
+        phase: 1,
+        pattern: 'delegation',
+        title: 'Willingness to Let Go',
+        prompt: 'I am genuinely prepared to stop personally doing low-leverage tasks in the next 30 days, even if letting go feels uncomfortable or causes temporary bumps.',
+        subtext: 'Are you ready to endure the initial discomfort of transferring authority to others or systems?',
+        isExpress: true
+      },
+      {
+        id: 'p1_readiness_candid_coaching',
+        phase: 1,
+        pattern: 'leadership',
+        title: 'Openness to Candid Accountability',
+        prompt: 'I welcome direct, candid feedback about how my own habits, decision defaults, and leadership patterns may be capping the company\'s ceiling.',
+        subtext: 'Are you ready to examine founder behaviors alongside business systems?',
+        isExpress: true
+      },
+      {
+        id: 'p1_readiness_quarantine_time',
+        phase: 1,
+        pattern: 'reactive',
+        title: 'Strategic Rhythm Discipline',
+        prompt: 'I am committed to quarantining 3 to 5 hours every single week exclusively for strategic business architecture, treating that time as sacred and untouchable.',
+        subtext: 'Are you ready to protect executive time against daily operational encroachment?',
         isExpress: false
       }
     ];
@@ -932,7 +1077,7 @@
         id: 'p2_delegation_friction',
         phase: 2,
         pattern: 'delegation',
-        title: 'Phase 2: Task Execution Trade-off',
+        title: 'Task Execution Trade-off',
         prompt: 'When routine work or a new task needs to get done:',
         optionA: {
           label: 'If I can finish something quickly myself, I usually just handle it rather than spending the extra time explaining it to someone else.',
@@ -950,7 +1095,7 @@
         id: 'p2_reactive_ownership',
         phase: 2,
         pattern: 'reactive',
-        title: 'Phase 2: Prioritization Trade-off',
+        title: 'Prioritization Trade-off',
         prompt: 'When planning your working time each day:',
         optionA: {
           label: 'I focus first on whatever immediate customer issue, fire, or friction is creating the biggest urgent pressure today.',
@@ -968,7 +1113,7 @@
         id: 'p2_owner_centralization',
         phase: 2,
         pattern: 'centralization',
-        title: 'Phase 2: Decision Authority Trade-off',
+        title: 'Decision Authority Trade-off',
         prompt: 'When an unusual situation or client exception occurs:',
         optionA: {
           label: 'I prefer staying personally involved so I can ensure the judgment call meets our standards.',
@@ -986,7 +1131,7 @@
         id: 'p2_execution_drift',
         phase: 2,
         pattern: 'drift',
-        title: 'Phase 2: Initiative Completion Trade-off',
+        title: 'Initiative Completion Trade-off',
         prompt: 'When a compelling new idea or business opportunity appears:',
         optionA: {
           label: 'I tend to pursue it quickly while enthusiasm is high, even if prior projects are still in progress.',
@@ -1004,15 +1149,19 @@
         id: 'p2_leadership_depth',
         phase: 2,
         pattern: 'leadership',
-        title: 'Phase 2: Talent & Oversight Trade-off',
+        title: 'Talent & Oversight Trade-off',
         prompt: 'When managing operational delivery:',
         optionA: {
-          label: 'I rely heavily on my own direct oversight because I don\'t have enough people around me who think and decide like owners.',
+          label: (profile) => (profile && profile.teamSize === 'solo')
+            ? "I rely heavily on my own direct execution because I don't have trusted outside specialists or contractors who think like owners."
+            : "I rely heavily on my own direct oversight because I don't have enough people around me who think and decide like owners.",
           favors: 'leadership',
           weight: 2
         },
         optionB: {
-          label: 'I actively invest time in developing key people\'s problem-solving skills, even when their learning curve takes time.',
+          label: (profile) => (profile && profile.teamSize === 'solo')
+            ? "I actively invest time in testing and building repeatable playbooks for specialists so I don't have to execute everything myself."
+            : "I actively invest time in developing key people's problem-solving skills, even when their learning curve takes time.",
           favors: 'leadership_mature',
           weight: 0
         },
@@ -1022,7 +1171,7 @@
         id: 'p2_growth_coupling',
         phase: 2,
         pattern: 'coupling',
-        title: 'Phase 2: Scaling Capacity Trade-off',
+        title: 'Scaling Capacity Trade-off',
         prompt: 'If your business volume increased by 30% next month:',
         optionA: {
           label: 'It would inevitably require significantly more hours, oversight, and operational stress from me personally.',
@@ -1030,7 +1179,9 @@
           weight: 2
         },
         optionB: {
-          label: 'Our workflows and team could absorb that volume without requiring much more of my direct personal time.',
+          label: (profile) => (profile && profile.teamSize === 'solo')
+            ? "My workflows and automated delivery systems could absorb that volume without requiring much more of my direct personal time."
+            : "Our workflows and team could absorb that volume without requiring much more of my direct personal time.",
           favors: 'coupling_mature',
           weight: 0
         },
@@ -1040,7 +1191,7 @@
         id: 'p2_commercial_uncertainty',
         phase: 2,
         pattern: 'commercial',
-        title: 'Phase 2: Commercial Visibility Trade-off',
+        title: 'Commercial Visibility Trade-off',
         prompt: 'When evaluating new customer acquisition and sales conversion:',
         optionA: {
           label: 'When prospects don\'t move forward or inquiries drop, it often feels difficult to pinpoint the exact structural reason.',
@@ -1058,7 +1209,7 @@
         id: 'p2_process_vs_shadowing',
         phase: 2,
         pattern: 'centralization',
-        title: 'Phase 2: Onboarding & Knowledge Transfer',
+        title: 'Onboarding & Knowledge Transfer',
         prompt: 'When someone new needs to learn a key workflow in your company:',
         optionA: {
           label: 'It feels more natural and practical to have them shadow me directly so I can show them how it\'s done in real time.',
@@ -1076,7 +1227,7 @@
         id: 'p2_problem_prevention',
         phase: 2,
         pattern: 'reactive',
-        title: 'Phase 2: Problem Solving Approach',
+        title: 'Problem Solving Approach',
         prompt: 'When operational snags occur in the business:',
         optionA: {
           label: 'I take pride in my ability to step in quickly and resolve complex emergencies with direct founder agility.',
@@ -1094,7 +1245,7 @@
         id: 'p2_focus_vs_scope',
         phase: 2,
         pattern: 'drift',
-        title: 'Phase 2: Offering Scope Trade-off',
+        title: 'Offering Scope Trade-off',
         prompt: 'When clients request specialized or custom services:',
         optionA: {
           label: 'I often customize our scope or add new services to capture the revenue opportunity and satisfy the client.',
@@ -1116,7 +1267,7 @@
         id: 'p3_change_readiness',
         phase: 3,
         dimension: 'readiness',
-        title: 'Phase 3: Change Readiness',
+        title: 'Change Readiness',
         prompt: 'Which best describes where you are right now regarding how you run the business?',
         options: [
           { text: 'I know things could be better, but right now I am not ready to make major changes to how we operate.', value: 1, label: 'Contemplative / Hesitant' },
@@ -1129,7 +1280,7 @@
         id: 'p3_habit_shift',
         phase: 3,
         dimension: 'ownership',
-        title: 'Phase 3: Personal Operating Shift',
+        title: 'Personal Operating Shift',
         prompt: 'If building a self-sustaining business required you to substantially change how you personally spend your time each day, how willing are you to do that?',
         options: [
           { text: 'Reluctant: I strongly prefer solutions that fit into my existing routine without changing how I work.', value: 1, label: 'Routine Protection' },
@@ -1142,7 +1293,7 @@
         id: 'p3_coachability',
         phase: 3,
         dimension: 'coachability',
-        title: 'Phase 3: Openness to Challenge',
+        title: 'Openness to Challenge',
         prompt: 'When an experienced advisor or colleague presents evidence that challenges an operating decision you strongly believe in, your natural reaction is to:',
         options: [
           { text: 'Defend my reasoning until there is overwhelming proof that my approach is wrong.', value: 1, label: 'Defensive / Skeptical' },
@@ -1155,7 +1306,7 @@
         id: 'p3_outcome_vision',
         phase: 3,
         dimension: 'vision',
-        title: 'Phase 3: Future Vision & Freedom',
+        title: 'Future Vision & Freedom',
         prompt: 'What is the primary personal breakthrough you want this business to create for you over the next 12 to 24 months?',
         options: [
           { text: 'Greater personal financial return and margin without increasing my working hours.', value: 2, label: 'Economic Leverage' },
@@ -1167,17 +1318,29 @@
     ];
 
     let preloadedLead = null;
+    let preloadedBusinessProfile = {
+      company: '',
+      website: '',
+      webPresence: 'website',
+      yearsOperating: '2–5 years',
+      teamSize: 'small',
+      revenueRange: '$250,000–$499,999'
+    };
+
     try {
       const dRaw = localStorage.getItem('klein_diagnostic_result');
       if (dRaw) {
         const d = JSON.parse(dRaw);
         if (d.client && d.client.email) preloadedLead = d.client;
+        if (d.client && d.client.company && !preloadedBusinessProfile.company) preloadedBusinessProfile.company = d.client.company;
+        if (d.businessProfile) preloadedBusinessProfile = Object.assign(preloadedBusinessProfile, d.businessProfile);
       }
       if (!preloadedLead) {
         const pRaw = localStorage.getItem('klein_survey_progress');
         if (pRaw) {
           const p = JSON.parse(pRaw);
           if (p.leadData && p.leadData.email) preloadedLead = p.leadData;
+          if (p.businessProfile) preloadedBusinessProfile = Object.assign(preloadedBusinessProfile, p.businessProfile);
         }
       }
       if (!preloadedLead) {
@@ -1185,6 +1348,7 @@
         if (cRaw) {
           const c = JSON.parse(cRaw);
           if (c && c.email) preloadedLead = { name: c.name || '', email: c.email, company: c.business || '' };
+          if (c && c.business && !preloadedBusinessProfile.company) preloadedBusinessProfile.company = c.business;
         }
       }
       if (!preloadedLead) {
@@ -1192,6 +1356,7 @@
         if (lRaw) {
           const l = JSON.parse(lRaw);
           if (l && l.lead && l.lead.email) preloadedLead = { name: l.lead.name || '', email: l.lead.email, company: l.lead.company || '' };
+          if (l && l.lead && l.lead.company && !preloadedBusinessProfile.company) preloadedBusinessProfile.company = l.lead.company;
         }
       }
     } catch (e) { }
@@ -1201,18 +1366,26 @@
     const paramName = urlParams.get('name');
     const paramCompany = urlParams.get('company');
 
+    if (paramCompany) {
+      preloadedBusinessProfile.company = paramCompany;
+    }
+
     const state = {
-      mode: 'express', // 'express' (14 questions) or 'deep' (21 questions)
+      mode: 'express', // 'express' (20 questions) or 'deep' (33 questions)
       activeScenarios: [],
       step: -1,
       answers: {},
+      businessProfile: preloadedBusinessProfile,
       leadData: {
         name: paramName || (preloadedLead && preloadedLead.name ? preloadedLead.name : 'Executive Lead'),
         email: paramEmail || (preloadedLead && preloadedLead.email ? preloadedLead.email : ''),
-        company: paramCompany || (preloadedLead && preloadedLead.company ? preloadedLead.company : 'Your Company')
+        company: paramCompany || preloadedBusinessProfile.company || (preloadedLead && preloadedLead.company ? preloadedLead.company : 'Your Company')
       },
       webhookUrl: localStorage.getItem('klein_webhook_url') || '',
       calendarUrl: localStorage.getItem('klein_calendar_url') || '',
+      isRerun: false,
+      hasExistingCompletedDossier: false,
+      completedSnapshot: null
     };
 
     const chatStream = document.getElementById('chatStream');
@@ -1221,6 +1394,22 @@
     const chatProgressBar = document.getElementById('chatProgressBar');
     const chatOverlay = document.getElementById('chatOverlay');
     const chatStepTracker = document.getElementById('chatStepTracker');
+
+    function getScenarioPrompt(s) {
+      if (!s) return '';
+      if (typeof s.prompt === 'function') {
+        return s.prompt(state.businessProfile);
+      }
+      return s.prompt;
+    }
+
+    function getScenarioOptionLabel(opt) {
+      if (!opt) return '';
+      if (typeof opt.label === 'function') {
+        return opt.label(state.businessProfile);
+      }
+      return opt.label || '';
+    }
 
     function buildScenarioList(mode) {
       if (mode === 'express') {
@@ -1292,7 +1481,7 @@
     function renderPastConversation(scenariosToPopulate) {
       chatStream.innerHTML = '';
 
-      const modeLabel = state.mode === 'express' ? 'Express Assessment (14 Scenarios)' : 'Deep-Dive Assessment (21 Scenarios)';
+      const modeLabel = state.mode === 'express' ? 'Express Assessment (20 Scenarios)' : 'Deep-Dive Assessment (33 Scenarios)';
       const modeBubble = document.createElement('div');
       modeBubble.className = 'chat-bubble-animate flex items-start gap-2.5 sm:gap-3 text-xs sm:text-sm';
       modeBubble.innerHTML = `
@@ -1307,20 +1496,46 @@
       chatStream.appendChild(modeBubble);
       submitUserAnswer(modeLabel);
 
+      if (state.businessProfile && state.businessProfile.company) {
+        const prof = state.businessProfile;
+        const teamLabels = { solo: 'Solo Operator', small: '2–5 People', medium: '6–20 People', large: '20+ People' };
+        const fndBubble = document.createElement('div');
+        fndBubble.className = 'chat-bubble-animate flex items-start gap-2.5 sm:gap-3 text-xs sm:text-sm';
+        fndBubble.innerHTML = `
+          <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-[#1a2936] text-[#598dae] border border-[rgba(89,141,174,0.35)] flex items-center justify-center font-bold text-xs flex-shrink-0 shadow-sm">
+            KI
+          </div>
+          <div class="bg-[#f0f5f8] border border-[#d8e2e9] p-3.5 sm:p-4 rounded-2xl rounded-tl-sm text-[#141f28] max-w-lg leading-relaxed shadow-sm space-y-1">
+            <div class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#36607d] font-mono">Step 0: Business Foundation</div>
+            <div>Calibrated for <strong>${prof.company}</strong> (${prof.yearsOperating}, ${teamLabels[prof.teamSize] || prof.teamSize}).</div>
+          </div>
+        `;
+        chatStream.appendChild(fndBubble);
+        submitUserAnswer(`${prof.company} &bull; ${prof.yearsOperating} &bull; ${teamLabels[prof.teamSize] || prof.teamSize}`);
+      }
+
       scenariosToPopulate.forEach((s) => {
         const val = state.answers[s.id];
         if (val === undefined) return;
 
         let displayAnswer = '';
         if (s.phase === 1) {
-          displayAnswer = val === 2 ? 'Agree' : (val === 1 ? 'Unsure' : 'Disagree');
+          if (val === 2) displayAnswer = 'Strongly Agree';
+          else if (val === 1.5) displayAnswer = 'Agree';
+          else if (val === 1 || val === 1.0) displayAnswer = 'Unsure';
+          else if (val === 0.5) displayAnswer = 'Disagree';
+          else if (val === 0) displayAnswer = 'Strongly Disagree';
+          else displayAnswer = 'Answered';
         } else if (s.phase === 2) {
-          displayAnswer = val === 'A' ? `Option A: ${s.optionA.label}` : `Option B: ${s.optionB.label}`;
+          const optALabel = getScenarioOptionLabel(s.optionA);
+          const optBLabel = getScenarioOptionLabel(s.optionB);
+          displayAnswer = val === 'A' ? `Option A: ${optALabel}` : `Option B: ${optBLabel}`;
         } else if (s.phase === 3) {
           const match = s.options.find(o => o.value === val);
           displayAnswer = match ? match.text : `Selected (Score ${val})`;
         }
 
+        const promptText = getScenarioPrompt(s);
         const qBubble = document.createElement('div');
         qBubble.className = 'chat-bubble-animate flex items-start gap-2.5 sm:gap-3 text-xs sm:text-sm';
         qBubble.innerHTML = `
@@ -1329,7 +1544,7 @@
           </div>
           <div class="bg-[#f0f5f8] border border-[#d8e2e9] p-3.5 sm:p-4 rounded-2xl rounded-tl-sm text-[#141f28] max-w-lg leading-relaxed shadow-sm space-y-1">
             ${s.title ? `<div class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#36607d] font-mono">${s.title}</div>` : ''}
-            <div>${s.prompt}</div>
+            <div>${promptText}</div>
           </div>
         `;
         chatStream.appendChild(qBubble);
@@ -1362,7 +1577,7 @@
       if (savedProgress && (savedProgress.isShortFormCompleted || savedProgress.isCompleted)) {
         const prompt = `
           Welcome back! You have a completed assessment dossier on file.<br><br>
-          You can view your unlocked <strong>Executive Owner Constraint Dossier</strong>, or re-run the assessment with our comprehensive 21-scenario deep dive.
+          You can view your unlocked <strong>Executive Owner Constraint Dossier</strong>, or re-run the assessment with our comprehensive 33-scenario deep dive.
         `;
 
         appendBotMessage('Welcome Back', prompt, () => {
@@ -1374,44 +1589,24 @@
               </button>
               <button id="upgradeDeepBtn" class="min-h-[50px] p-3 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#487b9c] hover:bg-[#eaf2f7] text-[#141f28] text-left transition-all flex flex-col justify-center shadow-sm">
                 <span class="font-bold text-xs sm:text-sm">🔍 Deep-Dive Assessment</span>
-                <span class="text-[10px] text-[#4a5560] mt-0.5">Complete full 21-scenario evaluation</span>
+                <span class="text-[10px] text-[#4a5560] mt-0.5">Complete full 33-scenario evaluation</span>
               </button>
             </div>
             <div class="text-center mt-2.5">
-              <button id="startFreshBtn" class="text-[11px] text-[#647c8f] hover:text-[#141f28] font-semibold underline">Or reset and start fresh</button>
+              <button id="startFreshBtn" class="text-[11px] text-[#647c8f] hover:text-[#141f28] font-semibold underline">Or re-run assessment</button>
             </div>
           `;
 
           document.getElementById('resumeDossierBtn').addEventListener('click', () => {
-            state.answers = savedProgress.answers || {};
-            state.leadData = savedProgress.leadData || state.leadData;
-            state.mode = savedProgress.mode || 'express';
-            state.activeScenarios = buildScenarioList(state.mode);
-            const analysis = analyzeConstraints();
-            chatOverlay.classList.add('opacity-0', 'pointer-events-none');
-            syncDashboard(analysis);
-            showToast('Viewing your executive constraint dossier.');
+            restoreCompletedDossier();
           });
 
           document.getElementById('upgradeDeepBtn').addEventListener('click', () => {
-            state.answers = savedProgress.answers || {};
-            state.leadData = savedProgress.leadData || state.leadData;
-            state.mode = 'deep';
-            state.activeScenarios = buildScenarioList('deep');
-            const unansweredIdx = state.activeScenarios.findIndex(s => state.answers[s.id] === undefined);
-            state.step = unansweredIdx >= 0 ? unansweredIdx : 0;
-            document.getElementById('auditTypeBadge').textContent = 'Deep-Dive (21 Qs)';
-            document.getElementById('reportModeBadge').textContent = 'Deep-Dive Executive Dossier';
-            const answeredScenarios = state.activeScenarios.slice(0, state.step);
-            renderPastConversation(answeredScenarios);
-            renderCurrentScenario();
+            startRerunSession();
           });
 
           document.getElementById('startFreshBtn').addEventListener('click', () => {
-            localStorage.removeItem('klein_survey_progress');
-            state.answers = {};
-            chatStream.innerHTML = '';
-            renderStandardWelcomeScreen();
+            startRerunSession();
           });
         });
         return;
@@ -1420,7 +1615,7 @@
       // Check if mid-way
       const hasAnsweredAny = savedProgress && savedProgress.answers && Object.keys(savedProgress.answers).length > 0;
       if (savedProgress && (savedProgress.hasSaved || hasAnsweredAny) && !savedProgress.isCompleted) {
-        const total = savedProgress.totalScenarios || (savedProgress.mode === 'deep' ? 21 : 14);
+        const total = savedProgress.totalScenarios || (savedProgress.mode === 'deep' ? 33 : 20);
         const answeredCount = savedProgress.answers ? Object.keys(savedProgress.answers).length : 0;
         const currentScenarioNum = Math.min(total, Math.max(1, (typeof savedProgress.step === 'number' ? savedProgress.step : answeredCount) + 1));
         const prompt = `
@@ -1445,11 +1640,12 @@
           document.getElementById('resumeProgressBtn').addEventListener('click', () => {
             state.answers = savedProgress.answers || {};
             state.leadData = savedProgress.leadData || state.leadData;
+            state.businessProfile = savedProgress.businessProfile || state.businessProfile;
             state.mode = savedProgress.mode || 'express';
             state.activeScenarios = buildScenarioList(state.mode);
             const nextIdx = state.activeScenarios.findIndex(s => state.answers[s.id] === undefined);
             state.step = nextIdx >= 0 ? nextIdx : (typeof savedProgress.step === 'number' ? savedProgress.step : 0);
-            document.getElementById('auditTypeBadge').textContent = state.mode === 'express' ? 'Express (14 Qs)' : 'Deep-Dive (21 Qs)';
+            document.getElementById('auditTypeBadge').textContent = state.mode === 'express' ? 'Express (20 Qs)' : 'Deep-Dive (33 Qs)';
             document.getElementById('reportModeBadge').textContent = state.mode === 'express' ? 'Express Executive Dossier' : 'Deep-Dive Executive Dossier';
             const answeredScenarios = state.activeScenarios.slice(0, state.step);
             renderPastConversation(answeredScenarios);
@@ -1473,56 +1669,185 @@
       const prompt = `
         Welcome to the <strong class="text-[#141f28] font-bold">Klein Insight Owner Constraint Assessment</strong>.<br><br>
         Most business problems are not purely operational or financial—they are directly connected to how the owner operates, delegates, handles pressure, and makes trade-offs.<br><br>
-        This assessment is built around three distinct phases:
+        This assessment is built around three distinct pillars:
         <ul class="list-disc pl-4 mt-1.5 space-y-1 text-xs text-[#354c5e]">
-          <li><strong>Phase 1: Emotional Experience</strong> (What owning the business currently feels like)</li>
-          <li><strong>Phase 2: Operating Preferences</strong> (Pairwise trade-offs identifying relative constraints)</li>
-          <li><strong>Phase 3: Drive &amp; Change Readiness</strong> (Agency, commitment &amp; future vision)</li>
+          <li><strong>Emotional Experience</strong> (What owning the business currently feels like)</li>
+          <li><strong>Operating Preferences</strong> (Pairwise trade-offs identifying relative constraints)</li>
+          <li><strong>Drive &amp; Change Readiness</strong> (Agency, commitment &amp; future vision)</li>
         </ul>
         <br>Choose your evaluation depth:
       `;
 
       appendBotMessage('Overview &amp; Method', prompt, () => {
+        let returnBtnHtml = '';
+        if (state.hasExistingCompletedDossier || state.isRerun || state.completedSnapshot) {
+          returnBtnHtml = `
+            <div class="text-center pt-2.5 border-t border-[#d8e2e9]/70 mt-1">
+              <button type="button" id="cancelRerunReturnBtn" class="text-xs text-[#36607d] hover:text-[#141f28] font-bold underline inline-flex items-center gap-1.5 transition-colors py-1 cursor-pointer">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                <span>Return to Current Completed Dossier</span>
+              </button>
+            </div>
+          `;
+        }
+
         activeInputContainer.innerHTML = `
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             <button id="startExpressBtn" class="min-h-[54px] p-3 rounded-xl bg-[#487b9c] hover:bg-[#36607d] text-white text-left transition-all shadow-md shadow-[rgba(72,123,156,0.25)] flex flex-col justify-center border border-[#36607d]">
               <span class="font-bold text-xs sm:text-sm flex items-center gap-1.5">
                 <span>⚡ Express Assessment</span>
-                <span class="text-[10px] bg-white/20 px-1.5 py-0.2 rounded font-semibold">14 Scenarios</span>
+                <span class="text-[10px] bg-white/20 px-1.5 py-0.2 rounded font-semibold">20 Scenarios</span>
               </span>
-              <span class="text-[10px] text-white/90 mt-0.5">Rapid triage across all 3 phases (~2 min)</span>
+              <span class="text-[10px] text-white/90 mt-0.5">Rapid triage across all 3 pillars (~3 min)</span>
             </button>
 
             <button id="startFullBtn" class="min-h-[54px] p-3 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#487b9c] hover:bg-[#eaf2f7] text-[#141f28] text-left transition-all flex flex-col justify-center shadow-sm">
               <span class="font-bold text-xs sm:text-sm flex items-center gap-1.5">
                 <span>🔍 Deep-Dive Assessment</span>
-                <span class="text-[10px] bg-[#edf3f7] text-[#36607d] border border-[#d8e2e9] px-1.5 py-0.2 rounded font-bold">21 Scenarios</span>
+                <span class="text-[10px] bg-[#edf3f7] text-[#36607d] border border-[#d8e2e9] px-1.5 py-0.2 rounded font-bold">33 Scenarios</span>
               </span>
-              <span class="text-[10px] text-[#4a5560] mt-0.5">Comprehensive pairwise evaluation &amp; contradiction analysis (~4 min)</span>
+              <span class="text-[10px] text-[#4a5560] mt-0.5">Comprehensive pairwise evaluation &amp; contradiction analysis (~6 min)</span>
             </button>
           </div>
+          ${returnBtnHtml}
         `;
+
+        if (document.getElementById('cancelRerunReturnBtn')) {
+          document.getElementById('cancelRerunReturnBtn').addEventListener('click', () => {
+            restoreCompletedDossier();
+          });
+        }
 
         document.getElementById('startExpressBtn').addEventListener('click', () => {
           state.mode = 'express';
           state.activeScenarios = buildScenarioList('express');
-          document.getElementById('auditTypeBadge').textContent = 'Express (14 Qs)';
+          document.getElementById('auditTypeBadge').textContent = 'Express (20 Qs)';
           document.getElementById('reportModeBadge').textContent = 'Express Executive Dossier';
-          document.getElementById('auditBaselineLabel').textContent = 'Format: 14-Scenario 3-Phase Owner Assessment';
-          submitUserAnswer("Express Assessment (14 Scenarios)");
-          state.step = 0;
-          renderCurrentScenario();
+          document.getElementById('auditBaselineLabel').textContent = 'Format: 20-Scenario 3-Phase Owner Assessment';
+          submitUserAnswer("Express Assessment (20 Scenarios)");
+          renderBusinessFoundationStep('express');
         });
 
         document.getElementById('startFullBtn').addEventListener('click', () => {
           state.mode = 'deep';
           state.activeScenarios = buildScenarioList('deep');
-          document.getElementById('auditTypeBadge').textContent = 'Deep-Dive (21 Qs)';
+          document.getElementById('auditTypeBadge').textContent = 'Deep-Dive (33 Qs)';
           document.getElementById('reportModeBadge').textContent = 'Deep-Dive Executive Dossier';
-          document.getElementById('auditBaselineLabel').textContent = 'Format: 21-Scenario 3-Phase Deep-Dive Assessment';
-          submitUserAnswer("Deep-Dive Assessment (21 Scenarios)");
+          document.getElementById('auditBaselineLabel').textContent = 'Format: 33-Scenario 3-Phase Deep-Dive Assessment';
+          submitUserAnswer("Deep-Dive Assessment (33 Scenarios)");
+          renderBusinessFoundationStep('deep');
+        });
+      });
+    }
+
+    function renderBusinessFoundationStep(chosenMode) {
+      chatProgressBar.style.width = '4%';
+      chatStepTracker.textContent = 'Business Context (Stage, Team & Pipeline)';
+
+      const prompt = `
+        Before we begin the scenarios, please confirm a few baseline details about your business. 
+        This enables our model to dynamically tailor questions to your exact operational stage, team scale, and customer acquisition structure.
+      `;
+
+      appendBotMessage('Step 0: Business Foundation', prompt, () => {
+        const prof = state.businessProfile || {};
+        const compVal = prof.company || (state.leadData && state.leadData.company && state.leadData.company !== 'Your Company' ? state.leadData.company : '');
+        const yrsVal = prof.yearsOperating || '2–5 years';
+        const teamVal = prof.teamSize || 'small';
+        const webVal = prof.webPresence || 'website';
+        const revVal = prof.revenueRange || '$250,000–$499,999';
+
+        activeInputContainer.innerHTML = `
+          <form id="foundationForm" class="space-y-2.5 p-0.5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div>
+                <label class="block text-[10px] font-bold text-[#141f28] uppercase tracking-wider mb-1">Company / Organization *</label>
+                <input type="text" id="fnCompany" required value="${compVal}" placeholder="Your Company Name" class="w-full px-3 py-2 rounded-lg bg-white border border-[#d8e2e9] text-xs text-[#141f28] placeholder-[#8ba2b3] focus:outline-none focus:border-[#487b9c] focus:ring-1 focus:ring-[#eaf2f7]">
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-[#141f28] uppercase tracking-wider mb-1">Web Presence / Acquisition Channel *</label>
+                <select id="fnWebPresence" class="w-full px-3 py-2 rounded-lg bg-white border border-[#d8e2e9] text-xs text-[#141f28] focus:outline-none focus:border-[#487b9c]">
+                  <option value="website" ${webVal === 'website' ? 'selected' : ''}>Active Website / Digital Funnel</option>
+                  <option value="referral" ${webVal === 'referral' ? 'selected' : ''}>Referral / Word-of-Mouth Pipeline</option>
+                  <option value="social" ${webVal === 'social' ? 'selected' : ''}>Social Media / Portfolio Channel</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <div>
+                <label class="block text-[10px] font-bold text-[#141f28] uppercase tracking-wider mb-1">Years Operating *</label>
+                <select id="fnYears" class="w-full px-3 py-2 rounded-lg bg-white border border-[#d8e2e9] text-xs text-[#141f28] focus:outline-none focus:border-[#487b9c]">
+                  <option value="Under 2 years" ${yrsVal === 'Under 2 years' ? 'selected' : ''}>Under 2 years</option>
+                  <option value="2–5 years" ${yrsVal === '2–5 years' ? 'selected' : ''}>2–5 years</option>
+                  <option value="6–10 years" ${yrsVal === '6–10 years' ? 'selected' : ''}>6–10 years</option>
+                  <option value="More than 10 years" ${yrsVal === 'More than 10 years' ? 'selected' : ''}>More than 10 years</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-[#141f28] uppercase tracking-wider mb-1">Team Scale *</label>
+                <select id="fnTeam" class="w-full px-3 py-2 rounded-lg bg-white border border-[#d8e2e9] text-xs text-[#141f28] focus:outline-none focus:border-[#487b9c]">
+                  <option value="solo" ${teamVal === 'solo' ? 'selected' : ''}>Just me (Solo Operator)</option>
+                  <option value="small" ${teamVal === 'small' ? 'selected' : ''}>2–5 people (Core Team)</option>
+                  <option value="medium" ${teamVal === 'medium' ? 'selected' : ''}>6–20 people (Growing Firm)</option>
+                  <option value="large" ${teamVal === 'large' ? 'selected' : ''}>20+ people (Established Org)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-[#141f28] uppercase tracking-wider mb-1">Approx. Revenue (Optional)</label>
+                <select id="fnRevenue" class="w-full px-3 py-2 rounded-lg bg-white border border-[#d8e2e9] text-xs text-[#141f28] focus:outline-none focus:border-[#487b9c]">
+                  <option value="Under $100,000" ${revVal === 'Under $100,000' ? 'selected' : ''}>Under $100,000</option>
+                  <option value="$100,000–$249,999" ${revVal === '$100,000–$249,999' ? 'selected' : ''}>$100,000–$249,999</option>
+                  <option value="$250,000–$499,999" ${revVal === '$250,000–$499,999' ? 'selected' : ''}>$250,000–$499,999</option>
+                  <option value="$500,000–$999,999" ${revVal === '$500,000–$999,999' ? 'selected' : ''}>$500,000–$999,999</option>
+                  <option value="$1 million or more" ${revVal === '$1 million or more' ? 'selected' : ''}>$1 million or more</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="submit" class="w-full min-h-[46px] py-2.5 rounded-xl bg-[#487b9c] hover:bg-[#36607d] text-white font-bold text-xs sm:text-sm tracking-wide transition-all shadow-md flex items-center justify-center gap-2 mt-2">
+              <span>Begin Scenario Assessment</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </button>
+          </form>
+        `;
+
+        document.getElementById('foundationForm').addEventListener('submit', (e) => {
+          e.preventDefault();
+          const comp = document.getElementById('fnCompany').value.trim() || 'Your Company';
+          const webP = document.getElementById('fnWebPresence').value;
+          const yrs = document.getElementById('fnYears').value;
+          const tm = document.getElementById('fnTeam').value;
+          const rev = document.getElementById('fnRevenue').value;
+
+          state.businessProfile = {
+            company: comp,
+            webPresence: webP,
+            yearsOperating: yrs,
+            teamSize: tm,
+            revenueRange: rev
+          };
+
+          if (!state.leadData.company || state.leadData.company === 'Your Company') {
+            state.leadData.company = comp;
+          }
+
+          const teamLabels = {
+            solo: 'Solo Operator',
+            small: '2–5 People',
+            medium: '6–20 People',
+            large: '20+ People'
+          };
+          const webLabels = {
+            website: 'Active Website',
+            referral: 'Referral Pipeline',
+            social: 'Social Pipeline'
+          };
+
+          submitUserAnswer(`${comp} &bull; ${yrs} &bull; ${teamLabels[tm] || tm} &bull; ${webLabels[webP] || webP}`);
           state.step = 0;
-          renderCurrentScenario();
+          saveProgressLocally(false);
+          setTimeout(renderCurrentScenario, 150);
         });
       });
     }
@@ -1537,37 +1862,46 @@
       const stepPercent = Math.min(100, Math.round(((state.step + 1) / (state.activeScenarios.length + 1)) * 100));
       chatProgressBar.style.width = stepPercent + '%';
 
-      const phaseNames = {
-        1: 'Phase 1: Emotional Experience',
-        2: 'Phase 2: Operating Trade-offs',
-        3: 'Phase 3: Change Readiness'
+      const pillarNames = {
+        1: 'Emotional Experience',
+        2: 'Operating Trade-offs',
+        3: 'Change Readiness'
       };
-      chatStepTracker.textContent = `${phaseNames[s.phase]} (${state.step + 1} of ${state.activeScenarios.length})`;
+      chatStepTracker.textContent = `${pillarNames[s.phase]} (${state.step + 1} of ${state.activeScenarios.length})`;
 
-      // Render Phase 1 (Agree / Unsure / Disagree)
+      // Render Phase 1 (5-Point Likert Scale: Strongly Agree to Strongly Disagree)
       if (s.phase === 1) {
-        const fullPrompt = `${s.prompt}${s.subtext ? `<div class="text-[#4a5560] text-xs mt-1.5 italic font-medium">${s.subtext}</div>` : ''}`;
+        const promptText = getScenarioPrompt(s);
+        const fullPrompt = `${promptText}${s.subtext ? `<div class="text-[#4a5560] text-xs mt-1.5 italic font-medium">${s.subtext}</div>` : ''}`;
         appendBotMessage(s.title, fullPrompt, () => {
           activeInputContainer.innerHTML = `
-            <div class="grid grid-cols-3 gap-2">
-              <button type="button" class="diag-btn min-h-[48px] py-2.5 px-2 rounded-xl border border-[#487b9c] bg-[#eaf2f7] hover:bg-[#36607d] hover:text-white text-[#36607d] font-bold text-xs transition-all flex flex-col items-center justify-center text-center shadow-sm" data-val="2" data-label="Agree">
-                <span class="font-bold text-xs sm:text-sm">Agree</span>
-                <span class="text-[9px] opacity-80 hidden sm:inline">Sounds like my reality</span>
+            <div class="grid grid-cols-1 sm:grid-cols-5 gap-1.5 sm:gap-2 pt-1">
+              <button type="button" class="diag-btn min-h-[46px] sm:min-h-[56px] px-2.5 py-2 sm:px-2 sm:py-2.5 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#1b2e3c] hover:bg-[#f0f5f8] text-[#141f28] font-bold text-xs flex sm:flex-col items-center justify-start sm:justify-center gap-2 sm:gap-1.5 text-left sm:text-center shadow-sm transition-all" data-val="2" data-label="Strongly Agree">
+                <span class="w-2.5 h-2.5 rounded-full border-2 border-[#1b2e3c] flex-shrink-0"></span>
+                <span class="text-xs leading-tight">Strongly Agree</span>
               </button>
-              <button type="button" class="diag-btn min-h-[48px] py-2.5 px-2 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#487b9c] hover:bg-[#eaf2f7] text-[#141f28] font-bold text-xs transition-all flex flex-col items-center justify-center text-center shadow-sm" data-val="1" data-label="Unsure">
-                <span class="font-bold text-xs sm:text-sm">Unsure</span>
-                <span class="text-[9px] opacity-80 hidden sm:inline">Inconsistent / Ambiguous</span>
+              <button type="button" class="diag-btn min-h-[46px] sm:min-h-[56px] px-2.5 py-2 sm:px-2 sm:py-2.5 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#487b9c] hover:bg-[#eaf2f7] text-[#141f28] font-bold text-xs flex sm:flex-col items-center justify-start sm:justify-center gap-2 sm:gap-1.5 text-left sm:text-center shadow-sm transition-all" data-val="1.5" data-label="Agree">
+                <span class="w-2.5 h-2.5 rounded-full border-2 border-[#487b9c] flex-shrink-0"></span>
+                <span class="text-xs leading-tight">Agree</span>
               </button>
-              <button type="button" class="diag-btn min-h-[48px] py-2.5 px-2 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#487b9c] hover:bg-[#eaf2f7] text-[#141f28] font-bold text-xs transition-all flex flex-col items-center justify-center text-center shadow-sm" data-val="0" data-label="Disagree">
-                <span class="font-bold text-xs sm:text-sm">Disagree</span>
-                <span class="text-[9px] opacity-80 hidden sm:inline">Doesn't sound like me</span>
+              <button type="button" class="diag-btn min-h-[46px] sm:min-h-[56px] px-2.5 py-2 sm:px-2 sm:py-2.5 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#8baec1] hover:bg-[#edf3f7] text-[#141f28] font-bold text-xs flex sm:flex-col items-center justify-start sm:justify-center gap-2 sm:gap-1.5 text-left sm:text-center shadow-sm transition-all" data-val="1.0" data-label="Unsure">
+                <span class="w-2.5 h-2.5 rounded-full border-2 border-[#8baec1] flex-shrink-0"></span>
+                <span class="text-xs leading-tight">Unsure</span>
+              </button>
+              <button type="button" class="diag-btn min-h-[46px] sm:min-h-[56px] px-2.5 py-2 sm:px-2 sm:py-2.5 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#b8cbd7] hover:bg-[#f8fafc] text-[#141f28] font-bold text-xs flex sm:flex-col items-center justify-start sm:justify-center gap-2 sm:gap-1.5 text-left sm:text-center shadow-sm transition-all" data-val="0.5" data-label="Disagree">
+                <span class="w-2.5 h-2.5 rounded-full border-2 border-[#b8cbd7] flex-shrink-0"></span>
+                <span class="text-xs leading-tight">Disagree</span>
+              </button>
+              <button type="button" class="diag-btn min-h-[46px] sm:min-h-[56px] px-2.5 py-2 sm:px-2 sm:py-2.5 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#cbd8e2] hover:bg-[#f8fafc] text-[#141f28] font-bold text-xs flex sm:flex-col items-center justify-start sm:justify-center gap-2 sm:gap-1.5 text-left sm:text-center shadow-sm transition-all" data-val="0" data-label="Strongly Disagree">
+                <span class="w-2.5 h-2.5 rounded-full border-2 border-[#d8e2e9] flex-shrink-0"></span>
+                <span class="text-xs leading-tight">Strongly Disagree</span>
               </button>
             </div>
           `;
 
           activeInputContainer.querySelectorAll('.diag-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-              const val = parseInt(btn.dataset.val, 10);
+              const val = parseFloat(btn.dataset.val);
               const label = btn.dataset.label;
               state.answers[s.id] = val;
               submitUserAnswer(label);
@@ -1583,8 +1917,11 @@
 
       // Render Phase 2 (Pairwise Trade-off: Choice A vs Choice B)
       if (s.phase === 2) {
+        const promptText = getScenarioPrompt(s);
+        const optALabel = getScenarioOptionLabel(s.optionA);
+        const optBLabel = getScenarioOptionLabel(s.optionB);
         const fullPrompt = `
-          ${s.prompt}<br>
+          ${promptText}<br>
           <span class="text-[#647c8f] text-[11px] block mt-1">Select the approach that most honestly reflects how you operate day-to-day:</span>
         `;
         appendBotMessage(s.title, fullPrompt, () => {
@@ -1592,11 +1929,11 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               <button type="button" class="pairwise-btn min-h-[58px] p-3 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#487b9c] hover:bg-[#eaf2f7] text-[#141f28] text-left transition-all flex flex-col justify-center shadow-sm group" data-val="A">
                 <span class="text-[10px] font-bold text-[#36607d] uppercase tracking-wider mb-0.5">Approach A</span>
-                <span class="text-xs leading-snug group-hover:text-[#141f28] font-medium">${s.optionA.label}</span>
+                <span class="text-xs leading-snug group-hover:text-[#141f28] font-medium">${optALabel}</span>
               </button>
               <button type="button" class="pairwise-btn min-h-[58px] p-3 rounded-xl border border-[#d8e2e9] bg-white hover:border-[#487b9c] hover:bg-[#eaf2f7] text-[#141f28] text-left transition-all flex flex-col justify-center shadow-sm group" data-val="B">
                 <span class="text-[10px] font-bold text-[#36607d] uppercase tracking-wider mb-0.5">Approach B</span>
-                <span class="text-xs leading-snug group-hover:text-[#141f28] font-medium">${s.optionB.label}</span>
+                <span class="text-xs leading-snug group-hover:text-[#141f28] font-medium">${optBLabel}</span>
               </button>
             </div>
           `;
@@ -1605,7 +1942,7 @@
             btn.addEventListener('click', () => {
               const choice = btn.dataset.val;
               state.answers[s.id] = choice;
-              const text = choice === 'A' ? `Approach A: "${s.optionA.label}"` : `Approach B: "${s.optionB.label}"`;
+              const text = choice === 'A' ? `Approach A: "${optALabel}"` : `Approach B: "${optBLabel}"`;
               submitUserAnswer(text);
               state.step++;
               activeInputContainer.innerHTML = '';
@@ -1763,8 +2100,11 @@
 
       // Save diagnostic snapshot to localStorage
       try {
-        localStorage.setItem('klein_diagnostic_result', JSON.stringify({
+        const completedDossier = {
           client: state.leadData,
+          businessProfile: state.businessProfile,
+          answers: Object.assign({}, state.answers),
+          mode: state.mode,
           diagnostics: {
             primaryConstraint: analysis.archetype.title,
             archetypeSummary: analysis.archetype.summary,
@@ -1781,9 +2121,20 @@
             }
           },
           timestamp: new Date().toISOString()
-        }));
+        };
+
+        localStorage.setItem('klein_diagnostic_result', JSON.stringify(completedDossier));
+        localStorage.setItem('klein_completed_dossier', JSON.stringify(completedDossier));
 
         state.step = state.activeScenarios.length;
+        state.isRerun = false;
+        state.hasExistingCompletedDossier = true;
+        state.completedSnapshot = {
+          answers: Object.assign({}, state.answers),
+          mode: state.mode,
+          leadData: Object.assign({}, state.leadData),
+          businessProfile: Object.assign({}, state.businessProfile)
+        };
 
         localStorage.setItem('klein_survey_progress', JSON.stringify({
           hasSaved: true,
@@ -1791,11 +2142,14 @@
           step: state.activeScenarios.length,
           totalScenarios: state.activeScenarios.length,
           answers: state.answers,
+          businessProfile: state.businessProfile,
           leadData: state.leadData,
           isShortFormCompleted: state.mode === 'express',
           isCompleted: true,
           savedAt: new Date().toISOString()
         }));
+
+        try { localStorage.removeItem('klein_survey_rerun_progress'); } catch(e) {}
 
         // Unlock V2 state across entire site
         localStorage.setItem('klein_deep_unlocked', 'true');
@@ -1804,7 +2158,7 @@
           localStorage.setItem('klein_contact_details', JSON.stringify({
             name: state.leadData.name && state.leadData.name !== 'Executive Lead' ? state.leadData.name : '',
             email: state.leadData.email || '',
-            business: state.leadData.company && state.leadData.company !== 'Your Company' ? state.leadData.company : '',
+            business: (state.businessProfile && state.businessProfile.company) || (state.leadData.company && state.leadData.company !== 'Your Company' ? state.leadData.company : ''),
             savedAt: new Date().toISOString()
           }));
         }
@@ -1819,28 +2173,38 @@
           const val = state.answers[s.id];
           let displayVal = 'Unanswered';
           if (s.phase === 1) {
-            displayVal = val === 2 ? 'Agree' : (val === 1 ? 'Unsure' : (val === 0 ? 'Disagree' : 'Unanswered'));
+            if (val === 2) displayVal = 'Strongly Agree';
+            else if (val === 1.5) displayVal = 'Agree';
+            else if (val === 1 || val === 1.0) displayVal = 'Unsure';
+            else if (val === 0.5) displayVal = 'Disagree';
+            else if (val === 0) displayVal = 'Strongly Disagree';
+            else displayVal = 'Unanswered';
           } else if (s.phase === 2) {
-            displayVal = val === 'A' ? `Choice A: "${s.optionA.label}"` : `Choice B: "${s.optionB.label}"`;
+            const optALabel = getScenarioOptionLabel(s.optionA);
+            const optBLabel = getScenarioOptionLabel(s.optionB);
+            displayVal = val === 'A' ? `Choice A: "${optALabel}"` : `Choice B: "${optBLabel}"`;
           } else if (s.phase === 3) {
             const opt = s.options.find(o => o.value === val);
             displayVal = opt ? `${opt.label} (${opt.text})` : `Score ${val}`;
           }
-          return `${idx + 1}. [Phase ${s.phase}] ${s.title}: ${displayVal}\n   Prompt: "${s.prompt}"`;
+          const promptText = getScenarioPrompt(s);
+          return `${idx + 1}. [Phase ${s.phase}] ${s.title}: ${displayVal}\n   Prompt: "${promptText}"`;
         }).join('\n\n');
 
         const sprintTexts = analysis.actionSteps.map(stepHtml => {
           return stepHtml.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
         }).join('\n');
 
+        const prof = state.businessProfile || {};
         const emailPayload = {
           access_key: '5e33b3d7-0efc-43f8-8669-dec872870e3d',
-          subject: `Owner Constraint Dossier: ${state.leadData.name} (${state.leadData.company})`,
+          subject: `Owner Constraint Dossier: ${state.leadData.name} (${prof.company || state.leadData.company})`,
           from_name: 'Klein Insight Assessment',
           name: state.leadData.name,
           email: state.leadData.email,
-          business_name: state.leadData.company,
-          'Assessment Depth': state.mode === 'express' ? 'Express (14 Scenarios)' : 'Deep-Dive (21 Scenarios)',
+          business_name: prof.company || state.leadData.company,
+          'Assessment Depth': state.mode === 'express' ? 'Express (20 Scenarios)' : 'Deep-Dive (33 Scenarios)',
+          'Business Profile': `${prof.company || 'N/A'} | Stage: ${prof.yearsOperating || 'N/A'} | Team: ${prof.teamSize || 'N/A'} | Rev: ${prof.revenueRange || 'N/A'} | Web: ${prof.webPresence || 'N/A'}`,
           'Primary Constraint': `${analysis.archetype.title}`,
           'Secondary Pattern': `${analysis.secondaryPatternTitle}`,
           'Part 1 Ownership Feel': analysis.emotionalNarrativeText,
@@ -1869,6 +2233,12 @@
 
       setTimeout(() => {
         chatOverlay.classList.add('opacity-0', 'pointer-events-none');
+        const saveExitChatBtn = document.getElementById('saveExitChatBtn');
+        if (saveExitChatBtn) {
+          const textSpan = saveExitChatBtn.querySelector('span');
+          if (textSpan) textSpan.textContent = 'Save & Exit';
+          saveExitChatBtn.setAttribute('title', 'Save Progress and Return to Homepage (Esc)');
+        }
         window.scrollTo({ top: 0, behavior: 'smooth' });
         syncDashboard(analysis);
         showToast('Executive Constraint Dossier Unlocked & Saved.');
@@ -1910,33 +2280,57 @@
         }
       });
 
-      // Tally Phase 1 converging evidence into relevant dimensions
-      if (state.answers['p1_growth_stress'] !== undefined) {
-        patternFriction.coupling.max += 6;
-        patternFriction.coupling.score += state.answers['p1_growth_stress'] * 3;
+      // Tally Phase 1 converging evidence into relevant dimensions (5-Point Likert Scale: 2 = SA, 1.5 = A, 1.0 = U, 0.5 = D, 0 = SD)
+      function addPhase1Friction(id, dimension, maxPoints) {
+        if (state.answers[id] !== undefined) {
+          const val = state.answers[id]; // 0 to 2
+          patternFriction[dimension].max += maxPoints;
+          patternFriction[dimension].score += (val / 2) * maxPoints;
+        }
       }
-      if (state.answers['p1_strategic_bandwidth'] !== undefined) {
-        patternFriction.reactive.max += 6;
-        patternFriction.reactive.score += state.answers['p1_strategic_bandwidth'] * 3;
+
+      function addPhase1ReadinessInverted(id, dimension, maxPoints) {
+        if (state.answers[id] !== undefined) {
+          const val = state.answers[id]; // 2 = high readiness (0 friction), 0 = high friction
+          patternFriction[dimension].max += maxPoints;
+          patternFriction[dimension].score += ((2 - val) / 2) * maxPoints;
+        }
       }
-      if (state.answers['p1_disconnect'] !== undefined) {
-        patternFriction.centralization.max += 6;
-        patternFriction.centralization.score += state.answers['p1_disconnect'] * 3;
-      }
-      if (state.answers['p1_central_router'] !== undefined) {
-        patternFriction.centralization.max += 6;
-        patternFriction.centralization.score += state.answers['p1_central_router'] * 3;
-      }
-      if (state.answers['p1_pipeline_anxiety'] !== undefined) {
-        patternFriction.commercial.max += 6;
-        patternFriction.commercial.score += state.answers['p1_pipeline_anxiety'] * 3;
-      }
+
+      // Baseline Phase 1 (7 scenarios)
+      addPhase1Friction('p1_growth_stress', 'coupling', 6);
+      addPhase1Friction('p1_strategic_bandwidth', 'reactive', 6);
+      addPhase1Friction('p1_disconnect', 'centralization', 6);
+      addPhase1Friction('p1_return_on_effort', 'coupling', 6);
+      addPhase1Friction('p1_central_router', 'centralization', 6);
+      addPhase1Friction('p1_pipeline_anxiety', 'commercial', 6);
       if (state.answers['p1_recurring_problems'] !== undefined) {
+        const val = state.answers['p1_recurring_problems'];
         patternFriction.reactive.max += 3;
-        patternFriction.reactive.score += state.answers['p1_recurring_problems'] * 1.5;
+        patternFriction.reactive.score += (val / 2) * 3;
         patternFriction.delegation.max += 3;
-        patternFriction.delegation.score += state.answers['p1_recurring_problems'] * 1.5;
+        patternFriction.delegation.score += (val / 2) * 3;
       }
+
+      // Application Theme 2: The Main Bottleneck (3 scenarios)
+      addPhase1Friction('p1_bottleneck_clarity', 'reactive', 6);
+      addPhase1Friction('p1_bottleneck_control', 'centralization', 6);
+      addPhase1Friction('p1_bottleneck_capacity', 'coupling', 6);
+
+      // Application Theme 3: What You Have Tried (3 scenarios)
+      addPhase1Friction('p1_tried_decaying_systems', 'drift', 6);
+      addPhase1Friction('p1_tried_delegation_rework', 'delegation', 6);
+      addPhase1Friction('p1_tried_interrupted_initiatives', 'drift', 6);
+
+      // Application Theme 4: Six-Month Goals (3 scenarios)
+      addPhase1Friction('p1_goal_operational_independence', 'centralization', 5);
+      addPhase1Friction('p1_goal_systematic_pipeline', 'commercial', 6);
+      addPhase1Friction('p1_goal_margin_leverage', 'coupling', 5);
+
+      // Application Theme 5: Readiness to Change (3 scenarios)
+      addPhase1ReadinessInverted('p1_readiness_let_go', 'delegation', 6);
+      addPhase1ReadinessInverted('p1_readiness_candid_coaching', 'leadership', 6);
+      addPhase1ReadinessInverted('p1_readiness_quarantine_time', 'reactive', 6);
 
       // Calculate normalized friction percentages (0-100%)
       const percentages = {};
@@ -2044,39 +2438,43 @@
       // -----------------------------------------------------------------------
       // PART 1: What Ownership Currently Feels Like (Emotional Experience Synthesis)
       // -----------------------------------------------------------------------
-      const growthStress = state.answers['p1_growth_stress'] === 2;
-      const strategicDisplaced = state.answers['p1_strategic_bandwidth'] === 2;
-      const disconnectStall = state.answers['p1_disconnect'] === 2;
-      const effortMismatch = state.answers['p1_return_on_effort'] === 2;
-      const pipelineAnxiety = state.answers['p1_pipeline_anxiety'] === 2;
+      const growthStress = (state.answers['p1_growth_stress'] || 0) >= 1.5;
+      const strategicDisplaced = (state.answers['p1_strategic_bandwidth'] || 0) >= 1.5;
+      const disconnectStall = (state.answers['p1_disconnect'] || 0) >= 1.5;
+      const effortMismatch = (state.answers['p1_return_on_effort'] || 0) >= 1.5;
+      const pipelineAnxiety = (state.answers['p1_pipeline_anxiety'] || 0) >= 1.5;
+
+      const prof = state.businessProfile || {};
+      const teamContext = prof.teamSize === 'solo' ? 'as a solo operator' : `managing a team of ${prof.teamSize === 'small' ? '2–5' : prof.teamSize === 'medium' ? '6–20' : '20+'}`;
+      const stageContext = prof.yearsOperating ? `with ${prof.yearsOperating.toLowerCase()} in operation` : '';
 
       let emotionalNarrativeHtml = '';
       let emotionalNarrativeText = '';
 
       if (growthStress && strategicDisplaced) {
-        emotionalNarrativeText = "You haven't lost your ambition. You've run out of room. You still want the company to grow, but additional business is increasingly associated with personal workload and delivery stress. Immediate daily demands repeatedly displace the strategic work you know would move the company forward.";
+        emotionalNarrativeText = `You haven't lost your ambition. You've run out of room. Operating ${stageContext || 'at this stage'} ${teamContext ? `while ${teamContext}` : ''}, you still want the company to grow, but additional business is increasingly associated with personal workload and delivery stress. Immediate daily demands repeatedly displace the strategic work you know would move the company forward.`;
         emotionalNarrativeHtml = `
           <p class="font-bold text-[#141f28]">You haven't lost your ambition. You've run out of room.</p>
           <p class="text-[#4a5560]">
-            Your responses suggest you care deeply about growing the company, but additional business has become closely coupled with personal workload, responsibility, and stress. 
+            Operating ${stageContext || 'at this stage'} ${teamContext ? `while ${teamContext}` : ''}, your responses suggest you care deeply about growing the company, but additional business has become closely coupled with personal workload, responsibility, and stress. 
             Because your days are consumed with immediate problem-solving, you have difficulty carving out protected time for the forward-looking work that would actually make the company easier to run.
           </p>
         `;
       } else if (effortMismatch) {
-        emotionalNarrativeText = "You're carrying more cognitive and operational strain than the business should require. You are working harder and investing tremendous personal effort, but the financial return and operational leverage are not compounding proportionally.";
+        emotionalNarrativeText = `You're carrying more cognitive and operational strain than the business should require. Operating ${stageContext || 'at this stage'}, you are working harder and investing tremendous personal effort, but the financial return and operational leverage are not compounding proportionally.`;
         emotionalNarrativeHtml = `
           <p class="font-bold text-[#141f28]">Effort is outpacing leverage.</p>
           <p class="text-[#4a5560]">
-            You are investing significant hours, but the business is not rewarding that effort with proportionate financial return or operational freedom. 
+            Operating ${stageContext || 'at this stage'} ${teamContext ? `while ${teamContext}` : ''}, you are investing significant hours, but the business is not rewarding that effort with proportionate financial return or operational freedom. 
             The feeling is not one of apathy—it is the frustration of high operational activity yielding insufficient strategic leverage.
           </p>
         `;
       } else {
-        emotionalNarrativeText = "Your responses reflect an established owner experiencing operational friction at the current ceiling of personal bandwidth. While the business functions, too much coordination and decision-making flow through your direct oversight.";
+        emotionalNarrativeText = `Your responses reflect an established owner experiencing operational friction at the current ceiling of personal bandwidth. While the business functions, too much coordination and decision-making flow through your direct oversight.`;
         emotionalNarrativeHtml = `
           <p class="font-bold text-[#141f28]">Operating at the ceiling of personal bandwidth.</p>
           <p class="text-[#4a5560]">
-            While the business delivers results, too much of the daily operating momentum relies on your personal cognitive presence. 
+            While the business delivers results ${stageContext ? `(${stageContext})` : ''}, too much of the daily operating momentum relies on your personal cognitive presence. 
             Stepping away or scaling volume creates tension because the business does not yet possess the structural independence to run smoothly without you.
           </p>
         `;
@@ -2271,6 +2669,26 @@
       const coverMetaDate = document.getElementById('coverMetaDate');
       if (coverMetaDate) {
         coverMetaDate.textContent = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      }
+
+      // Update Cover Card Context Pills
+      const prof = state.businessProfile || {};
+      const pillYearsText = document.getElementById('coverPillYearsText');
+      if (pillYearsText) pillYearsText.textContent = prof.yearsOperating ? `${prof.yearsOperating} Operating` : '2–5 Years Operating';
+
+      const pillTeamText = document.getElementById('coverPillTeamText');
+      if (pillTeamText) {
+        const teamLabels = { solo: 'Solo Operator', small: '2–5 People', medium: '6–20 People', large: '20+ People' };
+        pillTeamText.textContent = teamLabels[prof.teamSize] || prof.teamSize || 'Core Team';
+      }
+
+      const pillRevenueText = document.getElementById('coverPillRevenueText');
+      if (pillRevenueText) pillRevenueText.textContent = prof.revenueRange ? `${prof.revenueRange} Revenue` : 'Growth Stage';
+
+      const pillWebText = document.getElementById('coverPillWebText');
+      if (pillWebText) {
+        const webLabels = { website: 'Active Web Presence', referral: 'Referral Pipeline', social: 'Network Pipeline' };
+        pillWebText.textContent = webLabels[prof.webPresence] || 'Digital Presence';
       }
 
       document.getElementById('archetypeTitle').textContent = analysis.archetype.title;
@@ -2517,26 +2935,41 @@
 
     function saveProgressLocally(redirectHome = false) {
       try {
-        let previouslyCompleted = false;
-        try {
-          const prev = JSON.parse(localStorage.getItem('klein_survey_progress') || '{}');
-          if (prev.isCompleted || prev.isShortFormCompleted) previouslyCompleted = true;
-          const diag = JSON.parse(localStorage.getItem('klein_diagnostic_result') || '{}');
-          if (diag && diag.diagnostics && diag.diagnostics.primaryConstraint) previouslyCompleted = true;
-        } catch (e) { }
-
         const answersCount = state.answers ? Object.keys(state.answers).length : 0;
-        const total = state.activeScenarios && state.activeScenarios.length ? state.activeScenarios.length : (state.mode === 'deep' ? 21 : 14);
-        const isCompleted = previouslyCompleted || (state.activeScenarios && state.activeScenarios.length > 0 && (state.step >= state.activeScenarios.length || answersCount >= total));
+        const total = state.activeScenarios && state.activeScenarios.length ? state.activeScenarios.length : (state.mode === 'deep' ? 33 : 20);
+        const isCompleted = state.activeScenarios && state.activeScenarios.length > 0 && answersCount >= total && state.step >= total;
+
+        // If in a re-run session, save in-progress rerun to separate key, NEVER overwrite completed dossier
+        if (state.isRerun) {
+          const rerunData = {
+            hasSaved: true,
+            mode: state.mode || 'deep',
+            step: state.step,
+            answers: state.answers || {},
+            businessProfile: state.businessProfile || {},
+            leadData: state.leadData || {},
+            totalScenarios: total,
+            savedAt: new Date().toISOString()
+          };
+          localStorage.setItem('klein_survey_rerun_progress', JSON.stringify(rerunData));
+
+          if (redirectHome) {
+            // User requested to exit or pressed Esc during rerun: return to intact completed dossier
+            restoreCompletedDossier();
+            return;
+          }
+          return;
+        }
 
         const progressData = {
           hasSaved: true,
           mode: state.mode || 'deep',
           step: typeof state.step === 'number' && state.step >= 0 ? state.step : (isCompleted ? total : answersCount),
           answers: state.answers || {},
+          businessProfile: state.businessProfile || {},
           leadData: state.leadData || {},
           totalScenarios: total,
-          isShortFormCompleted: (state.mode === 'express' && (isCompleted || answersCount >= 14)),
+          isShortFormCompleted: (state.mode === 'express' && isCompleted),
           isCompleted: isCompleted,
           savedAt: new Date().toISOString()
         };
@@ -2545,11 +2978,11 @@
         if (isCompleted) {
           localStorage.setItem('klein_deep_unlocked', 'true');
         }
-        if (state.leadData && (state.leadData.email || state.leadData.name || state.leadData.company)) {
+        if (state.leadData && (state.leadData.email || state.leadData.name || state.leadData.company || (state.businessProfile && state.businessProfile.company))) {
           const cData = {
             name: state.leadData.name && state.leadData.name !== 'Executive Lead' ? state.leadData.name : '',
             email: state.leadData.email || '',
-            business: state.leadData.company && state.leadData.company !== 'Your Company' ? state.leadData.company : '',
+            business: (state.businessProfile && state.businessProfile.company) || (state.leadData.company && state.leadData.company !== 'Your Company' ? state.leadData.company : ''),
             savedAt: new Date().toISOString()
           };
           if (cData.email || cData.name || cData.business) {
@@ -2570,10 +3003,124 @@
       }
     }
 
+    function restoreCompletedDossier() {
+      let completed = state.completedSnapshot;
+      if (!completed || !completed.answers || Object.keys(completed.answers).length === 0) {
+        try {
+          const raw = localStorage.getItem('klein_completed_dossier') || localStorage.getItem('klein_diagnostic_result') || localStorage.getItem('klein_survey_progress');
+          if (raw) {
+            const data = JSON.parse(raw);
+            completed = {
+              answers: data.answers || {},
+              mode: data.mode || (data.answers && Object.keys(data.answers).length > 20 ? 'deep' : 'express'),
+              leadData: data.client || data.leadData || state.leadData,
+              businessProfile: data.businessProfile || state.businessProfile,
+              diagnostics: data.diagnostics || null
+            };
+            state.completedSnapshot = completed;
+          }
+        } catch (e) {}
+      }
+
+      if (completed && completed.answers && Object.keys(completed.answers).length > 0) {
+        state.isRerun = false;
+        state.hasExistingCompletedDossier = true;
+        state.answers = Object.assign({}, completed.answers);
+        state.mode = completed.mode || state.mode;
+        state.leadData = Object.assign({}, completed.leadData);
+        state.businessProfile = Object.assign({}, completed.businessProfile);
+        state.activeScenarios = buildScenarioList(state.mode);
+        state.step = state.activeScenarios.length;
+
+        // Reset chat exit button text
+        const saveExitChatBtn = document.getElementById('saveExitChatBtn');
+        if (saveExitChatBtn) {
+          const textSpan = saveExitChatBtn.querySelector('span');
+          if (textSpan) textSpan.textContent = 'Save & Exit';
+          saveExitChatBtn.setAttribute('title', 'Save Progress and Return to Homepage (Esc)');
+        }
+
+        chatOverlay.classList.add('opacity-0', 'pointer-events-none');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        if (state.leadData && state.leadData.name && state.leadData.company) {
+          const clientHeader = document.getElementById('dossierClientHeader');
+          if (clientHeader) {
+            clientHeader.textContent = `Owner Constraint Dossier: Prepared for ${state.leadData.name} (${state.leadData.company})`;
+          }
+        }
+        const reportBadge = document.getElementById('reportModeBadge');
+        if (reportBadge) {
+          reportBadge.textContent = state.mode === 'deep' ? 'Deep-Dive Executive Dossier' : 'Express Executive Dossier';
+        }
+        const baselineLabel = document.getElementById('auditBaselineLabel');
+        if (baselineLabel) {
+          baselineLabel.textContent = state.mode === 'deep'
+            ? 'Format: 33-Scenario 3-Phase Deep-Dive Assessment'
+            : 'Format: 20-Scenario 3-Phase Owner Assessment';
+        }
+
+        const analysis = analyzeConstraints();
+        syncDashboard(analysis);
+        showToast('Returned to your current Executive Dossier.');
+        return true;
+      }
+      return false;
+    }
+
+    function startRerunSession() {
+      // Snapshot the current completed dossier before starting rerun so it is never lost
+      if (!state.completedSnapshot || !state.completedSnapshot.answers || Object.keys(state.completedSnapshot.answers).length === 0) {
+        try {
+          const raw = localStorage.getItem('klein_completed_dossier') || localStorage.getItem('klein_diagnostic_result') || localStorage.getItem('klein_survey_progress');
+          if (raw) {
+            const data = JSON.parse(raw);
+            state.completedSnapshot = {
+              answers: data.answers || Object.assign({}, state.answers),
+              mode: data.mode || state.mode,
+              leadData: data.client || data.leadData || Object.assign({}, state.leadData),
+              businessProfile: data.businessProfile || Object.assign({}, state.businessProfile),
+              diagnostics: data.diagnostics || null
+            };
+          }
+        } catch (e) {}
+      }
+      if (!state.completedSnapshot && Object.keys(state.answers).length > 0) {
+        state.completedSnapshot = {
+          answers: Object.assign({}, state.answers),
+          mode: state.mode,
+          leadData: Object.assign({}, state.leadData),
+          businessProfile: Object.assign({}, state.businessProfile)
+        };
+      }
+
+      state.hasExistingCompletedDossier = true;
+      state.isRerun = true;
+      state.step = -1;
+      state.answers = {};
+      chatStream.innerHTML = '';
+
+      // Update chat overlay header exit button
+      const saveExitChatBtn = document.getElementById('saveExitChatBtn');
+      if (saveExitChatBtn) {
+        const textSpan = saveExitChatBtn.querySelector('span');
+        if (textSpan) textSpan.textContent = '← Back to Dossier';
+        saveExitChatBtn.setAttribute('title', 'Return to current completed dossier without saving rerun');
+      }
+
+      chatOverlay.classList.remove('opacity-0', 'pointer-events-none');
+      renderStandardWelcomeScreen();
+      showToast('Starting re-run. Your completed dossier will not be reset until the new assessment is finished.');
+    }
+
     const saveExitChatBtn = document.getElementById('saveExitChatBtn');
     if (saveExitChatBtn) {
       saveExitChatBtn.addEventListener('click', () => {
-        saveProgressLocally(true);
+        if (state.isRerun || state.hasExistingCompletedDossier) {
+          restoreCompletedDossier();
+        } else {
+          saveProgressLocally(true);
+        }
       });
     }
 
@@ -2586,27 +3133,46 @@
 
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' || e.key === 'Esc') {
-        saveProgressLocally(true);
+        const isChatOpen = !chatOverlay.classList.contains('pointer-events-none');
+        if (isChatOpen) {
+          if (state.isRerun || state.hasExistingCompletedDossier) {
+            restoreCompletedDossier();
+          } else {
+            saveProgressLocally(true);
+          }
+        }
       }
     });
 
     function restartIntake() {
+      if (state.hasExistingCompletedDossier || state.completedSnapshot) {
+        startRerunSession();
+        return;
+      }
       localStorage.removeItem('klein_survey_progress');
+      try { localStorage.removeItem('klein_completed_dossier'); } catch(e) {}
+      try { localStorage.removeItem('klein_diagnostic_result'); } catch(e) {}
+      try { localStorage.removeItem('klein_survey_rerun_progress'); } catch(e) {}
       state.step = -1;
       state.answers = {};
       chatStream.innerHTML = '';
       chatOverlay.classList.remove('opacity-0', 'pointer-events-none');
-      renderWelcomeScreen();
+      renderStandardWelcomeScreen();
     }
 
     document.getElementById('restartChatBtn').addEventListener('click', () => {
-      restartIntake();
-      showToast('Assessment reset.');
+      if (state.hasExistingCompletedDossier || state.completedSnapshot) {
+        startRerunSession();
+        showToast('New assessment run started. Current completed dossier preserved.');
+      } else {
+        restartIntake();
+        showToast('Assessment reset.');
+      }
     });
 
     document.querySelectorAll('#reopenChatBtn').forEach(btn => {
       btn.addEventListener('click', () => {
-        restartIntake();
+        startRerunSession();
       });
     });
 
@@ -2648,6 +3214,12 @@
       const isRestart = urlParams.get('restart') === 'true' || urlParams.get('mode') === 'restart' || urlParams.get('retake') === 'true';
       const wantsDossier = urlParams.get('view') === 'dossier' || window.location.hash === '#dossier';
 
+      let completedDossier = null;
+      try {
+        const raw = localStorage.getItem('klein_completed_dossier');
+        if (raw) completedDossier = JSON.parse(raw);
+      } catch (e) { }
+
       let savedProgress = null;
       try {
         const raw = localStorage.getItem('klein_survey_progress');
@@ -2660,18 +3232,50 @@
         if (raw) dossierData = JSON.parse(raw);
       } catch (e) { }
 
-      const isCompleted = (savedProgress && (savedProgress.isCompleted || savedProgress.isShortFormCompleted)) ||
+      const isCompleted = (completedDossier && completedDossier.diagnostics) ||
+                          (savedProgress && (savedProgress.isCompleted || savedProgress.isShortFormCompleted)) ||
                           (dossierData && dossierData.diagnostics && dossierData.diagnostics.primaryConstraint) ||
                           (savedProgress && savedProgress.answers && Object.keys(savedProgress.answers).length >= 14);
 
+      if (isCompleted) {
+        state.hasExistingCompletedDossier = true;
+        const source = completedDossier || (dossierData && dossierData.answers && Object.keys(dossierData.answers).length > 0 ? dossierData : null) || (savedProgress && savedProgress.isCompleted ? savedProgress : null) || dossierData;
+        if (source) {
+          state.completedSnapshot = {
+            answers: Object.assign({}, source.answers || (savedProgress && savedProgress.answers) || {}),
+            mode: source.mode || (savedProgress && savedProgress.mode) || 'deep',
+            leadData: Object.assign({}, source.client || source.leadData || (savedProgress && savedProgress.leadData) || state.leadData),
+            businessProfile: Object.assign({}, source.businessProfile || (savedProgress && savedProgress.businessProfile) || state.businessProfile),
+            diagnostics: source.diagnostics || (dossierData && dossierData.diagnostics) || null
+          };
+          try {
+            if (!localStorage.getItem('klein_completed_dossier')) {
+              localStorage.setItem('klein_completed_dossier', JSON.stringify({
+                answers: state.completedSnapshot.answers,
+                mode: state.completedSnapshot.mode,
+                client: state.completedSnapshot.leadData,
+                businessProfile: state.completedSnapshot.businessProfile,
+                diagnostics: state.completedSnapshot.diagnostics,
+                timestamp: new Date().toISOString()
+              }));
+            }
+          } catch(e) {}
+        }
+      }
+
       if ((wantsDossier || isCompleted) && !isRestart) {
-        if (savedProgress || dossierData) {
-          if (savedProgress) {
+        if (state.completedSnapshot || savedProgress || dossierData) {
+          if (state.completedSnapshot) {
+            state.answers = Object.assign({}, state.completedSnapshot.answers);
+            state.mode = state.completedSnapshot.mode;
+            state.leadData = Object.assign({}, state.completedSnapshot.leadData);
+            state.businessProfile = Object.assign({}, state.completedSnapshot.businessProfile);
+          } else if (savedProgress) {
             state.answers = savedProgress.answers || {};
             state.leadData = savedProgress.leadData || state.leadData;
             state.mode = savedProgress.mode || (Object.keys(state.answers).length > 14 ? 'deep' : 'express');
           }
-          if (dossierData && dossierData.client) {
+          if (dossierData && dossierData.client && (!state.leadData || !state.leadData.email)) {
             state.leadData = dossierData.client;
           }
 
@@ -2710,8 +3314,8 @@
           const baselineLabel = document.getElementById('auditBaselineLabel');
           if (baselineLabel) {
             baselineLabel.textContent = state.mode === 'deep'
-              ? 'Format: 21-Scenario 3-Phase Deep-Dive Assessment'
-              : 'Format: 14-Scenario 3-Phase Owner Assessment';
+              ? 'Format: 33-Scenario 3-Phase Deep-Dive Assessment'
+              : 'Format: 20-Scenario 3-Phase Owner Assessment';
           }
 
           chatOverlay.classList.add('opacity-0', 'pointer-events-none');
