@@ -1,0 +1,75 @@
+name: Learning Center Draft Agent
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 14 * * 1,4"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: klein-insight-content-agent
+  cancel-in-progress: false
+
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout website
+        uses: actions/checkout@v4
+
+      - name: Check for pending review
+        id: pending
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          count=$(gh pr list --state open --head "automation/content-review" --json number --jq 'length')
+          if [ "$count" != "0" ]; then
+            echo "A draft PR already awaits review; skip new drafts."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Configure Python
+        if: steps.pending.outputs.skip == 'false'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        if: steps.pending.outputs.skip == 'false'
+        run: pip install -r automation/requirements.txt
+
+      - name: Research and draft
+        if: steps.pending.outputs.skip == 'false'
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: gpt-4.1
+        run: python automation/run.py
+
+      - name: Open human-review pull request
+        if: steps.pending.outputs.skip == 'false'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/content-review
+          delete-branch: true
+          commit-message: "Draft educational article for human review"
+          title: "Editorial review: new Klein Insight learning resource"
+          body: |
+            This is an **unpublished draft**. Nothing is live until this pull request is reviewed and merged.
+
+            Before approving:
+            - [ ] Open and verify EVERY linked source URL and factual statement.
+            - [ ] Confirm numbers and dates match primary sources.
+            - [ ] Confirm the business implications are valid, useful, and not overstated.
+            - [ ] Review originality, tone, clarity, and practical exercise.
+            - [ ] Check the article page and Learning Center formatting.
+            - [ ] Confirm no fictional client anecdotes or proprietary information.
+          add-paths: |
+            learn/
+            automation/history.json
+            sitemap.xml
