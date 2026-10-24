@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }} | Klein Insight</title>
+  <meta name="description" content="{{ summary or description or 'Business strategy and growth coaching for established owner-led businesses.' }}">
+  <meta name="theme-color" content="#13212b">
+
+  <!-- OpenGraph / Social Media -->
+  <meta property="og:title" content="{{ title }} | Klein Insight">
+  <meta property="og:description" content="{{ summary or description or 'Business strategy and growth coaching for established owner-led businesses.' }}">
+  <meta property="og:type" content="{{ ogType or 'website' }}">
+  <meta property="og:url" content="https://kleininsight.com{{ page.url }}">
+  {% if featuredImage %}
+  <meta property="og:image" content="https://kleininsight.com{{ featuredImage }}">
+  {% else %}
+  <meta property="og:image" content="https://kleininsight.com/images/joe-klein-headshot.webp">
+  {% endif %}
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ title }} | Klein Insight">
+  <meta name="twitter:description" content="{{ summary or description }}">
+  {% if featuredImage %}
+  <meta name="twitter:image" content="https://kleininsight.com{{ featuredImage }}">
+  {% endif %}
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" type="application/rss+xml" title="Klein Insight — Insights Feed" href="/feed.xml">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/insights.css">
+  <link rel="stylesheet" href="/application.css">
+</head>
+
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="/" aria-label="Klein Insight home">
+        <img class="brand-logo" src="/images/logo-v1.png" alt="Klein Insight - Driven by Curiosity, Grounded in Strategy" width="282" height="148">
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        Menu
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+        <a href="/#services">Strategy Coaching</a>
+        <a href="/#about">About</a>
+        <a href="/insights/" class="{% if '/insights' in page.url %}active-nav{% endif %}">Insights</a>
+        <a href="/survey.html" id="navDiagnosticLink">Pulse Check</a>
+        <a href="/survey.html?view=results" id="navDossierLink" class="nav-dossier-link" style="display: none;">Pulse Check</a>
+        <a href="/survey-deep.html" id="navDeepLink" class="nav-deep-link" style="display: none;">Dossier</a>
+        <a class="nav-cta" href="/application.html" data-application-trigger>Let's Talk</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    {{ content | safe }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <div>
+        <a class="brand footer-brand" href="/" aria-label="Klein Insight home">
+          <span class="brand-mark">KI</span>
+          <span class="brand-name">Klein Insight</span>
+        </a>
+        <p>Business Strategy &amp; Growth Coaching</p>
+      </div>
+      <div class="footer-meta">
+        <p>&copy; <span id="year">2026</span> Klein Insight. All rights reserved.</p>
+        <a class="back-to-top" href="#top">Back to top</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/script.js"></script>
+</body>
+
+</html>

@@ -16,6 +16,7 @@
 
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="insights.css">
   <link rel="stylesheet" href="application.css">
 
   <script type="application/ld+json">
@@ -46,6 +47,7 @@
       <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
         <a href="#services">Strategy Coaching</a>
         <a href="#about">About</a>
+        <a href="insights/">Insights</a>
         <a href="survey.html" id="navDiagnosticLink">Pulse Check</a>
         <a href="survey.html?view=results" id="navDossierLink" class="nav-dossier-link" style="display: none;">Pulse Check</a>
         <a href="survey-deep.html" id="navDeepLink" class="nav-deep-link" style="display: none;">Dossier</a>
@@ -718,6 +720,76 @@
             </p>
             <p class="about-quote">My job is to help you be successful in whatever you are trying to accomplish.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recent Strategic Insights Section -->
+    <section class="home-insights-section" id="recent-insights" aria-label="Recent insights and strategy field notes">
+      <div class="container">
+        <div class="home-insights-header">
+          <div>
+            <p class="eyebrow">From the Field</p>
+            <h2 class="section-title">Recent Strategic Insights</h2>
+            <p class="section-lead">Practical thoughts on operational focus, leadership bottlenecks, and sustainable scaling.</p>
+          </div>
+          <a href="insights/" class="home-insights-all-link">
+            Explore all insights
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </div>
+
+        <div class="insights-grid">
+          {% for post in collections.recentInsights %}
+          <article class="insight-card">
+            <a href="{{ post.url }}" class="insight-card-media" aria-label="Read {{ post.data.title }}">
+              {% if post.data.featuredImage %}
+              <img src="{{ post.data.featuredImage }}" alt="{{ post.data.title }}" class="insight-card-img" loading="lazy">
+              {% else %}
+              <img src="images/hero-background.jpg" alt="Klein Insight" class="insight-card-img" loading="lazy">
+              {% endif %}
+              
+              <div class="insight-card-badges">
+                {% if post.data.category %}
+                <span class="insight-badge insight-category-badge">{{ post.data.category }}</span>
+                {% endif %}
+                {% if post.data.source == "linkedin" %}
+                <span class="insight-badge insight-linkedin-badge">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                  LinkedIn
+                </span>
+                {% endif %}
+              </div>
+            </a>
+
+            <div class="insight-card-body">
+              <div class="insight-card-meta">
+                <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
+                <span class="dot-divider">•</span>
+                <span>{{ post.templateContent | readingTime }}</span>
+              </div>
+
+              <h3 class="insight-card-title">
+                <a href="{{ post.url }}">{{ post.data.title }}</a>
+              </h3>
+
+              <p class="insight-card-summary">
+                {{ post.data.summary }}
+              </p>
+
+              <div class="insight-card-footer">
+                <div class="insight-author-inline">
+                  <img src="images/joe-klein-headshot.webp" alt="Joe Klein" width="28" height="28" loading="lazy">
+                  <span>{{ post.data.author or "Joe Klein" }}</span>
+                </div>
+                <a href="{{ post.url }}" class="insight-read-more" aria-label="Read full article: {{ post.data.title }}">
+                  Read
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+          {% endfor %}
         </div>
       </div>
     </section>

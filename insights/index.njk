@@ -1,0 +1,297 @@
+---
+layout: layouts/base.njk
+title: Strategic Insights & Field Notes
+summary: Pragmatic perspectives on business strategy, operational focus, and executive leadership for established owner-led companies.
+permalink: /insights/index.html
+---
+
+<!-- Ambient Hero Glow -->
+<div class="insights-ambient-glow" aria-hidden="true"></div>
+
+<section class="insights-hero section">
+  <div class="container insights-hero-wrap">
+    
+    <div class="insights-eyebrow-wrap">
+      <span class="insights-hero-badge">
+        <span class="badge-dot"></span>
+        Executive Intelligence &amp; Field Notes
+      </span>
+    </div>
+
+    <h1 class="insights-hero-title">Strategic Insights</h1>
+    
+    <p class="insights-lead">
+      Unfiltered perspectives on breaking through revenue plateaus, eliminating owner bottlenecks, and building an organization that executes with precision.
+    </p>
+
+    <!-- Search & Filter Controls -->
+    <div class="insights-controls-panel">
+      <div class="insights-search-wrap">
+        <svg class="insights-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="search" id="insightsSearch" class="insights-search-input" placeholder="Search by strategy, leadership, or keyword..." aria-label="Search insights">
+        <button type="button" id="searchClearBtn" class="insights-search-clear" aria-label="Clear search query" style="display: none;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="insights-filter-bar">
+        <div class="insights-filter-pills" id="categoryFilters" role="tablist" aria-label="Filter insights by category">
+          <button type="button" class="insights-pill active" data-filter="all" role="tab" aria-selected="true">
+            <span>All Insights</span>
+            <span class="pill-count" id="countAll">{{ collections.insights.length }}</span>
+          </button>
+          <button type="button" class="insights-pill" data-filter="Strategy" role="tab" aria-selected="false">
+            <span>Strategy</span>
+          </button>
+          <button type="button" class="insights-pill" data-filter="Leadership" role="tab" aria-selected="false">
+            <span>Leadership</span>
+          </button>
+          <button type="button" class="insights-pill" data-filter="Operations" role="tab" aria-selected="false">
+            <span>Operations</span>
+          </button>
+          <button type="button" class="insights-pill" data-filter="linkedin" role="tab" aria-selected="false">
+            <svg class="pill-linkedin-icon" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            <span>LinkedIn</span>
+          </button>
+        </div>
+
+        <div class="insights-view-options">
+          <button type="button" id="viewGridBtn" class="view-toggle-btn active" title="Grid View" aria-label="Grid View">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          </button>
+          <button type="button" id="viewListBtn" class="view-toggle-btn" title="Compact List View" aria-label="Compact List View">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="insights-grid-wrap section-muted">
+  <div class="container">
+    
+    <div class="insights-status-bar">
+      <span class="insights-count-label">Showing <strong id="visibleCount">{{ collections.insights.length }}</strong> insights</span>
+      <a href="/feed.xml" class="insights-rss-link" target="_blank" rel="noopener" title="Subscribe via RSS">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg>
+        <span>RSS Feed</span>
+      </a>
+    </div>
+
+    <div class="insights-grid" id="insightsGrid">
+      {% for post in collections.insights %}
+      <article class="insight-card" 
+               data-category="{{ post.data.category or 'Strategy' }}" 
+               data-source="{{ post.data.source or 'site' }}" 
+               data-title="{{ post.data.title | lower }}" 
+               data-summary="{{ post.data.summary | lower }}">
+        
+        <a href="{{ post.url }}" class="insight-card-media" aria-label="Read {{ post.data.title }}">
+          {% if post.data.featuredImage %}
+          <img src="{{ post.data.featuredImage }}" alt="{{ post.data.title }}" class="insight-card-img" loading="lazy">
+          {% else %}
+          <img src="/images/hero-background.jpg" alt="Klein Insight" class="insight-card-img" loading="lazy">
+          {% endif %}
+          
+          <div class="insight-card-scrim"></div>
+
+          <div class="insight-card-badges">
+            {% if post.data.category %}
+            <span class="insight-badge insight-category-badge">{{ post.data.category }}</span>
+            {% endif %}
+            {% if post.data.source == "linkedin" %}
+            <span class="insight-badge insight-linkedin-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              LinkedIn
+            </span>
+            {% else %}
+            <span class="insight-badge insight-site-badge">Memo</span>
+            {% endif %}
+          </div>
+        </a>
+
+        <div class="insight-card-body">
+          <div class="insight-card-meta">
+            <span class="meta-date">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
+            </span>
+            <span class="dot-divider">•</span>
+            <span class="meta-readtime">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              {{ post.templateContent | readingTime }}
+            </span>
+          </div>
+
+          <h2 class="insight-card-title">
+            <a href="{{ post.url }}">{{ post.data.title }}</a>
+          </h2>
+
+          <p class="insight-card-summary">
+            {{ post.data.summary }}
+          </p>
+
+          <div class="insight-card-footer">
+            <div class="insight-author-inline">
+              <img src="/images/joe-klein-headshot.webp" alt="Joe Klein" width="30" height="30" loading="lazy">
+              <span class="author-label">{{ post.data.author or "Joe Klein" }}</span>
+            </div>
+            <a href="{{ post.url }}" class="insight-read-more" aria-label="Read full article: {{ post.data.title }}">
+              <span>Read Insight</span>
+              <svg class="read-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+        </div>
+
+      </article>
+      {% endfor %}
+    </div>
+
+    <!-- Empty state for search/filtering -->
+    <div class="insights-empty-state" id="emptyState">
+      <div class="empty-icon-wrap">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          <line x1="8" y1="11" x2="14" y2="11"></line>
+        </svg>
+      </div>
+      <h3>No matching insights found</h3>
+      <p>We couldn't find any articles matching your search criteria. Try a different keyword or reset your filters.</p>
+      <button type="button" class="button button-primary" id="resetFiltersBtn" style="margin-top: 18px;">
+        Reset All Filters
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- Client-side filtering and view switching script -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('insightsSearch');
+    const searchClearBtn = document.getElementById('searchClearBtn');
+    const filterButtons = document.querySelectorAll('.insights-pill');
+    const grid = document.getElementById('insightsGrid');
+    const cards = document.querySelectorAll('.insight-card');
+    const emptyState = document.getElementById('emptyState');
+    const resetBtn = document.getElementById('resetFiltersBtn');
+    const visibleCountEl = document.getElementById('visibleCount');
+    const viewGridBtn = document.getElementById('viewGridBtn');
+    const viewListBtn = document.getElementById('viewListBtn');
+
+    let activeFilter = 'all';
+    let searchQuery = '';
+
+    function applyFilters() {
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const category = card.getAttribute('data-category') || '';
+        const source = card.getAttribute('data-source') || '';
+        const title = card.getAttribute('data-title') || '';
+        const summary = card.getAttribute('data-summary') || '';
+
+        // Category filter check
+        let matchesFilter = false;
+        if (activeFilter === 'all') {
+          matchesFilter = true;
+        } else if (activeFilter === 'linkedin') {
+          matchesFilter = (source === 'linkedin');
+        } else {
+          matchesFilter = (category.toLowerCase() === activeFilter.toLowerCase());
+        }
+
+        // Search text check
+        let matchesSearch = true;
+        if (searchQuery.trim().length > 0) {
+          const q = searchQuery.toLowerCase();
+          matchesSearch = title.includes(q) || summary.includes(q) || category.toLowerCase().includes(q);
+        }
+
+        if (matchesFilter && matchesSearch) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (visibleCountEl) {
+        visibleCountEl.textContent = visibleCount;
+      }
+
+      if (emptyState) {
+        emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+      }
+
+      if (searchClearBtn) {
+        searchClearBtn.style.display = searchQuery.trim().length > 0 ? 'flex' : 'none';
+      }
+    }
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+        activeFilter = btn.getAttribute('data-filter') || 'all';
+        applyFilters();
+      });
+    });
+
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        applyFilters();
+      });
+    }
+
+    if (searchClearBtn) {
+      searchClearBtn.addEventListener('click', () => {
+        if (searchInput) searchInput.value = '';
+        searchQuery = '';
+        searchInput.focus();
+        applyFilters();
+      });
+    }
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        if (searchInput) searchInput.value = '';
+        searchQuery = '';
+        activeFilter = 'all';
+        filterButtons.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', b.getAttribute('data-filter') === 'all' ? 'true' : 'false');
+        });
+        const allBtn = document.querySelector('.insights-pill[data-filter="all"]');
+        if (allBtn) allBtn.classList.add('active');
+        applyFilters();
+      });
+    }
+
+    // View layout switcher (Grid vs Compact List)
+    if (viewGridBtn && viewListBtn && grid) {
+      viewGridBtn.addEventListener('click', () => {
+        viewGridBtn.classList.add('active');
+        viewListBtn.classList.remove('active');
+        grid.classList.remove('insights-list-view');
+      });
+
+      viewListBtn.addEventListener('click', () => {
+        viewListBtn.classList.add('active');
+        viewGridBtn.classList.remove('active');
+        grid.classList.add('insights-list-view');
+      });
+    }
+  });
+</script>

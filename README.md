@@ -1,41 +1,62 @@
-# Klein Insight Website
+# Klein Insight Website & Insights Hub
 
-Static consulting website for Klein Insight.
+Business strategy consulting website for Klein Insight, featuring the **Insights Hub** (`/insights/`), automated LinkedIn synchronization, and visual CMS authoring.
 
-## Files
+## Architecture
 
-- `index.html` - main one-page site
-- `styles.css` - all site styling
-- `script.js` - mobile navigation + current year
-- `favicon.svg` - simple KI browser icon
-- `robots.txt` - search engine crawling rules
-- `sitemap.xml` - basic sitemap
+- **Static Site Engine**: Built with a lightweight [Eleventy (11ty)](https://www.11ty.dev/) pipeline that preserves all existing vanilla HTML/CSS/JS pages verbatim while compiling Markdown insight articles into static, SEO-optimized pages.
+- **CMS Authoring**: [Sveltia CMS](https://github.com/sveltia/sveltia-cms) at `/admin/` — lightweight, Git-backed visual editor with zero server or subscription costs.
+- **LinkedIn Sync**: Automated GitHub Action (`.github/workflows/sync-linkedin.yml`) that pulls Joe's LinkedIn posts, caches images locally, and commits them as Markdown articles.
+- **Hosting**: Cloudflare Pages.
 
-## Before Launch
+---
 
-There is one intentionally unfinished area in the Contact section.
+## Local Development
 
-Search `index.html` for:
+```bash
+# Install dependencies
+npm install
 
-`Replace this with your preferred email address or scheduling link before launch.`
+# Start local preview server (serves site at http://localhost:8080)
+npm start
 
-Replace that block with your preferred contact method before connecting `kleininsight.com`.
+# Compile static distribution to /_site
+npm run build
+```
 
-## Cloudflare Pages
+---
 
-This site is plain HTML/CSS/JavaScript and does not require a build framework.
+## Cloudflare Pages Deployment Settings
 
-When connecting the GitHub repository to Cloudflare Pages:
+When connecting or updating the repository in Cloudflare Pages:
 
-- Production branch: `main`
-- Framework preset: `None`
-- Build command: leave blank
-- Build output directory: `/` or the repository root, depending on the Cloudflare UI
+- **Production branch**: `main`
+- **Framework preset**: `None`
+- **Build command**: `npm run build`
+- **Build output directory**: `_site`
 
-## Suggested Next Improvements
+---
 
-1. Add a real contact method or booking link.
-2. Add a professional headshot or brand photography.
-3. Replace generalized project examples with approved case studies.
-4. Add dedicated service pages once the homepage positioning is finalized.
-5. Add analytics after launch.
+## Authoring Site-Only Posts (Sveltia CMS)
+
+1. Navigate to `https://kleininsight.com/admin/`.
+2. Click **Login with GitHub**.
+3. Create, edit, or publish articles using the rich text / markdown editor.
+4. When published, Sveltia CMS commits the post to the `main` branch, triggering an automatic Cloudflare Pages deployment.
+
+---
+
+## Automated LinkedIn Ingestion Setup
+
+The synchronization workflow runs automatically once daily at 6:00 AM Pacific (13:00 UTC) and can also be triggered on demand via the **Actions** tab in GitHub ("Run workflow").
+
+To connect Joe's LinkedIn feed:
+1. Go to your GitHub repository: **Settings > Secrets and variables > Actions**.
+2. Add one of the following secrets:
+   - **Option A (Official API - Preferred)**:
+     - `LINKEDIN_ACCESS_TOKEN`: OAuth access token generated via [developer.linkedin.com](https://developer.linkedin.com).
+     - `LINKEDIN_PERSON_URN`: Joe's person URN (e.g., `urn:li:person:...`).
+   - **Option B (Session Cookie Fallback)**:
+     - `LINKEDIN_LI_AT`: Joe's `li_at` cookie value from browser inspection on linkedin.com.
+
+If neither secret is set, the workflow will log a helpful notice and exit safely without failing.

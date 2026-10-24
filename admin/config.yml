@@ -1,0 +1,40 @@
+backend:
+  name: github
+  repo: kleininsight/klein-insight
+  branch: main
+
+site_url: https://kleininsight.com
+display_url: https://kleininsight.com
+logo_url: https://kleininsight.com/images/logo-v1.png
+
+media_folder: "assets/insights"
+public_folder: "/assets/insights"
+
+collections:
+  - name: "insights"
+    label: "Insights & Field Notes"
+    label_singular: "Insight"
+    folder: "content/insights"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}} ({{date}}) • {{category}}"
+    sortable_fields: ["date", "title", "category"]
+    view_filters:
+      - label: "Site Articles"
+        field: "source"
+        pattern: "site"
+      - label: "LinkedIn Posts"
+        field: "source"
+        pattern: "linkedin"
+    fields:
+      - { label: "Title", name: "title", widget: "string", required: true, hint: "Article or post headline" }
+      - { label: "Publish Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false, required: true }
+      - { label: "Author", name: "author", widget: "string", default: "Joe Klein", required: true }
+      - { label: "Summary / Excerpt", name: "summary", widget: "text", required: true, hint: "Short 2-3 sentence overview shown on preview cards" }
+      - { label: "Category", name: "category", widget: "select", options: ["Strategy", "Leadership", "Operations", "Execution", "Market Research"], default: "Strategy" }
+      - { label: "Source", name: "source", widget: "select", options: [{ label: "Site Article", value: "site" }, { label: "LinkedIn Post", value: "linkedin" }], default: "site" }
+      - { label: "LinkedIn URL", name: "linkedinUrl", widget: "string", required: false, hint: "Optional: Original post URL on LinkedIn" }
+      - { label: "Featured Image", name: "featuredImage", widget: "image", required: false, hint: "Optional header image" }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false, hint: "Enable to hide post from live site" }
+      - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/post.njk" }
+      - { label: "Body", name: "body", widget: "markdown", required: true }
