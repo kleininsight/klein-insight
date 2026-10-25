@@ -372,7 +372,7 @@
 .insight-card-media {
   position: relative;
   aspect-ratio: 16 / 9;
-  background: var(--dark);
+  background: var(--surface);
   overflow: hidden;
 }
 
@@ -384,15 +384,20 @@
 }
 
 .insight-card:hover .insight-card-img {
-  transform: scale(1.04);
+  transform: scale(1.03);
 }
 
 .insight-card-scrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(18, 30, 39, 0.25) 0%, rgba(18, 30, 39, 0.7) 100%);
+  background: linear-gradient(180deg, rgba(18, 30, 39, 0.15) 0%, rgba(18, 30, 39, 0) 40%);
   pointer-events: none;
-  transition: opacity 0.3s;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.insight-card:hover .insight-card-scrim {
+  opacity: 0.25;
 }
 
 .insight-card-badges {
