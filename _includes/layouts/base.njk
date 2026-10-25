@@ -4,27 +4,102 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ title }} | Klein Insight</title>
-  <meta name="description" content="{{ summary or description or 'Business strategy and growth coaching for established owner-led businesses.' }}">
-  <meta name="theme-color" content="#13212b">
-
-  <!-- OpenGraph / Social Media -->
-  <meta property="og:title" content="{{ title }} | Klein Insight">
-  <meta property="og:description" content="{{ summary or description or 'Business strategy and growth coaching for established owner-led businesses.' }}">
-  <meta property="og:type" content="{{ ogType or 'website' }}">
-  <meta property="og:url" content="https://kleininsight.com{{ page.url }}">
-  {% if featuredImage %}
-  <meta property="og:image" content="https://kleininsight.com{{ featuredImage }}">
+  
+  {% set pageTitle = (title ~ " | Klein Insight") if title else "Klein Insight — Business Strategy & Growth Coaching" %}
+  {% set pageDesc = (summary or description or "Business strategy and growth coaching for established owner-led businesses.") | cleanDescription %}
+  {% set canonicalUrl = "https://kleininsight.com" ~ page.url %}
+  {% if featuredImage and featuredImage != "" %}
+    {% set socialImage = "https://kleininsight.com" ~ featuredImage %}
+    {% set socialImageWidth = "1200" %}
+    {% set socialImageHeight = "630" %}
+    {% set socialImageType = "image/png" if ".png" in featuredImage else "image/jpeg" %}
   {% else %}
-  <meta property="og:image" content="https://kleininsight.com/images/joe-klein-headshot.webp">
+    {% set socialImage = "https://kleininsight.com/images/og-share-card.jpg" %}
+    {% set socialImageWidth = "1200" %}
+    {% set socialImageHeight = "630" %}
+    {% set socialImageType = "image/jpeg" %}
   {% endif %}
 
-  <!-- Twitter Cards -->
+  <title>{{ pageTitle }}</title>
+  <meta name="description" content="{{ pageDesc }}">
+  <meta name="theme-color" content="#13212b">
+  <link rel="canonical" href="{{ canonicalUrl }}">
+
+  <!-- OpenGraph / Facebook Meta Tags -->
+  <meta property="og:site_name" content="Klein Insight">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="{{ ogType or 'website' }}">
+  <meta property="og:title" content="{{ pageTitle }}">
+  <meta property="og:description" content="{{ pageDesc }}">
+  <meta property="og:url" content="{{ canonicalUrl }}">
+  <meta property="og:image" content="{{ socialImage }}">
+  <meta property="og:image:secure_url" content="{{ socialImage }}">
+  <meta property="og:image:type" content="{{ socialImageType }}">
+  <meta property="og:image:width" content="{{ socialImageWidth }}">
+  <meta property="og:image:height" content="{{ socialImageHeight }}">
+  <meta property="og:image:alt" content="{{ title or 'Klein Insight' }}">
+
+  {% if ogType == "article" %}
+  <!-- Article Metadata for Social Slide Previews -->
+  <meta property="article:published_time" content="{{ page.date | isoDateTime }}">
+  <meta property="article:author" content="https://www.linkedin.com/in/kleininsight/">
+  <meta property="article:publisher" content="https://kleininsight.com">
+  <meta property="article:section" content="{{ category or 'Business Strategy' }}">
+  {% if category %}
+  <meta property="article:tag" content="{{ category }}">
+  {% endif %}
+  {% endif %}
+
+  <!-- Twitter / X Cards -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ title }} | Klein Insight">
-  <meta name="twitter:description" content="{{ summary or description }}">
-  {% if featuredImage %}
-  <meta name="twitter:image" content="https://kleininsight.com{{ featuredImage }}">
+  <meta name="twitter:title" content="{{ pageTitle }}">
+  <meta name="twitter:description" content="{{ pageDesc }}">
+  <meta name="twitter:image" content="{{ socialImage }}">
+  <meta name="twitter:image:alt" content="{{ title or 'Klein Insight' }}">
+
+  <!-- Schema.org JSON-LD Structured Data -->
+  {% if ogType == "article" %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ canonicalUrl }}"
+    },
+    "headline": {{ (title or "Strategic Insight") | dump | safe }},
+    "description": {{ pageDesc | dump | safe }},
+    "image": [
+      "{{ socialImage }}"
+    ],
+    "datePublished": "{{ page.date | isoDateTime }}",
+    "author": {
+      "@type": "Person",
+      "name": "{{ author or 'Joe Klein' }}",
+      "jobTitle": "Business Strategy & Growth Coach",
+      "url": "https://www.linkedin.com/in/kleininsight/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Klein Insight",
+      "url": "https://kleininsight.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://kleininsight.com/images/logo-v1.png"
+      }
+    }
+  }
+  </script>
+  {% else %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Klein Insight",
+    "url": "https://kleininsight.com",
+    "description": "Business strategy and growth coaching for established owner-led businesses."
+  }
+  </script>
   {% endif %}
 
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">

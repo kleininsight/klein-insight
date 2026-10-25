@@ -39,6 +39,22 @@ export default function (eleventyConfig) {
     return date.toISOString().split("T")[0];
   });
 
+  eleventyConfig.addFilter("isoDateTime", (dateObj) => {
+    if (!dateObj) return "";
+    const date = typeof dateObj === "string" ? new Date(dateObj) : dateObj;
+    return date.toISOString();
+  });
+
+  eleventyConfig.addFilter("cleanDescription", (text) => {
+    if (!text) return "Business strategy and growth coaching for established owner-led businesses.";
+    return text
+      .toString()
+      .replace(/<\/?[^>]+(>|$)/g, "")
+      .replace(/[\r\n]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+  });
+
   eleventyConfig.addFilter("readingTime", (content) => {
     if (!content) return "1 min read";
     const wordsPerMinute = 200;
