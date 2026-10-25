@@ -4,13 +4,8 @@ on:
   schedule:
     # Runs daily at 13:00 UTC (6:00 AM Pacific Time)
     - cron: '0 13 * * *'
-  # Allows Joe or admin to trigger an instant sync at any time with an optional post URL
+  # Allows Joe or admin to trigger an instant sync at any time from GitHub Actions UI
   workflow_dispatch:
-    inputs:
-      post_url:
-        description: 'LinkedIn Post URL to scrape (e.g. https://www.linkedin.com/posts/...)'
-        required: false
-        type: string
 
 permissions:
   contents: write
@@ -33,14 +28,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Sync LinkedIn Posts
+      - name: Sync LinkedIn Posts via Bright Data
         env:
-          LINKEDINSCRAPERAPI_KEY: ${{ secrets.LINKEDINSCRAPERAPI_KEY }}
-          LINKEDIN_POST_URL: ${{ inputs.post_url }}
-          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
-          LINKEDIN_PERSON_URN: ${{ secrets.LINKEDIN_PERSON_URN }}
-          LINKEDIN_LI_AT: ${{ secrets.LINKEDIN_LI_AT }}
-          LINKEDIN_VANITY: 'kleininsight'
+          BRIGHTDATA_API_KEY: ${{ secrets.BRIGHTDATA_API_KEY }}
+          LINKEDIN_PROFILE_URL: 'https://www.linkedin.com/in/kleininsight/'
         run: node scripts/sync-linkedin.js
 
       - name: Commit and push new insights if available
@@ -51,6 +42,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "No new LinkedIn posts found to commit."
           else
-            git commit -m "Automated: Sync new LinkedIn posts from Joe Klein"
+            git commit -m "Automated: Sync new LinkedIn posts from Joe Klein via Bright Data"
             git push origin main
           fi

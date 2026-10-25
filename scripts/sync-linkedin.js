@@ -7,7 +7,6 @@ const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 const insightsDir = path.join(rootDir, 'content', 'insights');
 const assetsDir = path.join(rootDir, 'assets', 'insights');
-const urlsFile = path.join(rootDir, 'content', 'linkedin_urls.txt');
 
 // Ensure directories exist
 if (!fs.existsSync(insightsDir)) fs.mkdirSync(insightsDir, { recursive: true });
@@ -24,13 +23,53 @@ function slugify(text) {
     .slice(0, 50);
 }
 
-function extractTitleAndSummary(text) {
-  const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
-  if (lines.length === 0) return { title: 'LinkedIn Thought', summary: '' };
-  
-  // Use first line or first sentence as title
+function extractDateFromActivityId(activityId) {
+  try {
+    if (!activityId) return new Date();
+    // Match numeric digits from id or activity URN
+    const match = activityId.toString().match(/\d{15,20}/);
+    if (!match) return new Date();
+    const numericId = match[0];
+    const ms = Number(BigInt(numericId) >> 22n);
+    const date = new Date(ms);
+    // Sanity check: between 2020 and 2030
+    if (date.getFullYear() >= 2020 && date.getFullYear() <= 2030) {
+      return date;
+    }
+  } catch (e) {
+    // fallback
+  }
+  return new Date();
+}
+
+function extractCategory(text) {
+  const lower = text.toLowerCase();
+  if (lower.includes('market research') || lower.includes('survey') || lower.includes('conjoint') || lower.includes('data') || lower.includes('qualtrics')) {
+    return 'Market Research';
+  }
+  if (lower.includes('parent') || lower.includes('father') || lower.includes('leadership') || lower.includes('burnout') || lower.includes('culture')) {
+    return 'Leadership';
+  }
+  if (lower.includes('operation') || lower.includes('scaling') || lower.includes('system') || lower.includes('process')) {
+    return 'Operations';
+  }
+  return 'Strategy';
+}
+
+function extractTitleAndSummary(rawText) {
+  // Strip trailing "...more" or "... see more"
+  let clean = rawText
+    .replace(/\.\.\.more$/i, '')
+    .replace(/\.\.\. see more$/i, '')
+    .trim();
+
+  const lines = clean.split('\n').map(l => l.trim()).filter(Boolean);
+  if (lines.length === 0) return { title: 'Strategic Thought', summary: '', body: clean };
+
   let firstLine = lines[0].replace(/[#*_]/g, '').trim();
   let title = firstLine;
+
+  // If first line has a pipe or colon delimiter, take the core headline
   if (title.length > 70) {
     const periodIdx = title.indexOf('.');
     if (periodIdx > 15 && periodIdx < 70) {
@@ -40,14 +79,14 @@ function extractTitleAndSummary(text) {
     }
   }
 
-  // Summary is first 1-2 sentences
+  // Summary is second line or first 180 chars
   let summary = lines.slice(1).join(' ').replace(/[#*_]/g, '').trim();
   if (!summary) summary = firstLine;
   if (summary.length > 180) {
     summary = summary.slice(0, 177) + '...';
   }
 
-  return { title, summary };
+  return { title, summary, body: clean };
 }
 
 async function downloadImage(url, destPath) {
@@ -64,203 +103,130 @@ async function downloadImage(url, destPath) {
 }
 
 // -----------------------------------------------------------------------------
-// Strategy 1: linkedinscraperapi.com (Recommended external scraper)
+// Bright Data LinkedIn Profile & Activity Scraper
 // -----------------------------------------------------------------------------
-async function fetchFromLinkedinScraperApi(apiKey, postUrls) {
-  console.log(`[Sync] Scraping ${postUrls.length} post URL(s) using linkedinscraperapi.com...`);
-  const posts = [];
+async function fetchFromBrightData(apiKey, profileUrl, snapshotId = null) {
+  console.log('[Sync] Connecting to Bright Data API...');
+  let targetSnapshotId = snapshotId;
 
-  for (const url of postUrls) {
-    const cleanUrl = url.trim();
-    if (!cleanUrl || cleanUrl.startsWith('#')) continue;
+  if (!targetSnapshotId) {
+    console.log(`[Sync] Triggering collection on Bright Data for: ${profileUrl}`);
+    const triggerRes = await fetch('https://api.brightdata.com/datasets/v3/trigger?dataset_id=gd_l1viktl72bvl7bjuj0&include_errors=true', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify([{ url: profileUrl }])
+    });
 
-    console.log(`[Sync] Calling linkedinscraperapi for: ${cleanUrl}`);
-    try {
-      const apiUrl = `https://api.linkedinscraperapi.com/api/v1/linkedin/post?url=${encodeURIComponent(cleanUrl)}&api_key=${apiKey}`;
-      const res = await fetch(apiUrl);
-      if (!res.ok) {
-        const errorBody = await res.text();
-        console.warn(`[Sync] Error scraping ${cleanUrl} (${res.status}): ${errorBody}`);
-        continue;
-      }
+    if (!triggerRes.ok) {
+      const errText = await triggerRes.text();
+      throw new Error(`Bright Data trigger failed (${triggerRes.status}): ${errText}`);
+    }
 
-      const data = await res.json();
-      if (!data.content) {
-        console.warn(`[Sync] No content returned for ${cleanUrl}`);
-        continue;
-      }
+    const triggerData = await triggerRes.json();
+    targetSnapshotId = triggerData.snapshot_id;
+    console.log(`[Sync] Bright Data triggered snapshot: ${targetSnapshotId}`);
 
-      const media = [];
-      if (Array.isArray(data.media)) {
-        for (const item of data.media) {
-          if (item && item.mediaUrl) {
-            media.push(item.mediaUrl);
-          }
+    // Poll until ready (up to 60s)
+    let isReady = false;
+    for (let i = 0; i < 12; i++) {
+      await new Promise(r => setTimeout(r, 5000));
+      const progRes = await fetch(`https://api.brightdata.com/datasets/v3/progress/${targetSnapshotId}`, {
+        headers: { 'Authorization': `Bearer ${apiKey}` }
+      });
+      if (progRes.ok) {
+        const progData = await progRes.json();
+        console.log(`[Sync] Bright Data status: ${progData.status}`);
+        if (progData.status === 'ready') {
+          isReady = true;
+          break;
         }
       }
-
-      posts.push({
-        commentary: data.content,
-        date: data.postedAt ? new Date(data.postedAt) : new Date(),
-        linkedinUrl: data.postLink || cleanUrl,
-        authorName: data.postAuthor?.authorName || 'Joe Klein',
-        media
-      });
-    } catch (err) {
-      console.warn(`[Sync] Failed to scrape ${cleanUrl}:`, err.message);
     }
+
+    if (!isReady) {
+      console.warn('[Sync] Bright Data is still processing in background. Will check snapshot.');
+    }
+  } else {
+    console.log(`[Sync] Using existing snapshot ID: ${targetSnapshotId}`);
   }
 
-  return posts;
-}
-
-// -----------------------------------------------------------------------------
-// Strategy 2: Official LinkedIn Developer API
-// -----------------------------------------------------------------------------
-async function fetchFromOfficialApi(accessToken, personUrn) {
-  console.log('[Sync] Fetching posts via official LinkedIn REST API...');
-  const res = await fetch(`https://api.linkedin.com/rest/posts?author=${encodeURIComponent(personUrn)}&count=10`, {
-    headers: {
-      'Authorization': `Bearer ${accessToken}`,
-      'Linkedin-Version': '202610',
-      'X-Restli-Protocol-Version': '2.0.0'
-    }
+  // Fetch snapshot data
+  const snapRes = await fetch(`https://api.brightdata.com/datasets/v3/snapshot/${targetSnapshotId}?format=json`, {
+    headers: { 'Authorization': `Bearer ${apiKey}` }
   });
 
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`LinkedIn REST API error (${res.status}): ${text}`);
+  if (!snapRes.ok) {
+    throw new Error(`Bright Data snapshot retrieval failed (${snapRes.status})`);
   }
 
-  const data = await res.json();
-  const elements = data.elements || [];
-  return elements.map(post => {
-    const commentary = post.commentary || '';
-    const date = new Date(post.createdAt || Date.now());
-    const urn = post.id || '';
-    const linkedinUrl = `https://www.linkedin.com/feed/update/${urn}`;
-    const media = [];
-    if (post.content && post.content.media && Array.isArray(post.content.media)) {
-      post.content.media.forEach(m => {
-        if (m.originalUrl) media.push(m.originalUrl);
-      });
-    }
-    return { commentary, date, linkedinUrl, authorName: 'Joe Klein', media };
-  });
-}
-
-// -----------------------------------------------------------------------------
-// Strategy 3: Session Cookie / Voyager API
-// -----------------------------------------------------------------------------
-async function fetchFromVoyagerCookie(liAtCookie, vanityName = 'kleinjoes89') {
-  console.log('[Sync] Fetching posts using session credentials...');
-  const profileRes = await fetch(`https://www.linkedin.com/voyager/api/identity/profiles/${vanityName}/profileView`, {
-    headers: {
-      'Cookie': `li_at=${liAtCookie}`,
-      'Csrf-Token': 'ajax:4123456789012345678',
-      'X-Restli-Protocol-Version': '2.0.0',
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-    }
-  });
-
-  if (!profileRes.ok) {
-    throw new Error(`Voyager profile view returned ${profileRes.status}`);
+  const rawData = await snapRes.json();
+  const profile = Array.isArray(rawData) ? rawData[0] : rawData;
+  if (!profile || !profile.activity) {
+    console.log('[Sync] No profile activity array found in snapshot.');
+    return [];
   }
 
-  const profileData = await profileRes.json();
-  const urn = profileData.profile?.miniProfile?.entityUrn;
-  if (!urn) throw new Error('Could not resolve entityUrn for profile');
+  console.log(`[Sync] Retrieved profile: ${profile.name} with ${profile.activity.length} activity items.`);
 
-  const memberId = urn.replace('urn:li:fs_miniProfile:', '');
-  const feedRes = await fetch(`https://www.linkedin.com/voyager/api/identity/profileUpdatesV2?profileUrn=urn%3Ali%3Afsd_profile%3A${memberId}&q=memberShareFeed&count=10`, {
-    headers: {
-      'Cookie': `li_at=${liAtCookie}`,
-      'Csrf-Token': 'ajax:4123456789012345678',
-      'X-Restli-Protocol-Version': '2.0.0',
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-    }
+  // Filter for Joe's own published posts
+  const ownPosts = profile.activity.filter(item => {
+    if (!item.link) return false;
+    // Check if it's a post from kleininsight
+    return item.link.includes('/posts/kleininsight_');
   });
 
-  if (!feedRes.ok) {
-    throw new Error(`Voyager feed returned ${feedRes.status}`);
-  }
+  console.log(`[Sync] Found ${ownPosts.length} original post(s) authored by Joe Klein.`);
 
-  const feedData = await feedRes.json();
-  const elements = feedData.elements || [];
-  return elements.map(el => {
-    const commentary = el.commentary?.text?.text || el.value?.commentary?.text?.text || '';
-    const date = new Date(el.createdAt || Date.now());
-    const urn = el.entityUrn || '';
-    const linkedinUrl = `https://www.linkedin.com/feed/update/${urn}`;
-    return { commentary, date, linkedinUrl, authorName: 'Joe Klein', media: [] };
-  }).filter(p => p.commentary.length > 50);
+  return ownPosts.map(p => {
+    // Determine post ID
+    const urlMatch = p.link.match(/activity-(\d+)/);
+    const numericId = urlMatch ? urlMatch[1] : (p.id || '');
+    const date = extractDateFromActivityId(numericId);
+
+    return {
+      commentary: p.title || '',
+      date,
+      linkedinUrl: p.link,
+      authorName: profile.name || 'Joe Klein',
+      media: p.img ? [p.img] : [],
+      postId: numericId
+    };
+  });
 }
 
 // -----------------------------------------------------------------------------
 // Main Pipeline
 // -----------------------------------------------------------------------------
 async function main() {
-  const scraperKey = process.env.LINKEDINSCRAPERAPI_KEY || process.env.LINKEDIN_SCRAPER_API_KEY;
-  const token = process.env.LINKEDIN_ACCESS_TOKEN;
-  const personUrn = process.env.LINKEDIN_PERSON_URN || 'urn:li:person:kleinjoes89';
-  const cookie = process.env.LINKEDIN_LI_AT;
-  const vanity = process.env.LINKEDIN_VANITY || 'kleininsight';
+  const brightDataKey = process.env.BRIGHTDATA_API_KEY || process.env.BRIGHT_DATA_API_KEY || 'cd533a3a-3080-4756-9ab3-3dec045993f6';
+  const snapshotId = process.env.BRIGHTDATA_SNAPSHOT_ID || 'sd_mvn7xbu52jyf1zgzaw';
+  const profileUrl = process.env.LINKEDIN_PROFILE_URL || 'https://www.linkedin.com/in/kleininsight/';
 
   let rawPosts = [];
 
-  // Check if specific URLs were passed
-  const passedUrls = [];
-  if (process.env.LINKEDIN_POST_URL) {
-    passedUrls.push(process.env.LINKEDIN_POST_URL.trim());
-  }
-  if (process.env.LINKEDIN_POST_URLS) {
-    passedUrls.push(...process.env.LINKEDIN_POST_URLS.split(/[\n,]/).map(u => u.trim()).filter(Boolean));
-  }
-  if (fs.existsSync(urlsFile)) {
-    const fileContent = fs.readFileSync(urlsFile, 'utf-8');
-    const fileUrls = fileContent.split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('#'));
-    passedUrls.push(...fileUrls);
+  if (brightDataKey) {
+    try {
+      rawPosts = await fetchFromBrightData(brightDataKey, profileUrl, snapshotId);
+    } catch (err) {
+      console.error('[Sync] Bright Data fetch error:', err.message);
+    }
   }
 
-  // Deduplicate target URLs
-  const uniqueUrls = [...new Set(passedUrls)];
-
-  if (scraperKey && uniqueUrls.length > 0) {
-    rawPosts = await fetchFromLinkedinScraperApi(scraperKey, uniqueUrls);
-  } else if (scraperKey && uniqueUrls.length === 0) {
-    console.log('[Sync] Notice: LINKEDINSCRAPERAPI_KEY is configured, but no post URLs were provided.');
-    console.log('[Sync] To scrape posts: pass a post URL via GitHub Actions "Run workflow" or add URLs to content/linkedin_urls.txt.');
-  } else if (token) {
-    try {
-      rawPosts = await fetchFromOfficialApi(token, personUrn);
-    } catch (e) {
-      console.warn('[Sync] Official API attempt failed:', e.message);
-      if (cookie) {
-        console.log('[Sync] Falling back to session cookie...');
-        rawPosts = await fetchFromVoyagerCookie(cookie, vanity);
-      }
-    }
-  } else if (cookie) {
-    try {
-      rawPosts = await fetchFromVoyagerCookie(cookie, vanity);
-    } catch (e) {
-      console.error('[Sync] Session cookie sync failed:', e.message);
-    }
-  } else {
-    console.log('[Sync] Notice: No LinkedIn scraping credentials configured.');
-    console.log('       To use linkedinscraperapi.com: add LINKEDINSCRAPERAPI_KEY to GitHub Secrets.');
-    console.log('       To use session cookie: add LINKEDIN_LI_AT to GitHub Secrets.');
-    console.log('[Sync] Exiting cleanly without error.');
+  if (rawPosts.length === 0) {
+    console.log('[Sync] No posts returned from scraper.');
     return;
   }
 
-  console.log(`[Sync] Processed ${rawPosts.length} post(s).`);
+  console.log(`[Sync] Processing ${rawPosts.length} post(s) for import...`);
   let newPostCount = 0;
 
   for (const post of rawPosts) {
     if (!post.commentary || post.commentary.trim().length < 30) continue;
 
-    const { title, summary } = extractTitleAndSummary(post.commentary);
+    const { title, summary, body } = extractTitleAndSummary(post.commentary);
     const dateStr = post.date.toISOString().split('T')[0];
     const slug = slugify(title);
     const filename = `${dateStr}-${slug}.md`;
@@ -277,18 +243,21 @@ async function main() {
       const imgExt = '.jpg';
       const imgName = `${dateStr}-${slug}-cover${imgExt}`;
       const imgLocalPath = path.join(assetsDir, imgName);
+      console.log(`[Sync] Downloading post image to ${imgName}...`);
       const downloaded = await downloadImage(post.media[0], imgLocalPath);
       if (downloaded) {
         localFeaturedImage = `/assets/insights/${imgName}`;
       }
     }
 
+    const category = extractCategory(body);
+
     const frontmatter = `---
 title: "${title.replace(/"/g, '\\"')}"
 date: ${dateStr}
 author: "${post.authorName || 'Joe Klein'}"
 summary: "${summary.replace(/"/g, '\\"')}"
-category: "Leadership"
+category: "${category}"
 source: "linkedin"
 linkedinUrl: "${post.linkedinUrl}"
 featuredImage: "${localFeaturedImage}"
@@ -297,7 +266,7 @@ layout: layouts/post.njk
 permalink: /insights/${slug}/index.html
 ---
 
-${post.commentary.trim()}
+${body}
 `;
 
     fs.writeFileSync(targetFile, frontmatter, 'utf-8');
@@ -305,7 +274,7 @@ ${post.commentary.trim()}
     newPostCount++;
   }
 
-  console.log(`[Sync] Finished. Imported ${newPostCount} new insight post(s).`);
+  console.log(`[Sync] Finished. Successfully imported ${newPostCount} new insight post(s).`);
 }
 
 main().catch(err => {
