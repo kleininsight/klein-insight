@@ -3,3 +3,7 @@ tmp
 survey.html
 survey-deep.html
 application.html
+insights/**/*.html
+insights/*.html
+feed.xml
+sitemap.xml
