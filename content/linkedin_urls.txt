@@ -1,0 +1,3 @@
+# Add public LinkedIn post URLs below (one per line) to automatically scrape and publish them.
+# Example:
+# https://www.linkedin.com/posts/kleinjoes89_the-discipline-of-focus-activity-1234567890

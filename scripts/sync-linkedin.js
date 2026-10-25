@@ -7,6 +7,7 @@ const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 const insightsDir = path.join(rootDir, 'content', 'insights');
 const assetsDir = path.join(rootDir, 'assets', 'insights');
+const urlsFile = path.join(rootDir, 'content', 'linkedin_urls.txt');
 
 // Ensure directories exist
 if (!fs.existsSync(insightsDir)) fs.mkdirSync(insightsDir, { recursive: true });
@@ -62,6 +63,60 @@ async function downloadImage(url, destPath) {
   }
 }
 
+// -----------------------------------------------------------------------------
+// Strategy 1: linkedinscraperapi.com (Recommended external scraper)
+// -----------------------------------------------------------------------------
+async function fetchFromLinkedinScraperApi(apiKey, postUrls) {
+  console.log(`[Sync] Scraping ${postUrls.length} post URL(s) using linkedinscraperapi.com...`);
+  const posts = [];
+
+  for (const url of postUrls) {
+    const cleanUrl = url.trim();
+    if (!cleanUrl || cleanUrl.startsWith('#')) continue;
+
+    console.log(`[Sync] Calling linkedinscraperapi for: ${cleanUrl}`);
+    try {
+      const apiUrl = `https://api.linkedinscraperapi.com/api/v1/linkedin/post?url=${encodeURIComponent(cleanUrl)}&api_key=${apiKey}`;
+      const res = await fetch(apiUrl);
+      if (!res.ok) {
+        const errorBody = await res.text();
+        console.warn(`[Sync] Error scraping ${cleanUrl} (${res.status}): ${errorBody}`);
+        continue;
+      }
+
+      const data = await res.json();
+      if (!data.content) {
+        console.warn(`[Sync] No content returned for ${cleanUrl}`);
+        continue;
+      }
+
+      const media = [];
+      if (Array.isArray(data.media)) {
+        for (const item of data.media) {
+          if (item && item.mediaUrl) {
+            media.push(item.mediaUrl);
+          }
+        }
+      }
+
+      posts.push({
+        commentary: data.content,
+        date: data.postedAt ? new Date(data.postedAt) : new Date(),
+        linkedinUrl: data.postLink || cleanUrl,
+        authorName: data.postAuthor?.authorName || 'Joe Klein',
+        media
+      });
+    } catch (err) {
+      console.warn(`[Sync] Failed to scrape ${cleanUrl}:`, err.message);
+    }
+  }
+
+  return posts;
+}
+
+// -----------------------------------------------------------------------------
+// Strategy 2: Official LinkedIn Developer API
+// -----------------------------------------------------------------------------
 async function fetchFromOfficialApi(accessToken, personUrn) {
   console.log('[Sync] Fetching posts via official LinkedIn REST API...');
   const res = await fetch(`https://api.linkedin.com/rest/posts?author=${encodeURIComponent(personUrn)}&count=10`, {
@@ -90,13 +145,15 @@ async function fetchFromOfficialApi(accessToken, personUrn) {
         if (m.originalUrl) media.push(m.originalUrl);
       });
     }
-    return { commentary, date, linkedinUrl, media };
+    return { commentary, date, linkedinUrl, authorName: 'Joe Klein', media };
   });
 }
 
+// -----------------------------------------------------------------------------
+// Strategy 3: Session Cookie / Voyager API
+// -----------------------------------------------------------------------------
 async function fetchFromVoyagerCookie(liAtCookie, vanityName = 'kleinjoes89') {
   console.log('[Sync] Fetching posts using session credentials...');
-  // Voyager endpoint for user profile updates
   const profileRes = await fetch(`https://www.linkedin.com/voyager/api/identity/profiles/${vanityName}/profileView`, {
     headers: {
       'Cookie': `li_at=${liAtCookie}`,
@@ -135,19 +192,45 @@ async function fetchFromVoyagerCookie(liAtCookie, vanityName = 'kleinjoes89') {
     const date = new Date(el.createdAt || Date.now());
     const urn = el.entityUrn || '';
     const linkedinUrl = `https://www.linkedin.com/feed/update/${urn}`;
-    return { commentary, date, linkedinUrl, media: [] };
+    return { commentary, date, linkedinUrl, authorName: 'Joe Klein', media: [] };
   }).filter(p => p.commentary.length > 50);
 }
 
+// -----------------------------------------------------------------------------
+// Main Pipeline
+// -----------------------------------------------------------------------------
 async function main() {
+  const scraperKey = process.env.LINKEDINSCRAPERAPI_KEY || process.env.LINKEDIN_SCRAPER_API_KEY;
   const token = process.env.LINKEDIN_ACCESS_TOKEN;
   const personUrn = process.env.LINKEDIN_PERSON_URN || 'urn:li:person:kleinjoes89';
   const cookie = process.env.LINKEDIN_LI_AT;
-  const vanity = process.env.LINKEDIN_VANITY || 'kleinjoes89';
+  const vanity = process.env.LINKEDIN_VANITY || 'kleininsight';
 
   let rawPosts = [];
 
-  if (token) {
+  // Check if specific URLs were passed
+  const passedUrls = [];
+  if (process.env.LINKEDIN_POST_URL) {
+    passedUrls.push(process.env.LINKEDIN_POST_URL.trim());
+  }
+  if (process.env.LINKEDIN_POST_URLS) {
+    passedUrls.push(...process.env.LINKEDIN_POST_URLS.split(/[\n,]/).map(u => u.trim()).filter(Boolean));
+  }
+  if (fs.existsSync(urlsFile)) {
+    const fileContent = fs.readFileSync(urlsFile, 'utf-8');
+    const fileUrls = fileContent.split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('#'));
+    passedUrls.push(...fileUrls);
+  }
+
+  // Deduplicate target URLs
+  const uniqueUrls = [...new Set(passedUrls)];
+
+  if (scraperKey && uniqueUrls.length > 0) {
+    rawPosts = await fetchFromLinkedinScraperApi(scraperKey, uniqueUrls);
+  } else if (scraperKey && uniqueUrls.length === 0) {
+    console.log('[Sync] Notice: LINKEDINSCRAPERAPI_KEY is configured, but no post URLs were provided.');
+    console.log('[Sync] To scrape posts: pass a post URL via GitHub Actions "Run workflow" or add URLs to content/linkedin_urls.txt.');
+  } else if (token) {
     try {
       rawPosts = await fetchFromOfficialApi(token, personUrn);
     } catch (e) {
@@ -164,18 +247,18 @@ async function main() {
       console.error('[Sync] Session cookie sync failed:', e.message);
     }
   } else {
-    console.log('[Sync] Notice: Neither LINKEDIN_ACCESS_TOKEN nor LINKEDIN_LI_AT secret is configured.');
-    console.log('[Sync] To enable automatic syncing of Joe\'s LinkedIn posts:');
-    console.log('       Add LINKEDIN_ACCESS_TOKEN (from developer.linkedin.com) or LINKEDIN_LI_AT in GitHub Settings > Secrets.');
+    console.log('[Sync] Notice: No LinkedIn scraping credentials configured.');
+    console.log('       To use linkedinscraperapi.com: add LINKEDINSCRAPERAPI_KEY to GitHub Secrets.');
+    console.log('       To use session cookie: add LINKEDIN_LI_AT to GitHub Secrets.');
     console.log('[Sync] Exiting cleanly without error.');
     return;
   }
 
-  console.log(`[Sync] Retrieved ${rawPosts.length} posts from LinkedIn.`);
+  console.log(`[Sync] Processed ${rawPosts.length} post(s).`);
   let newPostCount = 0;
 
   for (const post of rawPosts) {
-    if (!post.commentary || post.commentary.trim().length < 40) continue;
+    if (!post.commentary || post.commentary.trim().length < 30) continue;
 
     const { title, summary } = extractTitleAndSummary(post.commentary);
     const dateStr = post.date.toISOString().split('T')[0];
@@ -185,6 +268,7 @@ async function main() {
 
     // Skip if already imported
     if (fs.existsSync(targetFile)) {
+      console.log(`[Sync] Already imported: ${filename}`);
       continue;
     }
 
@@ -202,7 +286,7 @@ async function main() {
     const frontmatter = `---
 title: "${title.replace(/"/g, '\\"')}"
 date: ${dateStr}
-author: "Joe Klein"
+author: "${post.authorName || 'Joe Klein'}"
 summary: "${summary.replace(/"/g, '\\"')}"
 category: "Leadership"
 source: "linkedin"
@@ -221,11 +305,10 @@ ${post.commentary.trim()}
     newPostCount++;
   }
 
-  console.log(`[Sync] Finished. Imported ${newPostCount} new LinkedIn post(s).`);
+  console.log(`[Sync] Finished. Imported ${newPostCount} new insight post(s).`);
 }
 
 main().catch(err => {
   console.error('[Sync] Error during LinkedIn synchronization:', err);
-  // Don't fail the build pipeline if LinkedIn is temporarily unreachable
   process.exit(0);
 });

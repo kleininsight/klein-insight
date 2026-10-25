@@ -5,7 +5,7 @@ author: "Joe Klein"
 summary: "Working 60+ hours a week isn't a badge of honor—it's a diagnostic symptom that your business model relies on your personal martyrdom rather than operational systems."
 category: "Leadership"
 source: "linkedin"
-linkedinUrl: "https://www.linkedin.com/in/kleinjoes89/"
+linkedinUrl: "https://www.linkedin.com/in/kleininsight/"
 featuredImage: ""
 draft: false
 layout: layouts/post.njk
