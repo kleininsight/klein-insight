@@ -52,11 +52,7 @@ The synchronization workflow runs automatically once daily at 6:00 AM Pacific (1
 
 To connect Joe's LinkedIn feed:
 1. Go to your GitHub repository: **Settings > Secrets and variables > Actions**.
-2. Add one of the following secrets:
-   - **Option A (Official API - Preferred)**:
-     - `LINKEDIN_ACCESS_TOKEN`: OAuth access token generated via [developer.linkedin.com](https://developer.linkedin.com).
-     - `LINKEDIN_PERSON_URN`: Joe's person URN (e.g., `urn:li:person:...`).
-   - **Option B (Session Cookie Fallback)**:
-     - `LINKEDIN_LI_AT`: Joe's `li_at` cookie value from browser inspection on linkedin.com.
+2. Add the following repository secret:
+   - **`BRIGHTDATA_API_KEY`**: Your Bright Data API key/token (from your Bright Data dashboard).
+3. The scraper will automatically trigger Bright Data collection on Joe's LinkedIn profile (`https://www.linkedin.com/in/kleininsight/`), poll until complete, download any new posts and media locally into `/content/insights/` and `/assets/insights/`, compile the static site, and commit the changes directly to `main`.
 
-If neither secret is set, the workflow will log a helpful notice and exit safely without failing.

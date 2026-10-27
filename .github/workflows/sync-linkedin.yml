@@ -6,6 +6,11 @@ on:
     - cron: '0 13 * * *'
   # Allows Joe or admin to trigger an instant sync at any time from GitHub Actions UI
   workflow_dispatch:
+    inputs:
+      snapshot_id:
+        description: 'Optional Bright Data snapshot ID (leave blank to scrape live profile)'
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -31,6 +36,7 @@ jobs:
       - name: Sync LinkedIn Posts via Bright Data
         env:
           BRIGHTDATA_API_KEY: ${{ secrets.BRIGHTDATA_API_KEY }}
+          BRIGHTDATA_SNAPSHOT_ID: ${{ inputs.snapshot_id }}
           LINKEDIN_PROFILE_URL: 'https://www.linkedin.com/in/kleininsight/'
         run: node scripts/sync-linkedin.js
 
@@ -42,6 +48,10 @@ jobs:
           if git diff --staged --quiet; then
             echo "No new LinkedIn posts found to commit."
           else
+            echo "New posts detected! Compiling static pages..."
+            npm run build
+            git add insights/ feed.xml sitemap.xml
             git commit -m "Automated: Sync new LinkedIn posts from Joe Klein via Bright Data"
             git push origin main
           fi
+

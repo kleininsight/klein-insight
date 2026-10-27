@@ -110,7 +110,7 @@ async function fetchFromBrightData(apiKey, profileUrl, snapshotId = null) {
   let targetSnapshotId = snapshotId;
 
   if (!targetSnapshotId) {
-    console.log(`[Sync] Triggering collection on Bright Data for: ${profileUrl}`);
+    console.log(`[Sync] Triggering fresh collection on Bright Data for: ${profileUrl}`);
     const triggerRes = await fetch('https://api.brightdata.com/datasets/v3/trigger?dataset_id=gd_l1viktl72bvl7bjuj0&include_errors=true', {
       method: 'POST',
       headers: {
@@ -129,28 +129,34 @@ async function fetchFromBrightData(apiKey, profileUrl, snapshotId = null) {
     targetSnapshotId = triggerData.snapshot_id;
     console.log(`[Sync] Bright Data triggered snapshot: ${targetSnapshotId}`);
 
-    // Poll until ready (up to 60s)
+    // Poll until ready (up to 30 attempts of 10s = 5 minutes)
     let isReady = false;
-    for (let i = 0; i < 12; i++) {
-      await new Promise(r => setTimeout(r, 5000));
+    const maxAttempts = 30;
+    const pollIntervalMs = 10000;
+    for (let i = 0; i < maxAttempts; i++) {
+      await new Promise(r => setTimeout(r, pollIntervalMs));
       const progRes = await fetch(`https://api.brightdata.com/datasets/v3/progress/${targetSnapshotId}`, {
         headers: { 'Authorization': `Bearer ${apiKey}` }
       });
       if (progRes.ok) {
         const progData = await progRes.json();
-        console.log(`[Sync] Bright Data status: ${progData.status}`);
+        console.log(`[Sync] Bright Data status: ${progData.status} (attempt ${i + 1}/${maxAttempts})`);
         if (progData.status === 'ready') {
           isReady = true;
           break;
+        } else if (progData.status === 'failed') {
+          throw new Error(`Bright Data scraping job failed: ${JSON.stringify(progData)}`);
         }
+      } else {
+        console.warn(`[Sync] Bright Data progress check returned HTTP ${progRes.status}`);
       }
     }
 
     if (!isReady) {
-      console.warn('[Sync] Bright Data is still processing in background. Will check snapshot.');
+      throw new Error(`Bright Data scraping job did not finish within 5 minutes. Snapshot ID: ${targetSnapshotId}`);
     }
   } else {
-    console.log(`[Sync] Using existing snapshot ID: ${targetSnapshotId}`);
+    console.log(`[Sync] Using snapshot ID: ${targetSnapshotId}`);
   }
 
   // Fetch snapshot data
@@ -159,7 +165,8 @@ async function fetchFromBrightData(apiKey, profileUrl, snapshotId = null) {
   });
 
   if (!snapRes.ok) {
-    throw new Error(`Bright Data snapshot retrieval failed (${snapRes.status})`);
+    const errBody = await snapRes.text();
+    throw new Error(`Bright Data snapshot retrieval failed (${snapRes.status}): ${errBody}`);
   }
 
   const rawData = await snapRes.json();
@@ -169,16 +176,18 @@ async function fetchFromBrightData(apiKey, profileUrl, snapshotId = null) {
     return [];
   }
 
-  console.log(`[Sync] Retrieved profile: ${profile.name} with ${profile.activity.length} activity items.`);
+  console.log(`[Sync] Retrieved profile: ${profile.name || 'Joe Klein'} with ${profile.activity.length} activity items.`);
 
   // Filter for Joe's own published posts
   const ownPosts = profile.activity.filter(item => {
     if (!item.link) return false;
-    // Check if it's a post from kleininsight
-    return item.link.includes('/posts/kleininsight_');
+    const link = item.link;
+    const isMatchingVanity = link.includes('/posts/kleininsight_') || link.includes('/posts/kleinjoes89_');
+    const isPostOrActivity = link.includes('/posts/') || link.includes('activity-') || link.includes('/feed/update/');
+    return isMatchingVanity || (isPostOrActivity && item.title && item.title.trim().length >= 30);
   });
 
-  console.log(`[Sync] Found ${ownPosts.length} original post(s) authored by Joe Klein.`);
+  console.log(`[Sync] Found ${ownPosts.length} post(s) authored by Joe Klein.`);
 
   return ownPosts.map(p => {
     // Determine post ID
@@ -201,19 +210,18 @@ async function fetchFromBrightData(apiKey, profileUrl, snapshotId = null) {
 // Main Pipeline
 // -----------------------------------------------------------------------------
 async function main() {
-  const brightDataKey = process.env.BRIGHTDATA_API_KEY || process.env.BRIGHT_DATA_API_KEY || 'cd533a3a-3080-4756-9ab3-3dec045993f6';
-  const snapshotId = process.env.BRIGHTDATA_SNAPSHOT_ID || 'sd_mvn7xbu52jyf1zgzaw';
+  const brightDataKey = process.env.BRIGHTDATA_API_KEY || process.env.BRIGHT_DATA_API_KEY;
+  const snapshotId = process.env.BRIGHTDATA_SNAPSHOT_ID || null;
   const profileUrl = process.env.LINKEDIN_PROFILE_URL || 'https://www.linkedin.com/in/kleininsight/';
 
-  let rawPosts = [];
-
-  if (brightDataKey) {
-    try {
-      rawPosts = await fetchFromBrightData(brightDataKey, profileUrl, snapshotId);
-    } catch (err) {
-      console.error('[Sync] Bright Data fetch error:', err.message);
-    }
+  if (!brightDataKey) {
+    console.error('[Sync] Error: BRIGHTDATA_API_KEY is not set in environment variables.');
+    console.error('       Please configure BRIGHTDATA_API_KEY in GitHub repository secrets.');
+    process.exit(1);
   }
+
+  let rawPosts = [];
+  rawPosts = await fetchFromBrightData(brightDataKey, profileUrl, snapshotId);
 
   if (rawPosts.length === 0) {
     console.log('[Sync] No posts returned from scraper.');
@@ -279,5 +287,6 @@ ${body}
 
 main().catch(err => {
   console.error('[Sync] Error during LinkedIn synchronization:', err);
-  process.exit(0);
+  process.exit(1);
 });
+

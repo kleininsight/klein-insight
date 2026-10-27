@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "eleventy --serve",
-    "build": "eleventy && node -e \"const fs=require('fs'); fs.cpSync('_site/insights','insights',{recursive:true}); fs.copyFileSync('_site/feed.xml','feed.xml'); fs.copyFileSync('_site/sitemap.xml','sitemap.xml');\""
+    "build": "eleventy && node --input-type=module -e \"import fs from 'fs'; fs.cpSync('_site/insights','insights',{recursive:true}); fs.copyFileSync('_site/feed.xml','feed.xml'); fs.copyFileSync('_site/sitemap.xml','sitemap.xml');\""
   },
   "keywords": [],
   "author": "",
