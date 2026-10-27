@@ -1,0 +1,15 @@
+---
+title: "Are you seeking to maximize the epistemological validity, analytica..."
+date: 2026-10-27
+author: "Joe Klein"
+summary: "Are you seeking to maximize the epistemological validity, analytical integrity, and actionable utility of consumer-generated qualitative and quantitative feedback? Start asking ..."
+category: "Market Research"
+source: "linkedin"
+linkedinUrl: "https://www.linkedin.com/posts/kleininsight_customerexperience-marketresearch-businessstrategy-activity-7520899251753799681-GVqZ"
+featuredImage: ""
+draft: false
+layout: layouts/post.njk
+permalink: /insights/are-you-seeking-to-maximize-the-epistemological-va/index.html
+---
+
+Are you seeking to maximize the epistemological validity, analytical integrity, and actionable utility of consumer-generated qualitative and quantitative feedback? Start asking better questions. Here's a crazy idea.... If you wouldn't ask your neighbor a question that way, why the hell would you ask your customers? Years ago, I was reviewing a customer survey developed by a research vendor in the energy industry. One question went something like this: "In regards to your PV system, what has the higher financial potential: 1 kWh of production for personal use or 1 kWh sent back to the grid?" Got that? Unless you work in the energy industry, probably not. Now imagine you're a homeowner with solar panels trying to answer that question. You might guess, skip it, or just close the survey. And there goes your valuable customer feedback. Here's how I'd approach it. 1. Know what you're trying to learn. Are you measuring what customers know, what they believe, or what they actually do? Those are very different things. 2. Ask it like you're talking to your neighbor. If I wanted to understand what customers believe, I'd ask: "Which do you think saves you more money: using the electricity your solar panels produce in your home, or sending that electricity back to your electric company?" Same general concept. No engineering degree required. 3. Give people permission not to know. Include an "I'm not sure" option. If half your customers don't understand how your product saves them money, that's valuable information! Maybe your messaging needs work. 4. Don't confuse perception with reality. Just because customers think something saves them money doesn't mean it actually does. In this example, the answer depends on electricity rates and how the utility compensates customers. Understanding what customers believe is useful. Treating those beliefs as facts can lead to expensive mistakes. Here's my challenge to you. Pull up the last customer survey or feedback form your business used. Read the questions out loud. Would you actually ask someone those questions in a normal conversation? More importantly, do you know what you're trying to learn, and would you trust the answers enough to make a business decision? If not, rethink your questions. Your customers shouldn't have to work harder to understand your questions than you did writing them. #CustomerExperience #MarketResearch #BusinessStrategy #Survey
