@@ -740,56 +740,113 @@
         </div>
 
         <div class="insights-grid">
-          {% for post in collections.recentInsights %}
           <article class="insight-card">
-            <a href="{{ post.url }}" class="insight-card-media" aria-label="Read {{ post.data.title }}">
-              {% if post.data.featuredImage %}
-              <img src="{{ post.data.featuredImage }}" alt="{{ post.data.title }}" class="insight-card-img" loading="lazy">
-              {% else %}
-              <img src="images/hero-background.jpg" alt="Klein Insight" class="insight-card-img" loading="lazy">
-              {% endif %}
-              
+            <a href="insights/are-you-seeking-to-maximize-the-epistemological-va/" class="insight-card-media" aria-label="Read Are you seeking to maximize the epistemological validity...">
+              <img src="images/hero-background.jpg" alt="Are you seeking to maximize the epistemological validity..." class="insight-card-img" loading="lazy">
               <div class="insight-card-badges">
-                {% if post.data.category %}
-                <span class="insight-badge insight-category-badge">{{ post.data.category }}</span>
-                {% endif %}
-                {% if post.data.source == "linkedin" %}
+                <span class="insight-badge insight-category-badge">Market Research</span>
                 <span class="insight-badge insight-linkedin-badge">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                   LinkedIn
                 </span>
-                {% endif %}
               </div>
             </a>
-
             <div class="insight-card-body">
               <div class="insight-card-meta">
-                <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
+                <time datetime="2026-10-27">Oct 27, 2026</time>
                 <span class="dot-divider">•</span>
-                <span>{{ post.templateContent | readingTime }}</span>
+                <span>2 min read</span>
               </div>
-
               <h3 class="insight-card-title">
-                <a href="{{ post.url }}">{{ post.data.title }}</a>
+                <a href="insights/are-you-seeking-to-maximize-the-epistemological-va/">Are you seeking to maximize the epistemological validity, analytical integrity, and actionable utility of consumer-generated qualitative and quantitative feedback?</a>
               </h3>
-
               <p class="insight-card-summary">
-                {{ post.data.summary }}
+                Are you seeking to maximize the epistemological validity, analytical integrity, and actionable utility of consumer-generated feedback? Start asking better questions. If you wouldn't ask your neighbor, why ask your customers?
               </p>
-
               <div class="insight-card-footer">
                 <div class="insight-author-inline">
                   <img src="images/joe-klein-headshot.webp" alt="Joe Klein" width="28" height="28" loading="lazy">
-                  <span>{{ post.data.author or "Joe Klein" }}</span>
+                  <span>Joe Klein</span>
                 </div>
-                <a href="{{ post.url }}" class="insight-read-more" aria-label="Read full article: {{ post.data.title }}">
+                <a href="insights/are-you-seeking-to-maximize-the-epistemological-va/" class="insight-read-more" aria-label="Read full article: Are you seeking to maximize the epistemological validity...">
                   Read
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </a>
               </div>
             </div>
           </article>
-          {% endfor %}
+
+          <article class="insight-card">
+            <a href="insights/day-6-hollywood-has-an-ai-problem/" class="insight-card-media" aria-label="Read Day 6 | Hollywood has an AI problem">
+              <img src="assets/insights/2026-10-26-day-6-hollywood-has-an-ai-problem-cover.jpg" alt="Day 6 | Hollywood has an AI problem" class="insight-card-img" loading="lazy">
+              <div class="insight-card-badges">
+                <span class="insight-badge insight-category-badge">Market Research</span>
+                <span class="insight-badge insight-linkedin-badge">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                  LinkedIn
+                </span>
+              </div>
+            </a>
+            <div class="insight-card-body">
+              <div class="insight-card-meta">
+                <time datetime="2026-10-26">Oct 26, 2026</time>
+                <span class="dot-divider">•</span>
+                <span>2 min read</span>
+              </div>
+              <h3 class="insight-card-title">
+                <a href="insights/day-6-hollywood-has-an-ai-problem/">Day 6 | Hollywood has an AI problem</a>
+              </h3>
+              <p class="insight-card-summary">
+                What happens when fans start making better content than the studios? AI is already generating movie trailers featuring actors in dreamed-up roles. Here is what this means for audience research.
+              </p>
+              <div class="insight-card-footer">
+                <div class="insight-author-inline">
+                  <img src="images/joe-klein-headshot.webp" alt="Joe Klein" width="28" height="28" loading="lazy">
+                  <span>Joe Klein</span>
+                </div>
+                <a href="insights/day-6-hollywood-has-an-ai-problem/" class="insight-read-more" aria-label="Read full article: Day 6 | Hollywood has an AI problem">
+                  Read
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="insight-card">
+            <a href="insights/day-5-can-republicans-rely-on-gdp-growth-to-win-th/" class="insight-card-media" aria-label="Read Day 5 | Can Republicans rely on GDP growth to win this November?">
+              <img src="assets/insights/2026-10-25-day-5-can-republicans-rely-on-gdp-growth-to-win-th-cover.jpg" alt="Day 5 | Can Republicans rely on GDP growth to win this November?" class="insight-card-img" loading="lazy">
+              <div class="insight-card-badges">
+                <span class="insight-badge insight-category-badge">Market Research</span>
+                <span class="insight-badge insight-linkedin-badge">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                  LinkedIn
+                </span>
+              </div>
+            </a>
+            <div class="insight-card-body">
+              <div class="insight-card-meta">
+                <time datetime="2026-10-25">Oct 25, 2026</time>
+                <span class="dot-divider">•</span>
+                <span>2 min read</span>
+              </div>
+              <h3 class="insight-card-title">
+                <a href="insights/day-5-can-republicans-rely-on-gdp-growth-to-win-th/">Day 5 | Can Republicans rely on GDP growth to win this November?</a>
+              </h3>
+              <p class="insight-card-summary">
+                We all know GDP isn't a measure of Americans' financial well-being. But come election season, it's the country's favorite report card. The numbers aren't lying; we're just asking them the wrong questions.
+              </p>
+              <div class="insight-card-footer">
+                <div class="insight-author-inline">
+                  <img src="images/joe-klein-headshot.webp" alt="Joe Klein" width="28" height="28" loading="lazy">
+                  <span>Joe Klein</span>
+                </div>
+                <a href="insights/day-5-can-republicans-rely-on-gdp-growth-to-win-th/" class="insight-read-more" aria-label="Read full article: Day 5 | Can Republicans rely on GDP growth to win this November?">
+                  Read
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>

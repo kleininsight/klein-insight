@@ -665,9 +665,96 @@ function preloadContactDetails() {
   }
 }
 
+// Ensure recent insights on homepage stay in sync with latest feed entries
+function syncRecentInsights() {
+  const grid = document.querySelector('#recent-insights .insights-grid');
+  if (!grid) return;
+
+  fetch('/feed.xml')
+    .then(res => {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.text();
+    })
+    .then(xmlStr => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(xmlStr, 'application/xml');
+      const entries = Array.from(doc.querySelectorAll('entry')).slice(0, 3);
+      if (entries.length === 0) return;
+
+      const cardsHtml = entries.map(entry => {
+        const title = entry.querySelector('title')?.textContent || '';
+        let link = entry.querySelector('link')?.getAttribute('href') || '#';
+        if (link.startsWith('https://kleininsight.com/')) {
+          link = link.replace('https://kleininsight.com/', '');
+        }
+        const updated = entry.querySelector('updated')?.textContent || '';
+        const summary = entry.querySelector('summary')?.textContent || '';
+        
+        let formattedDate = '';
+        let isoDate = '';
+        if (updated) {
+          const d = new Date(updated);
+          isoDate = d.toISOString().split('T')[0];
+          formattedDate = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
+        }
+
+        const contentHtml = entry.querySelector('content')?.textContent || '';
+        let imgUrl = 'images/hero-background.jpg';
+        const imgMatch = contentHtml.match(/src="([^"]+)"/);
+        if (imgMatch) {
+          imgUrl = imgMatch[1].replace(/^\//, '');
+        }
+
+        return `
+          <article class="insight-card">
+            <a href="${link}" class="insight-card-media" aria-label="Read ${title.replace(/"/g, '&quot;')}">
+              <img src="${imgUrl}" alt="${title.replace(/"/g, '&quot;')}" class="insight-card-img" loading="lazy">
+              <div class="insight-card-badges">
+                <span class="insight-badge insight-category-badge">Strategy</span>
+                <span class="insight-badge insight-linkedin-badge">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                  LinkedIn
+                </span>
+              </div>
+            </a>
+            <div class="insight-card-body">
+              <div class="insight-card-meta">
+                <time datetime="${isoDate}">${formattedDate}</time>
+                <span class="dot-divider">•</span>
+                <span>2 min read</span>
+              </div>
+              <h3 class="insight-card-title">
+                <a href="${link}">${title}</a>
+              </h3>
+              <p class="insight-card-summary">
+                ${summary}
+              </p>
+              <div class="insight-card-footer">
+                <div class="insight-author-inline">
+                  <img src="images/joe-klein-headshot.webp" alt="Joe Klein" width="28" height="28" loading="lazy">
+                  <span>Joe Klein</span>
+                </div>
+                <a href="${link}" class="insight-read-more" aria-label="Read full article: ${title.replace(/"/g, '&quot;')}">
+                  Read
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      if (cardsHtml) {
+        grid.innerHTML = cardsHtml;
+      }
+    })
+    .catch(() => {});
+}
+
 function initPageInteractions() {
   syncDiagnosticButtons();
   preloadContactDetails();
+  syncRecentInsights();
 }
 
 if (document.readyState === 'loading') {
