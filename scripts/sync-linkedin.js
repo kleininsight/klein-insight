@@ -178,13 +178,15 @@ async function fetchFromBrightData(apiKey, profileUrl, snapshotId = null) {
 
   console.log(`[Sync] Retrieved profile: ${profile.name || 'Joe Klein'} with ${profile.activity.length} activity items.`);
 
-  // Filter for Joe's own published posts
+  // Filter strictly for Joe's own published posts (ignore comments on other users' posts)
+  const vanity = profileUrl.replace(/\/$/, '').split('/').pop();
   const ownPosts = profile.activity.filter(item => {
     if (!item.link) return false;
     const link = item.link;
-    const isMatchingVanity = link.includes('/posts/kleininsight_') || link.includes('/posts/kleinjoes89_');
-    const isPostOrActivity = link.includes('/posts/') || link.includes('activity-') || link.includes('/feed/update/');
-    return isMatchingVanity || (isPostOrActivity && item.title && item.title.trim().length >= 30);
+    const isOwnPost = link.includes(`/posts/${vanity}_`) ||
+                      link.includes('/posts/kleininsight_') ||
+                      link.includes('/posts/kleinjoes89_');
+    return isOwnPost;
   });
 
   console.log(`[Sync] Found ${ownPosts.length} post(s) authored by Joe Klein.`);
