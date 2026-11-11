@@ -302,10 +302,10 @@ function updateHomepageRecentInsights(insightsDir, rootDir) {
 
   const cards = files.map(file => {
     const raw = fs.readFileSync(path.join(insightsDir, file), 'utf-8');
-    const fmMatch = raw.match(/^---\n([\s\S]*?)\n---/);
+    const fmMatch = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
     if (!fmMatch) return null;
     const fm = {};
-    fmMatch[1].split('\n').forEach(line => {
+    fmMatch[1].split(/\r?\n/).forEach(line => {
       const colonIdx = line.indexOf(':');
       if (colonIdx > 0) {
         const key = line.slice(0, colonIdx).trim();
@@ -370,10 +370,21 @@ function updateHomepageRecentInsights(insightsDir, rootDir) {
   }).filter(Boolean);
 
   if (cards.length > 0) {
-    const indexContent = fs.readFileSync(indexPath, 'utf-8');
-    const newGrid = `<div class="insights-grid">\n${cards.join('\n\n')}\n        </div>`;
-    const updated = indexContent.replace(/<div class="insights-grid">[\s\S]*?<\/div>/, newGrid);
-    fs.writeFileSync(indexPath, updated, 'utf-8');
+    let indexContent = fs.readFileSync(indexPath, 'utf-8');
+    const newGridBlock = `<!-- RECENT_INSIGHTS_START -->\n        <div class="insights-grid">\n${cards.join('\n\n')}\n        </div>\n        <!-- RECENT_INSIGHTS_END -->`;
+
+    const markerRegex = /<!-- RECENT_INSIGHTS_START -->[\s\S]*?<!-- RECENT_INSIGHTS_END -->/;
+    if (markerRegex.test(indexContent)) {
+      indexContent = indexContent.replace(markerRegex, newGridBlock);
+    } else {
+      const sectionRegex = /(<section[^>]*id="recent-insights"[^>]*>[\s\S]*?<div class="home-insights-header">[\s\S]*?<\/div>)([\s\S]*?)(<\/div>\s*<\/section>)/;
+      if (sectionRegex.test(indexContent)) {
+        indexContent = indexContent.replace(sectionRegex, `$1\n\n        ${newGridBlock}\n      $3`);
+      } else {
+        console.warn('[Sync] Could not find #recent-insights in index.html to update.');
+      }
+    }
+    fs.writeFileSync(indexPath, indexContent, 'utf-8');
     console.log('[Sync] Updated homepage recent insights in index.html');
   }
 }
